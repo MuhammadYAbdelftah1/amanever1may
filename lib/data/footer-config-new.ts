@@ -138,7 +138,7 @@ export const FOOTER_CONFIG_NEW = {
     },
   },
 
-  copyright: "© 2024 - 2026 أمان إيفر والرعاية الشاملة للخدمات الطبية. جميع الحقوق محفوظة.",
+  copyright: "© 2026 أمان إيفر والرعاية الشاملة للخدمات الطبية. جميع الحقوق محفوظة.",
 } as const;
 
 export type FooterConfigNew = typeof FOOTER_CONFIG_NEW;
