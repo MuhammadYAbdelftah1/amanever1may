@@ -1,13 +1,5 @@
-import { MapPin, PhoneCall, Phone, Mail, MessageCircle, Clock, Globe } from 'lucide-react';
-import Link from 'next/link';
+import { MapPin, PhoneCall, Phone, Mail, Clock } from 'lucide-react';
 import { FOOTER_CONFIG_NEW } from '@/lib/data/footer-config-new';
-
-const languageLabels: Record<string, string> = {
-  ar: 'عربي',
-  en: 'English',
-  ur: 'اردو',
-  tl: 'Tagalog',
-};
 
 export function FooterContactNew() {
   const { address, contact } = FOOTER_CONFIG_NEW;
@@ -89,29 +81,6 @@ export function FooterContactNew() {
           </a>
         </div>
 
-        {/* WhatsApp - Prominent */}
-        <a
-          href={`https://wa.me/${contact.whatsapp}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex flex-col items-center text-center gap-2 p-3 bg-[#25D366]/10 border border-[#25D366]/30 rounded-lg hover:bg-[#25D366]/20 transition focus:ring-2 focus:ring-[#25D366] focus:outline-none mt-1"
-        >
-          <div className="w-8 h-8 rounded-full bg-[#25D366]/20 flex items-center justify-center">
-            <MessageCircle className="w-4 h-4 text-[#25D366]" aria-hidden="true" />
-          </div>
-          <div>
-            <div className="text-xs text-[#8A9899] mb-1">
-              واتساب
-            </div>
-            <div className="flex items-center gap-2 justify-center">
-              <div className="text-sm text-[#1A2B2C] font-semibold">
-                ابدأ محادثة
-              </div>
-              <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" title="متاح الآن" />
-            </div>
-          </div>
-        </a>
-
         {/* Email */}
         <a
           href={`mailto:${contact.email}`}
@@ -124,26 +93,6 @@ export function FooterContactNew() {
             {contact.email}
           </div>
         </a>
-
-        {/* Languages - Active pills with brand colors */}
-        <div className="pt-3 border-t border-[#E5EAEB]">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <Globe className="w-3.5 h-3.5 text-[#8A9899]" aria-hidden="true" />
-            <p className="text-xs text-[#8A9899]">
-              خدمة عملاء بأي لغة
-            </p>
-          </div>
-          <div className="flex flex-wrap justify-center gap-1.5">
-            {contact.languages.map((lang) => (
-              <span
-                key={lang}
-                className="px-2.5 py-1 bg-[#4A8B8E]/10 border border-[#4A8B8E]/30 rounded-full text-xs text-[#4A8B8E] font-medium hover:bg-[#4A8B8E] hover:text-white transition-colors cursor-default"
-              >
-                {languageLabels[lang]}
-              </span>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Desktop & Tablet: Compact horizontal layout */}
@@ -218,64 +167,18 @@ export function FooterContactNew() {
           </a>
         </div>
 
-        {/* Row 3: WhatsApp & Email side by side */}
-        <div className="grid grid-cols-2 gap-2">
-          {/* WhatsApp */}
-          <a
-            href={`https://wa.me/${contact.whatsapp}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-col items-center text-center gap-1.5 p-2.5 bg-[#25D366]/10 border border-[#25D366]/30 rounded-lg hover:bg-[#25D366]/20 transition focus:ring-2 focus:ring-[#25D366] focus:outline-none"
-          >
-            <div className="w-7 h-7 rounded-full bg-[#25D366]/20 flex items-center justify-center">
-              <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" aria-hidden="true" />
-            </div>
-            <div>
-              <div className="text-xs text-[#8A9899] mb-0.5">
-                واتساب
-              </div>
-              <div className="flex items-center gap-1.5 justify-center">
-                <div className="text-xs text-[#1A2B2C] font-semibold">
-                  ابدأ محادثة
-                </div>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" title="متاح الآن" />
-              </div>
-            </div>
-          </a>
-
-          {/* Email */}
-          <a
-            href={`mailto:${contact.email}`}
-            className="flex flex-col items-center text-center gap-1.5 p-2.5 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
-          >
-            <div className="w-7 h-7 rounded-full bg-[#E8F1F1] flex items-center justify-center">
-              <Mail className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
-            </div>
-            <div className="text-xs text-[#1A2B2C] hover:text-[#4A8B8E] transition font-medium break-all">
-              {contact.email}
-            </div>
-          </a>
-        </div>
-
-        {/* Row 4: Languages */}
-        <div className="pt-2 border-t border-[#E5EAEB]">
-          <div className="flex items-center justify-center gap-1.5 mb-2">
-            <Globe className="w-3 h-3 text-[#8A9899]" aria-hidden="true" />
-            <p className="text-xs text-[#8A9899]">
-              خدمة عملاء بأي لغة
-            </p>
+        {/* Row 3: Email */}
+        <a
+          href={`mailto:${contact.email}`}
+          className="flex flex-col items-center text-center gap-1.5 p-2.5 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
+        >
+          <div className="w-7 h-7 rounded-full bg-[#E8F1F1] flex items-center justify-center">
+            <Mail className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
           </div>
-          <div className="flex flex-wrap justify-center gap-1.5">
-            {contact.languages.map((lang) => (
-              <span
-                key={lang}
-                className="px-2 py-0.5 bg-[#4A8B8E]/10 border border-[#4A8B8E]/30 rounded-full text-xs text-[#4A8B8E] font-medium hover:bg-[#4A8B8E] hover:text-white transition-colors cursor-default"
-              >
-                {languageLabels[lang]}
-              </span>
-            ))}
+          <div className="text-xs text-[#1A2B2C] hover:text-[#4A8B8E] transition font-medium break-all">
+            {contact.email}
           </div>
-        </div>
+        </a>
       </div>
     </div>
   );
