@@ -4,44 +4,73 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { FOOTER_CONFIG_NEW } from '@/lib/data/footer-config-new';
 
-export function FooterLinksNew() {
+interface FooterLinksNewProps {
+  section?: 'platform' | 'partners';
+}
+
+export function FooterLinksNew({ section }: FooterLinksNewProps) {
   const { platformLinks, partnerLinks } = FOOTER_CONFIG_NEW;
   
   // State for mobile accordions
-  const [openSection, setOpenSection] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleSection = (section: string) => {
-    setOpenSection(openSection === section ? null : section);
-  };
-
-  const sections = [
-    {
-      id: 'platform',
-      title: 'المنصة',
-      links: platformLinks,
-    },
-    {
-      id: 'partners',
-      title: 'للشركاء',
-      links: partnerLinks,
-    },
-  ];
+  const links = section === 'platform' ? platformLinks : partnerLinks;
+  const title = section === 'platform' ? 'المنصة' : 'للشركاء';
 
   return (
-    <div className="md:col-span-2">
-      {/* Desktop: Side by side columns */}
-      <div className="hidden md:grid md:grid-cols-2 gap-8">
-        {sections.map((section) => (
-          <nav key={section.id} aria-label={section.title}>
-            <h3 className="text-white font-bold text-base mb-5">
-              {section.title}
-            </h3>
-            <ul className="flex flex-col gap-3">
-              {section.links.map((link, index) => (
-                <li key={index}>
+    <div>
+      {/* Desktop: Normal display */}
+      <div className="hidden md:block">
+        <nav aria-label={title}>
+          <h3 className="text-[#1A2B2C] font-bold text-base mb-4">
+            {title}
+          </h3>
+          <ul className="flex flex-col gap-2.5">
+            {links.map((link, index) => (
+              <li key={index} className="flex items-center gap-2 group">
+                <span className="text-[#4A8B8E]/40 group-hover:text-[#4A8B8E] transition-colors text-xs">•</span>
+                <a
+                  href={link.url}
+                  className="text-sm text-[#5A6B6C] hover:text-[#4A8B8E] hover:font-medium transition-colors focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      {/* Mobile: Accordion */}
+      <div className="md:hidden border-b border-[#E5EAEB] pb-4">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full flex items-center justify-between text-[#1A2B2C] font-bold text-base py-2 focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded"
+          aria-expanded={isOpen}
+          aria-controls={`${section}-links`}
+        >
+          <span>{title}</span>
+          <ChevronDown
+            className={`w-5 h-5 text-[#5A6B6C] transition-transform ${
+              isOpen ? 'rotate-180' : ''
+            }`}
+            aria-hidden="true"
+          />
+        </button>
+        
+        {isOpen && (
+          <nav
+            id={`${section}-links`}
+            aria-label={title}
+            className="mt-3 px-2"
+          >
+            <ul className="flex flex-col gap-2.5">
+              {links.map((link, index) => (
+                <li key={index} className="flex items-center gap-2 group">
+                  <span className="text-[#4A8B8E]/40 group-hover:text-[#4A8B8E] transition-colors text-xs">•</span>
                   <a
                     href={link.url}
-                    className="text-sm text-slate-300 hover:text-white hover:translate-x-1 transition-all inline-block focus:ring-2 focus:ring-emerald-400 focus:outline-none rounded"
+                    className="text-sm text-[#5A6B6C] hover:text-[#4A8B8E] transition-colors focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded flex-1"
                   >
                     {link.label}
                   </a>
@@ -49,54 +78,7 @@ export function FooterLinksNew() {
               ))}
             </ul>
           </nav>
-        ))}
-      </div>
-
-      {/* Mobile: Accordions */}
-      <div className="md:hidden space-y-4">
-        {sections.map((section) => {
-          const isOpen = openSection === section.id;
-          
-          return (
-            <div key={section.id} className="border-b border-white/10 pb-4">
-              <button
-                onClick={() => toggleSection(section.id)}
-                className="w-full flex items-center justify-between text-white font-bold text-base py-2 focus:ring-2 focus:ring-emerald-400 focus:outline-none rounded"
-                aria-expanded={isOpen}
-                aria-controls={`${section.id}-links`}
-              >
-                <span>{section.title}</span>
-                <ChevronDown
-                  className={`w-5 h-5 transition-transform ${
-                    isOpen ? 'rotate-180' : ''
-                  }`}
-                  aria-hidden="true"
-                />
-              </button>
-              
-              {isOpen && (
-                <nav
-                  id={`${section.id}-links`}
-                  aria-label={section.title}
-                  className="mt-3"
-                >
-                  <ul className="flex flex-col gap-3">
-                    {section.links.map((link, index) => (
-                      <li key={index}>
-                        <a
-                          href={link.url}
-                          className="text-sm text-slate-300 hover:text-white transition inline-block focus:ring-2 focus:ring-emerald-400 focus:outline-none rounded"
-                        >
-                          {link.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              )}
-            </div>
-          );
-        })}
+        )}
       </div>
     </div>
   );

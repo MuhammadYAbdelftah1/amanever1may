@@ -8,61 +8,65 @@ export function FooterDownloadNew() {
   const { app } = FOOTER_CONFIG_NEW;
 
   return (
-    <div>
-      <h3 className="text-white font-bold text-base mb-5 flex items-center gap-2">
+    <div className="max-w-sm mx-auto md:max-w-none md:mx-0">
+      <h3 className="text-[#1A2B2C] font-bold text-base mb-4 flex items-center justify-center md:justify-start gap-2">
         <Smartphone className="w-5 h-5" aria-hidden="true" />
         <span>حمّل التطبيق</span>
       </h3>
       
-      <p className="text-sm text-slate-300 mb-5">
+      <p className="text-sm text-[#5A6B6C] mb-4 text-center md:text-start">
         صحتك في جيبك. حمّل أمان إيفر اليوم.
       </p>
 
-      {/* App Store Badges */}
-      <div className="flex flex-col gap-3 mb-6">
+      {/* App Store Badges with dark background */}
+      <div className="flex flex-col gap-2.5 mb-4">
         {app.stores.map((store) => (
           <Link
             key={store.name}
             href={store.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-transform hover:scale-105 active:scale-95 focus:ring-2 focus:ring-emerald-400 focus:outline-none rounded"
+            className="transition-transform hover:scale-105 active:scale-95 focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded-xl overflow-hidden"
             aria-label={`حمّل من ${store.name}`}
           >
-            <Image
-              src={store.badge}
-              alt={`حمّل من ${store.name}`}
-              width={160}
-              height={48}
-              className="h-12 w-auto"
-            />
+            <div className="bg-[#1A2B2C] rounded-xl p-1">
+              <Image
+                src={store.badge}
+                alt={`حمّل من ${store.name}`}
+                width={160}
+                height={48}
+                className="h-11 w-auto"
+              />
+            </div>
           </Link>
         ))}
       </div>
 
       {/* Trust Line - Rating & Downloads */}
       {app.rating !== 'APP_RATING' && app.downloads !== 'DOWNLOAD_COUNT' && (
-        <div className="flex items-center gap-2 text-xs text-slate-300 mb-6 pb-6 border-b border-white/10">
+        <div className="flex items-center gap-2 text-xs text-[#5A6B6C] mb-4 pb-4 border-b border-[#E5EAEB]">
           <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" aria-hidden="true" />
           <span className="font-medium">{app.rating}</span>
-          <span className="text-slate-500">·</span>
+          <span className="text-[#8A9899]">·</span>
           <span>أكثر من {app.downloads} تحميل</span>
         </div>
       )}
 
-      {/* QR Code Section - Temporary Smart Redirect */}
-      <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-        <p className="text-xs text-slate-400 mb-3 text-center">
+      {/* QR Code Section - Light theme */}
+      <div className="bg-[#F8FAFB] rounded-lg p-3.5 border border-[#E5EAEB]">
+        <p className="text-xs text-[#5A6B6C] mb-3 text-center">
           امسح الكود للتحميل المباشر
         </p>
         <div className="flex justify-center">
-          <TempQRCode
-            iosUrl={app.stores.find(s => s.name === 'App Store')?.url}
-            androidUrl={app.stores.find(s => s.name === 'Google Play')?.url}
-            huaweiUrl={app.stores.find(s => s.name === 'Huawei AppGallery')?.url}
-          />
+          <div className="bg-white border border-[#E5EAEB] rounded-lg p-2">
+            <TempQRCode
+              iosUrl={app.stores.find(s => s.name === 'App Store')?.url}
+              androidUrl={app.stores.find(s => s.name === 'Google Play')?.url}
+              huaweiUrl={app.stores.find(s => s.name === 'Huawei AppGallery')?.url}
+            />
+          </div>
         </div>
-        <p className="text-xs text-slate-400 mt-2 text-center">
+        <p className="text-xs text-[#5A6B6C] mt-2 text-center">
           يوجهك تلقائياً للمتجر المناسب
         </p>
       </div>

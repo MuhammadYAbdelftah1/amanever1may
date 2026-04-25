@@ -20,13 +20,13 @@ export async function HeroSection({ locale }: HeroSectionProps) {
           style={{
             minWidth: '100vw',
             minHeight: '100vh',
-            transform: 'translate(-50%, -30%)', // Changed from -40% to -30% to move video down more
+            transform: 'translate(-50%, -50%) translateY(0)', // Centered on mobile
           }}
           src="https://www.youtube.com/embed/W5Dm2WCk8jg?autoplay=1&mute=1&loop=1&playlist=W5Dm2WCk8jg&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&vq=hd720"
           title="Hero background video"
           allow="autoplay; encrypted-media"
         />
-        {/* Dark overlay for better text readability - reduced from 60% to 40% */}
+        {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/40" />
       </div>
 

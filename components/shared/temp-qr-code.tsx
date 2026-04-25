@@ -58,7 +58,7 @@ export function TempQRCode({
         onClick={handleClick}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
-        className="w-24 h-24 bg-white rounded-lg flex flex-col items-center justify-center hover:bg-gray-50 transition-colors focus:ring-2 focus:ring-emerald-400 focus:outline-none group"
+        className="w-24 h-24 bg-white rounded-lg flex flex-col items-center justify-center hover:bg-gray-50 transition-colors focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none group border border-[#E5EAEB]"
         aria-label="امسح الكود للتحميل"
       >
         {/* QR Code Pattern (Simplified) */}
@@ -66,7 +66,7 @@ export function TempQRCode({
           {[...Array(9)].map((_, i) => (
             <div
               key={i}
-              className="w-2 h-2 bg-slate-800 rounded-sm"
+              className="w-2 h-2 bg-[#1A2B2C] rounded-sm"
               style={{
                 opacity: [0, 2, 4, 6, 8].includes(i) ? 1 : 0.3,
               }}
@@ -75,14 +75,14 @@ export function TempQRCode({
         </div>
         
         {/* Icon */}
-        <Smartphone className="w-5 h-5 text-slate-600 group-hover:text-emerald-600 transition-colors" aria-hidden="true" />
+        <Smartphone className="w-5 h-5 text-[#5A6B6C] group-hover:text-[#4A8B8E] transition-colors" aria-hidden="true" />
       </button>
 
       {/* Tooltip */}
       {showTooltip && (
-        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800 text-white text-xs rounded-lg whitespace-nowrap z-10">
+        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-[#1A2B2C] text-white text-xs rounded-lg whitespace-nowrap z-10">
           انقر للتحميل من المتجر المناسب
-          <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-slate-800" />
+          <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-[#1A2B2C]" />
         </div>
       )}
     </div>

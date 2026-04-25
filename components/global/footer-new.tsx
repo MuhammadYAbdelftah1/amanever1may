@@ -37,53 +37,54 @@ export function FooterNew() {
   const { trustBadges } = FOOTER_CONFIG_NEW;
 
   return (
-    <footer role="contentinfo" className="bg-slate-900 pt-16 md:pt-20 pb-6">
+    <footer role="contentinfo" className="bg-white border-t border-[#E5EAEB] pt-10 md:pt-12 pb-4">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        {/* Zone 1: Main Grid (5 columns on desktop) */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-8 lg:gap-12">
-          {/* Column 1-2: Brand + Newsletter (spans 2 columns) */}
-          <FooterBrandNew />
+        {/* Zone 1: Main Grid - Stack on mobile, 12 cols on desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 lg:gap-8">
+          {/* Column 1-4: Brand + Newsletter + Social (spans 4 columns) */}
+          <div className="md:col-span-4">
+            <FooterBrandNew />
+          </div>
 
-          {/* Column 3-4: Links - المنصة + للشركاء (spans 2 columns) */}
-          <FooterLinksNew />
+          {/* Column 5-6: المنصة (spans 2 columns) */}
+          <div className="md:col-span-2">
+            <FooterLinksNew section="platform" />
+          </div>
 
-          {/* Column 5: Contact */}
-          <FooterContactNew />
+          {/* Column 7-8: للشركاء (spans 2 columns) */}
+          <div className="md:col-span-2">
+            <FooterLinksNew section="partners" />
+          </div>
 
-          {/* Column 6: Download (wraps to new row on smaller screens) */}
-          <div className="md:col-start-1 md:col-span-1 lg:col-start-auto">
+          {/* Column 9-10: Contact (spans 2 columns) */}
+          <div className="md:col-span-2">
+            <FooterContactNew />
+          </div>
+
+          {/* Column 11-12: Download (spans 2 columns) */}
+          <div className="md:col-span-2">
             <FooterDownloadNew />
           </div>
         </div>
 
-        {/* Zone 2: Middle Strip (Trust Badges) */}
-        <div className="border-t border-white/10 py-6 mt-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-400">
-            {/* Left side */}
-            <div className="flex flex-wrap items-center gap-4">
-              {trustBadges.slice(0, 2).map((badge, index) => {
-                const Icon = badge.icon === 'shield' ? Shield : Building2;
-                return (
-                  <div key={index} className="flex items-center gap-2">
-                    <Icon className="w-4 h-4 text-emerald-400" aria-hidden="true" />
-                    <span>{badge.label}</span>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Right side */}
-            <div className="flex flex-wrap items-center gap-4 md:justify-end">
-              {trustBadges.slice(2).map((badge, index) => {
-                const Icon = badge.icon === 'credit-card' ? CreditCard : Lock;
-                return (
-                  <div key={index} className="flex items-center gap-2">
-                    <Icon className="w-4 h-4 text-emerald-400" aria-hidden="true" />
-                    <span>{badge.label}</span>
-                  </div>
-                );
-              })}
-            </div>
+        {/* Zone 2: Trust Badges Strip */}
+        <div className="bg-[#F8FAFB] border-t border-[#E5EAEB] py-4 mt-6 -mx-4 md:-mx-8 px-4 md:px-8">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-2 text-xs text-[#5A6B6C]">
+            {/* All badges in one row */}
+            {trustBadges.map((badge, index) => {
+              let Icon;
+              if (badge.icon === 'shield') Icon = Shield;
+              else if (badge.icon === 'building') Icon = Building2;
+              else if (badge.icon === 'credit-card') Icon = CreditCard;
+              else Icon = Lock;
+              
+              return (
+                <div key={index} className="flex items-center gap-1.5">
+                  <Icon className="w-4 h-4 text-[#4A8B8E]" aria-hidden="true" />
+                  <span>{badge.label}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
