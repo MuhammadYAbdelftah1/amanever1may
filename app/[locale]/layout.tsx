@@ -8,6 +8,7 @@ import { routing } from '@/routing';
 import { StickyDownloadBar } from '@/components/global/sticky-download-bar';
 import { FooterNew } from '@/components/global/footer-new';
 import { ChatLauncher } from '@/components/chatbot/ChatLauncher';
+import { FloatingAuthButtons } from '@/components/global/floating-auth-buttons';
 import '../globals.css';
 
 export const metadata: Metadata = {
@@ -69,6 +70,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           {children}
           <StickyDownloadBar />
+          <FloatingAuthButtons />
           <ChatLauncher />
           <FooterNew />
         </NextIntlClientProvider>

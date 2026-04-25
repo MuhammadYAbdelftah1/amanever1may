@@ -60,10 +60,9 @@ export const FOOTER_CONFIG_NEW = {
 
   // Section B: للشركاء
   partnerLinks: [
-    { label: "منصة دخول الأطباء", url: "#" }, // TODO: Create /ar/doctors/login
-    { label: "منصة دخول التاجر", url: "#" }, // TODO: Create /ar/merchants/login
-    { label: "منصة المسوق بالعمولة", url: "#" }, // TODO: Create /ar/affiliates
-    { label: "فرص وظيفية", url: "#" }, // TODO: Create /ar/careers
+    { label: "منصة دخول الأطباء", url: "/ar/login?type=doctor" },
+    { label: "منصة دخول التاجر", url: "/ar/login?type=merchant" },
+    { label: "منصة المسوق بالعمولة", url: "/ar/login?type=affiliate" },
     { label: "للمستثمرين", url: "#" }, // TODO: Create /ar/investors (optional)
   ],
 

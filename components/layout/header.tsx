@@ -38,12 +38,8 @@ export function Header({ locale }: HeaderProps) {
       // Change header style after scrolling 50px
       setIsScrolled(currentScrollY > 50);
       
-      // Hide on scroll down, show on scroll up
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
+      // Keep header always visible (sticky)
+      setIsVisible(true);
       
       setLastScrollY(currentScrollY);
     };
@@ -61,7 +57,7 @@ export function Header({ locale }: HeaderProps) {
       } ${
         isHomePage
           ? isScrolled 
-            ? 'h-14 bg-white/15 backdrop-blur-lg border-b border-white/30 shadow-xl' 
+            ? 'h-14 bg-white border border-gray-200 shadow-xl' 
             : 'h-20 bg-white/5 backdrop-blur-sm border-b border-white/10'
           : 'h-16 bg-white border border-gray-200 shadow-lg'
       }`}
@@ -70,7 +66,7 @@ export function Header({ locale }: HeaderProps) {
         {/* Logo with scale animation */}
         <Link 
           href={`/${locale}`} 
-          className={`flex items-center focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 rounded-lg transition-all duration-300 hover:scale-105 ${
+          className={`flex items-center focus:outline-none focus:ring-2 focus:ring-[#4A8B8E]/50 focus:ring-offset-2 rounded-lg transition-all duration-300 hover:scale-105 ${
             isScrolled ? 'scale-90' : 'scale-100'
           }`}
           aria-label={t('home')}
@@ -86,9 +82,13 @@ export function Header({ locale }: HeaderProps) {
               href={link.href}
               className={`relative text-sm font-medium transition-all duration-300 rounded-lg px-4 py-2 group ${
                 isHomePage
-                  ? isActive(link.href)
-                    ? 'text-white bg-white/20'
-                    : 'text-white/80 hover:text-white hover:bg-white/10'
+                  ? isScrolled
+                    ? isActive(link.href)
+                      ? 'text-[#4A8B8E] bg-[#4A8B8E]/10'
+                      : 'text-gray-700 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5'
+                    : isActive(link.href)
+                      ? 'text-white bg-white/20'
+                      : 'text-white/80 hover:text-white hover:bg-white/10'
                   : isActive(link.href)
                     ? 'text-[#5e8f8f] bg-[#5e8f8f]/10'
                     : 'text-gray-700 hover:text-[#5e8f8f] hover:bg-[#5e8f8f]/5'
@@ -98,13 +98,19 @@ export function Header({ locale }: HeaderProps) {
               {/* Active indicator */}
               {isActive(link.href) && (
                 <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 rounded-full ${
-                  isHomePage ? 'bg-white' : 'bg-[#5e8f8f]'
+                  isHomePage 
+                    ? isScrolled 
+                      ? 'bg-[#4A8B8E]' 
+                      : 'bg-white'
+                    : 'bg-[#5e8f8f]'
                 }`} />
               )}
               {/* Hover effect */}
               <span className={`absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
                 isHomePage 
-                  ? 'bg-gradient-to-r from-white/0 via-white/5 to-white/0'
+                  ? isScrolled
+                    ? 'bg-gradient-to-r from-[#4A8B8E]/0 via-[#4A8B8E]/5 to-[#4A8B8E]/0'
+                    : 'bg-gradient-to-r from-white/0 via-white/5 to-white/0'
                   : 'bg-gradient-to-r from-[#5e8f8f]/0 via-[#5e8f8f]/5 to-[#5e8f8f]/0'
               }`} />
             </Link>
@@ -118,7 +124,9 @@ export function Header({ locale }: HeaderProps) {
             variant="ghost"
             className={`font-semibold rounded-lg px-4 py-2 transition-all duration-300 ${
               isHomePage
-                ? 'text-white hover:bg-white/20'
+                ? isScrolled
+                  ? 'text-[#4A8B8E] hover:bg-[#4A8B8E]/10'
+                  : 'text-white hover:bg-white/20'
                 : 'text-[#5e8f8f] hover:bg-[#5e8f8f]/10'
             }`}
           >
@@ -130,12 +138,14 @@ export function Header({ locale }: HeaderProps) {
             asChild
             className={`font-semibold rounded-lg px-5 py-2 transition-all duration-300 shadow-lg hover:shadow-xl ${
               isHomePage
-                ? 'bg-white text-emerald-600 hover:bg-white/90'
+                ? isScrolled
+                  ? 'bg-[#4A8B8E] text-white hover:bg-[#356B6E]'
+                  : 'bg-white text-emerald-600 hover:bg-white/90'
                 : 'bg-[#5e8f8f] text-white hover:bg-[#5e8f8f]/90'
             }`}
           >
-            <Link href={`/${locale}/signup`}>
-              {locale === 'ar' ? 'الاشتراك' : locale === 'ur' ? 'شامل ہوں' : 'Sign Up'}
+            <Link href={`/${locale}/register`}>
+              {locale === 'ar' ? 'اشترك الآن' : locale === 'ur' ? 'شامل ہوں' : 'Sign Up'}
             </Link>
           </Button>
           <div className={`transition-all duration-300 ${isScrolled ? 'scale-90' : 'scale-100'}`}>
@@ -157,7 +167,9 @@ export function Header({ locale }: HeaderProps) {
                 size="icon"
                 className={`transition-all duration-300 hover:scale-110 ${
                   isHomePage
-                    ? 'text-white hover:bg-white/20'
+                    ? isScrolled
+                      ? 'text-[#4A8B8E] hover:bg-[#4A8B8E]/10'
+                      : 'text-white hover:bg-white/20'
                     : 'text-[#5e8f8f] hover:bg-[#5e8f8f]/10'
                 }`}
                 aria-label={locale === 'ar' ? 'فتح القائمة' : locale === 'ur' ? 'مینو کھولیں' : 'Open menu'}
@@ -206,8 +218,8 @@ export function Header({ locale }: HeaderProps) {
                   asChild
                   className="w-full bg-white text-emerald-600 hover:bg-white/90 font-semibold rounded-lg shadow-lg"
                 >
-                  <Link href={`/${locale}/signup`}>
-                    {locale === 'ar' ? 'الاشتراك' : locale === 'ur' ? 'شامل ہوں' : 'Sign Up'}
+                  <Link href={`/${locale}/register`}>
+                    {locale === 'ar' ? 'اشترك الآن' : locale === 'ur' ? 'شامل ہوں' : 'Sign Up'}
                   </Link>
                 </Button>
               </div>
