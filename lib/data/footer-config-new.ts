@@ -71,10 +71,10 @@ export const FOOTER_CONFIG_NEW = {
 
   // Section C: قانوني (Bottom bar)
   legalLinks: [
-    { label: "سياسة الخصوصية والبيانات (PDPL)", url: "#" }, // TODO: Create /ar/privacy
-    { label: "شروط الاستخدام", url: "#" }, // TODO: Create /ar/terms
-    { label: "سياسة الاسترداد", url: "#" }, // TODO: Create /ar/refund
-    { label: "إعدادات ملفات تعريف الارتباط", url: "#" }, // TODO: Implement cookie settings modal
+    { label: "سياسة الخصوصية والبيانات (PDPL)", url: "/ar/privacy-policy" },
+    { label: "شروط الاستخدام", url: "/ar/terms-of-use" },
+    { label: "سياسة الاسترداد", url: "/ar/refund-policy" },
+    { label: "إعدادات ملفات تعريف الارتباط", url: "/ar/cookie-settings" },
   ],
 
   // App download section
