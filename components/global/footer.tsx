@@ -41,40 +41,8 @@ export function Footer() {
           <FooterDownload />
         </div>
 
-        {/* Zone 2: Contact Info Strip (Desktop Only - Centered) */}
-        <div className="hidden md:block border-t border-white/10 py-8 mt-12">
-          <div className="flex items-center justify-center gap-12 text-sm text-white">
-            {/* خدمة العملاء */}
-            <a 
-              href="tel:920018041" 
-              className="flex flex-col items-center gap-2 hover:text-emerald-400 transition group"
-            >
-              <span className="text-xs text-slate-400 group-hover:text-emerald-300">خدمة العملاء</span>
-              <span className="font-semibold text-lg">920018041</span>
-            </a>
-
-            {/* الهاتف الثابت */}
-            <a 
-              href="tel:0126142206" 
-              className="flex flex-col items-center gap-2 hover:text-emerald-400 transition group"
-            >
-              <span className="text-xs text-slate-400 group-hover:text-emerald-300">الهاتف الثابت</span>
-              <span className="font-semibold text-lg">0126142206</span>
-            </a>
-
-            {/* البريد الإلكتروني */}
-            <a 
-              href="mailto:info@amanever.com" 
-              className="flex flex-col items-center gap-2 hover:text-emerald-400 transition group"
-            >
-              <span className="text-xs text-slate-400 group-hover:text-emerald-300">البريد الإلكتروني</span>
-              <span className="font-semibold text-lg">info@amanever.com</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Zone 3: Middle Strip (Trust Badges) */}
-        <div className="border-t border-white/10 py-6 mt-6">
+        {/* Zone 2: Middle Strip (Trust Badges) */}
+        <div className="border-t border-white/10 py-6 mt-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-400">
             {/* Left side */}
             <div className="flex flex-wrap items-center gap-4">
@@ -102,7 +70,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Zone 4: Bottom Bar (Copyright) */}
+        {/* Zone 2: Middle Strip (Trust Badges) */}
         <FooterBottomBar />
       </div>
     </footer>

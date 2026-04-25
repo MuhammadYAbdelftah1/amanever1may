@@ -50,7 +50,7 @@ export const FOOTER_CONFIG_NEW = {
 
   // Section A: المنصة
   platformLinks: [
-    { label: "البطاقات والباقات", url: "/ar#membership-pricing-heading" },
+    { label: "البطاقات والباقات", url: "/ar/pricing" }, // ✅ Updated to dedicated pricing page
     { label: "الشبكة الطبية والصحية", url: "/ar#medical-network-heading" },
     { label: "خدماتنا الطبية", url: "/ar/services" },
     { label: "خدمات الرعاية المنزلية", url: "/ar#core-services-heading" },
