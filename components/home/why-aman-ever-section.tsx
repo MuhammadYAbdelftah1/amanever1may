@@ -95,7 +95,7 @@ const content = {
   closingCta: {
     text: 'مقتنع إن أمان إيفر ليك؟',
     links: [
-      { label: 'اختار باقتك', href: '#pricing' },
+      { label: 'اختار باقتك', href: '/ar/pricing' }, // ✅ Updated to dedicated pricing page
       { label: 'جرّب "اسأل طبيب" مجاناً', href: '/services#instant-booking' },
     ],
   },

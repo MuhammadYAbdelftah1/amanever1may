@@ -70,7 +70,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Zone 3: Bottom Bar (Copyright) */}
+        {/* Zone 2: Middle Strip (Trust Badges) */}
         <FooterBottomBar />
       </div>
     </footer>

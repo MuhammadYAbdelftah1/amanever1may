@@ -170,12 +170,12 @@ export default async function PrivacyPolicyPage({ params }: PrivacyPolicyPagePro
                                     </li>
                                   ))}
                                 </ul>
-                                {block.note && (
+                                {'note' in block && block.note && (
                                   <p className="mt-3 text-sm text-[#8A9899] italic">
                                     {block.note}
                                   </p>
                                 )}
-                                {block.alert && <AlertBox alert={block.alert} />}
+                                {'alert' in block && block.alert && <AlertBox alert={block.alert} />}
                               </div>
                             )}
 

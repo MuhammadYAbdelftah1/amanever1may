@@ -99,18 +99,18 @@ export default async function TermsOfUsePage({ params }: TermsOfUsePageProps) {
                             <a
                               href={`#${section.id}`}
                               className={`flex items-start gap-2 text-sm p-2 rounded-lg transition group ${
-                                section.critical
+                                'critical' in section && section.critical
                                   ? 'text-[#F59E0B] hover:bg-[#FEF3C7] font-medium'
                                   : 'text-[#5A6B6C] hover:text-[#4A8B8E] hover:bg-[#F8FAFB]'
                               }`}
                             >
                               <span className={`font-semibold flex-shrink-0 ${
-                                section.critical ? 'text-[#F59E0B]' : 'text-[#4A8B8E]'
+                                'critical' in section && section.critical ? 'text-[#F59E0B]' : 'text-[#4A8B8E]'
                               }`}>
                                 {section.number}.
                               </span>
                               <span className="flex-1">{section.title}</span>
-                              {section.critical && (
+                              {'critical' in section && section.critical && (
                                 <AlertTriangle className="w-4 h-4 flex-shrink-0" />
                               )}
                               <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition flex-shrink-0" />
@@ -131,17 +131,17 @@ export default async function TermsOfUsePage({ params }: TermsOfUsePageProps) {
                       key={section.id}
                       id={section.id}
                       className={`border rounded-xl p-6 md:p-8 scroll-mt-24 ${
-                        section.critical
+                        'critical' in section && section.critical
                           ? 'bg-[#FEF3C7] border-[#F59E0B]/30'
                           : 'bg-[#F8FAFB] border-[#E5EAEB]'
                       }`}
                     >
                       <h2 className="text-2xl font-bold text-[#1A2B2C] mb-6 flex items-start gap-3">
-                        <span className={section.critical ? 'text-[#F59E0B]' : 'text-[#4A8B8E]'}>
+                        <span className={'critical' in section && section.critical ? 'text-[#F59E0B]' : 'text-[#4A8B8E]'}>
                           {section.number}.
                         </span>
                         <span className="flex-1">{section.title}</span>
-                        {section.critical && (
+                        {'critical' in section && section.critical && (
                           <AlertTriangle className="w-6 h-6 text-[#F59E0B] flex-shrink-0" />
                         )}
                       </h2>
@@ -222,7 +222,7 @@ export default async function TermsOfUsePage({ params }: TermsOfUsePageProps) {
                                     </li>
                                   ))}
                                 </ul>
-                                {block.note && (
+                                {'note' in block && block.note && (
                                   <p className="mt-3 text-sm text-[#8A9899] italic">
                                     💡 {block.note}
                                   </p>
@@ -301,7 +301,7 @@ export default async function TermsOfUsePage({ params }: TermsOfUsePageProps) {
                             )}
 
                             {/* Alert */}
-                            {block.alert && <AlertBox alert={block.alert} />}
+                            {'alert' in block && block.alert && <AlertBox alert={block.alert} />}
                           </div>
                         ))}
                       </div>
