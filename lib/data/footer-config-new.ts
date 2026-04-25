@@ -63,7 +63,7 @@ export const FOOTER_CONFIG_NEW = {
     { label: "منصة دخول الأطباء", url: "/ar/login?type=doctor" },
     { label: "منصة دخول التاجر", url: "/ar/login?type=merchant" },
     { label: "منصة المسوق بالعمولة", url: "/ar/login?type=affiliate" },
-    { label: "للمستثمرين", url: "#" }, // TODO: Create /ar/investors (optional)
+    { label: "للمستثمرين", url: "/ar/investors" }, // ✅ Updated to dedicated investors page
   ],
 
   // Section C: قانوني (Bottom bar)
