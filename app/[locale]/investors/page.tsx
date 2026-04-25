@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
+import { unstable_setRequestLocale } from 'next-intl/server';
 import { InvestorsPageContent } from './InvestorsPageContent';
 
 type Props = {
@@ -7,8 +7,6 @@ type Props = {
 };
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: 'investors' });
-
   const title = locale === 'ar' 
     ? 'علاقات المستثمرين | أمان إيفر — منصة العضوية الصحية الرائدة في السعودية'
     : 'Investor Relations | Aman Ever — Saudi Arabia\'s Leading Healthtech Membership Platform';
