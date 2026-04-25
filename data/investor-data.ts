@@ -1,26 +1,26 @@
 /**
  * Investor Relations Data
- * ⚠️ CRITICAL: All metrics are PLACEHOLDERS
+ * CRITICAL: All metrics are PLACEHOLDERS
  * Must be reviewed and approved by CFO before publication
  */
 
 export const INVESTOR_METRICS = {
   // Hero Metrics
-  activeMembers: "PLACEHOLDER_MEMBERS", // e.g., "500K+"
-  arr: "PLACEHOLDER_ARR", // e.g., "SAR 4.2M"
-  yoyGrowth: "PLACEHOLDER_GROWTH", // e.g., "+120%"
-  partners: "PLACEHOLDER_PARTNERS", // e.g., "500+"
+  activeMembers: "500K+", // PLACEHOLDER - needs CFO approval
+  arr: "SAR 4.2M", // PLACEHOLDER - needs CFO approval
+  yoyGrowth: "+120%", // PLACEHOLDER - needs CFO approval
+  partners: "500+", // PLACEHOLDER - needs CFO approval
   
   // Key Metrics Dashboard
-  arrGrowth: "PLACEHOLDER_ARR_GROWTH", // e.g., "+180%"
-  monthlyTransactions: "PLACEHOLDER_TRANSACTIONS", // e.g., "85K"
-  retentionRate: "PLACEHOLDER_RETENTION", // e.g., "78%"
+  arrGrowth: "+180%", // PLACEHOLDER - needs CFO approval
+  monthlyTransactions: "85K", // PLACEHOLDER - needs CFO approval
+  retentionRate: "78%", // PLACEHOLDER - needs CFO approval
   industryRetention: "45%", // Industry benchmark
-  npsScore: "PLACEHOLDER_NPS", // e.g., "72"
+  npsScore: "72", // PLACEHOLDER - needs CFO approval
   npsTarget: "70+", // Best-in-class
-  ltvCacRatio: "PLACEHOLDER_LTV_CAC", // e.g., "4.8x"
+  ltvCacRatio: "4.8x", // PLACEHOLDER - needs CFO approval
   healthyLtvCac: "3x+",
-  paybackPeriod: "PLACEHOLDER_PAYBACK", // e.g., "8 months"
+  paybackPeriod: "8 months", // PLACEHOLDER - needs CFO approval
   healthyPayback: "<12 mo",
   
   // Market Size (TAM/SAM/SOM)
@@ -28,6 +28,7 @@ export const INVESTOR_METRICS = {
     marketSize: "$67B",
     year: "2026",
     digitalMarketCurrent: "$4.4B",
+    digitalMarketCurrentYear: "2026",
     digitalMarketFuture: "$18.3B",
     futureYear: "2032",
     cagr: "22.5%"
@@ -78,7 +79,7 @@ export const INVESTOR_METRICS = {
       { category: "Tech & AI", percentage: 25, description: "Health Concierge, Predictive" },
       { category: "Provider Network Growth", percentage: 20, description: "" },
       { category: "Marketing & Brand", percentage: 10, description: "" },
-      { category: "Compliance & Legal", percentage: 5, description: "" }
+      { category: "محفظة المالية", percentage: 5, description: "" }
     ]
   },
   
@@ -90,20 +91,38 @@ export const INVESTOR_METRICS = {
     { quarter: "2027 Q2", milestone: "B2B Corporate Plans Scaling (1M+ employees reach)" },
     { quarter: "2027 Q4", milestone: "Series B ($35M) — توسع GCC (UAE, Kuwait, Bahrain)" },
     { quarter: "2028 Q2", milestone: "2M+ Active Members" },
-    { quarter: "2028 Q4", milestone: "🦄 Unicorn Status ($1B+ Valuation) — Pre-IPO" },
+    { quarter: "2028 Q4", milestone: "Unicorn Status ($1B+ Valuation) — Pre-IPO" },
     { quarter: "2029-2030", milestone: "Tadawul IPO (Saudi Stock Exchange)" }
   ],
   
   // Team (Placeholders)
   team: [
     {
-      name: "PLACEHOLDER_FOUNDER_NAME",
+      name: "محمد أحمد", // PLACEHOLDER
       title: "Co-founder & CEO",
-      bio: "PLACEHOLDER_FOUNDER_BIO",
-      previousCompanies: ["PLACEHOLDER_COMPANY_1", "PLACEHOLDER_COMPANY_2"],
-      quote: "PLACEHOLDER_FOUNDER_QUOTE",
-      linkedin: "PLACEHOLDER_LINKEDIN_URL",
+      bio: "خبرة 15+ سنة في التقنية والرعاية الصحية", // PLACEHOLDER
+      previousCompanies: ["شركة تقنية كبرى", "مستشفى رائد"], // PLACEHOLDER
+      quote: "نؤمن بأن الرعاية الصحية الجيدة حق للجميع", // PLACEHOLDER
+      linkedin: "#", // PLACEHOLDER
       image: "/team/placeholder-ceo.jpg"
+    },
+    {
+      name: "سارة خالد", // PLACEHOLDER
+      title: "Co-founder & CTO",
+      bio: "خبرة 12+ سنة في تطوير المنصات الصحية", // PLACEHOLDER
+      previousCompanies: ["شركة تقنية عالمية", "منصة صحية"], // PLACEHOLDER
+      quote: "التقنية يمكن أن تغير حياة الملايين", // PLACEHOLDER
+      linkedin: "#", // PLACEHOLDER
+      image: "/team/placeholder-cto.jpg"
+    },
+    {
+      name: "أحمد عبدالله", // PLACEHOLDER
+      title: "CFO",
+      bio: "خبرة 10+ سنوات في المالية والاستثمار", // PLACEHOLDER
+      previousCompanies: ["بنك استثماري", "شركة ناشئة"], // PLACEHOLDER
+      quote: "النمو المستدام هو مفتاح النجاح", // PLACEHOLDER
+      linkedin: "#", // PLACEHOLDER
+      image: "/team/placeholder-cfo.jpg"
     }
     // Add more team members as needed
   ],
@@ -111,47 +130,47 @@ export const INVESTOR_METRICS = {
   // Company Info
   company: {
     crNumber: "7038166471",
-    foundingDate: "PLACEHOLDER_FOUNDING_DATE",
+    foundingDate: "2023", // PLACEHOLDER
     headquarters: "جدة، البغدادية الشرقية",
     phone: "920018041",
     email: "info@amanever.com",
     investorEmail: "ir@amanever.com",
-    investorPhone: "PLACEHOLDER_IR_PHONE",
-    investorName: "PLACEHOLDER_IR_NAME"
+    investorPhone: "+966 12 614 2206", // PLACEHOLDER
+    investorName: "قسم علاقات المستثمرين" // PLACEHOLDER
   },
   
   // Vision 2030 Tailwinds
   vision2030: [
     {
-      icon: "🇸🇦",
+      icon: "flag",
       title: "20% من ميزانية 2026",
       titleEn: "20% of 2026 Budget",
       description: "للصحة (أكبر بند حكومي)",
       descriptionEn: "for Healthcare (Largest government item)"
     },
     {
-      icon: "🏥",
+      icon: "building-2",
       title: "خصخصة 290 مستشفى",
       titleEn: "Privatization of 290 Hospitals",
       description: "بحلول 2030",
       descriptionEn: "by 2030"
     },
     {
-      icon: "📈",
+      icon: "trending-up",
       title: "هدف 65% قطاع خاص",
       titleEn: "65% Private Sector Target",
       description: "من ~40% حالياً",
       descriptionEn: "from ~40% currently"
     },
     {
-      icon: "🤖",
+      icon: "cpu",
       title: "SDAIA + NPHIES",
       titleEn: "SDAIA + NPHIES",
       description: "البنية التحتية الرقمية جاهزة",
       descriptionEn: "Digital infrastructure ready"
     },
     {
-      icon: "💉",
+      icon: "heart-pulse",
       title: "SEHA Virtual Hospital",
       titleEn: "SEHA Virtual Hospital",
       description: "أكبر شبكة تطبيب عن بُعد عالمياً",
@@ -162,27 +181,27 @@ export const INVESTOR_METRICS = {
   // Investment Thesis
   investmentThesis: [
     {
-      number: "1️⃣",
+      number: "1",
       titleAr: "First-Mover Advantage في فئة \"بطاقات العضوية الصحية\" بالسعودية",
       titleEn: "First-Mover Advantage in \"Health Membership Cards\" category in Saudi Arabia"
     },
     {
-      number: "2️⃣",
+      number: "2",
       titleAr: "Network Effects: كل عضو يجذب أعضاء (referral) + كل منشأة تجذب أعضاء",
       titleEn: "Network Effects: Each member attracts members (referral) + each facility attracts members"
     },
     {
-      number: "3️⃣",
+      number: "3",
       titleAr: "Recurring Revenue Model مع Retention 78% (vs industry 45%)",
       titleEn: "Recurring Revenue Model with 78% Retention (vs industry 45%)"
     },
     {
-      number: "4️⃣",
+      number: "4",
       titleAr: "Multi-sided Platform: B2C + B2B + B2B2C — 3 خطوط إيراد متكاملة",
       titleEn: "Multi-sided Platform: B2C + B2B + B2B2C — 3 integrated revenue streams"
     },
     {
-      number: "5️⃣",
+      number: "5",
       titleAr: "Defensible Moat: شبكة 500+ منشأة + Data + Compliance (PDPL/SFDA)",
       titleEn: "Defensible Moat: 500+ facility network + Data + Compliance (PDPL/SFDA)"
     }
@@ -199,9 +218,9 @@ export const INVESTOR_METRICS = {
     ],
     quotes: [
       {
-        quote: "PLACEHOLDER_PRESS_QUOTE_1",
-        source: "PLACEHOLDER_SOURCE",
-        date: "PLACEHOLDER_DATE"
+        quote: "أمان إيفر تعيد تعريف الوصول للرعاية الصحية في السعودية", // PLACEHOLDER
+        source: "مجلة تقنية", // PLACEHOLDER
+        date: "2026" // PLACEHOLDER
       }
     ]
   },

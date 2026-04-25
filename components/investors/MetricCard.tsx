@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { TrendingUp } from 'lucide-react';
 
 interface MetricCardProps {
-  icon: string;
+  icon: React.ReactNode;
   label: string;
   value: string;
   change?: string;
@@ -69,9 +70,10 @@ export function MetricCard({
       className="bg-white dark:bg-neutral-900 rounded-lg p-6 border border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-shadow"
     >
       <div className="flex items-start justify-between mb-4">
-        <span className="text-3xl">{icon}</span>
+        <div className="text-[#4A8B8E]">{icon}</div>
         {change && (
-          <span className="text-sm font-medium text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">
+          <span className="text-sm font-medium text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded flex items-center gap-1">
+            <TrendingUp className="w-3 h-3" />
             {change}
           </span>
         )}

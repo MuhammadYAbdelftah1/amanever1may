@@ -75,20 +75,20 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
         variant="ghost"
         size="icon"
         onClick={() => setIsOpen(!isOpen)}
-        className="text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 hover:scale-110 relative"
+        className="text-[#4A8B8E] hover:text-[#356B6E] hover:bg-[#4A8B8E]/10 transition-all duration-300 hover:scale-110 relative"
         aria-label={currentLocale === 'ar' ? 'تبديل اللغة' : currentLocale === 'ur' ? 'زبان تبدیل کریں' : 'Switch language'}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
         <Globe className="h-5 w-5" aria-hidden="true" />
         {/* Active indicator dot */}
-        <span className="absolute top-1 right-1 w-2 h-2 bg-white rounded-full animate-pulse" />
+        <span className="absolute top-1 right-1 w-2 h-2 bg-[#4A8B8E] rounded-full animate-pulse" />
       </Button>
 
       {/* Simple Dropdown */}
       {isOpen && (
         <div 
-          className="absolute top-full right-0 mt-2 bg-white/15 backdrop-blur-xl border border-white/30 rounded-lg shadow-xl p-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+          className="absolute top-full right-0 mt-2 bg-white border border-neutral-200 rounded-lg shadow-xl p-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
           role="menu"
           aria-label={currentLocale === 'ar' ? 'قائمة اللغات' : currentLocale === 'ur' ? 'زبان کی فہرست' : 'Language menu'}
         >
@@ -99,8 +99,8 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
                 onClick={() => switchLocale(locale)}
                 className={`flex items-center gap-1.5 px-2 py-1 rounded transition-all duration-200 ${
                   currentLocale === locale
-                    ? 'bg-white/25 text-white'
-                    : 'text-white/80 hover:text-white hover:bg-white/15'
+                    ? 'bg-[#4A8B8E]/20 text-[#4A8B8E]'
+                    : 'text-neutral-700 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/10'
                 }`}
                 role="menuitem"
                 aria-current={currentLocale === locale ? 'true' : undefined}

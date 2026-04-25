@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Clock, Calendar, User, ArrowRight } from 'lucide-react';
 import { BlogPost } from '@/data/blog-data';
+import { BlogVideoPlayer } from './BlogVideoPlayer';
 
 interface ArticleHeaderProps {
   post: BlogPost;
@@ -12,6 +13,7 @@ interface ArticleHeaderProps {
 
 export function ArticleHeader({ post }: ArticleHeaderProps) {
   const [formattedDate, setFormattedDate] = useState('');
+  const isVideo = post.coverImageType === 'video';
 
   useEffect(() => {
     const date = new Date(post.publishedDate);
@@ -81,18 +83,26 @@ export function ArticleHeader({ post }: ArticleHeaderProps) {
         </div>
       </div>
 
-      {/* Cover Image */}
+      {/* Cover Image or Video */}
       <div className="container mx-auto px-4 max-w-4xl -mt-8">
-        <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-          <Image
+        {isVideo ? (
+          <BlogVideoPlayer
             src={post.coverImage}
-            alt={post.title}
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            title={post.title}
+            className="h-[400px] md:h-[500px] shadow-2xl"
           />
-        </div>
+        ) : (
+          <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+            <Image
+              src={post.coverImage}
+              alt={post.title}
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            />
+          </div>
+        )}
       </div>
     </header>
   );

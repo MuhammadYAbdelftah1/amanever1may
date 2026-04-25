@@ -4,7 +4,16 @@
 import { motion } from 'framer-motion';
 import { MetricCard, RoadmapTimeline, InvestorContactForm, DataRoomGate } from '@/components/investors';
 import { INVESTOR_METRICS, MARKET_COMPARISON, CHART_DATA } from '@/data/investor-data';
-import { TrendingUp, Users, DollarSign, Building2, Target, Rocket, Award, FileText, Phone, Mail, MapPin, Linkedin, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { TrendingUp, Users, DollarSign, Building2, Target, Rocket, Award, FileText, Phone, Mail, MapPin, Linkedin, ExternalLink, CheckCircle2, Globe, Building, BarChart3, Cpu, HeartPulse, Flag, Star } from 'lucide-react';
+
+// Icon mapping for vision2030
+const iconMap: Record<string, React.ReactNode> = {
+  'flag': <Flag className="w-8 h-8" />,
+  'building-2': <Building2 className="w-8 h-8" />,
+  'trending-up': <TrendingUp className="w-8 h-8" />,
+  'cpu': <Cpu className="w-8 h-8" />,
+  'heart-pulse': <HeartPulse className="w-8 h-8" />,
+};
 
 export function OpportunitySection({ t, isRTL }: any) {
   return (
@@ -30,7 +39,9 @@ export function OpportunitySection({ t, isRTL }: any) {
             transition={{ delay: 0.1 }}
             className="bg-white dark:bg-neutral-800 rounded-2xl p-8 border-2 border-[#4A8B8E]/20"
           >
-            <div className="text-5xl mb-4">🌍</div>
+            <div className="mb-4">
+              <Globe className="w-12 h-12 text-[#4A8B8E]" />
+            </div>
             <h3 className="text-2xl font-bold mb-2">{t.opportunity.tam.title}</h3>
             <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-6">{t.opportunity.tam.subtitle}</p>
             <div className="space-y-3">
@@ -41,8 +52,11 @@ export function OpportunitySection({ t, isRTL }: any) {
               </div>
               <div>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">{t.opportunity.tam.digital}</p>
-                <p className="text-xl font-bold">{INVESTOR_METRICS.tam.digitalMarketCurrent} → {INVESTOR_METRICS.tam.digitalMarketFuture}</p>
-                <p className="text-xs text-neutral-500">({INVESTOR_METRICS.tam.futureYear})</p>
+                <p className="text-xl font-bold">
+                  {INVESTOR_METRICS.tam.digitalMarketCurrent} <span className="text-sm text-neutral-500">(2026)</span>
+                  {' → '}
+                  {INVESTOR_METRICS.tam.digitalMarketFuture} <span className="text-sm text-neutral-500">(2032)</span>
+                </p>
               </div>
               <div className="pt-3 border-t border-neutral-200 dark:border-neutral-700">
                 <p className="text-sm font-bold text-[#10B981]">{t.opportunity.tam.growth} {INVESTOR_METRICS.tam.cagr} CAGR</p>
@@ -58,7 +72,9 @@ export function OpportunitySection({ t, isRTL }: any) {
             transition={{ delay: 0.2 }}
             className="bg-white dark:bg-neutral-800 rounded-2xl p-8 border-2 border-[#C5A572]/20"
           >
-            <div className="text-5xl mb-4">🎯</div>
+            <div className="mb-4">
+              <Target className="w-12 h-12 text-[#C5A572]" />
+            </div>
             <h3 className="text-2xl font-bold mb-2">{t.opportunity.sam.title}</h3>
             <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-6">{t.opportunity.sam.subtitle}</p>
             <div className="space-y-3">
@@ -85,7 +101,9 @@ export function OpportunitySection({ t, isRTL }: any) {
             transition={{ delay: 0.3 }}
             className="bg-gradient-to-br from-[#10B981]/10 to-[#10B981]/5 dark:from-[#10B981]/20 dark:to-[#10B981]/10 rounded-2xl p-8 border-2 border-[#10B981]/30"
           >
-            <div className="text-5xl mb-4">🚀</div>
+            <div className="mb-4">
+              <Rocket className="w-12 h-12 text-[#10B981]" />
+            </div>
             <h3 className="text-2xl font-bold mb-2">{t.opportunity.som.title}</h3>
             <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-6">{t.opportunity.som.subtitle}</p>
             <div className="space-y-3">
@@ -120,7 +138,9 @@ export function OpportunitySection({ t, isRTL }: any) {
                 transition={{ delay: index * 0.1 }}
                 className="bg-white dark:bg-neutral-800 rounded-xl p-6 text-center hover:shadow-lg transition-shadow"
               >
-                <div className="text-4xl mb-3">{item.icon}</div>
+                <div className="mb-3 flex justify-center text-[#4A8B8E]">
+                  {iconMap[item.icon]}
+                </div>
                 <h4 className="font-bold mb-2">{isRTL ? item.title : item.titleEn}</h4>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">
                   {isRTL ? item.description : item.descriptionEn}
@@ -193,12 +213,17 @@ export function SolutionSection({ t, isRTL }: any) {
             viewport={{ once: true }}
             className="bg-gradient-to-br from-[#4A8B8E]/10 to-[#4A8B8E]/5 rounded-2xl p-8 border border-[#4A8B8E]/20"
           >
-            <div className="text-5xl mb-4">📱</div>
+            <div className="mb-4">
+              <Users className="w-12 h-12 text-[#4A8B8E]" />
+            </div>
             <h3 className="text-2xl font-bold mb-4">{t.solution.app.title}</h3>
             <div className="space-y-2">
               <p className="text-3xl font-bold text-[#4A8B8E]">{INVESTOR_METRICS.activeMembers}</p>
               <p className="text-sm text-neutral-600 dark:text-neutral-400">{t.solution.app.users}</p>
-              <p className="text-xl font-bold">4.8 ⭐</p>
+              <div className="flex items-center gap-2">
+                <p className="text-xl font-bold">4.8</p>
+                <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+              </div>
               <p className="text-sm text-neutral-600 dark:text-neutral-400">{t.solution.app.rating}</p>
             </div>
           </motion.div>
@@ -211,7 +236,9 @@ export function SolutionSection({ t, isRTL }: any) {
             transition={{ delay: 0.1 }}
             className="bg-gradient-to-br from-[#C5A572]/10 to-[#C5A572]/5 rounded-2xl p-8 border border-[#C5A572]/20"
           >
-            <div className="text-5xl mb-4">💳</div>
+            <div className="mb-4">
+              <Award className="w-12 h-12 text-[#C5A572]" />
+            </div>
             <h3 className="text-2xl font-bold mb-4">{t.solution.card.title}</h3>
             <p className="text-lg text-neutral-700 dark:text-neutral-300">{t.solution.card.instant}</p>
           </motion.div>
@@ -224,7 +251,9 @@ export function SolutionSection({ t, isRTL }: any) {
             transition={{ delay: 0.2 }}
             className="bg-gradient-to-br from-[#10B981]/10 to-[#10B981]/5 rounded-2xl p-8 border border-[#10B981]/20"
           >
-            <div className="text-5xl mb-4">🏥</div>
+            <div className="mb-4">
+              <Building2 className="w-12 h-12 text-[#10B981]" />
+            </div>
             <h3 className="text-2xl font-bold mb-4">{t.solution.network.title}</h3>
             <div className="space-y-2">
               <p className="text-3xl font-bold text-[#10B981]">{INVESTOR_METRICS.partners}</p>
@@ -241,7 +270,9 @@ export function SolutionSection({ t, isRTL }: any) {
             transition={{ delay: 0.3 }}
             className="bg-gradient-to-br from-[#C5A572]/10 to-[#C5A572]/5 rounded-2xl p-8 border border-[#C5A572]/20"
           >
-            <div className="text-5xl mb-4">💰</div>
+            <div className="mb-4">
+              <DollarSign className="w-12 h-12 text-[#C5A572]" />
+            </div>
             <h3 className="text-2xl font-bold mb-4">{t.solution.cashback.title}</h3>
             <div className="space-y-2">
               <p className="text-sm text-neutral-600 dark:text-neutral-400">{t.solution.cashback.model}</p>
@@ -257,7 +288,9 @@ export function SolutionSection({ t, isRTL }: any) {
             transition={{ delay: 0.4 }}
             className="md:col-span-2 bg-gradient-to-br from-[#4A8B8E]/10 to-[#4A8B8E]/5 rounded-2xl p-8 border border-[#4A8B8E]/20"
           >
-            <div className="text-5xl mb-4">🤖</div>
+            <div className="mb-4">
+              <Cpu className="w-12 h-12 text-[#4A8B8E]" />
+            </div>
             <h3 className="text-2xl font-bold mb-4">{t.solution.ai.title}</h3>
             <p className="text-lg text-neutral-700 dark:text-neutral-300">{t.solution.ai.description}</p>
           </motion.div>
@@ -286,49 +319,49 @@ export function TractionSection({ t, isRTL }: any) {
         {/* Key Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           <MetricCard
-            icon="👥"
+            icon={<Users className="w-8 h-8" />}
             label={t.traction.metrics.members}
             value={INVESTOR_METRICS.activeMembers}
             change={`↑ ${INVESTOR_METRICS.yoyGrowth}`}
             delay={0}
           />
           <MetricCard
-            icon="💵"
+            icon={<DollarSign className="w-8 h-8" />}
             label={t.traction.metrics.arr}
             value={INVESTOR_METRICS.arr}
             change={`↑ ${INVESTOR_METRICS.arrGrowth}`}
             delay={0.1}
           />
           <MetricCard
-            icon="📱"
+            icon={<BarChart3 className="w-8 h-8" />}
             label={t.traction.metrics.transactions}
             value={INVESTOR_METRICS.monthlyTransactions}
             change="↑ 95%"
             delay={0.2}
           />
           <MetricCard
-            icon="🔁"
+            icon={<TrendingUp className="w-8 h-8" />}
             label={t.traction.metrics.retention}
             value={INVESTOR_METRICS.retentionRate}
             benchmark={`${t.traction.metrics.industry}: ${INVESTOR_METRICS.industryRetention}`}
             delay={0.3}
           />
           <MetricCard
-            icon="⭐"
+            icon={<Award className="w-8 h-8" />}
             label={t.traction.metrics.nps}
             value={INVESTOR_METRICS.npsScore}
             benchmark={`${t.traction.metrics.bestInClass}: ${INVESTOR_METRICS.npsTarget}`}
             delay={0.4}
           />
           <MetricCard
-            icon="💰"
+            icon={<DollarSign className="w-8 h-8" />}
             label={t.traction.metrics.ltvCac}
             value={INVESTOR_METRICS.ltvCacRatio}
             benchmark={`${t.traction.metrics.healthy}: ${INVESTOR_METRICS.healthyLtvCac}`}
             delay={0.5}
           />
           <MetricCard
-            icon="⏱️"
+            icon={<TrendingUp className="w-8 h-8" />}
             label={t.traction.metrics.payback}
             value={INVESTOR_METRICS.paybackPeriod}
             benchmark={`${t.traction.metrics.healthy}: ${INVESTOR_METRICS.healthyPayback}`}

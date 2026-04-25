@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Clock, User, ArrowLeft } from 'lucide-react';
+import { Clock, User, ArrowLeft, Play } from 'lucide-react';
 import { BlogPost } from '@/data/blog-data';
 
 interface BlogCardProps {
@@ -14,6 +14,7 @@ interface BlogCardProps {
 export function BlogCard({ post, index }: BlogCardProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [formattedDate, setFormattedDate] = useState('');
+  const isVideo = post.coverImageType === 'video';
 
   useEffect(() => {
     // Animate on mount
@@ -40,15 +41,36 @@ export function BlogCard({ post, index }: BlogCardProps) {
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
       `}
     >
-      {/* Cover Image */}
+      {/* Cover Image or Video */}
       <Link href={`/ar/blog/${post.slug}`} className="block relative h-56 overflow-hidden">
-        <Image
-          src={post.coverImage}
-          alt={post.title}
-          fill
-          className="object-cover group-hover:scale-110 transition-transform duration-500"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+        {isVideo ? (
+          <>
+            <video
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster={post.coverImage.replace('.mp4', '-poster.jpg')}
+            >
+              <source src={post.coverImage} type="video/mp4" />
+            </video>
+            {/* Video Play Overlay */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
+              <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Play className="w-8 h-8 text-[#4A8B8E] ml-1" />
+              </div>
+            </div>
+          </>
+        ) : (
+          <Image
+            src={post.coverImage}
+            alt={post.title}
+            fill
+            className="object-cover group-hover:scale-110 transition-transform duration-500"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        )}
         
         {/* Category Badge */}
         <div className="absolute top-4 right-4 bg-[#4A8B8E] text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
@@ -57,8 +79,9 @@ export function BlogCard({ post, index }: BlogCardProps) {
 
         {/* Featured Badge */}
         {post.featured && (
-          <div className="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-            ⭐ مميز
+          <div className="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
+            <span className="text-white">⭐</span>
+            <span>مميز</span>
           </div>
         )}
       </Link>

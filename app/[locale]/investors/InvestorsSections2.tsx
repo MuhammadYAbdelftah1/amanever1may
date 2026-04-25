@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { INVESTOR_METRICS } from '@/data/investor-data';
-import { Linkedin, CheckCircle2 } from 'lucide-react';
+import { Linkedin, CheckCircle2, DollarSign, BarChart3, Award, AlertTriangle } from 'lucide-react';
 
 export function BusinessModelSection({ t, isRTL }: any) {
   return (
@@ -24,7 +24,7 @@ export function BusinessModelSection({ t, isRTL }: any) {
             className="bg-white dark:bg-neutral-900 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-800"
           >
             <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-              <span>💵</span>
+              <DollarSign className="w-6 h-6 text-[#10B981]" />
               {t.businessModel.revenue.title}
             </h3>
             <div className="space-y-4">
@@ -62,7 +62,7 @@ export function BusinessModelSection({ t, isRTL }: any) {
             className="bg-gradient-to-br from-[#C5A572]/10 to-[#C5A572]/5 rounded-2xl p-8 border border-[#C5A572]/20"
           >
             <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-              <span>📊</span>
+              <BarChart3 className="w-6 h-6 text-[#C5A572]" />
               {t.businessModel.unitEconomics.title}
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
@@ -79,7 +79,10 @@ export function BusinessModelSection({ t, isRTL }: any) {
                     {metric.value}
                   </p>
                   {metric.highlight && (
-                    <p className="text-xs text-green-600 dark:text-green-400 mt-1">✓ {t.traction.metrics.healthy}</p>
+                    <p className="text-xs text-green-600 dark:text-green-400 mt-1 flex items-center justify-center gap-1">
+                      <CheckCircle2 className="w-3 h-3" />
+                      {t.traction.metrics.healthy}
+                    </p>
                   )}
                 </div>
               ))}
@@ -94,7 +97,7 @@ export function BusinessModelSection({ t, isRTL }: any) {
             className="bg-white dark:bg-neutral-900 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-800"
           >
             <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-              <span>🏆</span>
+              <Award className="w-6 h-6 text-[#10B981]" />
               {t.businessModel.profitability.title}
             </h3>
             <div className="space-y-4">
@@ -165,7 +168,7 @@ export function TeamSection({ t, isRTL }: any) {
                 </div>
 
                 <p className="text-sm italic text-neutral-700 dark:text-neutral-300 mb-4 border-t border-neutral-200 dark:border-neutral-700 pt-4">
-                  "{member.quote}"
+                  &ldquo;{member.quote}&rdquo;
                 </p>
 
                 <a
@@ -187,9 +190,10 @@ export function TeamSection({ t, isRTL }: any) {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-12 text-center text-sm text-neutral-500 dark:text-neutral-500"
+          className="mt-12 text-center text-sm text-neutral-500 dark:text-neutral-500 flex items-center justify-center gap-2"
         >
-          <p>⚠️ Team information contains placeholders. Update with actual team data before publication.</p>
+          <AlertTriangle className="w-4 h-4" />
+          <p>Team information contains placeholders. Update with actual team data before publication.</p>
         </motion.div>
       </div>
     </section>

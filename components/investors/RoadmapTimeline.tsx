@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { useInView } from 'framer-motion';
+import { TrendingUp, Sparkles } from 'lucide-react';
 
 interface RoadmapItem {
   quarter: string;
@@ -30,7 +31,7 @@ export function RoadmapTimeline({ items, isRTL = false }: RoadmapTimelineProps) 
 
       <div className="space-y-12">
         {items.map((item, index) => {
-          const isUnicorn = item.milestone.includes('🦄');
+          const isUnicorn = item.milestone.includes('🦄') || item.milestone.toLowerCase().includes('unicorn');
           const isIPO = item.milestone.includes('IPO');
           
           return (
@@ -73,13 +74,19 @@ export function RoadmapTimeline({ items, isRTL = false }: RoadmapTimelineProps) 
                       {item.quarter}
                     </span>
                     {(isUnicorn || isIPO) && (
-                      <span className="text-2xl">{isUnicorn ? '🦄' : '📈'}</span>
+                      <span className="flex items-center">
+                        {isUnicorn ? (
+                          <Sparkles className="w-6 h-6 text-[#C5A572]" />
+                        ) : (
+                          <TrendingUp className="w-6 h-6 text-[#10B981]" />
+                        )}
+                      </span>
                     )}
                   </div>
-                  <p className={`${isUnicorn || isIPO ? 'text-lg font-bold' : 'text-base'} ${
+                  <p className={`${isUnicorn || isIPO ? 'text-lg font-bold text-[#4A8B8E]' : 'text-base text-[#4A8B8E]'} ${
                     isRTL ? 'text-right' : 'text-left'
                   }`}>
-                    {item.milestone}
+                    {item.milestone.replace('🦄', '')}
                   </p>
                 </div>
               </div>

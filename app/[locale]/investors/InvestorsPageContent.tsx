@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Calendar, Download, TrendingUp, Users, DollarSign, Building2, Target, Rocket, Award, FileText, Phone, Mail, MapPin, Linkedin, ExternalLink } from 'lucide-react';
+import { Calendar, Download, TrendingUp, Users, DollarSign, Building2, Target, Rocket, Award, FileText, Phone, Mail, MapPin, Linkedin, ExternalLink, AlertTriangle, Star } from 'lucide-react';
 import { MetricCard, RoadmapTimeline, InvestorContactForm, DataRoomGate } from '@/components/investors';
 import { INVESTOR_METRICS, MARKET_COMPARISON } from '@/data/investor-data';
 import { useEffect } from 'react';
@@ -259,7 +259,15 @@ export function InvestorsPageContent({ locale }: InvestorsPageContentProps) {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950" dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className="min-h-screen bg-white dark:bg-neutral-950 pt-24 md:pt-32" dir={isRTL ? 'rtl' : 'ltr'}>
+      {/* Development Warning Banner - Remove before production */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="fixed top-20 left-0 right-0 z-40 bg-yellow-500 text-black px-4 py-2 text-center text-sm font-bold flex items-center justify-center gap-2">
+          <AlertTriangle className="w-4 h-4" />
+          تحذير: جميع البيانات المالية والإحصائيات في هذه الصفحة هي PLACEHOLDERS وتحتاج لمراجعة CFO/Legal قبل النشر
+        </div>
+      )}
+      
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#0F1B1C] via-[#1a2f30] to-[#0F1B1C] text-white">
         {/* Background Pattern */}

@@ -3,10 +3,11 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import { InvestorsPageContent } from './InvestorsPageContent';
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
   const title = locale === 'ar' 
     ? 'علاقات المستثمرين | أمان إيفر — منصة العضوية الصحية الرائدة في السعودية'
     : 'Investor Relations | Aman Ever — Saudi Arabia\'s Leading Healthtech Membership Platform';
@@ -52,7 +53,8 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
   };
 }
 
-export default function InvestorsPage({ params: { locale } }: Props) {
+export default async function InvestorsPage({ params }: Props) {
+  const { locale } = await params;
   unstable_setRequestLocale(locale);
   
   return <InvestorsPageContent locale={locale} />;

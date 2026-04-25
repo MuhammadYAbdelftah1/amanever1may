@@ -205,7 +205,7 @@ export function DataRoomGate({ resources, isRTL = false, translations }: DataRoo
                   </div>
                   <h3 className="text-xl font-bold mb-2">{translations.success}</h3>
                   <p className="text-neutral-600 dark:text-neutral-400">
-                    We'll send you access credentials shortly.
+                    We&apos;ll send you access credentials shortly.
                   </p>
                 </div>
               )}

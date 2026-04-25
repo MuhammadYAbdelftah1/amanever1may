@@ -31,6 +31,7 @@ export interface BlogPost {
   excerpt: string;
   content: string; // Full article content (Markdown or HTML)
   coverImage: string;
+  coverImageType?: 'image' | 'video'; // New field to specify media type
   category: BlogCategory;
   tags: string[];
   author: BlogAuthor;
@@ -167,7 +168,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 *هذا المقال مراجع طبياً من قبل د. خالد السقاف، استشاري أمراض القلب.*
     `,
-    coverImage: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80',
+    coverImage: '/images/blog/periodic-checkups-cover.jpeg',
     category: 'صحة عامة',
     tags: ['فحوصات', 'وقاية', 'كشف مبكر', 'صحة'],
     author: BLOG_AUTHORS['dr-khaled'],
@@ -228,7 +229,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 *مقال من فريق أمان إيفر - بالتعاون مع خبراء التحول الرقمي*
     `,
-    coverImage: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80',
+    coverImage: '/images/blog/vision-2030-digital-health.png',
     category: 'تقنية صحية',
     tags: ['رؤية 2030', 'تحول رقمي', 'تقنية', 'صحة رقمية'],
     author: BLOG_AUTHORS['aman-team'],
@@ -306,7 +307,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 *مراجع طبياً من د. خالد السقاف، استشاري أمراض القلب*
     `,
-    coverImage: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80',
+    coverImage: '/images/blog/heart-healthy-habits.jpeg',
     category: 'نصائح وقائية',
     tags: ['قلب', 'وقاية', 'عادات صحية', 'نمط حياة'],
     author: BLOG_AUTHORS['dr-khaled'],

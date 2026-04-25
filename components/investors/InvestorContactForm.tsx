@@ -87,20 +87,20 @@ export function InvestorContactForm({ isRTL = false, translations }: InvestorCon
       className="bg-white dark:bg-neutral-900 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-800 shadow-lg"
     >
       <div className="mb-6">
-        <h3 className="text-2xl font-bold mb-2">{translations.title}</h3>
+        <h3 className="text-2xl font-bold mb-2 text-[#1A2B2C] dark:text-white">{translations.title}</h3>
         <p className="text-neutral-600 dark:text-neutral-400">{translations.subtitle}</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" dir={isRTL ? 'rtl' : 'ltr'}>
         {/* Name */}
         <div>
-          <label className="block text-sm font-medium mb-2">
+          <label className="block text-sm font-medium mb-2 text-[#1A2B2C] dark:text-white">
             {translations.name} <span className="text-red-500">*</span>
           </label>
           <input
             {...register('name')}
             type="text"
-            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 focus:ring-2 focus:ring-[#4A8B8E] focus:border-transparent outline-none transition"
+            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-[#1A2B2C] dark:text-white focus:ring-2 focus:ring-[#4A8B8E] focus:border-transparent outline-none transition"
             disabled={isSubmitting}
           />
           {errors.name && (
@@ -110,13 +110,13 @@ export function InvestorContactForm({ isRTL = false, translations }: InvestorCon
 
         {/* Email */}
         <div>
-          <label className="block text-sm font-medium mb-2">
+          <label className="block text-sm font-medium mb-2 text-[#1A2B2C] dark:text-white">
             {translations.email} <span className="text-red-500">*</span>
           </label>
           <input
             {...register('email')}
             type="email"
-            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 focus:ring-2 focus:ring-[#4A8B8E] focus:border-transparent outline-none transition"
+            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-[#1A2B2C] dark:text-white focus:ring-2 focus:ring-[#4A8B8E] focus:border-transparent outline-none transition"
             disabled={isSubmitting}
           />
           {errors.email && (
@@ -126,13 +126,13 @@ export function InvestorContactForm({ isRTL = false, translations }: InvestorCon
 
         {/* Company */}
         <div>
-          <label className="block text-sm font-medium mb-2">
+          <label className="block text-sm font-medium mb-2 text-[#1A2B2C] dark:text-white">
             {translations.company} <span className="text-red-500">*</span>
           </label>
           <input
             {...register('company')}
             type="text"
-            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 focus:ring-2 focus:ring-[#4A8B8E] focus:border-transparent outline-none transition"
+            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-[#1A2B2C] dark:text-white focus:ring-2 focus:ring-[#4A8B8E] focus:border-transparent outline-none transition"
             disabled={isSubmitting}
           />
           {errors.company && (
@@ -142,12 +142,12 @@ export function InvestorContactForm({ isRTL = false, translations }: InvestorCon
 
         {/* Investment Size */}
         <div>
-          <label className="block text-sm font-medium mb-2">
+          <label className="block text-sm font-medium mb-2 text-[#1A2B2C] dark:text-white">
             {translations.investmentSize} <span className="text-red-500">*</span>
           </label>
           <select
             {...register('investmentSize')}
-            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 focus:ring-2 focus:ring-[#4A8B8E] focus:border-transparent outline-none transition"
+            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-[#1A2B2C] dark:text-white focus:ring-2 focus:ring-[#4A8B8E] focus:border-transparent outline-none transition"
             disabled={isSubmitting}
           >
             <option value="">Select...</option>
@@ -164,11 +164,11 @@ export function InvestorContactForm({ isRTL = false, translations }: InvestorCon
 
         {/* Message */}
         <div>
-          <label className="block text-sm font-medium mb-2">{translations.message}</label>
+          <label className="block text-sm font-medium mb-2 text-[#1A2B2C] dark:text-white">{translations.message}</label>
           <textarea
             {...register('message')}
             rows={4}
-            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 focus:ring-2 focus:ring-[#4A8B8E] focus:border-transparent outline-none transition resize-none"
+            className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-[#1A2B2C] dark:text-white focus:ring-2 focus:ring-[#4A8B8E] focus:border-transparent outline-none transition resize-none"
             disabled={isSubmitting}
           />
         </div>
@@ -187,7 +187,7 @@ export function InvestorContactForm({ isRTL = false, translations }: InvestorCon
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-800 dark:text-green-200"
+            className="p-4 bg-[#4A8B8E]/10 border border-[#4A8B8E]/30 rounded-lg text-[#4A8B8E]"
           >
             {translations.success}
           </motion.div>

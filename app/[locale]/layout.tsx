@@ -5,6 +5,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { ibmPlexArabic, roboto } from '@/lib/fonts';
 import { routing } from '@/routing';
+import { Header } from '@/components/layout/header';
 import { StickyDownloadBar } from '@/components/global/sticky-download-bar';
 import { FooterNew } from '@/components/global/footer-new';
 import { ChatLauncher } from '@/components/chatbot/ChatLauncher';
@@ -68,6 +69,7 @@ export default async function RootLayout({
           {locale === 'ar' ? 'انتقل إلى المحتوى الرئيسي' : locale === 'ur' ? 'مرکزی مواد پر جائیں' : 'Skip to main content'}
         </a>
         <NextIntlClientProvider messages={messages}>
+          <Header locale={locale} />
           {children}
           <StickyDownloadBar />
           <FloatingAuthButtons />

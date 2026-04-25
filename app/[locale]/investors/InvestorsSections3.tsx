@@ -1,7 +1,11 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { RoadmapTimeline, InvestorContactForm, DataRoomGate } from '@/components/investors';
 import { INVESTOR_METRICS } from '@/data/investor-data';
-import { Download, Calendar, Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
+import { Download, Calendar, Mail, Phone, MapPin, ExternalLink, Rocket, AlertTriangle, FileText, BarChart3, Award } from 'lucide-react';
+import { useState } from 'react';
+import { ScheduleCallModal } from '@/components/investors/ScheduleCallModal';
 
 export function RoadmapSection({ t, isRTL }: any) {
   return (
@@ -57,8 +61,9 @@ export function FundingRoundSection({ t, isRTL }: any) {
 
           <div className="relative z-10">
             <div className="text-center mb-8">
-              <div className="inline-block bg-[#C5A572] text-white px-6 py-3 rounded-full font-bold text-lg mb-4">
-                🚀 {t.funding.raising}
+              <div className="inline-flex items-center gap-2 bg-[#C5A572] text-white px-6 py-3 rounded-full font-bold text-lg mb-4">
+                <Rocket className="w-5 h-5" />
+                {t.funding.raising}
               </div>
             </div>
 
@@ -131,8 +136,9 @@ export function FundingRoundSection({ t, isRTL }: any) {
             </div>
 
             {/* Warning */}
-            <div className="mt-6 text-center text-xs text-neutral-600 dark:text-neutral-400">
-              <p>⚠️ {t.disclaimer.text}</p>
+            <div className="mt-6 text-center text-xs text-neutral-600 dark:text-neutral-400 flex items-center justify-center gap-2">
+              <AlertTriangle className="w-3 h-3" />
+              <p>{t.disclaimer.text}</p>
             </div>
           </div>
         </motion.div>
@@ -162,7 +168,9 @@ export function PressSection({ t, isRTL }: any) {
           viewport={{ once: true }}
           className="max-w-2xl mx-auto text-center bg-white dark:bg-neutral-800 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-700"
         >
-          <div className="text-5xl mb-4">📰</div>
+          <div className="mb-4 flex justify-center">
+            <FileText className="w-16 h-16 text-[#4A8B8E]" />
+          </div>
           <h3 className="text-2xl font-bold mb-4">{t.press.mediaInquiries}</h3>
           <p className="text-neutral-600 dark:text-neutral-400 mb-6">
             {t.press.contact}
@@ -209,7 +217,7 @@ export function ResourcesSection({ t, isRTL }: any) {
             className="bg-white dark:bg-neutral-900 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-800"
           >
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              <span>📰</span>
+              <FileText className="w-6 h-6 text-[#4A8B8E]" />
               {t.resources.pressReleases.title}
             </h3>
             <div className="space-y-3 mb-6">
@@ -242,7 +250,7 @@ export function ResourcesSection({ t, isRTL }: any) {
             className="bg-white dark:bg-neutral-900 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-800"
           >
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              <span>📊</span>
+              <BarChart3 className="w-6 h-6 text-[#C5A572]" />
               {t.resources.reports.title}
             </h3>
             <div className="space-y-3 mb-6">
@@ -275,7 +283,7 @@ export function ResourcesSection({ t, isRTL }: any) {
             className="bg-white dark:bg-neutral-900 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-800"
           >
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              <span>🎤</span>
+              <Award className="w-6 h-6 text-[#10B981]" />
               {t.resources.events.title}
             </h3>
             <div className="space-y-3">
@@ -303,94 +311,102 @@ export function ResourcesSection({ t, isRTL }: any) {
 
 export function ContactSection({ t, isRTL }: any) {
   const { company } = INVESTOR_METRICS;
+  const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-[#0F1B1C] to-[#1a2f30] text-white">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            {t.contact.title}
-            <br />
-            <span className="text-[#C5A572]">{t.contact.subtitle}</span>
-          </h2>
-        </motion.div>
-
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-          {/* Contact Info */}
+    <>
+      <section className="py-20 bg-gradient-to-br from-[#0F1B1C] to-[#1a2f30] text-white">
+        <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="text-center mb-16"
           >
-            <div>
-              <h3 className="text-2xl font-bold mb-6">{t.contact.irLead}</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#4A8B8E] rounded-full flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-neutral-400">{t.contact.email}</p>
-                    <a href={`mailto:${company.investorEmail}`} className="text-lg hover:text-[#C5A572] transition-colors">
-                      {company.investorEmail}
-                    </a>
-                  </div>
-                </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.contact.title}
+              <br />
+              <span className="text-[#C5A572]">{t.contact.subtitle}</span>
+            </h2>
+          </motion.div>
 
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#4A8B8E] rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5" />
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
+            {/* Contact Info */}
+            <motion.div
+              initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <div>
+                <h3 className="text-2xl font-bold mb-6">{t.contact.irLead}</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-[#4A8B8E] rounded-full flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-neutral-400">{t.contact.email}</p>
+                      <a href={`mailto:${company.investorEmail}`} className="text-lg hover:text-[#C5A572] transition-colors">
+                        {company.investorEmail}
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-neutral-400">{t.contact.phone}</p>
-                    <a href={`tel:${company.investorPhone}`} className="text-lg hover:text-[#C5A572] transition-colors">
-                      {company.investorPhone}
-                    </a>
-                  </div>
-                </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#4A8B8E] rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5" />
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-[#4A8B8E] rounded-full flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-neutral-400">{t.contact.phone}</p>
+                      <a href={`tel:${company.investorPhone}`} className="text-lg hover:text-[#C5A572] transition-colors">
+                        {company.investorPhone}
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-lg">{company.headquarters}</p>
-                    <p className="text-sm text-neutral-400">{company.phone}</p>
+
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-[#4A8B8E] rounded-full flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-lg">{company.headquarters}</p>
+                      <p className="text-sm text-neutral-400">{company.phone}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="pt-8 border-t border-white/20">
-              <div className="flex gap-4">
-                <button className="flex-1 bg-[#C5A572] hover:bg-[#b39563] text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+              <div className="pt-8 border-t border-white/20">
+                <button 
+                  onClick={() => setIsScheduleModalOpen(true)}
+                  className="w-full bg-[#C5A572] hover:bg-[#b39563] text-white font-bold py-4 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+                >
                   <Calendar className="w-5 h-5" />
                   {t.contact.scheduleCall}
                 </button>
-                <button className="flex-1 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 border border-white/20">
-                  <Download className="w-5 h-5" />
-                  {t.contact.requestDeck}
-                </button>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
 
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: isRTL ? -20 : 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <InvestorContactForm isRTL={isRTL} translations={t.contact.form} />
-          </motion.div>
+            {/* Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: isRTL ? -20 : 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <InvestorContactForm isRTL={isRTL} translations={t.contact.form} />
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Schedule Call Modal */}
+      <ScheduleCallModal
+        isOpen={isScheduleModalOpen}
+        onClose={() => setIsScheduleModalOpen(false)}
+        isRTL={isRTL}
+        title={t.contact.scheduleCall}
+      />
+    </>
   );
 }
