@@ -35,7 +35,7 @@ export const FOOTER_CONFIG_NEW = {
       ar: "الأحد - الخميس: 9 صباحاً - 6 مساءً",
       note: "خط الطوارئ الطبية متاح 24/7",
     },
-    languages: ["ar", "en", "ur", "tl"], // Arabic, English, Urdu, Tagalog
+    languages: ["ar", "en", "ur"], // Arabic, English, Urdu
   },
 
   social: [
