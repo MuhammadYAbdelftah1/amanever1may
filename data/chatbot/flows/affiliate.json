@@ -1,0 +1,375 @@
+{
+  "startNode": "welcome",
+  "nodes": {
+    "welcome": {
+      "id": "welcome",
+      "audience": "affiliate",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "أهلاً بك في برنامج المسوّقين بالعمولة!"
+        },
+        {
+          "type": "text",
+          "text": "ما هو الـ ID الخاص بك في أمان إيفر؟"
+        }
+      ],
+      "input": {
+        "key": "affiliateId",
+        "placeholder": "مثال: ae2001",
+        "validate": "affiliate_id",
+        "required": true
+      },
+      "next": "verify"
+    },
+    "verify": {
+      "id": "verify",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "مرحباً {{affiliateName}}! 👋"
+        },
+        {
+          "type": "card",
+          "title": "{{affiliateName}}",
+          "body": "ID: {{affiliateId}} · العمولة: {{commission}}% · المبيعات: {{sales}} ر.س",
+          "icon": "wallet"
+        },
+        {
+          "type": "text",
+          "text": "كيف أقدر أساعدك اليوم؟"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "أرباحي وعمولاتي",
+          "value": "earnings",
+          "icon": "wallet"
+        },
+        {
+          "label": "طلب سحب",
+          "value": "withdrawal",
+          "icon": "credit-card"
+        },
+        {
+          "label": "روابط التسويق",
+          "value": "links",
+          "icon": "file-text"
+        },
+        {
+          "label": "الإحصائيات",
+          "value": "stats",
+          "icon": "ticket"
+        },
+        {
+          "label": "تواصل مع موظف",
+          "value": "human_agent",
+          "icon": "message-circle"
+        }
+      ],
+      "next": {
+        "earnings": "earnings-info",
+        "withdrawal": "withdrawal-request",
+        "links": "marketing-links",
+        "stats": "statistics",
+        "human_agent": "handoff-message"
+      }
+    },
+    "earnings-info": {
+      "id": "earnings-info",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "ملخص أرباحك:"
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "label": "الرصيد الحالي",
+              "value": "{{sales}} ر.س"
+            },
+            {
+              "label": "نسبة العمولة",
+              "value": "{{commission}}%"
+            },
+            {
+              "label": "إجمالي المبيعات",
+              "value": "85,000 ر.س"
+            },
+            {
+              "label": "عدد الإحالات",
+              "value": "42 إحالة"
+            },
+            {
+              "label": "آخر دفعة",
+              "value": "8,500 ر.س - 1 أبريل"
+            }
+          ]
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "طلب سحب",
+          "value": "withdrawal",
+          "icon": "credit-card"
+        },
+        {
+          "label": "رجوع",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "withdrawal": "withdrawal-request",
+        "back": "verify"
+      }
+    },
+    "withdrawal-request": {
+      "id": "withdrawal-request",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "رصيدك المتاح للسحب: {{sales}} ر.س"
+        },
+        {
+          "type": "text",
+          "text": "الحد الأدنى للسحب: 1,000 ر.س"
+        },
+        {
+          "type": "text",
+          "text": "كم المبلغ الذي تريد سحبه؟"
+        }
+      ],
+      "input": {
+        "key": "withdrawal_amount",
+        "placeholder": "مثال: 5000",
+        "validate": "text",
+        "required": true
+      },
+      "next": "withdrawal-confirm"
+    },
+    "withdrawal-confirm": {
+      "id": "withdrawal-confirm",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "تم استلام طلب السحب بمبلغ {{withdrawal_amount}} ر.س"
+        },
+        {
+          "type": "card",
+          "title": "طلب سحب #WD-2026-001",
+          "body": "الحالة: قيد المعالجة · المدة المتوقعة: 3-5 أيام عمل",
+          "icon": "credit-card"
+        },
+        {
+          "type": "text",
+          "text": "سيتم تحويل المبلغ إلى حسابك البنكي المسجل."
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "رجوع للقائمة",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "back": "verify"
+      }
+    },
+    "marketing-links": {
+      "id": "marketing-links",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "روابط التسويق الخاصة بك:"
+        },
+        {
+          "type": "card",
+          "title": "رابط عام",
+          "body": "amanever.com/ref/{{affiliateId}}",
+          "icon": "file-text"
+        },
+        {
+          "type": "card",
+          "title": "رابط الباقات",
+          "body": "amanever.com/membership?ref={{affiliateId}}",
+          "icon": "file-text"
+        },
+        {
+          "type": "text",
+          "text": "يمكنك نسخ هذه الروابط واستخدامها في حملاتك التسويقية."
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "طلب رابط مخصص",
+          "value": "custom_link",
+          "icon": "file-text"
+        },
+        {
+          "label": "رجوع",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "custom_link": "custom-link-request",
+        "back": "verify"
+      }
+    },
+    "custom-link-request": {
+      "id": "custom-link-request",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "لأي صفحة تحتاج رابط مخصص؟"
+        }
+      ],
+      "input": {
+        "key": "custom_link_page",
+        "placeholder": "مثال: صفحة الخدمات، صفحة معينة...",
+        "validate": "text",
+        "required": true
+      },
+      "next": "custom-link-created"
+    },
+    "custom-link-created": {
+      "id": "custom-link-created",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "تم استلام طلبك! سيتم إنشاء الرابط المخصص لـ {{custom_link_page}} وإرساله لك خلال 24 ساعة."
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "رجوع للقائمة",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "back": "verify"
+      }
+    },
+    "statistics": {
+      "id": "statistics",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "إحصائيات هذا الشهر:"
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "label": "عدد النقرات",
+              "value": "1,250 نقرة"
+            },
+            {
+              "label": "معدل التحويل",
+              "value": "3.4%"
+            },
+            {
+              "label": "عدد الإحالات الناجحة",
+              "value": "12 إحالة"
+            },
+            {
+              "label": "متوسط قيمة الإحالة",
+              "value": "850 ر.س"
+            },
+            {
+              "label": "إجمالي العمولات",
+              "value": "2,100 ر.س"
+            }
+          ]
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "تقرير مفصل",
+          "value": "detailed_report",
+          "icon": "file-text"
+        },
+        {
+          "label": "رجوع",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "detailed_report": "detailed-report",
+        "back": "verify"
+      }
+    },
+    "detailed-report": {
+      "id": "detailed-report",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "لأي فترة تحتاج التقرير المفصل؟"
+        }
+      ],
+      "input": {
+        "key": "report_period",
+        "placeholder": "مثال: مارس 2026، الربع الأول...",
+        "validate": "text",
+        "required": true
+      },
+      "next": "report-requested"
+    },
+    "report-requested": {
+      "id": "report-requested",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "تم استلام طلبك! سيتم إرسال التقرير المفصل لفترة {{report_period}} على بريدك الإلكتروني خلال ساعة."
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "رجوع للقائمة",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "back": "verify"
+      }
+    },
+    "handoff-message": {
+      "id": "handoff-message",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "جاري تحويلك لموظف المسوقين..."
+        },
+        {
+          "type": "text",
+          "text": "سيتم فتح واتساب خلال لحظات. يرجى الانتظار..."
+        }
+      ],
+      "handoff": {
+        "channel": "whatsapp",
+        "prefilledMessage": "مرحباً، أنا {{affiliateName}} - ID: {{affiliateId}}"
+      },
+      "final": true
+    },
+    "no-id": {
+      "id": "no-id",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "لا مشكلة! تواصل معنا عبر واتساب للتسجيل في البرنامج والحصول على ID"
+        }
+      ],
+      "handoff": {
+        "channel": "whatsapp",
+        "prefilledMessage": "أرغب بالتسجيل في برنامج المسوّقين بالعمولة والحصول على ID"
+      },
+      "final": true
+    }
+  }
+}

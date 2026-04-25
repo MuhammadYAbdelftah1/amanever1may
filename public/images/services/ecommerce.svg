@@ -1,0 +1,19 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#f0f7f7"/>
+  <g transform="translate(400, 300)">
+    <!-- Shopping Cart -->
+    <path d="M -80 -60 L -60 -60 L -40 40 L 60 40 L 80 -20 L -50 -20 Z" fill="#5e8f8f" opacity="0.2" stroke="#5e8f8f" stroke-width="3"/>
+    
+    <!-- Cart Wheels -->
+    <circle cx="-20" cy="60" r="12" fill="#5e8f8f"/>
+    <circle cx="40" cy="60" r="12" fill="#5e8f8f"/>
+    
+    <!-- Medical Cross on Cart -->
+    <g transform="translate(10, 0)">
+      <rect x="-4" y="-15" width="8" height="30" fill="#5e8f8f"/>
+      <rect x="-15" y="-4" width="30" height="8" fill="#5e8f8f"/>
+    </g>
+  </g>
+  <text x="400" y="500" font-family="Arial, sans-serif" font-size="32" fill="#5e8f8f" text-anchor="middle" font-weight="bold">E-Commerce Store</text>
+  <text x="400" y="540" font-family="Arial, sans-serif" font-size="18" fill="#4a7373" text-anchor="middle">Medical Products & Services</text>
+</svg>

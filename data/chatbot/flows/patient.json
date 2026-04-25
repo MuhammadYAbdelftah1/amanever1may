@@ -1,0 +1,465 @@
+{
+  "startNode": "welcome",
+  "nodes": {
+    "welcome": {
+      "id": "welcome",
+      "audience": "patient",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "حيّاك الله! وش اللي تحتاجه اليوم؟"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "حجز استشارة",
+          "value": "book",
+          "icon": "calendar"
+        },
+        {
+          "label": "أعرف عن الباقات",
+          "value": "membership",
+          "icon": "credit-card"
+        },
+        {
+          "label": "الشبكة الطبية",
+          "value": "network",
+          "icon": "map-pin"
+        },
+        {
+          "label": "الخصومات والكاش باك",
+          "value": "discounts",
+          "icon": "ticket"
+        },
+        {
+          "label": "دعم فني",
+          "value": "support",
+          "icon": "message-circle"
+        }
+      ],
+      "next": {
+        "book": "book-specialty",
+        "membership": "membership-menu",
+        "network": "network-city",
+        "discounts": "discounts-info",
+        "support": "support"
+      }
+    },
+    "book-specialty": {
+      "id": "book-specialty",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "أي تخصص تحتاج؟"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "طب عام",
+          "value": "general",
+          "icon": "stethoscope"
+        },
+        {
+          "label": "أطفال",
+          "value": "pediatrics",
+          "icon": "baby"
+        },
+        {
+          "label": "نساء وولادة",
+          "value": "obgyn",
+          "icon": "user"
+        },
+        {
+          "label": "جلدية",
+          "value": "dermatology",
+          "icon": "sparkles"
+        },
+        {
+          "label": "أسنان",
+          "value": "dental",
+          "icon": "sparkles"
+        },
+        {
+          "label": "نفسي",
+          "value": "psychiatry",
+          "icon": "brain"
+        },
+        {
+          "label": "تخصص آخر",
+          "value": "other_specialty",
+          "icon": "file-text"
+        }
+      ],
+      "next": {
+        "general": "book-confirm",
+        "pediatrics": "book-confirm",
+        "obgyn": "book-confirm",
+        "dermatology": "book-confirm",
+        "dental": "book-confirm",
+        "psychiatry": "book-confirm",
+        "other_specialty": "book-specialty-input"
+      }
+    },
+    "book-specialty-input": {
+      "id": "book-specialty-input",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "اكتب التخصص اللي تحتاجه:"
+        }
+      ],
+      "input": {
+        "key": "specialty",
+        "placeholder": "مثال: عظام، قلب، عيون...",
+        "validate": "text",
+        "required": true
+      },
+      "next": "book-confirm"
+    },
+    "book-confirm": {
+      "id": "book-confirm",
+      "blocks": [
+        {
+          "type": "card",
+          "title": "استشارة طبية",
+          "body": "ابتداءً من 50 ريال · متاح الآن",
+          "icon": "calendar"
+        },
+        {
+          "type": "text",
+          "text": "تقدر تحجز مباشرة من التطبيق أو الموقع"
+        },
+        {
+          "type": "link",
+          "label": "احجز الآن",
+          "href": "https://amanever.com/#services-package",
+          "external": true
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "عندي سؤال ثاني",
+          "value": "back"
+        }
+      ],
+      "next": {
+        "back": "welcome"
+      }
+    },
+    "membership-menu": {
+      "id": "membership-menu",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "عندنا باقتين مميزتين:"
+        },
+        {
+          "type": "card",
+          "title": "Premier",
+          "body": "199 ريال/شهر · خصم 50% · استشارة مجانية/شهر",
+          "icon": "star"
+        },
+        {
+          "type": "card",
+          "title": "VIP",
+          "body": "499 ريال/شهر · خصم 80% · استشارات غير محدودة · زيارة منزلية",
+          "icon": "crown"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "قارن بينهم",
+          "value": "compare"
+        },
+        {
+          "label": "اشترك الآن",
+          "value": "subscribe"
+        },
+        {
+          "label": "رجوع",
+          "value": "back"
+        }
+      ],
+      "next": {
+        "compare": "membership-compare",
+        "subscribe": "membership-subscribe",
+        "back": "welcome"
+      }
+    },
+    "membership-compare": {
+      "id": "membership-compare",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "مقارنة الباقات:"
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "label": "الخصم على الخدمات",
+              "value": "Premier: 50% · VIP: 80%"
+            },
+            {
+              "label": "الاستشارات المجانية",
+              "value": "Premier: 1/شهر · VIP: غير محدودة"
+            },
+            {
+              "label": "الزيارات المنزلية",
+              "value": "Premier: خصم 30% · VIP: مجانية"
+            },
+            {
+              "label": "الأولوية في الحجز",
+              "value": "Premier: نعم · VIP: نعم"
+            },
+            {
+              "label": "كاش باك",
+              "value": "Premier: 5% · VIP: 10%"
+            },
+            {
+              "label": "السعر الشهري",
+              "value": "Premier: 199 ر.س · VIP: 499 ر.س"
+            }
+          ]
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "اشترك الآن",
+          "value": "subscribe"
+        },
+        {
+          "label": "رجوع",
+          "value": "back"
+        }
+      ],
+      "next": {
+        "subscribe": "membership-subscribe",
+        "back": "membership-menu"
+      }
+    },
+    "membership-subscribe": {
+      "id": "membership-subscribe",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "ممتاز! تقدر تشترك مباشرة من التطبيق أو الموقع"
+        },
+        {
+          "type": "link",
+          "label": "اشترك الآن",
+          "href": "https://amanever.com/ar/membership",
+          "external": true
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "عندي سؤال ثاني",
+          "value": "back"
+        }
+      ],
+      "next": {
+        "back": "welcome"
+      }
+    },
+    "network-city": {
+      "id": "network-city",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "في أي مدينة؟"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "جدة",
+          "value": "jeddah"
+        },
+        {
+          "label": "الرياض",
+          "value": "riyadh"
+        },
+        {
+          "label": "الدمام",
+          "value": "dammam"
+        },
+        {
+          "label": "مكة",
+          "value": "makkah"
+        },
+        {
+          "label": "المدينة",
+          "value": "madinah"
+        },
+        {
+          "label": "تبوك",
+          "value": "tabuk"
+        },
+        {
+          "label": "الخبر",
+          "value": "khobar"
+        },
+        {
+          "label": "أبها",
+          "value": "abha"
+        }
+      ],
+      "next": {
+        "jeddah": "network-result",
+        "riyadh": "network-result",
+        "dammam": "network-result",
+        "makkah": "network-result",
+        "madinah": "network-result",
+        "tabuk": "network-result",
+        "khobar": "network-result",
+        "abha": "network-result"
+      }
+    },
+    "network-result": {
+      "id": "network-result",
+      "blocks": [
+        {
+          "type": "card",
+          "title": "الشبكة الطبية",
+          "body": "120+ مقدم خدمة في مدينتك · مستشفيات · عيادات · صيدليات",
+          "icon": "map-pin"
+        },
+        {
+          "type": "text",
+          "text": "شوف الخريطة الكاملة والمواقع:"
+        },
+        {
+          "type": "link",
+          "label": "عرض الخريطة",
+          "href": "https://amanever.com/ar/medical-network",
+          "external": true
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "عندي سؤال ثاني",
+          "value": "back"
+        }
+      ],
+      "next": {
+        "back": "welcome"
+      }
+    },
+    "discounts-info": {
+      "id": "discounts-info",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "عندنا عروض مميزة لك:"
+        },
+        {
+          "type": "card",
+          "title": "خصم حتى 80%",
+          "body": "على جميع الخدمات الطبية لأعضاء VIP",
+          "icon": "percent"
+        },
+        {
+          "type": "card",
+          "title": "كاش باك",
+          "body": "استرجع جزء من مصاريفك في محفظتك",
+          "icon": "wallet"
+        },
+        {
+          "type": "card",
+          "title": "نقاط الولاء",
+          "body": "اجمع نقاط واستبدلها بخدمات مجانية",
+          "icon": "gift"
+        },
+        {
+          "type": "link",
+          "label": "تفاصيل العروض المالية",
+          "href": "https://amanever.com/ar/services#financial",
+          "external": true
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "عندي سؤال ثاني",
+          "value": "back"
+        }
+      ],
+      "next": {
+        "back": "welcome"
+      }
+    },
+    "support": {
+      "id": "support",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "كيف أقدر أساعدك؟"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "مشكلة تقنية في التطبيق",
+          "value": "tech"
+        },
+        {
+          "label": "استفسار عن فاتورة/استرداد",
+          "value": "billing"
+        },
+        {
+          "label": "غير ذلك",
+          "value": "other"
+        }
+      ],
+      "next": {
+        "tech": "support-tech",
+        "billing": "support-billing",
+        "other": "handoff-whatsapp"
+      }
+    },
+    "support-tech": {
+      "id": "support-tech",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "عشان نساعدك بشكل أفضل، ممكن تعطيني رقم جوالك؟"
+        }
+      ],
+      "input": {
+        "key": "phone",
+        "placeholder": "مثال: 0512345678",
+        "validate": "phone",
+        "required": true
+      },
+      "next": "handoff-whatsapp"
+    },
+    "support-billing": {
+      "id": "support-billing",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "عشان نساعدك بشكل أفضل، ممكن تعطيني رقم جوالك؟"
+        }
+      ],
+      "input": {
+        "key": "phone",
+        "placeholder": "مثال: 0512345678",
+        "validate": "phone",
+        "required": true
+      },
+      "next": "handoff-whatsapp"
+    },
+    "handoff-whatsapp": {
+      "id": "handoff-whatsapp",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "تمام! راح يتواصل معك أحد موظفينا عبر واتساب خلال دقائق"
+        }
+      ],
+      "handoff": {
+        "channel": "whatsapp",
+        "prefilledMessage": "مرحبا، أنا {{name}} — رقمي {{phone}} — جاني من شات أمنية"
+      },
+      "final": true
+    }
+  }
+}

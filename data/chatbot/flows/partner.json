@@ -1,0 +1,533 @@
+{
+  "startNode": "welcome",
+  "nodes": {
+    "welcome": {
+      "id": "welcome",
+      "audience": "partner",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "أهلاً بك!"
+        },
+        {
+          "type": "text",
+          "text": "ما هو الـ ID الخاص بمنشأتك في أمان إيفر؟"
+        }
+      ],
+      "input": {
+        "key": "partnerId",
+        "placeholder": "مثال: ae1001",
+        "validate": "partner_id",
+        "required": true
+      },
+      "next": "verify"
+    },
+    "verify": {
+      "id": "verify",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "مرحباً {{partnerName}}! 👋"
+        },
+        {
+          "type": "card",
+          "title": "{{partnerName}}",
+          "body": "ID: {{partnerId}} · الحالة: نشط · النوع: {{partnerType}}",
+          "icon": "building-2"
+        },
+        {
+          "type": "text",
+          "text": "كيف أقدر أساعدك اليوم؟"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "معلومات الحساب",
+          "value": "account_info",
+          "icon": "user"
+        },
+        {
+          "label": "الفواتير والمدفوعات",
+          "value": "billing",
+          "icon": "credit-card"
+        },
+        {
+          "label": "دعم فني",
+          "value": "technical",
+          "icon": "message-circle"
+        },
+        {
+          "label": "تحديث البيانات",
+          "value": "update_info",
+          "icon": "file-text"
+        },
+        {
+          "label": "تواصل مع موظف",
+          "value": "human_agent",
+          "icon": "user"
+        }
+      ],
+      "next": {
+        "account_info": "account-info",
+        "billing": "billing-menu",
+        "technical": "technical-menu",
+        "update_info": "update-info",
+        "human_agent": "handoff-message"
+      }
+    },
+    "account-info": {
+      "id": "account-info",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "معلومات حسابك:"
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "label": "اسم المنشأة",
+              "value": "{{partnerName}}"
+            },
+            {
+              "label": "رقم الشريك",
+              "value": "{{partnerId}}"
+            },
+            {
+              "label": "نوع المنشأة",
+              "value": "{{partnerType}}"
+            },
+            {
+              "label": "حالة الحساب",
+              "value": "نشط"
+            },
+            {
+              "label": "تاريخ الانضمام",
+              "value": "يناير 2024"
+            }
+          ]
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "رجوع للقائمة",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "back": "verify"
+      }
+    },
+    "billing-menu": {
+      "id": "billing-menu",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "الفواتير والمدفوعات - اختر ما تحتاجه:"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "عرض الفواتير",
+          "value": "view_invoices",
+          "icon": "file-text"
+        },
+        {
+          "label": "حالة الدفعات",
+          "value": "payment_status",
+          "icon": "credit-card"
+        },
+        {
+          "label": "طلب فاتورة",
+          "value": "request_invoice",
+          "icon": "file-text"
+        },
+        {
+          "label": "رجوع",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "view_invoices": "view-invoices",
+        "payment_status": "payment-status",
+        "request_invoice": "request-invoice",
+        "back": "verify"
+      }
+    },
+    "view-invoices": {
+      "id": "view-invoices",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "آخر الفواتير:"
+        },
+        {
+          "type": "card",
+          "title": "فاتورة مارس 2026",
+          "body": "المبلغ: 15,000 ر.س · الحالة: مدفوعة",
+          "icon": "file-text"
+        },
+        {
+          "type": "card",
+          "title": "فاتورة فبراير 2026",
+          "body": "المبلغ: 12,500 ر.س · الحالة: مدفوعة",
+          "icon": "file-text"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "رجوع",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "back": "billing-menu"
+      }
+    },
+    "payment-status": {
+      "id": "payment-status",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "حالة الدفعات:"
+        },
+        {
+          "type": "card",
+          "title": "الدفعة القادمة",
+          "body": "المبلغ: 18,200 ر.س · التاريخ: 30 أبريل 2026",
+          "icon": "calendar"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "رجوع",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "back": "billing-menu"
+      }
+    },
+    "request-invoice": {
+      "id": "request-invoice",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "لأي شهر تحتاج الفاتورة؟"
+        }
+      ],
+      "input": {
+        "key": "invoice_month",
+        "placeholder": "مثال: مارس 2026",
+        "validate": "text",
+        "required": true
+      },
+      "next": "invoice-requested"
+    },
+    "invoice-requested": {
+      "id": "invoice-requested",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "تم استلام طلبك! سيتم إرسال الفاتورة لـ {{invoice_month}} على بريدك الإلكتروني خلال 24 ساعة."
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "رجوع للقائمة",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "back": "verify"
+      }
+    },
+    "technical-menu": {
+      "id": "technical-menu",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "الدعم الفني - كيف أقدر أساعدك؟"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "مشكلة في النظام",
+          "value": "system_issue",
+          "icon": "message-circle"
+        },
+        {
+          "label": "طلب تدريب",
+          "value": "training",
+          "icon": "file-text"
+        },
+        {
+          "label": "فتح تذكرة فنية",
+          "value": "create_ticket",
+          "icon": "ticket"
+        },
+        {
+          "label": "رجوع",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "system_issue": "system-issue",
+        "training": "training-request",
+        "create_ticket": "create-ticket",
+        "back": "verify"
+      }
+    },
+    "system-issue": {
+      "id": "system-issue",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "وصف المشكلة التي تواجهها:"
+        }
+      ],
+      "input": {
+        "key": "issue_description",
+        "placeholder": "اكتب وصف المشكلة...",
+        "validate": "text",
+        "required": true
+      },
+      "next": "ticket-created"
+    },
+    "training-request": {
+      "id": "training-request",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "على أي موضوع تحتاج تدريب؟"
+        }
+      ],
+      "input": {
+        "key": "training_topic",
+        "placeholder": "مثال: استخدام النظام، إدارة الحجوزات...",
+        "validate": "text",
+        "required": true
+      },
+      "next": "training-scheduled"
+    },
+    "training-scheduled": {
+      "id": "training-scheduled",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "تم استلام طلب التدريب على: {{training_topic}}"
+        },
+        {
+          "type": "text",
+          "text": "سيتواصل معك فريق التدريب خلال 48 ساعة لتحديد الموعد المناسب."
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "رجوع للقائمة",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "back": "verify"
+      }
+    },
+    "create-ticket": {
+      "id": "create-ticket",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "اكتب تفاصيل التذكرة الفنية:"
+        }
+      ],
+      "input": {
+        "key": "ticket_details",
+        "placeholder": "وصف المشكلة أو الطلب...",
+        "validate": "text",
+        "required": true
+      },
+      "next": "ticket-created"
+    },
+    "ticket-created": {
+      "id": "ticket-created",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "تم إنشاء التذكرة الفنية بنجاح! ✅"
+        },
+        {
+          "type": "card",
+          "title": "تذكرة #TK-2026-001",
+          "body": "الحالة: قيد المعالجة · الأولوية: متوسطة",
+          "icon": "ticket"
+        },
+        {
+          "type": "text",
+          "text": "سيتم الرد عليك خلال 24 ساعة عمل."
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "رجوع للقائمة",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "back": "verify"
+      }
+    },
+    "update-info": {
+      "id": "update-info",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "ما هي البيانات التي تريد تحديثها؟"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "معلومات الاتصال",
+          "value": "contact",
+          "icon": "user"
+        },
+        {
+          "label": "العنوان",
+          "value": "address",
+          "icon": "map-pin"
+        },
+        {
+          "label": "بيانات البنك",
+          "value": "bank",
+          "icon": "credit-card"
+        },
+        {
+          "label": "رجوع",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "contact": "update-contact",
+        "address": "update-address",
+        "bank": "update-bank",
+        "back": "verify"
+      }
+    },
+    "update-contact": {
+      "id": "update-contact",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "أدخل رقم الجوال الجديد:"
+        }
+      ],
+      "input": {
+        "key": "new_phone",
+        "placeholder": "مثال: 0512345678",
+        "validate": "phone",
+        "required": true
+      },
+      "next": "update-confirmed"
+    },
+    "update-address": {
+      "id": "update-address",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "أدخل العنوان الجديد:"
+        }
+      ],
+      "input": {
+        "key": "new_address",
+        "placeholder": "العنوان الكامل...",
+        "validate": "text",
+        "required": true
+      },
+      "next": "update-confirmed"
+    },
+    "update-bank": {
+      "id": "update-bank",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "لتحديث بيانات البنك، يرجى التواصل مع موظف الشركات مباشرة لأسباب أمنية."
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "تواصل الآن",
+          "value": "contact",
+          "icon": "message-circle"
+        },
+        {
+          "label": "رجوع",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "contact": "handoff-message",
+        "back": "update-info"
+      }
+    },
+    "update-confirmed": {
+      "id": "update-confirmed",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "تم استلام طلب التحديث! سيتم مراجعته والتواصل معك خلال 24 ساعة."
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "رجوع للقائمة",
+          "value": "back",
+          "icon": "arrow-left"
+        }
+      ],
+      "next": {
+        "back": "verify"
+      }
+    },
+    "handoff-message": {
+      "id": "handoff-message",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "جاري تحويلك لموظف الشركات..."
+        },
+        {
+          "type": "text",
+          "text": "سيتم فتح واتساب خلال لحظات. يرجى الانتظار..."
+        }
+      ],
+      "handoff": {
+        "channel": "whatsapp",
+        "prefilledMessage": "مرحباً، أنا {{partnerName}} من {{partnerType}} - ID: {{partnerId}}"
+      },
+      "final": true
+    },
+    "no-id": {
+      "id": "no-id",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "لا مشكلة! تواصل مع فريق الشراكات عبر واتساب للحصول على ID"
+        }
+      ],
+      "handoff": {
+        "channel": "whatsapp",
+        "prefilledMessage": "أمثّل منشأة وأرغب بالحصول على ID للشراكة مع أمان إيفر"
+      },
+      "final": true
+    }
+  }
+}

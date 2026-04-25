@@ -1,0 +1,20 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#f0f7f7"/>
+  <g transform="translate(400, 300)">
+    <!-- Wallet -->
+    <rect x="-100" y="-60" width="200" height="120" rx="15" fill="#5e8f8f" opacity="0.2"/>
+    <rect x="-90" y="-50" width="180" height="100" rx="10" fill="white"/>
+    
+    <!-- Card -->
+    <rect x="-70" y="-30" width="140" height="60" rx="8" fill="#5e8f8f" opacity="0.3"/>
+    
+    <!-- Coins/Money Symbol -->
+    <circle cx="60" cy="-50" r="25" fill="#5e8f8f"/>
+    <text x="60" y="-40" font-family="Arial, sans-serif" font-size="28" fill="white" text-anchor="middle" font-weight="bold">$</text>
+    
+    <!-- Cashback Arrow -->
+    <path d="M -60 -70 L -40 -90 L -40 -80 L -20 -80 L -20 -60 L -40 -60 L -40 -50 Z" fill="#5e8f8f"/>
+  </g>
+  <text x="400" y="500" font-family="Arial, sans-serif" font-size="32" fill="#5e8f8f" text-anchor="middle" font-weight="bold">Smart Financial Solutions</text>
+  <text x="400" y="540" font-family="Arial, sans-serif" font-size="18" fill="#4a7373" text-anchor="middle">Cashback & Rewards</text>
+</svg>

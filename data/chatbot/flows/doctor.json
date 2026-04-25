@@ -1,0 +1,24 @@
+{
+  "startNode": "welcome",
+  "nodes": {
+    "welcome": {
+      "id": "welcome",
+      "audience": "doctor",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "أهلاً دكتور!"
+        },
+        {
+          "type": "text",
+          "text": "تسجيل الأطباء يتطلب رفع رخصة SCFHS ونموذج كامل. راح يخدمك فريقنا المخصص عبر واتساب مباشرة."
+        }
+      ],
+      "handoff": {
+        "channel": "whatsapp",
+        "prefilledMessage": "أرغب بالانضمام كطبيب في شبكة أمان إيفر"
+      },
+      "final": true
+    }
+  }
+}

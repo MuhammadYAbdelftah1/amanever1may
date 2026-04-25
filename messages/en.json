@@ -1,0 +1,206 @@
+{
+  "common": {
+    "siteName": "Aman Ever",
+    "home": "Home",
+    "about": "About Us",
+    "services": "Our Services",
+    "vision": "Our Vision",
+    "values": "Our Values",
+    "contact": "Contact Us"
+  },
+  "home": {
+    "hero": {
+      "title": "Your Smart Partner in Healthcare Journey",
+      "subtitle": "We are Aman Ever, a leading Saudi technology platform specialized in technical and marketing mediation for medical services",
+      "cta": "Discover Our Services",
+      "ctaSecondary": "Contact Us"
+    },
+    "services": {
+      "title": "Most Requested",
+      "subtitle": "We provide a comprehensive range of medical and healthcare services",
+      "membership": {
+        "title": "Aman Ever Membership",
+        "description": "Your Premier & VIP Card - Your gateway to direct discounts up to 80% on all medical and cosmetic services. You can issue your electronic card instantly through the app in seconds."
+      },
+      "cashback": {
+        "title": "Loyalty Program (Cashback)",
+        "description": "Get cash back when purchasing the card or with first use of services. Enjoy instant financial returns to your wallet."
+      },
+      "points": {
+        "title": "Aman Points Wallet",
+        "description": "Collect your points with every purchase invoice and redeem them for service credit for your future purchases"
+      },
+      "instantBooking": {
+        "title": "Instant Bookings & Consultations",
+        "description": "Book your appointments with elite doctors without waiting. Online consultations via voice and video calls, or through Ask a Doctor service (chat) with guaranteed quick response."
+      },
+      "homeCare": {
+        "title": "Home Care Services",
+        "description": "We provide you with elite doctors in various specialties and specialized nursing services to visit you at home, saving you the hassle of waiting in hospitals. Elderly care + home lab tests + physiotherapy and cupping come to your home with a complete team"
+      },
+      "store": {
+        "title": "Aman Electronic Store",
+        "description": "A diverse store that brings you medical and cosmetic products and services at discounted prices and non-stop exclusive offers."
+      },
+      "medicalNetwork": {
+        "title": "Wide Medical Network",
+        "description": "Direct access to a wide and reliable network of hospitals, specialized centers and pharmacies throughout the Kingdom."
+      },
+      "healthNetwork": {
+        "title": "Health & Sports Network",
+        "description": "An integrated network including fitness clubs, sports clubs and health clubs for a more vibrant lifestyle."
+      }
+    },
+    "whyUs": {
+      "title": "Why We're the Best?",
+      "subtitle": "Competitive Advantages",
+      "features": {
+        "inclusive": {
+          "title": "Complete Inclusivity Without Restrictions",
+          "description": "Our services and cards are available to all segments of society (citizens, residents, and visitors), for all ages and health conditions without any restrictions or exceptions."
+        },
+        "coverage": {
+          "title": "Wide and Accessible Coverage",
+          "description": "We provide you with comprehensive geographical coverage without credit limits, and most importantly: our services do not require any prior approvals from the company."
+        },
+        "speed": {
+          "title": "Exceptional Ease and Speed",
+          "description": "Instant issuance of electronic card in seconds through the app, with a customer service team available to serve you 24/7."
+        },
+        "booking": {
+          "title": "Medical Bookings and Instant Consultations",
+          "description": "Book your medical appointment and get instant consultation with elite doctors in seconds through the app."
+        },
+        "home-care": {
+          "title": "Home Care Services",
+          "description": "Specialized nursing services, elderly care, home lab tests, physiotherapy, and cupping; we bring a complete medical team to your home."
+        },
+        "response": {
+          "title": "Fast Medical Response (Your First Question Free)",
+          "description": "We guarantee you in Ask a Doctor service exceptional response speed and replies within 15 minutes maximum, and because your health matters to us, we made your first question and consultation completely free."
+        },
+        "financial": {
+          "title": "Financial Benefits and World of Savings",
+          "description": "We give you direct discounts up to 80%, in addition to cashback and an integrated points wallet within the loyalty program."
+        },
+        "payment": {
+          "title": "Flexible and Accessible Payment Options",
+          "description": "We provide you with all electronic payment methods, in addition to providing comfortable installment payment services through (Tabby and Tamara) to facilitate your access to care."
+        },
+        "transparency": {
+          "title": "Transparency and Reliability",
+          "description": "We believe in absolute transparency, where the app allows you to view real ratings of services and medical facilities by customers to make your decision with confidence."
+        }
+      }
+    },
+    "partners": {
+      "title": "Success Partners",
+      "subtitle": "We are proud of our partnership with a selection of the largest hospitals and medical, health and cosmetic centers in the Kingdom",
+      "trustBadge": "More than 500+ trusted partners throughout the Kingdom"
+    },
+    "about": {
+      "title": "About Us",
+      "subtitle": "Your Smart Partner in Healthcare Journey",
+      "description": "A leading Saudi technology platform connecting you with the best medical and health services in the Kingdom. We provide comprehensive and innovative care solutions supporting Vision 2030 in digital health transformation.",
+      "highlights": {
+        "vision2030": "Supporting Saudi Vision 2030 in health and technical transformation",
+        "partners": "Network of 500+ trusted medical partners throughout the Kingdom",
+        "technology": "Advanced and secure technology for a seamless healthcare experience"
+      },
+      "stats": {
+        "partners": "Medical Partners",
+        "users": "Active Users",
+        "cities": "Cities",
+        "discount": "Discounts"
+      },
+      "cta": "Discover More"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Your Smart Partner in Healthcare Journey",
+    "intro": "We are Aman Ever, a leading Saudi technology platform specialized in technical and marketing mediation. We manage an integrated digital ecosystem and smart applications designed to keep pace with the digital health transformation in line with Saudi Vision 2030.",
+    "description": "We work passionately to be the technical bridge connecting you with elite medical, health, and cosmetic service providers in the Kingdom, offering comprehensive and innovative care solutions that redefine digital health services by combining innovation with the highest quality standards.",
+    "mission": {
+      "title": "Our Mission",
+      "description": "We strive to be a safe bridge connecting the community with medical and cosmetic services, facilitating easy and reliable access with the highest quality and technical standards. We are committed to elevating the patient experience by integrating technology with direct care and providing exclusive financial benefits that give our customers the power of savings and excellence at all times."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the leading platform in medical marketing and digital healthcare in Saudi Arabia and the Arab region, actively contributing to achieving Saudi Vision 2030 targets in health and technical transformation."
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "We provide a comprehensive range of integrated medical and healthcare services",
+    "remoteCare": {
+      "title": "Remote Medical Care",
+      "description": "Providing medical consultations and appointment scheduling with ease from your home",
+      "features": [
+        "Instant medical consultations",
+        "Electronic appointment scheduling",
+        "Health status monitoring",
+        "Electronic prescriptions"
+      ]
+    },
+    "homeServices": {
+      "title": "Home Services",
+      "description": "Providing healthcare services at the beneficiary's residence with comfort and safety",
+      "features": [
+        "Home medical visits",
+        "Home nursing",
+        "Medical examinations",
+        "Physical therapy"
+      ]
+    },
+    "ecommerce": {
+      "title": "E-Commerce Store",
+      "description": "Integrated platform for purchasing medical products and services at discounted prices",
+      "features": [
+        "Certified medical products",
+        "Competitive prices",
+        "Fast delivery",
+        "Quality guarantee"
+      ]
+    },
+    "financial": {
+      "title": "Smart Financial Solutions",
+      "description": "Offering fixed deals and discounts, with cashback program and points wallet",
+      "features": [
+        "Cashback program",
+        "Points wallet",
+        "Exclusive offers and discounts",
+        "Flexible payment plans"
+      ]
+    }
+  },
+  "vision": {
+    "title": "Our Vision and Mission",
+    "visionTitle": "Our Vision",
+    "visionDescription": "To be the leading platform in medical marketing and digital healthcare in Saudi Arabia and the Arab region, actively contributing to achieving Saudi Vision 2030 targets in health and technical transformation.",
+    "visionGoal": "At Aman Ever, we strive to bring about a qualitative shift in the health sector within Saudi Arabia by leveraging the latest technologies to transform the healthcare experience into a comprehensive and seamless digital system.",
+    "missionTitle": "Our Mission",
+    "missionDescription": "We strive to be a safe bridge connecting the community with medical and cosmetic services, facilitating easy and reliable access with the highest quality and technical standards. We are committed to elevating the patient experience by integrating technology with direct care and providing exclusive financial benefits that give our customers the power of savings and excellence at all times."
+  },
+  "values": {
+    "title": "Our Values",
+    "subtitle": "We are pioneers in integrating technology with medical care to facilitate your access to the best services",
+    "intro": "Driven by a set of values that form the core of our work, where we put human health first and their comfort at the heart of everything we offer",
+    "clarity": {
+      "title": "Clarity and Respect",
+      "description": "We deal with everyone with transparency and respect, because trust is the foundation of every successful relationship"
+    },
+    "innovation": {
+      "title": "Simplified Innovation",
+      "description": "We always strive to provide innovative medical services that make care closer and easier for everyone"
+    },
+    "safety": {
+      "title": "Safe Experience",
+      "description": "We are committed to providing a medical experience you can rely on with safety and peace of mind"
+    },
+    "partnership": {
+      "title": "Service Partnership",
+      "description": "We believe that working together and building strong partnerships is the way to achieve the best possible service"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#f0f7f7"/>
+  <g transform="translate(400, 300)">
+    <!-- Monitor/Screen -->
+    <rect x="-150" y="-100" width="300" height="200" rx="10" fill="#5e8f8f" opacity="0.2"/>
+    <rect x="-140" y="-90" width="280" height="160" rx="5" fill="white"/>
+    
+    <!-- Doctor Icon -->
+    <circle cx="0" cy="-20" r="25" fill="#5e8f8f" opacity="0.3"/>
+    <path d="M -30 20 Q -30 -10, 0 -10 Q 30 -10, 30 20 L 30 40 L -30 40 Z" fill="#5e8f8f" opacity="0.3"/>
+    
+    <!-- Video Call Icon -->
+    <circle cx="80" cy="-60" r="20" fill="#5e8f8f"/>
+    <path d="M 70 -65 L 70 -55 L 85 -60 Z" fill="white"/>
+  </g>
+  <text x="400" y="500" font-family="Arial, sans-serif" font-size="32" fill="#5e8f8f" text-anchor="middle" font-weight="bold">Remote Medical Care</text>
+  <text x="400" y="540" font-family="Arial, sans-serif" font-size="18" fill="#4a7373" text-anchor="middle">Telemedicine Services</text>
+</svg>

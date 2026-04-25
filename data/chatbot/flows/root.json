@@ -1,0 +1,75 @@
+{
+  "startNode": "welcome",
+  "nodes": {
+    "welcome": {
+      "id": "welcome",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "هلا وسهلا! 👋 أنا أمنية — مساعدتك الذكية في أمان إيفر."
+        },
+        {
+          "type": "text",
+          "text": "كيف أقدر أخدمك اليوم؟"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "أنا مستفيد",
+          "value": "patient",
+          "icon": "heart-pulse"
+        },
+        {
+          "label": "أنا طبيب",
+          "value": "doctor",
+          "icon": "stethoscope"
+        },
+        {
+          "label": "أنا شريك/منشأة",
+          "value": "partner",
+          "icon": "building-2"
+        },
+        {
+          "label": "مسوّق بالعمولة",
+          "value": "affiliate",
+          "icon": "wallet"
+        }
+      ],
+      "next": {
+        "patient": "patient:welcome",
+        "doctor": "doctor:welcome",
+        "partner": "partner:welcome",
+        "affiliate": "affiliate:welcome"
+      }
+    },
+    "emergency": {
+      "id": "emergency",
+      "emergency": true,
+      "blocks": [
+        {
+          "type": "text",
+          "text": "هذه حالة طارئة — لا ننصح بالانتظار"
+        },
+        {
+          "type": "text",
+          "text": "اتصل بالإسعاف فوراً:"
+        }
+      ],
+      "quickReplies": [
+        {
+          "label": "اتصل بـ 997",
+          "value": "call_997"
+        },
+        {
+          "label": "اتصل بـ 911",
+          "value": "call_911"
+        },
+        {
+          "label": "تواصل مع طبيب الآن",
+          "value": "emergency_handoff"
+        }
+      ],
+      "final": true
+    }
+  }
+}
