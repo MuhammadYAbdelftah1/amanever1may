@@ -1,4 +1,4 @@
-import { MapPin, PhoneCall, Phone, Mail, MessageCircle, Clock } from 'lucide-react';
+import { MapPin, PhoneCall, Phone, Mail, MessageCircle, Clock, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { FOOTER_CONFIG_NEW } from '@/lib/data/footer-config-new';
 
@@ -14,18 +14,18 @@ export function FooterContactNew() {
 
   return (
     <div>
-      <h3 className="text-[#1A2B2C] font-bold text-base mb-4 text-center md:text-start">
+      <h3 className="text-[#1A2B2C] font-bold text-base mb-4 text-center">
         تواصل معنا
       </h3>
       
-      <div className="flex flex-col gap-2.5 max-w-sm mx-auto md:max-w-none md:mx-0">
+      <div className="flex flex-col gap-3 max-w-sm mx-auto">
         {/* Address */}
-        <div className="flex items-start gap-2.5 flex-col sm:flex-row text-center sm:text-start">
-          <div className="w-7 h-7 rounded-lg bg-[#F8FAFB] flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
-            <MapPin className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
+        <div className="flex flex-col items-center text-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-[#E8F1F1] flex items-center justify-center">
+            <MapPin className="w-4 h-4 text-[#4A8B8E]" aria-hidden="true" />
           </div>
-          <div className="flex-1">
-            <div className="text-sm text-[#5A6B6C]">
+          <div>
+            <div className="text-sm text-[#1A2B2C] font-medium">
               {address.city}
             </div>
             <div className="text-xs text-[#8A9899] mt-0.5">
@@ -35,31 +35,32 @@ export function FooterContactNew() {
         </div>
 
         {/* Working Hours */}
-        <div className="flex items-start gap-2.5 flex-col sm:flex-row text-center sm:text-start">
-          <div className="w-7 h-7 rounded-lg bg-[#F8FAFB] flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
-            <Clock className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
+        <div className="flex flex-col items-center text-center gap-2 pt-3 border-t border-[#E5EAEB]">
+          <div className="w-8 h-8 rounded-full bg-[#E8F1F1] flex items-center justify-center">
+            <Clock className="w-4 h-4 text-[#4A8B8E]" aria-hidden="true" />
           </div>
-          <div className="flex-1">
-            <div className="text-xs text-[#8A9899] mb-0.5">
+          <div>
+            <div className="text-xs text-[#8A9899] mb-1">
               ساعات العمل
             </div>
-            <div className="text-sm text-[#5A6B6C]">
+            <div className="text-sm text-[#1A2B2C] font-medium">
               {contact.workingHours.ar}
             </div>
           </div>
         </div>
 
-        {/* Hotline & Landline in 2 columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        {/* Phone Numbers Grid */}
+        <div className="grid grid-cols-2 gap-2 pt-3 border-t border-[#E5EAEB]">
+          {/* Customer Service */}
           <a
             href={`tel:${contact.hotline}`}
-            className="flex items-start gap-2 focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded p-1.5 flex-col sm:flex-row text-center sm:text-start"
+            className="flex flex-col items-center text-center gap-2 p-2.5 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
           >
-            <div className="w-7 h-7 rounded-lg bg-[#F8FAFB] flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
-              <PhoneCall className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
+            <div className="w-8 h-8 rounded-full bg-[#E8F1F1] flex items-center justify-center">
+              <PhoneCall className="w-4 h-4 text-[#4A8B8E]" aria-hidden="true" />
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-xs text-[#8A9899] mb-0.5 truncate">
+            <div>
+              <div className="text-xs text-[#8A9899] mb-1">
                 خدمة العملاء
               </div>
               <div className="text-sm text-[#1A2B2C] hover:text-[#4A8B8E] transition font-medium">
@@ -68,15 +69,16 @@ export function FooterContactNew() {
             </div>
           </a>
 
+          {/* Landline */}
           <a
             href={`tel:${contact.landline}`}
-            className="flex items-start gap-2 focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded p-1.5 flex-col sm:flex-row text-center sm:text-start"
+            className="flex flex-col items-center text-center gap-2 p-2.5 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
           >
-            <div className="w-7 h-7 rounded-lg bg-[#F8FAFB] flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
-              <Phone className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
+            <div className="w-8 h-8 rounded-full bg-[#E8F1F1] flex items-center justify-center">
+              <Phone className="w-4 h-4 text-[#4A8B8E]" aria-hidden="true" />
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-xs text-[#8A9899] mb-0.5 truncate">
+            <div>
+              <div className="text-xs text-[#8A9899] mb-1">
                 الهاتف الثابت
               </div>
               <div className="text-sm text-[#1A2B2C] hover:text-[#4A8B8E] transition font-medium">
@@ -86,22 +88,22 @@ export function FooterContactNew() {
           </a>
         </div>
 
-        {/* WhatsApp - Enhanced */}
+        {/* WhatsApp - Prominent */}
         <a
           href={`https://wa.me/${contact.whatsapp}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-start gap-2.5 p-2.5 bg-[#25D366]/8 border border-[#25D366]/30 rounded-lg hover:bg-[#25D366]/15 transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none flex-col sm:flex-row text-center sm:text-start"
+          className="flex flex-col items-center text-center gap-2 p-3 bg-[#25D366]/10 border border-[#25D366]/30 rounded-lg hover:bg-[#25D366]/20 transition focus:ring-2 focus:ring-[#25D366] focus:outline-none mt-1"
         >
-          <div className="w-7 h-7 rounded-lg bg-[#25D366]/20 flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
-            <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" aria-hidden="true" />
+          <div className="w-8 h-8 rounded-full bg-[#25D366]/20 flex items-center justify-center">
+            <MessageCircle className="w-4 h-4 text-[#25D366]" aria-hidden="true" />
           </div>
-          <div className="flex-1">
-            <div className="text-xs text-[#8A9899] mb-0.5">
+          <div>
+            <div className="text-xs text-[#8A9899] mb-1">
               واتساب
             </div>
-            <div className="flex items-center gap-2 justify-center sm:justify-start">
-              <div className="text-sm text-[#1A2B2C] font-medium">
+            <div className="flex items-center gap-2 justify-center">
+              <div className="text-sm text-[#1A2B2C] font-semibold">
                 ابدأ محادثة
               </div>
               <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" title="متاح الآن" />
@@ -112,36 +114,42 @@ export function FooterContactNew() {
         {/* Email */}
         <a
           href={`mailto:${contact.email}`}
-          className="flex items-start gap-2.5 focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded flex-col sm:flex-row text-center sm:text-start"
+          className="flex flex-col items-center text-center gap-2 pt-3 border-t border-[#E5EAEB] focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded"
         >
-          <div className="w-7 h-7 rounded-lg bg-[#F8FAFB] flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
-            <Mail className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
+          <div className="w-8 h-8 rounded-full bg-[#E8F1F1] flex items-center justify-center">
+            <Mail className="w-4 h-4 text-[#4A8B8E]" aria-hidden="true" />
           </div>
-          <div className="flex-1">
-            <div className="text-sm text-[#1A2B2C] hover:text-[#4A8B8E] transition break-all">
-              {contact.email}
-            </div>
+          <div className="text-sm text-[#1A2B2C] hover:text-[#4A8B8E] transition font-medium break-all">
+            {contact.email}
           </div>
         </a>
 
         {/* Contact Form Link */}
         <Link
           href="/ar/contact"
-          className="text-sm text-[#4A8B8E] hover:text-[#356B6E] transition underline focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded text-center md:text-start"
+          className="text-sm text-[#4A8B8E] hover:text-[#356B6E] transition font-medium text-center focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded py-1"
         >
           تواصل عبر النموذج ←
         </Link>
 
-        {/* Languages - Compact pills */}
-        <div className="flex flex-wrap justify-center md:justify-start gap-1.5 pt-2.5 border-t border-[#E5EAEB]">
-          {contact.languages.map((lang) => (
-            <span
-              key={lang}
-              className="px-2 py-0.5 bg-[#F8FAFB] border border-[#E5EAEB] rounded text-xs text-[#5A6B6C]"
-            >
-              {languageLabels[lang]}
-            </span>
-          ))}
+        {/* Languages - Active pills with brand colors */}
+        <div className="pt-3 border-t border-[#E5EAEB]">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Globe className="w-3.5 h-3.5 text-[#8A9899]" aria-hidden="true" />
+            <p className="text-xs text-[#8A9899]">
+              خدمة عملاء بأي لغة
+            </p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-1.5">
+            {contact.languages.map((lang) => (
+              <span
+                key={lang}
+                className="px-2.5 py-1 bg-[#4A8B8E]/10 border border-[#4A8B8E]/30 rounded-full text-xs text-[#4A8B8E] font-medium hover:bg-[#4A8B8E] hover:text-white transition-colors cursor-default"
+              >
+                {languageLabels[lang]}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

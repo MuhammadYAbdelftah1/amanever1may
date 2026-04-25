@@ -18,33 +18,31 @@ export function FooterDownloadNew() {
         صحتك في جيبك. حمّل أمان إيفر اليوم.
       </p>
 
-      {/* App Store Badges with dark background */}
-      <div className="flex flex-col gap-2.5 mb-4">
+      {/* App Store Badges - centered without background */}
+      <div className="flex flex-col gap-2.5 mb-4 items-center md:items-start">
         {app.stores.map((store) => (
           <Link
             key={store.name}
             href={store.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-transform hover:scale-105 active:scale-95 focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded-xl overflow-hidden"
+            className="transition-transform hover:scale-105 active:scale-95 focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded-xl"
             aria-label={`حمّل من ${store.name}`}
           >
-            <div className="bg-[#1A2B2C] rounded-xl p-1">
-              <Image
-                src={store.badge}
-                alt={`حمّل من ${store.name}`}
-                width={160}
-                height={48}
-                className="h-11 w-auto"
-              />
-            </div>
+            <Image
+              src={store.badge}
+              alt={`حمّل من ${store.name}`}
+              width={160}
+              height={48}
+              className="h-11 w-auto"
+            />
           </Link>
         ))}
       </div>
 
-      {/* Trust Line - Rating & Downloads */}
+      {/* Trust Line - Rating & Downloads - centered */}
       {app.rating !== 'APP_RATING' && app.downloads !== 'DOWNLOAD_COUNT' && (
-        <div className="flex items-center gap-2 text-xs text-[#5A6B6C] mb-4 pb-4 border-b border-[#E5EAEB]">
+        <div className="flex items-center justify-center md:justify-start gap-2 text-xs text-[#5A6B6C] mb-4 pb-4 border-b border-[#E5EAEB]">
           <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" aria-hidden="true" />
           <span className="font-medium">{app.rating}</span>
           <span className="text-[#8A9899]">·</span>
