@@ -5,6 +5,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
 import { Header } from '@/components/layout/header';
 import { 
@@ -132,7 +133,7 @@ export default function CookieSettingsPage() {
               {/* Status Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#E5EAEB] rounded-full">
                 <span className="text-sm text-[#8A9899]">
-                  {hasInteracted 
+                  {hasInteracted && consent
                     ? `آخر تحديث: ${new Date(consent.timestamp).toLocaleDateString('ar-SA')}`
                     : 'لم تحدد تفضيلاتك بعد'
                   }
@@ -437,19 +438,19 @@ export default function CookieSettingsPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
+              <Link
                 href="/ar/privacy-policy"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#4A8B8E] hover:bg-[#356B6E] text-white font-semibold rounded-lg transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
               >
                 <Shield className="w-5 h-5" />
                 <span>سياسة الخصوصية</span>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/ar/contact"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-[#F8FAFB] text-[#4A8B8E] border border-[#4A8B8E] font-semibold rounded-lg transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
               >
                 <span>تواصل معنا</span>
-              </a>
+              </Link>
             </div>
           </div>
         </section>

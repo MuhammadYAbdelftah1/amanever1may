@@ -40,7 +40,7 @@ export function FooterDownloadNew() {
       </div>
 
       {/* Trust Line - Rating & Downloads - centered */}
-      {app.rating !== 'APP_RATING' && app.downloads !== 'DOWNLOAD_COUNT' && (
+      {app.rating && app.downloads && (
         <div className="flex items-center justify-center md:justify-start gap-2 text-xs text-[#5A6B6C] pb-4 border-b border-[#E5EAEB]">
           <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" aria-hidden="true" />
           <span className="font-medium">{app.rating}</span>

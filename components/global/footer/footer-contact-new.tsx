@@ -95,12 +95,12 @@ export function FooterContactNew() {
         </a>
       </div>
 
-      {/* Desktop & Tablet: Compact horizontal layout */}
-      <div className="hidden md:flex flex-col gap-3 max-w-md mx-auto">
-        {/* Row 1: Address & Working Hours side by side */}
-        <div className="grid grid-cols-2 gap-3">
+      {/* Desktop & Tablet: Horizontal centered layout */}
+      <div className="hidden md:block">
+        {/* Address & Working Hours - Stacked vertically */}
+        <div className="flex flex-col gap-2.5 max-w-xs mx-auto mb-3">
           {/* Address */}
-          <div className="flex flex-col items-center text-center gap-2 p-2 bg-[#F8FAFB] rounded-lg">
+          <div className="flex flex-col items-center text-center gap-1.5 p-2 bg-[#F8FAFB] rounded-lg">
             <div className="w-7 h-7 rounded-full bg-[#E8F1F1] flex items-center justify-center">
               <MapPin className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
             </div>
@@ -115,7 +115,7 @@ export function FooterContactNew() {
           </div>
 
           {/* Working Hours */}
-          <div className="flex flex-col items-center text-center gap-2 p-2 bg-[#F8FAFB] rounded-lg">
+          <div className="flex flex-col items-center text-center gap-1.5 p-2 bg-[#F8FAFB] rounded-lg">
             <div className="w-7 h-7 rounded-full bg-[#E8F1F1] flex items-center justify-center">
               <Clock className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
             </div>
@@ -130,8 +130,9 @@ export function FooterContactNew() {
           </div>
         </div>
 
-        {/* Row 2: Phone Numbers in 2 columns */}
-        <div className="grid grid-cols-2 gap-2">
+        {/* Phone Numbers & Email - Horizontal centered */}
+        <div className="flex items-center justify-center gap-3 flex-wrap">
+          {/* Customer Service */}
           <a
             href={`tel:${contact.hotline}`}
             className="flex flex-col items-center text-center gap-1.5 p-2 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
@@ -149,6 +150,7 @@ export function FooterContactNew() {
             </div>
           </a>
 
+          {/* Landline */}
           <a
             href={`tel:${contact.landline}`}
             className="flex flex-col items-center text-center gap-1.5 p-2 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
@@ -165,20 +167,20 @@ export function FooterContactNew() {
               </div>
             </div>
           </a>
-        </div>
 
-        {/* Row 3: Email */}
-        <a
-          href={`mailto:${contact.email}`}
-          className="flex flex-col items-center text-center gap-1.5 p-2.5 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
-        >
-          <div className="w-7 h-7 rounded-full bg-[#E8F1F1] flex items-center justify-center">
-            <Mail className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
-          </div>
-          <div className="text-xs text-[#1A2B2C] hover:text-[#4A8B8E] transition font-medium break-all">
-            {contact.email}
-          </div>
-        </a>
+          {/* Email */}
+          <a
+            href={`mailto:${contact.email}`}
+            className="flex flex-col items-center text-center gap-1.5 p-2 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
+          >
+            <div className="w-7 h-7 rounded-full bg-[#E8F1F1] flex items-center justify-center">
+              <Mail className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
+            </div>
+            <div className="text-xs text-[#1A2B2C] hover:text-[#4A8B8E] transition font-medium break-all">
+              {contact.email}
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   );

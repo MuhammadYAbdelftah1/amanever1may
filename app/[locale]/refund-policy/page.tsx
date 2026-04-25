@@ -81,7 +81,7 @@ export default async function RefundPolicyPage({ params }: RefundPolicyPageProps
             <RefundDecisionTree
               title={decisionTree.title}
               subtitle={decisionTree.subtitle}
-              options={decisionTree.options}
+              options={[...decisionTree.options]}
             />
           </div>
         </section>
@@ -105,18 +105,18 @@ export default async function RefundPolicyPage({ params }: RefundPolicyPageProps
                             <a
                               href={`#${section.id}`}
                               className={`flex items-start gap-2 text-sm p-2 rounded-lg transition group ${
-                                section.exceptional
+                                'exceptional' in section && section.exceptional
                                   ? 'text-[#F59E0B] hover:bg-[#FEF3C7]/40 font-medium'
                                   : 'text-[#5A6B6C] hover:text-[#4A8B8E] hover:bg-[#F8FAFB]'
                               }`}
                             >
                               <span className={`font-semibold flex-shrink-0 ${
-                                section.exceptional ? 'text-[#F59E0B]' : 'text-[#4A8B8E]'
+                                'exceptional' in section && section.exceptional ? 'text-[#F59E0B]' : 'text-[#4A8B8E]'
                               }`}>
                                 {section.number}.
                               </span>
                               <span className="flex-1">{section.title}</span>
-                              {section.exceptional && (
+                              {'exceptional' in section && section.exceptional && (
                                 <AlertTriangle className="w-4 h-4 flex-shrink-0" />
                               )}
                               <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition flex-shrink-0" />
@@ -137,17 +137,17 @@ export default async function RefundPolicyPage({ params }: RefundPolicyPageProps
                       key={section.id}
                       id={section.id}
                       className={`border rounded-xl p-6 md:p-8 scroll-mt-24 ${
-                        section.exceptional
+                        'exceptional' in section && section.exceptional
                           ? 'bg-[#FEF3C7]/40 border-[#F59E0B]/20'
                           : 'bg-[#F8FAFB] border-[#E5EAEB]'
                       }`}
                     >
                       <h2 className="text-2xl font-bold text-[#1A2B2C] mb-6 flex items-start gap-3">
-                        <span className={section.exceptional ? 'text-[#F59E0B]' : 'text-[#4A8B8E]'}>
+                        <span className={'exceptional' in section && section.exceptional ? 'text-[#F59E0B]' : 'text-[#4A8B8E]'}>
                           {section.number}.
                         </span>
                         <span className="flex-1">{section.title}</span>
-                        {section.exceptional && (
+                        {'exceptional' in section && section.exceptional && (
                           <AlertTriangle className="w-6 h-6 text-[#F59E0B] flex-shrink-0" />
                         )}
                       </h2>
