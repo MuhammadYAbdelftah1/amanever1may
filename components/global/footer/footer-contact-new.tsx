@@ -130,12 +130,30 @@ export function FooterContactNew() {
           </div>
         </div>
 
-        {/* Phone Numbers & Email - Horizontal centered */}
-        <div className="flex items-center justify-center gap-3 flex-wrap">
-          {/* Customer Service */}
+        {/* Phone Numbers & Email - Horizontal centered (always horizontal on desktop) */}
+        <div className="flex items-center justify-center gap-3 ml-[640px]">
+          {/* Email - First */}
+          <a
+            href={`mailto:${contact.email}`}
+            className="flex flex-col items-center text-center gap-1.5 p-2 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none min-w-[140px]"
+          >
+            <div className="w-7 h-7 rounded-full bg-[#E8F1F1] flex items-center justify-center">
+              <Mail className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
+            </div>
+            <div>
+              <div className="text-xs text-[#8A9899] mb-0.5">
+                البريد الإلكتروني
+              </div>
+              <div className="text-xs text-[#1A2B2C] hover:text-[#4A8B8E] transition font-medium break-all">
+                {contact.email}
+              </div>
+            </div>
+          </a>
+
+          {/* Customer Service - Middle */}
           <a
             href={`tel:${contact.hotline}`}
-            className="flex flex-col items-center text-center gap-1.5 p-2 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
+            className="flex flex-col items-center text-center gap-1.5 p-2 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none min-w-[140px]"
           >
             <div className="w-7 h-7 rounded-full bg-[#E8F1F1] flex items-center justify-center">
               <PhoneCall className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
@@ -150,10 +168,10 @@ export function FooterContactNew() {
             </div>
           </a>
 
-          {/* Landline */}
+          {/* Landline - Last */}
           <a
             href={`tel:${contact.landline}`}
-            className="flex flex-col items-center text-center gap-1.5 p-2 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
+            className="flex flex-col items-center text-center gap-1.5 p-2 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none min-w-[140px]"
           >
             <div className="w-7 h-7 rounded-full bg-[#E8F1F1] flex items-center justify-center">
               <Phone className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
@@ -165,19 +183,6 @@ export function FooterContactNew() {
               <div className="text-xs text-[#1A2B2C] hover:text-[#4A8B8E] transition font-medium">
                 {contact.landline}
               </div>
-            </div>
-          </a>
-
-          {/* Email */}
-          <a
-            href={`mailto:${contact.email}`}
-            className="flex flex-col items-center text-center gap-1.5 p-2 rounded-lg hover:bg-[#F8FAFB] transition focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none"
-          >
-            <div className="w-7 h-7 rounded-full bg-[#E8F1F1] flex items-center justify-center">
-              <Mail className="w-3.5 h-3.5 text-[#4A8B8E]" aria-hidden="true" />
-            </div>
-            <div className="text-xs text-[#1A2B2C] hover:text-[#4A8B8E] transition font-medium break-all">
-              {contact.email}
             </div>
           </a>
         </div>
