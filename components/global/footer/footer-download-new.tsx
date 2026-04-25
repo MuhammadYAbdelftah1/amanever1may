@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Smartphone, Star } from 'lucide-react';
 import { FOOTER_CONFIG_NEW } from '@/lib/data/footer-config-new';
-import { TempQRCode } from '@/components/shared/temp-qr-code';
 
 export function FooterDownloadNew() {
   const { app } = FOOTER_CONFIG_NEW;
@@ -42,32 +41,13 @@ export function FooterDownloadNew() {
 
       {/* Trust Line - Rating & Downloads - centered */}
       {app.rating !== 'APP_RATING' && app.downloads !== 'DOWNLOAD_COUNT' && (
-        <div className="flex items-center justify-center md:justify-start gap-2 text-xs text-[#5A6B6C] mb-4 pb-4 border-b border-[#E5EAEB]">
+        <div className="flex items-center justify-center md:justify-start gap-2 text-xs text-[#5A6B6C] pb-4 border-b border-[#E5EAEB]">
           <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" aria-hidden="true" />
           <span className="font-medium">{app.rating}</span>
           <span className="text-[#8A9899]">·</span>
           <span>أكثر من {app.downloads} تحميل</span>
         </div>
       )}
-
-      {/* QR Code Section - Light theme */}
-      <div className="bg-[#F8FAFB] rounded-lg p-3.5 border border-[#E5EAEB]">
-        <p className="text-xs text-[#5A6B6C] mb-3 text-center">
-          امسح الكود للتحميل المباشر
-        </p>
-        <div className="flex justify-center">
-          <div className="bg-white border border-[#E5EAEB] rounded-lg p-2">
-            <TempQRCode
-              iosUrl={app.stores.find(s => s.name === 'App Store')?.url}
-              androidUrl={app.stores.find(s => s.name === 'Google Play')?.url}
-              huaweiUrl={app.stores.find(s => s.name === 'Huawei AppGallery')?.url}
-            />
-          </div>
-        </div>
-        <p className="text-xs text-[#5A6B6C] mt-2 text-center">
-          يوجهك تلقائياً للمتجر المناسب
-        </p>
-      </div>
     </div>
   );
 }

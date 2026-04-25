@@ -124,14 +124,6 @@ export function FooterContactNew() {
           </div>
         </a>
 
-        {/* Contact Form Link */}
-        <Link
-          href="/ar/contact"
-          className="text-sm text-[#4A8B8E] hover:text-[#356B6E] transition font-medium text-center focus:ring-2 focus:ring-[#4A8B8E] focus:outline-none rounded py-1"
-        >
-          تواصل عبر النموذج ←
-        </Link>
-
         {/* Languages - Active pills with brand colors */}
         <div className="pt-3 border-t border-[#E5EAEB]">
           <div className="flex items-center justify-center gap-2 mb-2">

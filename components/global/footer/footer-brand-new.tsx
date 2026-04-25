@@ -64,7 +64,7 @@ export function FooterBrandNew() {
         <div className="mb-4 flex justify-center md:justify-start">
           <span className="inline-flex items-center gap-1.5 bg-[#E8F1F1] text-[#356B6E] px-3 py-1 rounded-full text-xs font-medium">
             <Flag className="w-3.5 h-3.5" aria-hidden="true" />
-            🇸🇦 صُنعت بكل حب في السعودية
+            🇸🇦 صُنعت بكل حب في المملكة العربية السعودية
           </span>
         </div>
       )}
