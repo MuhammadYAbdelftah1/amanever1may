@@ -252,6 +252,7 @@ function ComparisonTable() {
 export function WhyAmanEverSection({ locale }: WhyAmanEverSectionProps) {
   return (
     <section
+      id="why-aman-ever"
       className="py-20 md:py-28 lg:py-32 bg-gradient-to-b from-white via-slate-50 to-white"
       aria-labelledby="why-aman-ever-heading"
     >

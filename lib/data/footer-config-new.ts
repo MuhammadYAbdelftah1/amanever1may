@@ -50,14 +50,14 @@ export const FOOTER_CONFIG_NEW = {
 
   // Section A: المنصة
   platformLinks: [
-    { label: "عن أمان إيفر", url: "#" }, // TODO: Create /ar/about
-    { label: "ليه أمان إيفر؟", url: "#" }, // TODO: Create /ar/why-us
-    { label: "البطاقات والباقات", url: "#" }, // TODO: Create /ar/pricing
-    { label: "الشبكة الطبية والصحية", url: "#" }, // TODO: Create /ar/network
+    { label: "عن أمان إيفر", url: "/ar/about" },
+    { label: "ليه أمان إيفر؟", url: "/ar#why-aman-ever" },
+    { label: "البطاقات والباقات", url: "/ar#membership-pricing-heading" },
+    { label: "الشبكة الطبية والصحية", url: "/ar#medical-network-heading" },
     { label: "خدماتنا الطبية", url: "/ar/services" },
-    { label: "خدمات الرعاية المنزلية", url: "#" }, // TODO: Create /ar/home-care
-    { label: "المدونة", url: "#" }, // TODO: Create /ar/blog
-    { label: "الأسئلة الشائعة", url: "#" }, // TODO: Create /ar/faq
+    { label: "خدمات الرعاية المنزلية", url: "/ar#core-services-heading" },
+    { label: "المدونة", url: "/ar#blog-preview-heading" },
+    { label: "الأسئلة الشائعة", url: "/ar#faq-section" },
   ],
 
   // Section B: للشركاء

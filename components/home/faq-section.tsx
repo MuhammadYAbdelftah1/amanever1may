@@ -436,7 +436,7 @@ export function FAQSection() {
         }}
       />
 
-      <section className="bg-white py-20 md:py-28">
+      <section id="faq-section" className="bg-white py-20 md:py-28" aria-labelledby="faq-heading">
         <div className="max-w-4xl mx-auto px-4">
           {/* Header */}
           <div className="text-center md:text-center mb-12">
