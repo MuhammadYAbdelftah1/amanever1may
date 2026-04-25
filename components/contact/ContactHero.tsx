@@ -9,7 +9,7 @@ export function ContactHero() {
   const { contact } = knowledge.organization;
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-emerald-50 to-white py-16 md:py-24">
+    <section className="relative overflow-hidden bg-gradient-to-b from-emerald-50 to-white py-16 md:py-24 mt-20 md:mt-24">
       {/* Abstract dotted pattern */}
       <div
         className="absolute inset-0 opacity-30"

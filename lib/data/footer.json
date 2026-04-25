@@ -1,0 +1,144 @@
+{
+  "brand": {
+    "nameAr": "أمان إيفر والرعاية الشاملة للخدمات الطبية",
+    "nameEn": "AMAN EVER COMPANY & COMPREHENSIVE CARE OF MEDICAL SERVICES",
+    "tagline": "شريككم الموثوق في الرعاية الصحية — خدمات طبية متكاملة بلمسة واحدة.",
+    "cr": "7038166471",
+    "logoSrc": "/images/logo.png",
+    "madeinSaudi": true
+  },
+  "address": {
+    "city": "جدة، البغدادية الشرقية",
+    "building": "مبنى البغدادية بلازا",
+    "country": "SA"
+  },
+  "contact": {
+    "hotline": "920018041",
+    "whatsapp": "966544608220",
+    "whatsappDisplay": "0544608220",
+    "landline": "0126142206",
+    "email": "info@amanever.com",
+    "workingHours": {
+      "ar": "الأحد - الخميس: 9 صباحاً - 6 مساءً",
+      "note": "خط الطوارئ الطبية متاح 24/7"
+    },
+    "languages": ["ar", "en", "ur", "tl"]
+  },
+  "social": [
+    { "platform": "facebook", "url": "#", "label": "تابعنا على فيسبوك" },
+    { "platform": "instagram", "url": "#", "label": "تابعنا على إنستغرام" },
+    { "platform": "snapchat", "url": "#", "label": "أضفنا على سناب شات" },
+    { "platform": "tiktok", "url": "#", "label": "تابعنا على تيك توك" },
+    { "platform": "x", "url": "#", "label": "تابعنا على إكس" },
+    { "platform": "linkedin", "url": "#", "label": "تواصل معنا عبر لينكد إن" },
+    { "platform": "youtube", "url": "#", "label": "اشترك في قناتنا على يوتيوب" }
+  ],
+  "platformLinks": [
+    { "label": "عن أمان إيفر", "url": "#", "todo": "Create /ar/about" },
+    { "label": "ليه أمان إيفر؟", "url": "#", "todo": "Create /ar/why-us" },
+    { "label": "البطاقات والباقات", "url": "#", "todo": "Create /ar/pricing" },
+    { "label": "الشبكة الطبية والصحية", "url": "#", "todo": "Create /ar/network" },
+    { "label": "خدماتنا الطبية", "url": "/ar/services" },
+    { "label": "خدمات الرعاية المنزلية", "url": "#", "todo": "Create /ar/home-care" },
+    { "label": "المدونة", "url": "#", "todo": "Create /ar/blog" },
+    { "label": "الأسئلة الشائعة", "url": "#", "todo": "Create /ar/faq" }
+  ],
+  "partnerLinks": [
+    { "label": "منصة دخول الأطباء", "url": "#", "todo": "Create /ar/doctors/login" },
+    { "label": "منصة دخول التاجر", "url": "#", "todo": "Create /ar/merchants/login" },
+    { "label": "كن شريكاً", "url": "#", "todo": "Create /ar/partners" },
+    { "label": "فرص وظيفية", "url": "#", "todo": "Create /ar/careers" },
+    { "label": "للمستثمرين", "url": "#", "todo": "Create /ar/investors (optional)" }
+  ],
+  "legalLinks": [
+    { "label": "سياسة الخصوصية والبيانات (PDPL)", "url": "#", "todo": "Create /ar/privacy" },
+    { "label": "شروط الاستخدام", "url": "#", "todo": "Create /ar/terms" },
+    { "label": "سياسة الاسترداد", "url": "#", "todo": "Create /ar/refund" },
+    { "label": "إعدادات ملفات تعريف الارتباط", "url": "#", "todo": "Implement cookie settings modal" }
+  ],
+  "app": {
+    "rating": "4.8",
+    "downloads": "50,000+",
+    "qrCode": "/images/app-qr-code.png",
+    "stores": [
+      {
+        "name": "App Store",
+        "url": "https://apps.apple.com/sa/app/amanever",
+        "badge": "/images/app-store-ar.png"
+      },
+      {
+        "name": "Google Play",
+        "url": "https://play.google.com/store/apps/details?id=com.amanever",
+        "badge": "/images/google-play-ar.png"
+      },
+      {
+        "name": "Huawei AppGallery",
+        "url": "https://appgallery.huawei.com/app/amanever",
+        "badge": "/images/huawei-appgallery-ar.png"
+      }
+    ]
+  },
+  "newsletter": {
+    "enabled": true,
+    "title": "اشترك في نصائح صحية أسبوعية",
+    "placeholder": "بريدك الإلكتروني",
+    "buttonText": "اشتراك",
+    "action": "#",
+    "todo": "Add /api/newsletter/subscribe endpoint"
+  },
+  "trustBadges": [
+    { "icon": "shield", "label": "متوافق مع PDPL", "verified": true },
+    { "icon": "building", "label": "مرخّص من وزارة الصحة", "verified": true },
+    { "icon": "credit-card", "label": "طرق الدفع: مدى · فيزا · ماستركارد · Apple Pay · تابي · تمارا", "verified": true },
+    { "icon": "lock", "label": "موقع آمن — SSL 256-bit", "verified": true }
+  ],
+  "complianceBadges": {
+    "vision2030": {
+      "enabled": true,
+      "logo": "/images/badges/vision-2030.png",
+      "label": "متوافق مع رؤية 2030"
+    },
+    "sdaia": {
+      "enabled": true,
+      "logo": "/images/badges/sdaia.png",
+      "label": "معتمد من SDAIA"
+    },
+    "zatca": {
+      "enabled": true,
+      "logo": "/images/badges/zatca.png",
+      "label": "متوافق مع ZATCA"
+    }
+  },
+  "copyright": "© 2024 - 2026 أمان إيفر والرعاية الشاملة للخدمات الطبية. جميع الحقوق محفوظة.",
+  "_notes": {
+    "placeholders": [
+      "APP_RATING: Replace with actual app rating (e.g., '4.8')",
+      "DOWNLOAD_COUNT: Replace with actual download count (e.g., '50,000+')"
+    ],
+    "todos": [
+      "Generate QR code image for app download smart link",
+      "Create all new route pages listed in platformLinks and partnerLinks",
+      "Add newsletter backend endpoint",
+      "Confirm and enable compliance badges (Vision 2030, SDAIA, ZATCA)",
+      "Update all social media URLs with real profile links",
+      "Test mobile accordions on real devices",
+      "Run Lighthouse accessibility audit (target ≥ 95)"
+    ],
+    "removed": [
+      "حجوزاتي واستشاراتي الطبية (app function, not website page)"
+    ],
+    "added": [
+      "المدونة (SEO)",
+      "الأسئلة الشائعة (FAQ)",
+      "فرص وظيفية (Careers)",
+      "للمستثمرين (Investors)",
+      "كن شريكاً (Partner signup)",
+      "Newsletter signup",
+      "QR code for app download",
+      "Working hours",
+      "Languages available",
+      "Contact form link",
+      "Made in Saudi badge"
+    ]
+  }
+}
