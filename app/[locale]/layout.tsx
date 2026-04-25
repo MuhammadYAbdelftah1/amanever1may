@@ -7,7 +7,7 @@ import { ibmPlexArabic, roboto } from '@/lib/fonts';
 import { routing } from '@/routing';
 import { StickyDownloadBar } from '@/components/global/sticky-download-bar';
 import { WhatsAppButton } from '@/components/global/whatsapp-button';
-import { Footer } from '@/components/global/footer';
+import { FooterNew } from '@/components/global/footer-new';
 import { ChatLauncher } from '@/components/chatbot/ChatLauncher';
 import '../globals.css';
 
@@ -72,7 +72,7 @@ export default async function RootLayout({
           <StickyDownloadBar />
           <WhatsAppButton />
           <ChatLauncher />
-          <Footer />
+          <FooterNew />
         </NextIntlClientProvider>
       </body>
     </html>
