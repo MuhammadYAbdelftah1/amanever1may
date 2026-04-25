@@ -6,7 +6,6 @@ import { notFound } from 'next/navigation';
 import { ibmPlexArabic, roboto } from '@/lib/fonts';
 import { routing } from '@/routing';
 import { Header } from '@/components/layout/header';
-import { StickyDownloadBar } from '@/components/global/sticky-download-bar';
 import { FooterNew } from '@/components/global/footer-new';
 import { ChatLauncher } from '@/components/chatbot/ChatLauncher';
 import { FloatingAuthButtons } from '@/components/global/floating-auth-buttons';
@@ -71,7 +70,6 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Header locale={locale} />
           {children}
-          <StickyDownloadBar />
           <FloatingAuthButtons />
           <ChatLauncher />
           <FooterNew />

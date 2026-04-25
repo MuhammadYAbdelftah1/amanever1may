@@ -59,7 +59,7 @@ const placeholderPosts: BlogPost[] = [
   {
     id: '1',
     slug: '/blog/periodic-checkups-guide',
-    coverImage: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80',
+    coverImage: '/images/blog/periodic-checkups-cover.jpeg',
     category: 'صحة عامة',
     publishedDate: '2026-04-20',
     title: 'أهمية الفحوصات الدورية: دليلك للكشف المبكر عن الأمراض',
@@ -73,7 +73,7 @@ const placeholderPosts: BlogPost[] = [
   {
     id: '2',
     slug: '/blog/digital-health-vision-2030',
-    coverImage: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80',
+    coverImage: '/images/blog/vision-2030-digital-health.png',
     category: 'تقنية صحية',
     publishedDate: '2026-04-15',
     title: 'التحول الرقمي الصحي في المملكة 2030: أين نحن الآن؟',
@@ -86,7 +86,7 @@ const placeholderPosts: BlogPost[] = [
   {
     id: '3',
     slug: '/blog/5-heart-healthy-habits',
-    coverImage: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
+    coverImage: '/images/blog/heart-healthy-habits.jpeg',
     category: 'نصائح وقائية',
     publishedDate: '2026-04-10',
     title: '5 عادات يومية تحمي قلبك من أمراض الأوعية الدموية',
