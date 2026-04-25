@@ -50,8 +50,6 @@ export const FOOTER_CONFIG_NEW = {
 
   // Section A: المنصة
   platformLinks: [
-    { label: "عن أمان إيفر", url: "/ar/about" },
-    { label: "ليه أمان إيفر؟", url: "/ar#why-aman-ever" },
     { label: "البطاقات والباقات", url: "/ar#membership-pricing-heading" },
     { label: "الشبكة الطبية والصحية", url: "/ar#medical-network-heading" },
     { label: "خدماتنا الطبية", url: "/ar/services" },
