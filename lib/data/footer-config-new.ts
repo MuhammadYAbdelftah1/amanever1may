@@ -54,7 +54,7 @@ export const FOOTER_CONFIG_NEW = {
     { label: "الشبكة الطبية والصحية", url: "/ar#medical-network-heading" },
     { label: "خدماتنا الطبية", url: "/ar/services" },
     { label: "خدمات الرعاية المنزلية", url: "/ar#core-services-heading" },
-    { label: "المدونة", url: "/ar#blog-preview-heading" },
+    { label: "المدونة", url: "/ar/blog" }, // ✅ Updated to dedicated blog page
     { label: "الأسئلة الشائعة", url: "/ar#faq-section" },
   ],
 
@@ -62,7 +62,7 @@ export const FOOTER_CONFIG_NEW = {
   partnerLinks: [
     { label: "منصة دخول الأطباء", url: "#" }, // TODO: Create /ar/doctors/login
     { label: "منصة دخول التاجر", url: "#" }, // TODO: Create /ar/merchants/login
-    { label: "كن شريكاً", url: "#" }, // TODO: Create /ar/partners
+    { label: "منصة المسوق بالعمولة", url: "#" }, // TODO: Create /ar/affiliates
     { label: "فرص وظيفية", url: "#" }, // TODO: Create /ar/careers
     { label: "للمستثمرين", url: "#" }, // TODO: Create /ar/investors (optional)
   ],
