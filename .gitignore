@@ -20,6 +20,13 @@
 .DS_Store
 *.pem
 
+# documentation and sensitive files (security)
+*.md
+!README.md
+*.pdf
+*.mp4
+*.mov
+
 # debug
 npm-debug.log*
 yarn-debug.log*
