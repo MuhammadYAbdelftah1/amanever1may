@@ -54,14 +54,10 @@ export function Header({ locale }: HeaderProps) {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out rounded-3xl md:rounded-[3rem] lg:rounded-[4rem] mx-4 md:mx-6 lg:mx-8 mt-4 md:mt-6 lg:mt-8 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out rounded-3xl md:rounded-[3rem] lg:rounded-[4rem] mx-4 md:mx-6 lg:mx-8 mt-4 md:mt-6 lg:mt-8 bg-white border border-gray-200 shadow-lg ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       } ${
-        isHomePage
-          ? isScrolled 
-            ? 'h-14 bg-white border border-gray-200 shadow-xl' 
-            : 'h-20 bg-white/5 backdrop-blur-sm border-b border-white/10'
-          : 'h-16 bg-white border border-gray-200 shadow-lg'
+        isScrolled ? 'h-14' : 'h-16 md:h-20'
       }`}
     >
       <div className="container mx-auto flex h-full items-center justify-between px-4 md:px-6 transition-all duration-300">
@@ -83,38 +79,18 @@ export function Header({ locale }: HeaderProps) {
               key={link.href}
               href={link.href}
               className={`relative text-sm font-medium transition-all duration-300 rounded-lg px-4 py-2 group ${
-                isHomePage
-                  ? isScrolled
-                    ? isActive(link.href)
-                      ? 'text-[#4A8B8E] bg-[#4A8B8E]/10'
-                      : 'text-gray-700 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5'
-                    : isActive(link.href)
-                      ? 'text-white bg-white/20'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
-                  : isActive(link.href)
-                    ? 'text-[#5e8f8f] bg-[#5e8f8f]/10'
-                    : 'text-gray-700 hover:text-[#5e8f8f] hover:bg-[#5e8f8f]/5'
+                isActive(link.href)
+                  ? 'text-[#4A8B8E] bg-[#4A8B8E]/10'
+                  : 'text-gray-700 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5'
               }`}
             >
               {link.label}
               {/* Active indicator */}
               {isActive(link.href) && (
-                <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 rounded-full ${
-                  isHomePage 
-                    ? isScrolled 
-                      ? 'bg-[#4A8B8E]' 
-                      : 'bg-white'
-                    : 'bg-[#5e8f8f]'
-                }`} />
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 rounded-full bg-[#4A8B8E]" />
               )}
               {/* Hover effect */}
-              <span className={`absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-                isHomePage 
-                  ? isScrolled
-                    ? 'bg-gradient-to-r from-[#4A8B8E]/0 via-[#4A8B8E]/5 to-[#4A8B8E]/0'
-                    : 'bg-gradient-to-r from-white/0 via-white/5 to-white/0'
-                  : 'bg-gradient-to-r from-[#5e8f8f]/0 via-[#5e8f8f]/5 to-[#5e8f8f]/0'
-              }`} />
+              <span className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#4A8B8E]/0 via-[#4A8B8E]/5 to-[#4A8B8E]/0" />
             </Link>
           ))}
         </nav>
@@ -124,13 +100,7 @@ export function Header({ locale }: HeaderProps) {
           <Button 
             asChild
             variant="ghost"
-            className={`font-semibold rounded-lg px-4 py-2 transition-all duration-300 ${
-              isHomePage
-                ? isScrolled
-                  ? 'text-[#4A8B8E] hover:bg-[#4A8B8E]/10'
-                  : 'text-white hover:bg-white/20'
-                : 'text-[#5e8f8f] hover:bg-[#5e8f8f]/10'
-            }`}
+            className="font-semibold rounded-lg px-4 py-2 transition-all duration-300 text-[#4A8B8E] hover:bg-[#4A8B8E]/10"
           >
             <Link href={`/${locale}/login`}>
               {locale === 'ar' ? 'تسجيل الدخول' : locale === 'ur' ? 'لاگ ان' : 'Login'}
@@ -138,13 +108,7 @@ export function Header({ locale }: HeaderProps) {
           </Button>
           <Button 
             asChild
-            className={`font-semibold rounded-lg px-5 py-2 transition-all duration-300 shadow-lg hover:shadow-xl ${
-              isHomePage
-                ? isScrolled
-                  ? 'bg-[#4A8B8E] text-white hover:bg-[#356B6E]'
-                  : 'bg-white text-emerald-600 hover:bg-white/90'
-                : 'bg-[#5e8f8f] text-white hover:bg-[#5e8f8f]/90'
-            }`}
+            className="font-semibold rounded-lg px-5 py-2 transition-all duration-300 shadow-lg hover:shadow-xl bg-[#4A8B8E] text-white hover:bg-[#356B6E]"
           >
             <Link href={`/${locale}/register`}>
               {locale === 'ar' ? 'اشترك الآن' : locale === 'ur' ? 'شامل ہوں' : 'Sign Up'}
@@ -167,13 +131,7 @@ export function Header({ locale }: HeaderProps) {
               <Button 
                 variant="ghost" 
                 size="icon"
-                className={`transition-all duration-300 hover:scale-110 ${
-                  isHomePage
-                    ? isScrolled
-                      ? 'text-[#4A8B8E] hover:bg-[#4A8B8E]/10'
-                      : 'text-white hover:bg-white/20'
-                    : 'text-[#5e8f8f] hover:bg-[#5e8f8f]/10'
-                }`}
+                className="transition-all duration-300 hover:scale-110 text-[#4A8B8E] hover:bg-[#4A8B8E]/10"
                 aria-label={locale === 'ar' ? 'فتح القائمة' : locale === 'ur' ? 'مینو کھولیں' : 'Open menu'}
               >
                 <Menu className="h-5 w-5" aria-hidden="true" />

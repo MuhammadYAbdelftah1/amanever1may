@@ -1,4 +1,4 @@
-import { setRequestLocale } from 'next-intl/server';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { HeroSection } from '@/components/home/hero-section';
 import { HowItWorksSection } from '@/components/home/how-it-works-section';
 import { MembershipPricingSection } from '@/components/home/membership-pricing-section';
@@ -21,11 +21,14 @@ export default async function HomePage({
   // Enable static rendering
   setRequestLocale(locale);
 
+  // Get translations for hero
+  const t = await getTranslations('home.hero');
+
   return (
     <>
       <Header locale={locale} />
       <main id="main-content" className="min-h-screen">
-        <HeroSection locale={locale} />
+        <HeroSection locale={locale} translations={{ title: t('title') }} />
         <HowItWorksSection locale={locale} />
         <MembershipPricingSection locale={locale} />
         <CoreServicesSection locale={locale} />
