@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/home/hero-section';
 import { HowItWorksSection } from '@/components/home/how-it-works-section';
 import { MembershipPricingSection } from '@/components/home/membership-pricing-section';
 import { CoreServicesSection } from '@/components/home/core-services-section';
+import { PackagesCarouselSection } from '@/components/home/packages-carousel-section';
 import { WhyAmanEverSection } from '@/components/home/why-aman-ever-section';
 import { MedicalNetworkSection } from '@/components/home/medical-network-section';
 import { BlogPreviewSection } from '@/components/home/blog-preview-section';
@@ -39,6 +40,7 @@ export default async function HomePage({
         </div>
         
         <CoreServicesSection locale={locale} />
+        <PackagesCarouselSection locale={locale} />
         <WhyAmanEverSection locale={locale} />
         <HowItWorksSection locale={locale} />
         <MembershipPricingSection locale={locale} />

@@ -5,6 +5,7 @@ import { PricingHero } from '@/components/pricing/PricingHero';
 import { AnchorBlock } from '@/components/pricing/AnchorBlock';
 import { QuickComparison } from '@/components/pricing/QuickComparison';
 import { PricingPlans } from '@/components/pricing/PricingPlans';
+import { AllPackages } from '@/components/pricing/AllPackages';
 import { SavingsCalculator } from '@/components/pricing/SavingsCalculator';
 import { ComparisonTable } from '@/components/pricing/ComparisonTable';
 import { InsuranceComparison } from '@/components/pricing/InsuranceComparison';
@@ -187,6 +188,9 @@ export default async function PricingPage({
             <PricingPlans />
           </div>
         </section>
+
+        {/* All Packages - 8 Packages */}
+        <AllPackages />
 
         {/* Savings Calculator */}
         <section className="py-16 bg-[#F8FAFB]">
