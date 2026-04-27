@@ -71,14 +71,14 @@ const categories: NetworkCategory[] = [
     icon: Building2,
     count: '120+',
     partners: [
-      { id: '1', nameAr: 'مستشفى الدكتور سليمان الحبيب', nameEn: 'Dr. Sulaiman Al Habib', city: 'riyadh', neighborhood: 'العليا', rating: { value: 4.8, count: 1250 }, discountPercent: 60, bookingHref: '/services#instant-booking' },
-      { id: '2', nameAr: 'مستشفى المواساة', nameEn: 'Mouwasat Hospital', city: 'dammam', neighborhood: 'الفيصلية', rating: { value: 4.7, count: 980 }, discountPercent: 55, bookingHref: '/services#instant-booking' },
-      { id: '3', nameAr: 'مستشفى دله', nameEn: 'Dallah Hospital', city: 'riyadh', neighborhood: 'النخيل', rating: { value: 4.6, count: 850 }, discountPercent: 50, bookingHref: '/services#instant-booking' },
-      { id: '4', nameAr: 'السعودي الألماني', nameEn: 'Saudi German Health', city: 'jeddah', neighborhood: 'حي السلامة', rating: { value: 4.7, count: 1100 }, discountPercent: 55, bookingHref: '/services#instant-booking' },
-      { id: '5', nameAr: 'مستشفى الحمادي', nameEn: 'Al Hammadi Hospital', city: 'riyadh', neighborhood: 'الملقا', rating: { value: 4.5, count: 720 }, discountPercent: 50, bookingHref: '/services#instant-booking' },
-      { id: '6', nameAr: 'مستشفى الحبيب التخصصي', nameEn: 'Al Habib Specialist', city: 'riyadh', neighborhood: 'الغدير', rating: { value: 4.8, count: 950 }, discountPercent: 60, bookingHref: '/services#instant-booking' },
-      { id: '7', nameAr: 'مستشفى الملك فيصل التخصصي', nameEn: 'King Faisal Specialist', city: 'riyadh', neighborhood: 'الشميسي', rating: { value: 4.9, count: 1500 }, discountPercent: 65, bookingHref: '/services#instant-booking' },
-      { id: '8', nameAr: 'مستشفيات مغربي', nameEn: 'Magrabi Hospitals', city: 'jeddah', neighborhood: 'الروضة', rating: { value: 4.7, count: 1050 }, discountPercent: 55, bookingHref: '/services#instant-booking' },
+      { id: '1', nameAr: 'مستشفى الدكتور سليمان الحبيب', nameEn: 'Dr. Sulaiman Al Habib', logoSrc: '/logo.jpeg', city: 'riyadh', neighborhood: 'العليا', rating: { value: 4.8, count: 1250 }, discountPercent: 60, bookingHref: '/services#instant-booking' },
+      { id: '2', nameAr: 'مستشفى المواساة', nameEn: 'Mouwasat Hospital', logoSrc: '/logo.jpeg', city: 'dammam', neighborhood: 'الفيصلية', rating: { value: 4.7, count: 980 }, discountPercent: 55, bookingHref: '/services#instant-booking' },
+      { id: '3', nameAr: 'مستشفى دله', nameEn: 'Dallah Hospital', logoSrc: '/logo.jpeg', city: 'riyadh', neighborhood: 'النخيل', rating: { value: 4.6, count: 850 }, discountPercent: 50, bookingHref: '/services#instant-booking' },
+      { id: '4', nameAr: 'السعودي الألماني', nameEn: 'Saudi German Health', logoSrc: '/logo.jpeg', city: 'jeddah', neighborhood: 'حي السلامة', rating: { value: 4.7, count: 1100 }, discountPercent: 55, bookingHref: '/services#instant-booking' },
+      { id: '5', nameAr: 'مستشفى الحمادي', nameEn: 'Al Hammadi Hospital', logoSrc: '/logo.jpeg', city: 'riyadh', neighborhood: 'الملقا', rating: { value: 4.5, count: 720 }, discountPercent: 50, bookingHref: '/services#instant-booking' },
+      { id: '6', nameAr: 'مستشفى الحبيب التخصصي', nameEn: 'Al Habib Specialist', logoSrc: '/logo.jpeg', city: 'riyadh', neighborhood: 'الغدير', rating: { value: 4.8, count: 950 }, discountPercent: 60, bookingHref: '/services#instant-booking' },
+      { id: '7', nameAr: 'مستشفى الملك فيصل التخصصي', nameEn: 'King Faisal Specialist', logoSrc: '/logo.jpeg', city: 'riyadh', neighborhood: 'الشميسي', rating: { value: 4.9, count: 1500 }, discountPercent: 65, bookingHref: '/services#instant-booking' },
+      { id: '8', nameAr: 'مستشفيات مغربي', nameEn: 'Magrabi Hospitals', logoSrc: '/logo.jpeg', city: 'jeddah', neighborhood: 'الروضة', rating: { value: 4.7, count: 1050 }, discountPercent: 55, bookingHref: '/services#instant-booking' },
     ],
   },
   {
@@ -87,8 +87,8 @@ const categories: NetworkCategory[] = [
     icon: Stethoscope,
     count: '180+',
     partners: [
-      { id: 'c1', nameAr: 'عيادات الموسى', nameEn: 'Al Moosa Clinics', city: 'riyadh', discountPercent: 50, bookingHref: '/services#instant-booking' },
-      { id: 'c2', nameAr: 'مجمع عيادات الرعاية', nameEn: 'Care Clinics Complex', city: 'jeddah', discountPercent: 45, bookingHref: '/services#instant-booking' },
+      { id: 'c1', nameAr: 'عيادات الموسى', nameEn: 'Al Moosa Clinics', logoSrc: '/logo.jpeg', city: 'riyadh', discountPercent: 50, bookingHref: '/services#instant-booking' },
+      { id: 'c2', nameAr: 'مجمع عيادات الرعاية', nameEn: 'Care Clinics Complex', logoSrc: '/logo.jpeg', city: 'jeddah', discountPercent: 45, bookingHref: '/services#instant-booking' },
     ],
   },
   {
@@ -97,11 +97,11 @@ const categories: NetworkCategory[] = [
     icon: Pill,
     count: '80+',
     partners: [
-      { id: 'p1', nameAr: 'صيدليات النهدي', nameEn: 'Nahdi Pharmacy', city: 'riyadh', discountPercent: 30, bookingHref: '/services#store' },
-      { id: 'p2', nameAr: 'صيدليات الدواء', nameEn: 'Al-Dawaa Pharmacy', city: 'jeddah', discountPercent: 25, bookingHref: '/services#store' },
-      { id: 'p3', nameAr: 'صيدليات صدلية', nameEn: 'Saydalia', city: 'dammam', discountPercent: 28, bookingHref: '/services#store' },
-      { id: 'p4', nameAr: 'صيدليات سين', nameEn: 'Seen Pharmacy', city: 'riyadh', discountPercent: 30, bookingHref: '/services#store' },
-      { id: 'p5', nameAr: 'صيدلية تمر', nameEn: 'Tamer Pharmacy', city: 'jeddah', discountPercent: 25, bookingHref: '/services#store' },
+      { id: 'p1', nameAr: 'صيدليات النهدي', nameEn: 'Nahdi Pharmacy', logoSrc: '/logo.jpeg', city: 'riyadh', discountPercent: 30, bookingHref: '/services#store' },
+      { id: 'p2', nameAr: 'صيدليات الدواء', nameEn: 'Al-Dawaa Pharmacy', logoSrc: '/logo.jpeg', city: 'jeddah', discountPercent: 25, bookingHref: '/services#store' },
+      { id: 'p3', nameAr: 'صيدليات صدلية', nameEn: 'Saydalia', logoSrc: '/logo.jpeg', city: 'dammam', discountPercent: 28, bookingHref: '/services#store' },
+      { id: 'p4', nameAr: 'صيدليات سين', nameEn: 'Seen Pharmacy', logoSrc: '/logo.jpeg', city: 'riyadh', discountPercent: 30, bookingHref: '/services#store' },
+      { id: 'p5', nameAr: 'صيدلية تمر', nameEn: 'Tamer Pharmacy', logoSrc: '/logo.jpeg', city: 'jeddah', discountPercent: 25, bookingHref: '/services#store' },
     ],
   },
   {
@@ -110,8 +110,8 @@ const categories: NetworkCategory[] = [
     icon: Eye,
     count: '35+',
     partners: [
-      { id: 'e1', nameAr: 'مستشفيات مغربي للعيون', nameEn: 'Magrabi Eye Hospitals', city: 'riyadh', discountPercent: 55, bookingHref: '/services#instant-booking' },
-      { id: 'e2', nameAr: 'مركز ابن رشد للعيون', nameEn: 'Ibn Rushd Eye Center', city: 'jeddah', discountPercent: 50, bookingHref: '/services#instant-booking' },
+      { id: 'e1', nameAr: 'مستشفيات مغربي للعيون', nameEn: 'Magrabi Eye Hospitals', logoSrc: '/logo.jpeg', city: 'riyadh', discountPercent: 55, bookingHref: '/services#instant-booking' },
+      { id: 'e2', nameAr: 'مركز ابن رشد للعيون', nameEn: 'Ibn Rushd Eye Center', logoSrc: '/logo.jpeg', city: 'jeddah', discountPercent: 50, bookingHref: '/services#instant-booking' },
     ],
   },
   {
@@ -120,8 +120,8 @@ const categories: NetworkCategory[] = [
     icon: Smile,
     count: '60+',
     partners: [
-      { id: 'd1', nameAr: 'عيادات الأسنان المتقدمة', nameEn: 'Advanced Dental Clinics', city: 'riyadh', discountPercent: 45, bookingHref: '/services#instant-booking' },
-      { id: 'd2', nameAr: 'مركز التجميل الطبي', nameEn: 'Medical Beauty Center', city: 'jeddah', discountPercent: 50, bookingHref: '/services#instant-booking' },
+      { id: 'd1', nameAr: 'عيادات الأسنان المتقدمة', nameEn: 'Advanced Dental Clinics', logoSrc: '/logo.jpeg', city: 'riyadh', discountPercent: 45, bookingHref: '/services#instant-booking' },
+      { id: 'd2', nameAr: 'مركز التجميل الطبي', nameEn: 'Medical Beauty Center', logoSrc: '/logo.jpeg', city: 'jeddah', discountPercent: 50, bookingHref: '/services#instant-booking' },
     ],
   },
   {
@@ -130,23 +130,37 @@ const categories: NetworkCategory[] = [
     icon: FlaskConical,
     count: '45+',
     partners: [
-      { id: 'l1', nameAr: 'مختبرات البرج', nameEn: 'Al Borg Laboratories', city: 'riyadh', discountPercent: 40, bookingHref: '/services#instant-booking' },
-      { id: 'l2', nameAr: 'مختبرات المختبر', nameEn: 'Al Mokhtabar Labs', city: 'jeddah', discountPercent: 38, bookingHref: '/services#instant-booking' },
+      { id: 'l1', nameAr: 'مختبرات البرج', nameEn: 'Al Borg Laboratories', logoSrc: '/logo.jpeg', city: 'riyadh', discountPercent: 40, bookingHref: '/services#instant-booking' },
+      { id: 'l2', nameAr: 'مختبرات المختبر', nameEn: 'Al Mokhtabar Labs', logoSrc: '/logo.jpeg', city: 'jeddah', discountPercent: 38, bookingHref: '/services#instant-booking' },
     ],
   },
 ];
 
 const content = {
-  eyebrow: 'شبكة أمان الطبية',
-  title: '500+ مستشفى وعيادة وصيدلية… في متناول يدك',
-  subtitle: 'استكشف شبكتنا الطبية في جميع أنحاء المملكة. اختار التخصص، اختار المدينة، واحجز مباشرة عبر التطبيق.',
-  counterPrefix: 'معروض الآن:',
+  eyebrow: 'الثقة تُبنى بالأرقام والشراكات الحقيقية',
+  title: 'أرقام حقيقية وشراكات موثوقة — هذا اللي يميّز أمان إيفر',
+  subtitle: 'منصة مرخّصة من وزارة الصحة السعودية، بشراكات استراتيجية مع نخبة المستشفيات والصيدليات في المملكة. أرقامنا تتكلم — 50,000+ مستخدم وفّروا ملايين الريالات على رعايتهم الصحية.',
+  stats: [
+    { value: '50,000+', label: 'مستخدم نشط' },
+    { value: '500+', label: 'مقدم خدمة طبية' },
+    { value: '50+', label: 'مدينة سعودية' },
+    { value: '4.8/5', label: 'تقييم العملاء' },
+  ],
+  trustBadges: [
+    { icon: '✅', text: 'مرخّص من وزارة الصحة (MOH)' },
+    { icon: '✅', text: 'متوافق مع PDPL ومعتمد من SDAIA' },
+    { icon: '✅', text: 'أطباء معتمدون من SCFHS' },
+    { icon: '✅', text: 'السجل التجاري: 7038166471' },
+  ],
+  partnersTitle: 'شركاؤنا في الرعاية الصحية',
+  partnersSubtitle: 'نعمل مع أكبر وأوثق مقدمي الخدمات الطبية في المملكة لضمان وصولك لأفضل رعاية.',
+  counterPrefix: 'معروض الحين:',
   counterSuffix: 'مقدم خدمة في',
   counterCity: 'بمدينة',
   cta: {
-    question: 'ما لقيت اللي بتدور عليه؟',
-    primary: 'تصفح الشبكة كاملة',
-    secondary: 'اقترح إضافة مقدم خدمة',
+    question: 'جاهز تنضم لـ 50,000+ مستخدم يثقون فينا؟',
+    primary: 'احصل على بطاقتك — 199 ريال/سنة',
+    secondary: 'شوف كل الشركاء',
   },
 };
 
@@ -229,20 +243,57 @@ export function MedicalNetworkSection({ locale }: MedicalNetworkSectionProps) {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-slate-50" aria-labelledby="medical-network-heading">
+    <section className="pt-12 pb-20 md:pt-16 md:pb-28 bg-gradient-to-b from-white via-slate-50 to-white" aria-labelledby="medical-network-heading">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
-        <div className="text-center mb-12 max-w-4xl mx-auto">
-          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+        <div className="text-center mb-8 max-w-4xl mx-auto">
+          <p className="text-sm font-bold text-emerald-600 uppercase tracking-wider mb-3">
             {content.eyebrow}
           </p>
           <h2
             id="medical-network-heading"
-            className="text-3xl md:text-4xl font-bold text-slate-900 mb-4"
+            className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight mb-4"
           >
             {content.title}
           </h2>
-          <p className="text-lg md:text-xl text-slate-600">{content.subtitle}</p>
+          <p className="text-lg text-slate-700 leading-relaxed">{content.subtitle}</p>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12 max-w-5xl mx-auto">
+          {content.stats.map((stat, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl border-2 border-emerald-100 p-6 text-center hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="text-3xl md:text-4xl font-black text-emerald-600 mb-2">
+                {stat.value}
+              </div>
+              <div className="text-sm md:text-base text-slate-600 font-medium">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Trust Badges */}
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 mb-16 max-w-4xl mx-auto shadow-lg">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {content.trustBadges.map((badge, index) => (
+              <div key={index} className="flex items-center gap-3">
+                <span className="text-2xl">{badge.icon}</span>
+                <span className="text-sm md:text-base text-slate-700 font-medium">
+                  {badge.text}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Partners Section Title */}
+        <div className="text-center mb-8 max-w-3xl mx-auto">
+          <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
+            {content.partnersTitle}
+          </h3>
+          <p className="text-base md:text-lg text-slate-600">{content.partnersSubtitle}</p>
         </div>
 
         {/* Counter Strip */}
@@ -347,15 +398,15 @@ export function MedicalNetworkSection({ locale }: MedicalNetworkSectionProps) {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-12 pt-8 border-t border-slate-200">
-          <p className="text-base md:text-lg text-slate-600 mb-4">{content.cta.question}</p>
+        <div className="text-center mt-16 pt-12 border-t-2 border-slate-200">
+          <p className="text-lg md:text-xl font-bold text-slate-900 mb-6">{content.cta.question}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <Link href={`/${locale}/medical-network`}>{content.cta.primary} ←</Link>
+            <Button asChild size="lg" className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700">
+              <Link href={`/${locale}/pricing`}>{content.cta.primary} ←</Link>
             </Button>
             <Link
-              href={`/${locale}/suggest-partner`}
-              className="text-primary font-semibold hover:text-primary/80 transition-colors duration-200"
+              href={`/${locale}/medical-network`}
+              className="text-emerald-600 font-bold hover:text-emerald-700 transition-colors duration-200 text-base md:text-lg"
             >
               {content.cta.secondary} ←
             </Link>

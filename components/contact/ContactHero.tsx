@@ -25,12 +25,12 @@ export function ContactHero() {
         <div className="mx-auto max-w-3xl text-center">
           {/* Heading */}
           <h1 className="mb-4 text-4xl font-bold text-slate-900 md:text-5xl">
-            نحن هنا لخدمتك — في أي وقت تحتاجنا
+            نحن هنا لخدمتك — متى ما تحتاجنا
           </h1>
 
           {/* Subheading */}
           <p className="mb-8 text-lg text-slate-600 md:text-xl">
-            اختر الطريقة الأنسب للتواصل معنا، وراح يصلك ردنا خلال 15 دقيقة في
+            اختر الطريقة الأنسب للتواصل معنا، وراح يوصلك ردنا خلال 15 دقيقة في
             ساعات العمل.
           </p>
 

@@ -28,11 +28,11 @@ type Tier = {
 
 const content = {
   eyebrow: 'عضويتك الطبية الذكية',
-  title: 'بطاقة واحدة… وفر يوصل لـ 80% على كل احتياجاتك الصحية',
-  subtitle: 'اختار الباقة المناسبة ليك، واصدرها إلكترونياً في 60 ثانية. بدون تأمين، بدون موافقات، وبدون حد أدنى للعمر.',
+  title: 'بطاقة واحدة — وفّر حتى ٨٠٪ على احتياجاتك الصحية',
+  subtitle: 'اختر الباقة المناسبة لك، واصدرها إلكترونياً في ٦٠ ثانية. بدون تأمين، بدون موافقات، وبدون حد أدنى للعمر.',
   calculator: {
-    body: 'متوسط العائلة في السعودية بتصرف ~4,800 ريال سنوياً على الخدمات الطبية والتجميلية. مع بطاقة أمان إيفر، متوسط التوفير يوصل لـ 2,400-3,200 ريال/سنة — أكتر من 10 أضعاف سعر البطاقة نفسها.',
-    cta: 'احسب توفيرك بالتفصيل ←',
+    body: 'متوسط العائلة في السعودية تصرف ~٤٬٨٠٠ ريال سنوياً على الخدمات الطبية والتجميلية. مع بطاقة أمان إيفر، متوسط التوفير يوصل لـ ٢٬٤٠٠-٣٬٢٠٠ ريال/سنة — أكثر من ١٠ أضعاف سعر البطاقة.',
+    cta: 'احسب توفيرك بالتفصيل',
   },
   tiers: [
     {
@@ -42,15 +42,15 @@ const content = {
       priceYearly: 199,
       priceMonthly: 16.5,
       features: [
-        'خصم حتى 60% على الشبكة الطبية',
+        'خصم حتى ٦٠٪ على الشبكة الطبية',
         'حجوزات فورية مع الأطباء',
         'استشارة "اسأل طبيب" مجاناً',
-        'كاش باك 5% على كل فاتورة',
+        'كاش باك ٥٪ على كل فاتورة',
         'نقاط ولاء قابلة للاستبدال',
-        'دعم عملاء 24/7',
+        'دعم عملاء ٢٤/٧',
       ],
       ctaLabel: 'اشترك في Premier',
-      ctaHref: '/services#membership',
+      ctaHref: '/register',
       headerBg: 'bg-emerald-50',
       headerTextColor: 'text-slate-900',
     },
@@ -62,15 +62,15 @@ const content = {
       priceMonthly: 41.5,
       isRecommended: true,
       features: [
-        'خصم حتى 80% (بدلاً من 60%)',
-        'تغطية لـ 4 أفراد من العائلة',
+        'خصم حتى ٨٠٪ (بدلاً من ٦٠٪)',
+        'تغطية لـ ٤ أفراد من العائلة',
         'زيارة طبيب منزلية مجانية (شهرياً)',
         'فحص شامل سنوي مجاني',
         'أولوية في الحجوزات + أطباء VIP',
-        'كاش باك 10% (بدلاً من 5%)',
+        'كاش باك ١٠٪ (بدلاً من ٥٪)',
       ],
       ctaLabel: 'اشترك في VIP',
-      ctaHref: '/services#membership',
+      ctaHref: '/register',
       headerBg: 'bg-gradient-to-br from-slate-900 to-emerald-900',
       headerTextColor: 'text-white',
     },
@@ -79,17 +79,17 @@ const content = {
   vipIntro: 'كل مزايا Premier، بالإضافة إلى:',
   recommendedBadge: 'الأكثر توفيراً',
   comparisonToggle: {
-    show: 'شوف المقارنة الكاملة ↓',
-    hide: 'إخفاء المقارنة ↑',
+    show: 'شوف المقارنة الكاملة',
+    hide: 'إخفاء المقارنة',
   },
   trustStrip: [
-    'بيانات آمنة (PDPL/SDAIA)',
-    'استرداد خلال 14 يوم',
-    'إصدار فوري إلكتروني',
-    'معتمد في السعودية',
+    '✓ بيانات آمنة (PDPL/SDAIA)',
+    '✓ استرداد خلال ١٤ يوم',
+    '✓ إصدار فوري إلكتروني',
+    '✓ معتمد في السعودية',
   ],
   finalCta: {
-    body: 'مش متأكد أي باقة تناسبك؟ جرّب التطبيق مجاناً — أول استشارة "اسأل طبيب" مجانية بالكامل وبدون الاشتراك.',
+    body: 'مش متأكد أي باقة تناسبك؟ جرّب التطبيق مجاناً — أول استشارة "اسأل طبيب" مجانية بالكامل بدون اشتراك.',
     primaryButton: 'ابدأ مجاناً',
     secondaryButton: 'قارن الباقات بالتفصيل',
   },
@@ -271,7 +271,7 @@ export function MembershipPricingSection({ locale }: MembershipPricingSectionPro
                   {content.calculator.body}
                 </p>
                 <Button asChild variant="outline" className="border-amber-600 text-amber-700 hover:bg-amber-100">
-                  <Link href={`/${locale}/savings-calculator`}>{content.calculator.cta}</Link>
+                  <Link href={`/${locale}/pricing`}>{content.calculator.cta}</Link>
                 </Button>
               </div>
             </div>
@@ -315,7 +315,7 @@ export function MembershipPricingSection({ locale }: MembershipPricingSectionPro
               size="lg"
               className="text-base md:text-lg px-8 py-6 rounded-xl hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
             >
-              <Link href={`/${locale}/download`}>{content.finalCta.primaryButton}</Link>
+              <Link href={`/${locale}/register`}>{content.finalCta.primaryButton}</Link>
             </Button>
             <Button
               asChild

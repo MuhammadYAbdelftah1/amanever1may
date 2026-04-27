@@ -28,7 +28,6 @@ export function Header({ locale }: HeaderProps) {
     { href: `/${locale}`, label: t('home') },
     { href: `/${locale}/about`, label: t('about') },
     { href: `/${locale}/services`, label: t('services') },
-    { href: `/${locale}/investors`, label: locale === 'ar' ? 'المستثمرين' : locale === 'ur' ? 'سرمایہ کار' : 'Investors' },
     { href: `/${locale}/blog`, label: locale === 'ar' ? 'المدونة' : locale === 'ur' ? 'بلاگ' : 'Blog' },
     { href: `/${locale}/contact`, label: t('contact') },
   ];

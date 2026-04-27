@@ -1,7 +1,7 @@
 'use client';
 
-import { Smartphone, Download, CalendarCheck, HeartPulse } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
@@ -10,49 +10,52 @@ interface HowItWorksSectionProps {
 }
 
 const content = {
-  eyebrow: 'بسيطة… سريعة… بدون تأمين',
-  title: 'ابدأ رعايتك في 3 خطوات فقط',
-  subtitle: 'من تحميل التطبيق لأول استشارة مجانية… كل ده في أقل من دقيقتين.',
+  eyebrow: 'بدون تأمين · بدون موافقات · بدون انتظار',
+  title: 'رعاية صحية كاملة في جيبك — تبدأ من الحين',
+  subtitle: '٥٠,٠٠٠+ عميل وفّروا آلاف الريالات على الرعاية الصحية. الحين دورك — ابدأ في أقل من دقيقتين.',
   steps: [
     {
       id: '01',
       arabicNumber: '٠١',
-      icon: Smartphone,
-      title: 'حمّل تطبيق أمان إيفر',
-      description: 'اختار بطاقة عضويتك (Premier أو VIP) واصدرها إلكترونياً في أقل من 60 ثانية.',
-      trustChips: ['دفع آمن', 'تابي وتمارا متاحين'],
-      cta: { text: 'تحميل التطبيق ←', href: '/download' },
+      image: '/logo.jpeg', // TODO: Replace with actual step image
+      title: 'بطاقتك جاهزة في ٦٠ ثانية',
+      description: 'ما تحتاج تنتظر موافقات ولا تعبّي نماذج طويلة. اختر باقتك (Premier بـ ١٩٩ ريال أو VIP بـ ٤٩٩ ريال)، ادفع بأمان، وقسّطها على ٤ دفعات عبر تابي أو تمارا — حتى على الخدمات الطبية نفسها.',
+      trustChips: ['✓ دفع آمن ومرخّص', '✓ تقسيط بدون فوائد'],
+      cta: { text: 'حمّل التطبيق الحين', href: '/register' },
+      microCopy: 'أول استشارة "اسأل طبيب" مجاناً — بدون بطاقة ائتمان',
     },
     {
       id: '02',
       arabicNumber: '٠٢',
-      icon: CalendarCheck,
-      title: 'اختار طبيبك أو خدمتك',
-      description: 'احجز موعد فوري، ابدأ استشارة أونلاين، أو اطلب خدمة رعاية منزلية.',
-      trustChips: ['رد طبيب خلال 15 دقيقة', '500+ مقدم خدمة'],
-      cta: { text: 'شوف الخدمات ←', href: '/services' },
+      image: '/logo.jpeg', // TODO: Replace with actual step image
+      title: 'طبيبك يردّ عليك خلال ١٥ دقيقة',
+      description: 'سواء تبي استشارة أونلاين، حجز موعد في مستشفى (سليمان الحبيب، المواساة، دلّه)، أو زيارة منزلية — كل شيء من تطبيق واحد. أكثر من ٥٠٠ مقدم خدمة في ٥٠+ مدينة سعودية ينتظرونك.',
+      trustChips: ['⚡ رد خلال ١٥ دقيقة', '🏥 ٥٠٠+ مستشفى وعيادة'],
+      cta: { text: 'شوف الخدمات المتاحة', href: '/services' },
+      microCopy: 'تقييم ٤.٨/٥ من أكثر من ٥٠,٠٠٠ عميل',
     },
     {
       id: '03',
       arabicNumber: '٠٣',
-      icon: HeartPulse,
-      title: 'احصل على الخدمة ووفّر فوراً',
-      description: 'خصم مباشر يوصل 80% + كاش باك + نقاط تتحول لرصيد استخدام قادم.',
-      trustChips: ['💰 لا موافقات مسبقة', '🎁 استرداد فوري'],
-      cta: { text: 'احسب وفوراتك ←', href: '/savings-calculator' },
+      image: '/logo.jpeg', // TODO: Replace with actual step image
+      title: 'وفّر حتى ٨٠٪ + كاش باك يرجع لك',
+      description: 'خصم مباشر على الاستشارات، التحاليل، الأدوية، وحتى الجيم (فتنس تايم). كل ريال تصرفه يرجع لك كاش باك (٥٪ Premier، ١٠٪ VIP) + نقاط تتحول رصيد. ما فيه موافقات مسبقة — الخصم يطبّق فوراً.',
+      trustChips: ['💰 كاش باك فوري', '🚫 بدون موافقات مسبقة'],
+      cta: { text: 'احسب كم بتوفّر', href: '/pricing' },
+      microCopy: 'عائلة من ٤ أفراد توفّر في المتوسط ٣,٥٠٠ ريال سنوياً',
     },
   ],
   ctaBand: {
-    text: 'جاهز تبدأ؟ أول استشارة "اسأل طبيب" مجاناً بالكامل',
-    primaryButton: 'حمّل التطبيق الآن',
-    secondaryButton: 'شوف باقات البطاقة',
+    text: 'جاهز تبدأ؟ أول استشارة مجاناً — بدون التزام',
+    primaryButton: 'حمّل التطبيق وابدأ الحين',
+    primaryMicroCopy: 'متاح على iOS وAndroid · بدون بطاقة ائتمان للتجربة',
+    secondaryButton: 'شوف الباقات والأسعار',
   },
 };
 
 function StepCard({ step, index, locale }: { step: typeof content.steps[0]; index: number; locale: string }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const Icon = step.icon;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -87,10 +90,16 @@ function StepCard({ step, index, locale }: { step: typeof content.steps[0]; inde
         {step.arabicNumber}
       </div>
 
-      {/* Icon */}
+      {/* Image */}
       <div className="relative mb-6">
-        <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-          <Icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={2} aria-hidden="true" />
+        <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300 shadow-lg">
+          <Image
+            src={step.image}
+            alt={step.title}
+            fill
+            className="object-cover"
+            priority={index === 0}
+          />
         </div>
       </div>
 
@@ -108,7 +117,7 @@ function StepCard({ step, index, locale }: { step: typeof content.steps[0]; inde
           {step.trustChips.map((chip, i) => (
             <span
               key={i}
-              className="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded-full"
+              className="bg-slate-100 text-slate-700 text-xs px-3 py-1.5 rounded-full font-medium"
             >
               {chip}
             </span>
@@ -116,12 +125,21 @@ function StepCard({ step, index, locale }: { step: typeof content.steps[0]; inde
         </div>
 
         {/* Inline CTA */}
-        <Link
-          href={`/${locale}${step.cta.href}`}
-          className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors duration-200"
-        >
-          {step.cta.text}
-        </Link>
+        <div className="space-y-2">
+          <Link
+            href={`/${locale}${step.cta.href}`}
+            className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors duration-200"
+          >
+            {step.cta.text}
+          </Link>
+          
+          {/* Micro-copy under CTA */}
+          {step.microCopy && (
+            <p className="text-xs text-slate-500 leading-relaxed">
+              {step.microCopy}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -192,22 +210,27 @@ export function HowItWorksSection({ locale }: HowItWorksSectionProps) {
             {content.ctaBand.text}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              asChild
-              size="lg"
-              className="text-base md:text-lg px-8 py-6 rounded-xl hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
-            >
-              <Link href={`/${locale}/download`}>
-                {content.ctaBand.primaryButton}
-              </Link>
-            </Button>
+            <div className="flex flex-col items-center gap-2 w-full sm:w-auto">
+              <Button
+                asChild
+                size="lg"
+                className="text-base md:text-lg px-8 py-6 rounded-xl hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
+              >
+                <Link href={`/${locale}/register`}>
+                  {content.ctaBand.primaryButton}
+                </Link>
+              </Button>
+              <p className="text-xs text-slate-500 text-center max-w-xs">
+                {content.ctaBand.primaryMicroCopy}
+              </p>
+            </div>
             <Button
               asChild
               variant="outline"
               size="lg"
               className="text-base md:text-lg px-8 py-6 rounded-xl hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
             >
-              <Link href={`/${locale}/services`}>
+              <Link href={`/${locale}/pricing`}>
                 {content.ctaBand.secondaryButton}
               </Link>
             </Button>

@@ -6,7 +6,7 @@ import { heroContent } from '@/lib/data/services-config';
 export function ServicesHero() {
   return (
     <section
-      className="relative bg-gradient-to-b from-emerald-50 to-white py-20 md:py-28"
+      className="relative bg-gradient-to-b from-emerald-50 to-white pt-28 md:pt-36 pb-20 md:pb-28"
       aria-labelledby="services-hero-title"
     >
       <div className="container mx-auto px-4">

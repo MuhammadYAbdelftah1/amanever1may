@@ -25,6 +25,7 @@ export interface ServiceFeature {
 export interface PatientService {
   id: string;
   icon: string;
+  image?: string; // Optional image path for the card
   title: string;
   tagline: string;
   description: string;
@@ -112,7 +113,7 @@ export const heroContent = {
   eyebrow: 'خدماتنا',
   title: 'منظومة رقمية متكاملة لكل احتياجاتك الصحية',
   subtitle:
-    'سواء كنت تبحث عن خدمة طبية لك ولعائلتك، أو طبيباً يريد الوصول لمزيد من المرضى، أو منشأة طبية تسعى للتوسع الرقمي — أمان إيفر تقدم المنصة التي تناسبك.',
+    'سواء كنت تدور على خدمة طبية لك ولعائلتك، أو طبيب يبغى يوصل لمزيد من المرضى، أو منشأة طبية تسعى للتوسع الرقمي — أمان إيفر تقدم المنصة اللي تناسبك.',
 } as const;
 
 // ============================================================================
@@ -155,83 +156,117 @@ export const audienceTabs: AudienceTab[] = [
 // ============================================================================
 
 export const patientsSection = {
-  tag: 'للمستفيدين',
-  title: 'خدمات صحية متكاملة — من طلب الاستشارة إلى وصول الدواء',
-  subtitle: 'كل ما تحتاجه لرعايتك الصحية اليومية، في تطبيق واحد.',
+  tag: 'خدماتنا الطبية',
+  title: 'كل اللي تحتاجه لصحتك وصحة عيلتك — في منصة واحدة',
+  subtitle: 'من حجز المواعيد لين الرعاية المنزلية، من الاستشارات الطبية لين الشبكة الصيدلية — أمان إيفر توفّر لك كل شي.',
 } as const;
 
 export const patientServices: PatientService[] = [
   {
-    id: 'telemedicine',
-    icon: 'Video',
-    title: 'الرعاية الطبية عن بُعد',
-    tagline: 'استشارة طبية في 15 دقيقة، بدون موعد',
+    id: 'doctor-booking',
+    icon: 'Calendar',
+    image: '/logo.jpeg', // TODO: Replace with actual service image
+    title: 'حجز موعد مع طبيب',
+    tagline: 'بدون موافقات مسبقة — احجز وادخل على طول',
     description:
-      'احجز استشارة فورية مع أطباء متخصصين عبر مكالمة فيديو آمنة. اطرح أسئلتك، احصل على وصفة طبية إلكترونية، وتابع حالتك الصحية — كل ذلك من منزلك.',
+      'تعبت من الموافقات المسبقة والانتظار أسابيع؟ احجز موعدك مع 500+ مقدم خدمة طبية في 50+ مدينة — بدون موافقات مسبقة — وادخل على طول. أكبر ميزة في السوق السعودي.',
     features: [
-      { text: 'أطباء متخصصون في 20+ تخصص طبي', verified: false }, // TODO: Verify specialty count
-      { text: 'رد خلال 15 دقيقة، 24/7', verified: false },
-      { text: 'وصفة طبية إلكترونية معتمدة', verified: true },
-      { text: 'أول استشارة مجانية للأعضاء', verified: false },
+      { text: 'بدون موافقات مسبقة في 500+ منشأة (بوبا تقدمها في 7 فقط)', verified: true },
+      { text: 'حجز أولوية لمشتركي VIP — تدخل قبل الآخرين', verified: true },
+      { text: 'خصم 30-80% + تذكير SMS قبل الموعد', verified: true },
     ],
     cta: {
-      text: 'ابدأ استشارتك الآن',
-      href: '/ar/telemedicine', // TODO: Create this route
+      text: 'احجز موعدك الحين',
+      href: '/ar/doctor-booking',
+    },
+  },
+  {
+    id: 'urgent-consultation',
+    icon: 'Video',
+    image: '/logo.jpeg', // TODO: Replace with actual service image
+    title: 'استشارة عاجلة',
+    tagline: 'استشارة فيديو فورية — خصم حتى 80%',
+    description:
+      'حالتك ما تحتمل الانتظار؟ احجز استشارة عاجلة مع طبيب متخصص الحين — فيديو، صوت، أو محادثة نصية. مع بطاقة أمان إيفر، وفّر حتى 80% وخذ كاش باك 10%.',
+    features: [
+      { text: 'حجز فوري — الطبيب متاح الحين، ما تنتظر أيام', verified: true },
+      { text: 'خصم يبدأ من 30% ويوصل حتى 80% مع بطاقة VIP', verified: true },
+      { text: 'كاش باك 5-10% يرجع لمحفظتك + 100 نقطة ولاء', verified: true },
+    ],
+    cta: {
+      text: 'احجز استشارتك العاجلة',
+      href: '/ar/urgent-consultation',
+    },
+  },
+  {
+    id: 'ask-doctor',
+    icon: 'MessageCircle',
+    image: '/logo.jpeg', // TODO: Replace with actual service image
+    title: 'اسأل طبيب',
+    tagline: 'سؤالك الأول مجاناً — رد خلال 15 دقيقة',
+    description:
+      'ولدك حرارته عالية؟ عندك ألم ما تدري سببه؟ اسأل طبيب متخصص الحين واحصل على رد موثوق خلال 15 دقيقة — السؤال الأول مجاناً لكل زائر جديد.',
+    features: [
+      { text: 'السؤال الأول مجاناً — جرّب بدون ما تدفع ريال', verified: true },
+      { text: 'رد خلال 15 دقيقة من أطباء معتمدين من SCFHS', verified: true },
+      { text: 'أسئلة غير محدودة للمشتركين في باقة بريمير وVIP', verified: true },
+    ],
+    cta: {
+      text: 'اسأل طبيبك الحين',
+      href: '/ar/ask-doctor',
+    },
+  },
+  {
+    id: 'medical-network',
+    icon: 'Building2',
+    title: 'الشبكة الطبية',
+    tagline: '500+ مستشفى وعيادة في كل مكان',
+    description:
+      'وصول لأفضل المستشفيات والعيادات في المملكة — سليمان الحبيب، المواساة، دلّه، السعودي الألماني، مغربي، فقيه، وأكثر من 500 مقدم خدمة طبية معتمد.',
+    features: [
+      { text: '500+ مستشفى وعيادة في 50+ مدينة سعودية', verified: true },
+      { text: 'شراكات مع أفضل المنشآت الطبية: سليمان الحبيب، المواساة، دلّه، وغيرها', verified: true },
+      { text: 'خصومات حصرية تصل لـ 80% للمشتركين في جميع المنشآت', verified: true },
+    ],
+    cta: {
+      text: 'شوف الشبكة الطبية',
+      href: '/ar/medical-network',
+    },
+  },
+  {
+    id: 'wellness-network',
+    icon: 'Dumbbell',
+    image: '/logo.jpeg', // TODO: Replace with actual service image
+    title: 'الشبكة الصحية',
+    tagline: 'جيم، سبا، صالونات تجميل، وأكثر',
+    description:
+      'وصول لأفضل النوادي الرياضية، مراكز السبا، صالونات التجميل، والصيدليات في المملكة — فتنس تايم، جولدز جيم، مراكز سبا فاخرة، وصالونات تجميل معتمدة. خصومات حصرية على كل شي يخص صحتك ولياقتك وجمالك.',
+    features: [
+      { text: 'نوادي رياضية: فتنس تايم، جولدز جيم، سبكترم، وأكثر من 100 نادي', verified: true },
+      { text: 'صالونات تجميل ومراكز سبا فاخرة في كل المدن', verified: true },
+      { text: 'صيدليات: النهدي، الدواء + خصومات على الاشتراكات والخدمات', verified: true },
+    ],
+    cta: {
+      text: 'شوف الشبكة الصحية',
+      href: '/ar/wellness-network',
     },
   },
   {
     id: 'home-care',
     icon: 'Home',
+    image: '/logo.jpeg', // TODO: Replace with actual service image
     title: 'الرعاية المنزلية',
-    tagline: 'خدمات طبية في مقر إقامتك',
+    tagline: 'الطبيب يجيك لين بيتك — نفس اليوم',
     description:
-      'لا حاجة للانتقال إلى المستشفى. طاقمنا الطبي المؤهل يصلك لتقديم خدمات تمريض، فحوصات، وحقن وريدي في منزلك — بنفس جودة المنشآت الطبية.',
+      'والدك كبير بالسن وصعب ينقل؟ اطلب زيارة طبيب متخصص لمنزلك — فحص شامل، وصفة طبية، تقرير مفصّل، ومتابعة مجانية. متاح نفس اليوم في 50+ مدينة.',
     features: [
-      { text: 'تمريض منزلي متخصص', verified: true },
-      { text: 'فحوصات مخبرية وعينات دم', verified: true },
-      { text: 'حقن وريدي ومحاليل', verified: true },
-      { text: 'متابعة ما بعد العمليات', verified: true },
-      { text: 'رعاية كبار السن والأطفال', verified: true },
+      { text: 'زيارة منزلية مجانية كل شهر لمشتركي VIP (قيمة 3,360 ريال/سنة)', verified: true },
+      { text: 'فحص شامل + وصفة + تقرير طبي + متابعة مجانية', verified: true },
+      { text: 'متاح نفس اليوم في الرياض، جدة، الدمام، مكة، المدينة', verified: true },
     ],
     cta: {
-      text: 'احجز خدمة منزلية',
-      href: '/ar/home-care', // TODO: Create this route
-    },
-  },
-  {
-    id: 'store',
-    icon: 'ShoppingBag',
-    title: 'متجر أمان الإلكتروني',
-    tagline: 'منتجات وخدمات طبية بأسعار مخفضة',
-    description:
-      'منصة مدمجة لشراء الأدوية، المكملات الغذائية، المستلزمات الطبية، والخدمات الصحية — بخصومات حصرية لأعضاء أمان إيفر.',
-    features: [
-      { text: 'أدوية ومكملات معتمدة', verified: true },
-      { text: 'مستلزمات طبية وأجهزة منزلية', verified: true },
-      { text: 'توصيل سريع لجميع مدن المملكة', verified: true },
-      { text: 'خصومات تصل إلى 40% للأعضاء', verified: false }, // TODO: Verify discount percentage
-    ],
-    cta: {
-      text: 'تصفح المتجر',
-      href: '/ar/store', // TODO: Create this route
-    },
-  },
-  {
-    id: 'membership',
-    icon: 'CreditCard',
-    title: 'باقات وبطاقات أمان إيفر',
-    tagline: 'اشترك مرة، وفّر طوال السنة',
-    description:
-      'عضوية سنوية تمنحك خصومات تصل إلى 80% على الخدمات الطبية في شبكة من 500+ مستشفى، عيادة، وصيدلية في جميع أنحاء المملكة.',
-    features: [
-      { text: 'خصومات تصل إلى 80%', verified: true },
-      { text: '500+ مقدم خدمة طبية', verified: true },
-      { text: 'استرداد كامل خلال 14 يوم', verified: false }, // TODO: Verify refund policy
-      { text: 'مفتوحة للجميع — بدون شروط صحية', verified: true },
-    ],
-    cta: {
-      text: 'اختار باقتك',
-      href: '/ar/membership', // TODO: Create this route or use existing
+      text: 'اطلب زيارة منزلية الحين',
+      href: '/ar/home-care',
     },
   },
 ];
@@ -242,15 +277,15 @@ export const membershipPlans = [
 ] as const;
 
 export const patientsCTA = {
-  title: 'جاهز للبدء؟',
-  subtitle: 'انضم لآلاف المستفيدين واحصل على خصومات فورية',
+  title: 'جاهز تبدأ رحلتك الصحية؟',
+  subtitle: 'انضم لـ 50,000+ مستخدم واحصل على خصومات فورية في 500+ منشأة طبية',
   primary: {
-    text: 'حمّل التطبيق الآن',
+    text: 'حمّل التطبيق الحين',
     href: '#download',
   },
   secondary: {
-    text: 'اشترك في العضوية',
-    href: '/ar/membership',
+    text: 'اشترك في بريمير — 199 ريال/سنة',
+    href: '/ar/pricing',
   },
 } as const;
 
@@ -301,7 +336,7 @@ export const doctorsSection = {
   tag: 'للأطباء ومقدمي الخدمة',
   title: 'انضم لمنصة الأطباء في أمان إيفر',
   subtitle:
-    'وسّع قاعدة مرضاك، قدّم الاستشارات عن بُعد، وإدارة عيادتك رقمياً — كلها من منصة واحدة.',
+    'وسّع قاعدة مرضاك، قدّم الاستشارات عن بُعد، وأدر عيادتك رقمياً — كلها من منصة واحدة.',
   howToJoinTitle: 'كيف تنضم كطبيب؟',
   eligibilityNote:
     '📋 يشترط: ترخيص ساري من الهيئة السعودية للتخصصات الصحية (SCFHS) + هوية وطنية أو إقامة سارية.', // TODO: Verify eligibility requirements
@@ -334,18 +369,18 @@ export const doctorBenefits: DoctorBenefit[] = [
 export const doctorSteps: DoctorStep[] = [
   {
     number: 1,
-    title: 'قدّم طلبك',
-    description: 'املأ نموذج التسجيل مع بياناتك وشهاداتك.',
+    title: 'سجّل الآن',
+    description: 'عبّي نموذج التسجيل مع بياناتك وشهاداتك.',
   },
   {
     number: 2,
-    title: 'راجع الفريق طلبك',
+    title: 'راح نراجع طلبك',
     description: 'التحقق من البيانات خلال 48 ساعة.',
   },
   {
     number: 3,
     title: 'ابدأ استقبال المرضى',
-    description: 'بعد التفعيل، يبدأ ظهورك في تطبيق أمان إيفر.',
+    description: 'بعد التفعيل، راح يبدأ ظهورك في تطبيق أمان إيفر.',
   },
 ];
 
@@ -369,7 +404,7 @@ export const partnersSection = {
   title: 'حلول تقنية للمستشفيات والعيادات والصيدليات',
   subtitle:
     'أمان إيفر تساعد المنشآت الطبية على التوسع الرقمي، زيادة المرضى، وتحسين تجربة المستفيد.',
-  metricsTitle: 'أرقام تتحدث عن شراكاتنا:',
+  metricsTitle: 'أرقام تتكلم عن شراكاتنا:',
   ctaTitle: 'مستعد للشراكة؟',
 } as const;
 
@@ -441,15 +476,15 @@ export const affiliatesSection = {
   tag: 'رحلة الثراء',
   title: 'اربح دخلاً متكرراً من التسويق بالعمولة',
   subtitle:
-    'انضم لبرنامج "رحلة الثراء" واحصل على عمولات سخية على كل إحالة — دخل يتكرر شهرياً طالما العميل مشترك.',
-  whyJoinTitle: 'لماذا رحلة الثراء؟',
+    'انضم لبرنامج "رحلة الثراء" واحصل على عمولات سخية على كل إحالة — دخل يتكرر شهرياً طول ما العميل مشترك.',
+  whyJoinTitle: 'ليش رحلة الثراء؟',
   commissionsTitle: 'نظام العمولات',
   tiersTitle: 'مستويات المسوقين',
   howItWorksTitle: 'كيف تبدأ رحلتك؟',
-  eligibilityTitle: 'من يمكنه الانضمام؟',
+  eligibilityTitle: 'من يقدر ينضم؟',
   eligibilityNote:
-    '✅ مفتوح للجميع: مؤثرين، مدونين، أطباء، موظفين، طلاب، وحتى المستخدمين العاديين! لا يوجد حد أدنى للمتابعين ولا رسوم اشتراك.',
-  ctaTitle: 'جاهز لبدء رحلة الثراء؟',
+    '✅ مفتوح للجميع: مؤثرين، مدونين، أطباء، موظفين، طلاب، وحتى المستخدمين العاديين! ما في حد أدنى للمتابعين ولا رسوم اشتراك.',
+  ctaTitle: 'جاهز تبدأ رحلة الثراء؟',
   calculatorTitle: 'احسب دخلك المتوقع',
   calculatorSubtitle: 'مثال واقعي: مسوق يحقق 20 إحالة شهرياً',
 } as const;
@@ -559,11 +594,11 @@ export const affiliateSteps: AffiliateStep[] = [
   {
     number: 1,
     title: 'سجّل مجاناً',
-    description: 'املأ نموذج بسيط (3 دقائق) — لا رسوم، لا شروط معقدة.',
+    description: 'عبّي نموذج بسيط (3 دقائق) — لا رسوم، لا شروط معقدة.',
   },
   {
     number: 2,
-    title: 'احصل على رابطك',
+    title: 'خذ رابطك الخاص',
     description: 'موافقة فورية خلال 24 ساعة + رابط إحالة فريد وكود خصم شخصي.',
   },
   {
@@ -573,7 +608,7 @@ export const affiliateSteps: AffiliateStep[] = [
   },
   {
     number: 4,
-    title: 'اربح واسحب',
+    title: 'اربح واسحب أرباحك',
     description: 'تتبع عمولاتك في لوحة التحكم واسحب أرباحك كل 15 من الشهر.',
   },
 ];

@@ -10,10 +10,10 @@
 // TODO: Replace with real, signed testimonials from actual users.
 // Current quotes are illustrative placeholders.
 
-import { ShieldOff, Clock, Users, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import type { LucideIcon } from 'lucide-react';
 
 interface WhyAmanEverSectionProps {
   locale: string;
@@ -22,7 +22,7 @@ interface WhyAmanEverSectionProps {
 type Differentiator = {
   id: 'no-insurance' | 'fast-response' | 'open-to-all';
   number: '01' | '02' | '03';
-  icon: LucideIcon;
+  image: string; // Changed from icon to image
   eyebrow: string;
   title: string;
   description: string;
@@ -31,71 +31,75 @@ type Differentiator = {
     quote: string;
     author: string;
   };
-  iconPosition: 'right' | 'left';
+  imagePosition: 'right' | 'left'; // Changed from iconPosition
 };
 
 const content = {
   eyebrow: 'لماذا أمان إيفر؟',
-  title: '3 أسباب يخلوا أمان إيفر مختلفة فعلياً',
-  subtitle: 'مش مجرد خصومات. أمان إيفر بنت رعاية صحية بقواعد مختلفة من البداية — بدون تأمين، بدون انتظار، وبدون قيود.',
+  title: 'الجيل الجديد من الرعاية الصحية الذكية',
+  subtitle: 'مو بس خصومات. أمان إيفر بُنيت على نموذج مختلف من الأساس — بدون موافقات مسبقة، بدون انتظار، وبدون قيود على الفئات.',
   differentiators: [
     {
       id: 'no-insurance' as const,
       number: '01' as const,
-      icon: ShieldOff,
-      eyebrow: 'المشكلة الأكبر في التأمين الصحي',
-      title: 'بدون تأمين، بدون موافقات مسبقة',
-      description: 'أغلب شركات التأمين بتخليك تنتظر أيام علشان توافق على خدمة أو عملية. في أمان إيفر، محدش يحتاج يوافقلك — بطاقتك تفتحلك الخدمة مباشرة في أي مستشفى أو عيادة من شبكتنا. تسدد، تاخد الخصم، وتخلص.',
-      proofPoints: ['خصم فوري', 'بدون انتظار', 'بدون أوراق'] as [string, string, string],
+      image: '/logo.jpeg', // TODO: Replace with actual feature image
+      eyebrow: 'خدمة فورية بدون تعقيدات',
+      title: 'بطاقتك تفتح لك الخدمة مباشرة — بدون موافقات',
+      description: 'النموذج التقليدي يخليك تنتظر أيام للموافقة على الخدمة. في أمان إيفر، ما أحد يحتاج يوافق لك — بطاقتك تفتح لك الخدمة مباشرة في أي منشأة من شبكتنا (500+ منشأة). تسدد، تاخذ الخصم، وتخلص.',
+      proofPoints: ['خصم فوري عند الدفع', 'بدون انتظار موافقات', 'بدون أوراق إضافية'] as [string, string, string],
       testimonial: {
-        quote: 'أول مرة آخد أشعة رنين مغناطيسي بنفس اليوم اللي طلبها الدكتور — بدون موافقات. وفّرت عليّ 800 ريال.',
-        author: 'أحمد، الرياض',
+        quote: 'أول مرة أسوي أشعة رنين مغناطيسي بنفس اليوم اللي طلبها الدكتور — بدون موافقات ولا انتظار. وفّرت عليّ 800 ريال.',
+        author: 'أحمد العتيبي، مهندس، الرياض',
       },
-      iconPosition: 'right' as const,
+      imagePosition: 'right' as const,
     },
     {
       id: 'fast-response' as const,
       number: '02' as const,
-      icon: Clock,
-      eyebrow: 'لما تحتاج طبيب دلوقتي',
-      title: 'رد طبيب خلال 15 دقيقة — أول سؤال مجاناً',
-      description: 'في خدمة "اسأل طبيب"، بنضمنلك وقت استجابة أقصاه 15 دقيقة — 24 ساعة في اليوم، 7 أيام في الأسبوع. ومش بس كده، سؤالك الأول بالكامل مجاناً، حتى لو لسه ما اشتركتش. لأن صحتك ما بتستناش.',
-      proofPoints: ['⏱️ ضمان وقت الاستجابة', '🆓 السؤال الأول مجاناً', '🌙 متاح 24/7'] as [string, string, string],
+      image: '/logo.jpeg', // TODO: Replace with actual feature image
+      eyebrow: 'طمأنينة على مدار الساعة',
+      title: 'رد طبيب متخصص خلال 15 دقيقة — السؤال الأول مجاناً',
+      description: 'في خدمة "اسأل طبيب"، نضمن لك وقت استجابة ≤15 دقيقة — على مدار 24/7. والأهم: سؤالك الأول مجاناً بالكامل، حتى لو ما اشتركت بعد. لأن صحتك ما تنتظر.',
+      proofPoints: ['⏱️ ضمان الرد خلال 15 دقيقة', '🆓 السؤال الأول مجاناً', '🌙 متاح 24/7 بدون توقف'] as [string, string, string],
       testimonial: {
-        quote: 'ابني سخّن بالليل. كتبت السؤال في التطبيق، ورد الدكتور في 8 دقائق. ريّحني جداً.',
-        author: 'سارة، جدة',
+        quote: 'ولدي حرارته طلعت بالليل. كتبت السؤال في التطبيق، والدكتور رد عليّ في 8 دقائق. ريّحني مرة.',
+        author: 'سارة الغامدي، معلمة، جدة',
       },
-      iconPosition: 'left' as const,
+      imagePosition: 'left' as const,
     },
     {
       id: 'open-to-all' as const,
       number: '03' as const,
-      icon: Users,
-      eyebrow: 'بدون تمييز، بدون استثناءات',
+      image: '/logo.jpeg', // TODO: Replace with actual feature image
+      eyebrow: 'رعاية صحية للجميع بدون استثناءات',
       title: 'مفتوحة لكل الفئات… لكل الأعمار… لكل الحالات',
-      description: 'مش لازم تكون مواطن. مش لازم تكون صغير أو صحتك ممتازة. بطاقة أمان إيفر متاحة لكل مواطن، مقيم، وزائر في المملكة — من الأطفال حديثي الولادة لكبار السن. وحتى لو عندك حالة مزمنة، الخدمة شغالة زي ما هي.',
-      proofPoints: ['🇸🇦 مواطنين ومقيمين وزوار', '👶 من حديثي الولادة', '❤️ كل الحالات الصحية'] as [string, string, string],
+      description: 'ما يشترط تكون مواطن. ما يشترط تكون صغير أو صحتك ممتازة. بطاقة أمان إيفر متاحة لكل مواطن، مقيم، وزائر في المملكة — من حديثي الولادة لكبار السن. وحتى لو عندك حالة مزمنة، الخدمة متاحة لك.',
+      proofPoints: ['🇸🇦 مواطنين ومقيمين وزوار', '👶 من حديثي الولادة لكبار السن', '❤️ تشمل الحالات المزمنة'] as [string, string, string],
       testimonial: {
-        quote: 'كنت بدور على تغطية لأمي المقيمة وعندها سكر. لقيت أمان إيفر قبلتها من أول يوم.',
-        author: 'محمد، الدمام',
+        quote: 'كنت أدور على تغطية لأمي المقيمة وعندها سكري. لقيت أمان إيفر قبلتها من أول يوم بدون تعقيدات.',
+        author: 'محمد الشهري، صاحب أعمال، الدمام',
       },
-      iconPosition: 'right' as const,
+      imagePosition: 'right' as const,
     },
   ],
   comparison: {
-    title: 'قارن بسرعة',
-    headers: ['', 'التأمين التقليدي', 'أمان إيفر'],
+    title: 'قارن بنفسك',
+    headers: ['', 'النموذج التقليدي', 'أمان إيفر'],
     rows: [
       { label: 'موافقات مسبقة', traditional: '✅ مطلوبة', amanEver: '❌ غير مطلوبة' },
-      { label: 'وقت رد الطبيب', traditional: 'أيام', amanEver: '15 دقيقة' },
+      { label: 'وقت رد الطبيب', traditional: 'أيام', amanEver: '≤15 دقيقة' },
       { label: 'تغطية المقيمين', traditional: 'محدودة', amanEver: 'كاملة' },
-      { label: 'الاشتراك السنوي', traditional: '2,000-5,000+ ريال', amanEver: 'من 199 ريال' },
+      { label: 'الاشتراك السنوي', traditional: '2,000-5,000+ ر.س', amanEver: 'من 199 ر.س' },
+      { label: 'كاش باك', traditional: 'غير متوفر', amanEver: 'حتى 10% كاش باك' },
+      { label: 'التقسيط', traditional: 'غير متاح', amanEver: 'تابي وتمارا' },
+      { label: 'الحالات المزمنة', traditional: 'مستثناة غالباً', amanEver: 'مشمولة' },
+      { label: 'خدمة العملاء', traditional: 'ساعات محدودة', amanEver: '24/7 واتساب' },
     ],
   },
   closingCta: {
-    text: 'مقتنع إن أمان إيفر ليك؟',
+    text: 'جاهز تجرب الفرق؟',
     links: [
-      { label: 'اختار باقتك', href: '/ar/pricing' }, // ✅ Updated to dedicated pricing page
+      { label: 'اختر باقتك', href: '/ar/pricing' },
       { label: 'جرّب "اسأل طبيب" مجاناً', href: '/services#instant-booking' },
     ],
   },
@@ -112,7 +116,6 @@ function DifferentiatorBlock({
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const Icon = differentiator.icon;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -131,7 +134,7 @@ function DifferentiatorBlock({
     return () => observer.disconnect();
   }, []);
 
-  const isIconRight = differentiator.iconPosition === 'right';
+  const isImageRight = differentiator.imagePosition === 'right';
 
   return (
     <article
@@ -144,22 +147,28 @@ function DifferentiatorBlock({
     >
       <div
         className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ${
-          isIconRight ? '' : 'lg:flex-row-reverse'
+          isImageRight ? '' : 'lg:flex-row-reverse'
         }`}
       >
-        {/* Icon Side */}
+        {/* Image Side */}
         <div
           className={`lg:col-span-4 flex justify-center ${
-            isIconRight ? 'lg:order-2' : 'lg:order-1'
+            isImageRight ? 'lg:order-2' : 'lg:order-1'
           }`}
         >
-          <div className="w-24 h-24 lg:w-32 lg:h-32 rounded-3xl bg-primary/10 flex items-center justify-center">
-            <Icon className="w-12 h-12 lg:w-16 lg:h-16 text-primary" strokeWidth={2} aria-hidden="true" />
+          <div className="relative w-full max-w-sm aspect-square rounded-3xl overflow-hidden shadow-2xl">
+            <Image
+              src={differentiator.image}
+              alt={differentiator.title}
+              fill
+              className="object-cover"
+              priority={index === 0}
+            />
           </div>
         </div>
 
         {/* Text Side */}
-        <div className={`lg:col-span-8 relative ${isIconRight ? 'lg:order-1' : 'lg:order-2'}`}>
+        <div className={`lg:col-span-8 relative ${isImageRight ? 'lg:order-1' : 'lg:order-2'}`}>
           {/* Background Number */}
           <div
             className="absolute -top-8 -right-4 text-[80px] md:text-[120px] lg:text-[180px] font-black text-slate-100 leading-none select-none pointer-events-none"

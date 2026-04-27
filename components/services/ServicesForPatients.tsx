@@ -48,8 +48,8 @@ export function ServicesForPatients() {
           </motion.p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-7xl mx-auto">
+        {/* Services Grid - 6 Cards in 3 columns on desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
           {patientServices.map((service, index) => (
             <ServiceDetailCard key={service.id} service={service} index={index} />
           ))}

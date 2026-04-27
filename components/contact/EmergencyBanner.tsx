@@ -20,10 +20,10 @@ export function EmergencyBanner() {
             />
             <div>
               <h2 className="mb-2 text-lg font-bold text-red-900">
-                هذه الصفحة ليست للحالات الطارئة
+                هذه الصفحة مو للحالات الطارئة
               </h2>
               <p className="text-sm text-red-800">
-                إذا كنت تواجه حالة طبية طارئة، يرجى الاتصال فوراً على:
+                إذا عندك حالة طبية طارئة، اتصل فوراً على:
               </p>
             </div>
           </div>

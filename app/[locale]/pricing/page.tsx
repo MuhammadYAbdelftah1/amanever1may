@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
 import { Header } from '@/components/layout/header';
 import { PricingHero } from '@/components/pricing/PricingHero';
+import { AnchorBlock } from '@/components/pricing/AnchorBlock';
 import { QuickComparison } from '@/components/pricing/QuickComparison';
 import { PricingPlans } from '@/components/pricing/PricingPlans';
 import { SavingsCalculator } from '@/components/pricing/SavingsCalculator';
@@ -11,6 +12,7 @@ import { PricingTestimonials } from '@/components/pricing/PricingTestimonials';
 import { B2BSection } from '@/components/pricing/B2BSection';
 import { PricingFAQ } from '@/components/pricing/PricingFAQ';
 import { FinalCTA } from '@/components/pricing/FinalCTA';
+import { StickyCTA } from '@/components/pricing/StickyCTA';
 
 export const metadata: Metadata = {
   title: 'البطاقات والباقات — أسعار العضوية الصحية في السعودية | أمان إيفر',
@@ -158,9 +160,19 @@ export default async function PricingPage({
 
       <Header locale={locale} />
       
+      {/* Sticky CTA for Mobile */}
+      <StickyCTA />
+      
       <main id="main-content" className="min-h-screen bg-white">
         {/* Hero Section */}
         <PricingHero />
+
+        {/* Anchor Block - Loss Aversion */}
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <AnchorBlock />
+          </div>
+        </section>
 
         {/* Quick Comparison - Above the fold */}
         <section className="py-12 bg-[#F8FAFB]">
@@ -186,9 +198,14 @@ export default async function PricingPage({
         {/* Detailed Comparison Table */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4 max-w-6xl">
-            <h2 className="text-3xl font-bold text-[#1A2B2C] text-center mb-12">
-              مقارنة تفصيلية بين الباقات
-            </h2>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-[#1A2B2C] mb-4">
+                قارن بالتفصيل: كم تخسر بدون البطاقة؟
+              </h2>
+              <p className="text-lg text-[#5A6B6C] max-w-3xl mx-auto">
+                شوف الفرق الواضح بين الاستمرار بدون بطاقة والاشتراك في أمان إيفر
+              </p>
+            </div>
             <ComparisonTable />
           </div>
         </section>
@@ -240,6 +257,7 @@ export default async function PricingPage({
             <p className="text-xs text-[#5A6B6C] text-center leading-relaxed">
               أمان إيفر بطاقة عضوية للحصول على خصومات. ليست بديلاً عن التأمين الصحي الإلزامي. 
               الأرقام التوضيحية مبنية على متوسطات السوق. النتائج الفعلية تختلف حسب الاستخدام.
+              مرخص من وزارة الصحة · مسجل تجارياً 7038166471 · متوافق مع PDPL/SDAIA.
             </p>
           </div>
         </section>

@@ -228,7 +228,7 @@ const cardholderFAQItems: FAQItemData[] = [
   },
   {
     id: 'faq-card-3',
-    question: 'هل هيشتغل في المستشفى أو العيادة اللي أنا بروحها؟',
+    question: 'هل راح تشتغل في المستشفى أو العيادة اللي أروح لها؟',
     category: 'coverage',
     answer: (
       <>
@@ -252,14 +252,14 @@ const cardholderFAQItems: FAQItemData[] = [
           فوق وشوف المستشفيات المتوفرة في مدينتك.
         </p>
         <p>
-          لو مقدم الخدمة المفضل ليك مش ضمن الشبكة، تواصل معانا — بنوسّع الشبكة باستمرار بناءً على طلبات العملاء.
+          لو مقدم الخدمة المفضل لك مو ضمن الشبكة، تواصل معنا — نوسّع الشبكة باستمرار بناءً على طلبات العملاء.
         </p>
       </>
     ),
   },
   {
     id: 'faq-card-4',
-    question: 'لو اشتركت ومااستفدتش، هل بقدر أسترد فلوسي؟',
+    question: 'إذا اشتركت وما استفدت، هل أقدر أسترد فلوسي؟',
     category: 'refund',
     answer: (
       <>
@@ -278,7 +278,7 @@ const cardholderFAQItems: FAQItemData[] = [
           بدون أسئلة، بدون رسوم خفية. استرداد مباشر على نفس وسيلة الدفع خلال <strong className="text-slate-900 font-bold">5-7 أيام عمل</strong>.
         </p>
         <p>
-          <strong className="text-slate-900 font-bold">نحن واثقون بقيمة الخدمة</strong> — والضمان ده مجرد تأكيد على ثقتنا.
+          <strong className="text-slate-900 font-bold">نحن واثقون بقيمة الخدمة</strong> — والضمان هذا مجرد تأكيد على ثقتنا.
         </p>
       </>
     ),
@@ -303,7 +303,7 @@ const cardholderFAQItems: FAQItemData[] = [
             <strong className="text-slate-900 font-bold">لا نبيع أو نشارك بياناتك</strong> مع أطراف ثالثة لأغراض تسويقية — أبداً.
           </li>
           <li>
-            مشاركة البيانات مع مقدم الخدمة الطبية بتتم <strong className="text-slate-900 font-bold">بموافقتك الصريحة</strong> ولغرض الحجز فقط.
+            مشاركة البيانات مع مقدم الخدمة الطبية تتم <strong className="text-slate-900 font-bold">بموافقتك الصريحة</strong> ولغرض الحجز فقط.
           </li>
           <li>
             بتقدر تطلب <strong className="text-slate-900 font-bold">حذف حسابك وبياناتك</strong> في أي وقت من إعدادات الحساب.
@@ -317,7 +317,7 @@ const cardholderFAQItems: FAQItemData[] = [
   },
   {
     id: 'faq-card-6',
-    question: 'لو واجهت مشكلة، مين المسؤول؟ وإزاي أوصله؟',
+    question: 'إذا واجهت مشكلة، من المسؤول؟ وكيف أوصل له؟',
     category: 'support',
     answer: (
       <>
@@ -351,7 +351,7 @@ const cardholderFAQItems: FAQItemData[] = [
   },
   {
     id: 'faq-card-7',
-    question: 'تمام، إزاي أبدأ؟',
+    question: 'تمام، كيف أبدأ؟',
     category: 'action',
     answer: (
       <>
@@ -379,7 +379,7 @@ const cardholderFAQItems: FAQItemData[] = [
         </ol>
         <p className="mt-4">
           <a href="#download" className="text-emerald-600 underline underline-offset-4 hover:text-emerald-700 font-bold">
-            حمّل التطبيق وابدأ دلوقتي ←
+            حمّل التطبيق وابدأ الحين ←
           </a>
         </p>
       </>
@@ -444,10 +444,10 @@ export function FAQSection() {
               الأسئلة الشائعة
             </p>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              كل اللي محتاج تعرفه قبل ما تشترك
+              كل اللي تحتاج تعرفه قبل ما تشترك
             </h2>
             <p className="text-base md:text-lg text-slate-600 leading-relaxed">
-              إجابات مباشرة للأسئلة اللي بتجيلنا كل يوم. لو سؤالك مش هنا، تواصل معانا مباشرة على واتساب.
+              إجابات مباشرة للأسئلة اللي توصلنا كل يوم. إذا سؤالك مو هنا، تواصل معنا مباشرة على واتساب.
             </p>
             <div className="text-sm text-slate-500 mt-4 flex items-center justify-center gap-4 flex-wrap">
               <span className="flex items-center gap-1">
@@ -506,7 +506,7 @@ export function FAQSection() {
               لسه عندك أسئلة؟
             </h3>
             <p className="text-base text-slate-600 mb-6">
-              تواصل معانا مباشرة، وهنرد عليك خلال 15 دقيقة.
+              تواصل معنا مباشرة، وراح نرد عليك خلال 15 دقيقة.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a

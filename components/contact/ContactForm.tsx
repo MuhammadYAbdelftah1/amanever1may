@@ -82,7 +82,7 @@ export function ContactForm() {
     return (
       <div className="rounded-3xl border border-slate-200 bg-white p-6 text-center md:p-8">
         <CheckCircle2 className="mx-auto mb-4 h-12 w-12 text-emerald-600" aria-hidden="true" />
-        <h3 className="mb-2 text-2xl font-bold text-slate-900">وصلتنا رسالتك</h3>
+        <h3 className="mb-2 text-2xl font-bold text-slate-900">وصلتنا رسالتك ✓</h3>
         <p className="mb-6 text-slate-600">
           {getSuccessMessageByTopic(submittedTopic)}
         </p>
