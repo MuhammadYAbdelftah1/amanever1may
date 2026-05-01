@@ -5,7 +5,7 @@ import { LoginForm } from '@/components/auth/LoginForm';
 
 export const metadata: Metadata = {
   title: 'تسجيل الدخول | أمان إيفر',
-  description: 'سجل دخولك إلى حسابك في أمان إيفر. دخول المشتركين، الأطباء، التجار، والمسوقين بالعمولة.',
+  description: 'سجل دخولك إلى لوحة التحكم الخاصة بك. دخول التجار، الأطباء، والمسوقين بالعمولة.',
   robots: 'noindex, nofollow', // منع الفهرسة لصفحات تسجيل الدخول
 };
 

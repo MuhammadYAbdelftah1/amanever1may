@@ -2,10 +2,8 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
 import { finalCTASection, ctaPaths } from '@/lib/data/services-config';
-import * as LucideIcons from 'lucide-react';
 
 export function ServicesCTA() {
   return (
@@ -39,10 +37,8 @@ export function ServicesCTA() {
         </div>
 
         {/* CTA Paths */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {ctaPaths.map((path, index) => {
-            const IconComponent = (LucideIcons as any)[path.icon] || LucideIcons.Circle;
-
             return (
               <motion.div
                 key={path.id}
@@ -50,36 +46,37 @@ export function ServicesCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
-                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-8 text-center hover:bg-white/20 transition-all duration-300"
+                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl overflow-hidden hover:bg-white/20 transition-all duration-300"
               >
-                {/* Icon */}
-                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-white/20 text-white flex items-center justify-center">
-                  <IconComponent className="w-8 h-8" aria-hidden="true" />
-                </div>
-
-                {/* Audience Label */}
-                <p className="text-sm font-bold text-emerald-300 uppercase tracking-wider mb-4">
-                  {path.audience}
-                </p>
-
-                {/* Subtitle */}
-                <p className="text-sm text-emerald-50 leading-relaxed mb-6">{path.subtitle}</p>
-
-                {/* CTA Button or App Badges */}
-                {path.showAppBadges ? (
-                  <div className="space-y-4">
-                    <p className="text-lg font-bold text-white mb-4">{path.ctaText}</p>
-                    <div className="flex justify-center">
-                      <Image
-                        src="/images/all-stores.jpg"
-                        alt="حمّل التطبيق من App Store أو Google Play أو AppGallery"
-                        width={300}
-                        height={100}
-                        className="rounded-xl"
-                      />
+                {/* Image Banner - Full Width at Top */}
+                <div className="w-full h-32 md:h-40 overflow-hidden bg-white/20 relative border-b-2 border-dashed border-white/40">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-3">
+                    <div className="text-xs md:text-sm font-bold text-white mb-1">
+                      للمصممة
+                    </div>
+                    <div className="text-[10px] md:text-xs text-white/90 mb-2 px-2 leading-tight">
+                      {path.audience}
+                    </div>
+                    <div className="text-[9px] text-white/80 font-semibold mb-0.5">
+                      Desktop: Full Width × 160px
+                    </div>
+                    <div className="text-[8px] text-white/70">
+                      Mobile: Full Width × 128px
                     </div>
                   </div>
-                ) : (
+                </div>
+
+                {/* Content Section */}
+                <div className="p-8 text-center">
+                  {/* Audience Label */}
+                  <p className="text-sm font-bold text-emerald-300 uppercase tracking-wider mb-4">
+                    {path.audience}
+                  </p>
+
+                  {/* Subtitle */}
+                  <p className="text-sm text-emerald-50 leading-relaxed mb-6">{path.subtitle}</p>
+
+                  {/* CTA Button */}
                   <Link
                     href={path.ctaHref || '#'}
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-emerald-700 font-bold hover:bg-emerald-50 transition-colors w-full"
@@ -87,7 +84,7 @@ export function ServicesCTA() {
                     <span>{path.ctaText}</span>
                     <ArrowLeft className="w-5 h-5" aria-hidden="true" />
                   </Link>
-                )}
+                </div>
               </motion.div>
             );
           })}

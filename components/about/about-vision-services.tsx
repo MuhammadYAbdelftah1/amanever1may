@@ -1,17 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Video, Home, ShoppingBag, Wallet, Network, Building2 } from 'lucide-react';
 import { ABOUT_CONFIG } from '@/lib/data/about-config';
-
-const ICON_MAP = {
-  Video,
-  Home,
-  ShoppingBag,
-  Wallet,
-  Network,
-  Building2,
-} as const;
 
 export function AboutVisionServices() {
   const { vision } = ABOUT_CONFIG;
@@ -52,8 +42,6 @@ export function AboutVisionServices() {
         {/* Services grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {vision.services.map((service, index) => {
-            const Icon = ICON_MAP[service.icon as keyof typeof ICON_MAP];
-            
             return (
               <motion.div
                 key={index}
@@ -61,17 +49,38 @@ export function AboutVisionServices() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="rounded-2xl bg-white border border-slate-200 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                className="rounded-2xl bg-white border border-slate-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="w-14 h-14 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5">
-                  <Icon className="w-7 h-7" aria-hidden="true" />
+                {/* Image Banner - Full Width at Top */}
+                <div className="w-full h-32 md:h-40 overflow-hidden bg-emerald-50 relative border-b-2 border-dashed border-emerald-300">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-3">
+                    <div className="text-xs md:text-sm font-bold text-emerald-700 mb-1">
+                      للمصممة
+                    </div>
+                    <div className="text-[10px] md:text-xs text-emerald-600 mb-2 px-2 leading-tight">
+                      {service.title}
+                    </div>
+                    <div className="text-[9px] md:text-[10px] text-gray-500 font-semibold mb-0.5">
+                      Desktop: Full Width × 160px
+                    </div>
+                    <div className="text-[8px] md:text-[9px] text-gray-500 mb-0.5">
+                      Tablet: Full Width × 160px
+                    </div>
+                    <div className="text-[8px] md:text-[9px] text-gray-500">
+                      Mobile: Full Width × 128px
+                    </div>
+                  </div>
                 </div>
-                <h4 className="text-lg font-bold text-slate-900 mb-2">
-                  {service.title}
-                </h4>
-                <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                  {service.description}
-                </p>
+
+                {/* Content Section */}
+                <div className="p-6">
+                  <h4 className="text-lg font-bold text-slate-900 mb-2">
+                    {service.title}
+                  </h4>
+                  <p className="text-sm md:text-base text-slate-600 leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
               </motion.div>
             );
           })}

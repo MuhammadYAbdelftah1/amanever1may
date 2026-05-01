@@ -2,24 +2,22 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Eye, EyeOff, LogIn, Smartphone, User, Stethoscope, Store, TrendingUp, Users } from 'lucide-react';
+import { Eye, EyeOff, LogIn, Smartphone, Stethoscope, Store, TrendingUp } from 'lucide-react';
 import { Logo } from '@/components/shared/logo';
 
-type UserType = 'visitor' | 'member' | 'doctor' | 'merchant' | 'affiliate';
+type UserType = 'merchant' | 'doctor' | 'affiliate';
 
 interface LoginFormProps {
   initialTab?: UserType;
 }
 
 const USER_TYPES = [
-  { id: 'visitor', label: 'الزوار', icon: Users, description: 'دخول الزوار والمستخدمين الجدد' },
-  { id: 'member', label: 'المشتركين', icon: User, description: 'أصحاب بطاقات أمان إيفر' },
-  { id: 'doctor', label: 'الأطباء', icon: Stethoscope, description: 'منصة الأطباء' },
-  { id: 'merchant', label: 'التجار', icon: Store, description: 'منصة التجار' },
-  { id: 'affiliate', label: 'المسوقين', icon: TrendingUp, description: 'منصة المسوق بالعمولة' },
+  { id: 'merchant', label: 'تاجر', icon: Store, description: 'لوحة تحكم التجار والمنشآت الطبية' },
+  { id: 'doctor', label: 'طبيب', icon: Stethoscope, description: 'لوحة تحكم الأطباء والممارسين الصحيين' },
+  { id: 'affiliate', label: 'مسوق', icon: TrendingUp, description: 'لوحة تحكم المسوقين بالعمولة' },
 ] as const;
 
-export function LoginForm({ initialTab = 'visitor' }: LoginFormProps) {
+export function LoginForm({ initialTab = 'merchant' }: LoginFormProps) {
   const [activeTab, setActiveTab] = useState<UserType>(initialTab);
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -40,13 +38,13 @@ export function LoginForm({ initialTab = 'visitor' }: LoginFormProps) {
   };
 
   const getPlaceholder = () => {
-    if (activeTab === 'visitor') {
-      return 'رقم الجوال / البريد الإلكتروني / اسم المستخدم';
+    if (activeTab === 'merchant') {
+      return 'رقم السجل التجاري / رقم الجوال / البريد الإلكتروني';
     }
-    if (activeTab === 'member') {
-      return 'رقم البطاقة / رقم الجوال / البريد الإلكتروني';
+    if (activeTab === 'doctor') {
+      return 'رقم الترخيص الطبي / رقم الجوال / البريد الإلكتروني';
     }
-    return 'رقم الهوية / رقم الجوال / البريد الإلكتروني';
+    return 'رقم الجوال / البريد الإلكتروني';
   };
 
   return (
@@ -61,7 +59,7 @@ export function LoginForm({ initialTab = 'visitor' }: LoginFormProps) {
       </div>
 
       {/* Tabs */}
-      <div className="grid grid-cols-5 gap-2 mb-8">
+      <div className="grid grid-cols-3 gap-3 mb-8">
         {USER_TYPES.map((type) => {
           const Icon = type.icon;
           return (
@@ -69,7 +67,7 @@ export function LoginForm({ initialTab = 'visitor' }: LoginFormProps) {
               key={type.id}
               onClick={() => setActiveTab(type.id as UserType)}
               className={`
-                relative py-3 px-2 rounded-xl text-center transition-all duration-300
+                relative py-4 px-3 rounded-xl text-center transition-all duration-300
                 ${
                   activeTab === type.id
                     ? 'bg-[#4A8B8E] text-white shadow-lg scale-105'
@@ -78,8 +76,8 @@ export function LoginForm({ initialTab = 'visitor' }: LoginFormProps) {
               `}
               title={type.description}
             >
-              <Icon className="w-6 h-6 mx-auto mb-1" />
-              <div className="text-xs font-bold">{type.label}</div>
+              <Icon className="w-7 h-7 mx-auto mb-2" />
+              <div className="text-sm font-bold">{type.label}</div>
             </button>
           );
         })}
@@ -97,10 +95,10 @@ export function LoginForm({ initialTab = 'visitor' }: LoginFormProps) {
         {/* Identifier Input */}
         <div>
           <label htmlFor="identifier" className="block text-sm font-bold text-[#1A2B2C] mb-2">
-            {activeTab === 'visitor' 
-              ? 'بيانات الدخول' 
-              : activeTab === 'member' 
-                ? 'رقم البطاقة أو بيانات الدخول' 
+            {activeTab === 'merchant' 
+              ? 'رقم السجل التجاري أو بيانات الدخول' 
+              : activeTab === 'doctor' 
+                ? 'رقم الترخيص الطبي أو بيانات الدخول' 
                 : 'بيانات الدخول'
             }
           </label>
@@ -115,11 +113,11 @@ export function LoginForm({ initialTab = 'visitor' }: LoginFormProps) {
             dir="ltr"
           />
           <p className="text-xs text-[#8A9899] mt-1">
-            {activeTab === 'visitor'
-              ? 'أدخل رقم الجوال، البريد الإلكتروني، أو اسم المستخدم'
-              : activeTab === 'member' 
-                ? 'أدخل رقم البطاقة، رقم الجوال، البريد الإلكتروني، أو اسم المستخدم'
-                : 'أدخل رقم الهوية، رقم الجوال، البريد الإلكتروني، أو اسم المستخدم'
+            {activeTab === 'merchant'
+              ? 'أدخل رقم السجل التجاري، رقم الجوال، أو البريد الإلكتروني'
+              : activeTab === 'doctor' 
+                ? 'أدخل رقم الترخيص الطبي، رقم الجوال، أو البريد الإلكتروني'
+                : 'أدخل رقم الجوال أو البريد الإلكتروني'
             }
           </p>
         </div>
@@ -181,7 +179,7 @@ export function LoginForm({ initialTab = 'visitor' }: LoginFormProps) {
 
         {/* Register Link */}
         <p className="text-center text-sm text-[#5A6B6C]">
-          ليس لديك حساب؟{' '}
+          ليس لديك حساب تاجر أو طبيب أو مسوق؟{' '}
           <Link
             href="/ar/register"
             className="text-[#4A8B8E] hover:text-[#356B6E] font-bold transition-colors"

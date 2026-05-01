@@ -5,7 +5,7 @@ import { RegisterForm } from '@/components/auth/RegisterForm';
 
 export const metadata: Metadata = {
   title: 'إنشاء حساب جديد | أمان إيفر',
-  description: 'سجل الآن في أمان إيفر واحصل على أفضل خدمات الرعاية الصحية الرقمية في المملكة.',
+  description: 'سجل الآن كتاجر، طبيب، أو مسوق بالعمولة وانضم إلى شبكة أمان إيفر للرعاية الصحية الرقمية.',
   robots: 'noindex, nofollow',
 };
 

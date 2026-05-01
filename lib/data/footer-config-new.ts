@@ -26,10 +26,10 @@ export const FOOTER_CONFIG_NEW = {
   },
 
   contact: {
-    hotline: "920018041",
-    whatsapp: "966544608220",
-    whatsappDisplay: "0544608220",
-    landline: "0126142206",
+    hotline: "+966920018041",
+    whatsapp: "9200",
+    whatsappDisplay: "9200",
+    landline: "+966126142206",
     email: "info@amanever.com",
     workingHours: {
       ar: "الأحد - الخميس: 9 صباحاً - 6 مساءً",

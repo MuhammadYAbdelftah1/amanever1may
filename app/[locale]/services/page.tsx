@@ -3,7 +3,6 @@ import { Header } from '@/components/layout/header';
 import { ServicesHero } from '@/components/services/ServicesHero';
 import { AudienceTabs } from '@/components/services/AudienceTabs';
 import { ServicesForPatients } from '@/components/services/ServicesForPatients';
-import { FinancialSolutions } from '@/components/services/FinancialSolutions';
 import { ServicesForDoctors } from '@/components/services/ServicesForDoctors';
 import { ServicesForPartners } from '@/components/services/ServicesForPartners';
 import { ServicesForAffiliates } from '@/components/services/ServicesForAffiliates';
@@ -125,9 +124,6 @@ export default async function ServicesPage({
 
         {/* Section 2: Services for Patients (B2C) */}
         <ServicesForPatients />
-
-        {/* Section 3: Financial Solutions */}
-        <FinancialSolutions />
 
         {/* Section 4: Services for Doctors */}
         <ServicesForDoctors />

@@ -81,13 +81,29 @@ export function ContactSocials() {
                 href={platform.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:-translate-y-1 hover:shadow-md ${platform.color}`}
+                className={`group rounded-xl border border-slate-200 bg-white overflow-hidden transition-all hover:-translate-y-1 hover:shadow-md ${platform.color}`}
                 aria-label={`تابعنا على ${platform.name}`}
               >
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 transition-colors group-hover:bg-white">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
+                {/* Image Banner */}
+                <div className="w-full h-20 md:h-24 overflow-hidden bg-emerald-50 relative border-b-2 border-dashed border-emerald-300">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-2">
+                    <div className="text-[10px] font-bold text-emerald-700 mb-0.5">
+                      للمصممة
+                    </div>
+                    <div className="text-[9px] text-emerald-600 mb-1 px-1 leading-tight">
+                      {platform.name}
+                    </div>
+                    <div className="text-[8px] text-gray-500 font-semibold mb-0.5">
+                      Desktop: Full Width × 96px
+                    </div>
+                    <div className="text-[7px] text-gray-500">
+                      Mobile: Full Width × 80px
+                    </div>
+                  </div>
                 </div>
-                <div className="min-w-0 flex-1">
+                
+                {/* Content */}
+                <div className="p-4">
                   <p className="truncate font-medium text-slate-900">
                     {platform.name}
                   </p>

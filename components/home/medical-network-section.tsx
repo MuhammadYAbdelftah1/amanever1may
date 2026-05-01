@@ -20,6 +20,7 @@ import { Building2, Stethoscope, Pill, Eye, Smile, FlaskConical, ChevronLeft, Ch
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import type { LucideIcon } from 'lucide-react';
+import { NetworkMapPopover } from '@/components/shared/network-map-popover';
 
 interface MedicalNetworkSectionProps {
   locale: string;
@@ -293,7 +294,12 @@ export function MedicalNetworkSection({ locale }: MedicalNetworkSectionProps) {
           <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
             {content.partnersTitle}
           </h3>
-          <p className="text-base md:text-lg text-slate-600">{content.partnersSubtitle}</p>
+          <p className="text-base md:text-lg text-slate-600 mb-4">{content.partnersSubtitle}</p>
+          
+          {/* Network Map Button */}
+          <div className="flex justify-center">
+            <NetworkMapPopover locale={locale} type="medical" />
+          </div>
         </div>
 
         {/* Counter Strip */}

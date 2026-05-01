@@ -1,11 +1,16 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { HeroSection } from '@/components/home/hero-section';
-import { HowItWorksSection } from '@/components/home/how-it-works-section';
+import { WhyBestSection } from '@/components/home/why-best-section';
 import { MembershipPricingSection } from '@/components/home/membership-pricing-section';
 import { CoreServicesSection } from '@/components/home/core-services-section';
 import { PackagesCarouselSection } from '@/components/home/packages-carousel-section';
-import { WhyAmanEverSection } from '@/components/home/why-aman-ever-section';
-import { MedicalNetworkSection } from '@/components/home/medical-network-section';
+import { AmanNetworkSection } from '@/components/home/aman-network-section';
+import { PartnersSection } from '@/components/home/partners-section';
+import { AvailableDoctorsSection } from '@/components/home/available-doctors-section';
+import { TopProvidersSection } from '@/components/home/top-providers-section';
+import { ExclusiveDiscountsSection } from '@/components/home/exclusive-discounts-section';
+import { PersonalizedResultsSection } from '@/components/home/personalized-results-section';
+import { NearbyProvidersSection } from '@/components/home/nearby-providers-section';
 import { BlogPreviewSection } from '@/components/home/blog-preview-section';
 import { FAQSection } from '@/components/home/faq-section';
 import { FinalCTASection } from '@/components/home/final-cta-section';
@@ -31,6 +36,9 @@ export default async function HomePage({
       <main id="main-content" className="min-h-screen">
         <HeroSection locale={locale} translations={{ title: t('title') }} />
         
+        {/* Why Best Section */}
+        <WhyBestSection locale={locale} />
+        
         {/* Mobile App Download Buttons - Only visible on mobile */}
         <div className="md:hidden py-6 px-4 bg-gradient-to-b from-slate-50 to-white">
           <div className="container mx-auto text-center">
@@ -41,10 +49,14 @@ export default async function HomePage({
         
         <CoreServicesSection locale={locale} />
         <PackagesCarouselSection locale={locale} />
-        <WhyAmanEverSection locale={locale} />
-        <HowItWorksSection locale={locale} />
+        <AmanNetworkSection locale={locale} />
+        <PartnersSection locale={locale} />
+        <AvailableDoctorsSection locale={locale} />
+        <TopProvidersSection locale={locale} />
+        <ExclusiveDiscountsSection locale={locale} />
+        <PersonalizedResultsSection locale={locale} />
+        <NearbyProvidersSection locale={locale} />
         <MembershipPricingSection locale={locale} />
-        <MedicalNetworkSection locale={locale} />
         <BlogPreviewSection locale={locale} />
         <FAQSection />
         <FinalCTASection />

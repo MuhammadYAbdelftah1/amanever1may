@@ -2,20 +2,19 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Eye, EyeOff, UserPlus, Smartphone, Mail, User, Stethoscope, Store, TrendingUp } from 'lucide-react';
+import { Eye, EyeOff, UserPlus, Smartphone, Mail, Stethoscope, Store, TrendingUp } from 'lucide-react';
 import { Logo } from '@/components/shared/logo';
 
-type UserType = 'user' | 'doctor' | 'merchant' | 'affiliate';
+type UserType = 'merchant' | 'doctor' | 'affiliate';
 
 const USER_TYPES = [
-  { id: 'user', label: 'مستخدم', icon: User, description: 'حساب عادي للأفراد' },
+  { id: 'merchant', label: 'تاجر', icon: Store, description: 'للصيدليات والمراكز الطبية والمنشآت الصحية' },
   { id: 'doctor', label: 'طبيب', icon: Stethoscope, description: 'للأطباء والممارسين الصحيين' },
-  { id: 'merchant', label: 'تاجر', icon: Store, description: 'للصيدليات والمراكز الطبية' },
   { id: 'affiliate', label: 'مسوق', icon: TrendingUp, description: 'للمسوقين بالعمولة' },
 ] as const;
 
 export function RegisterForm() {
-  const [userType, setUserType] = useState<UserType>('user');
+  const [userType, setUserType] = useState<UserType>('merchant');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -68,7 +67,7 @@ export function RegisterForm() {
       {/* User Type Tabs */}
       <div className="mb-6">
         <p className="text-sm font-bold text-[#1A2B2C] mb-3 text-center">اختر نوع الحساب:</p>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-3 gap-3">
           {USER_TYPES.map((type) => {
             const Icon = type.icon;
             return (
@@ -76,7 +75,7 @@ export function RegisterForm() {
                 key={type.id}
                 onClick={() => setUserType(type.id as UserType)}
                 className={`
-                  py-3 px-2 rounded-xl text-center transition-all duration-300 flex flex-col items-center gap-1
+                  py-4 px-3 rounded-xl text-center transition-all duration-300 flex flex-col items-center gap-2
                   ${
                     userType === type.id
                       ? 'bg-[#4A8B8E] text-white shadow-lg scale-105'
@@ -85,8 +84,8 @@ export function RegisterForm() {
                 `}
                 title={type.description}
               >
-                <Icon className="w-6 h-6" />
-                <span className="text-xs font-bold">{type.label}</span>
+                <Icon className="w-7 h-7" />
+                <span className="text-sm font-bold">{type.label}</span>
               </button>
             );
           })}
@@ -125,10 +124,10 @@ export function RegisterForm() {
           <p className="text-xs text-[#8A9899] mt-1">سيتم إرسال رمز التحقق إلى هذا الرقم</p>
         </div>
 
-        {/* Email Input (Optional for user, required for others) */}
+        {/* Email Input (Required for all) */}
         <div>
           <label htmlFor="email" className="block text-sm font-bold text-[#1A2B2C] mb-2">
-            البريد الإلكتروني {userType === 'user' ? <span className="text-[#8A9899]">(اختياري)</span> : <span className="text-red-500">*</span>}
+            البريد الإلكتروني <span className="text-red-500">*</span>
           </label>
           <div className="relative">
             <Mail className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8A9899]" />
@@ -139,7 +138,7 @@ export function RegisterForm() {
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="example@email.com"
               className="w-full px-4 py-3 pr-12 border-2 border-[#E5EAEB] rounded-xl focus:border-[#4A8B8E] focus:outline-none transition-colors text-[#1A2B2C] placeholder:text-[#8A9899]"
-              required={userType !== 'user'}
+              required
               dir="ltr"
             />
           </div>
@@ -360,25 +359,28 @@ export function RegisterForm() {
       <div className="mt-6 p-4 bg-[#E8F1F1] rounded-lg">
         <p className="text-xs font-bold text-[#1A2B2C] mb-2 flex items-center gap-2">
           <span className="text-[#4A8B8E]">✨</span>
-          {userType === 'user' && 'مميزات الاشتراك:'}
-          {userType === 'doctor' && 'مميزات الانضمام للأطباء:'}
           {userType === 'merchant' && 'مميزات الانضمام للتجار:'}
+          {userType === 'doctor' && 'مميزات الانضمام للأطباء:'}
           {userType === 'affiliate' && 'مميزات الانضمام للمسوقين:'}
         </p>
         <ul className="text-xs text-[#5A6B6C] space-y-1">
-          {userType === 'user' && (
+          {userType === 'merchant' && (
             <>
               <li className="flex items-start gap-2">
                 <span className="text-[#4A8B8E] mt-0.5">✓</span>
-                <span>خصومات تصل إلى 70% على الخدمات الطبية</span>
+                <span>زيادة عدد العملاء من خلال شبكة أمان إيفر</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#4A8B8E] mt-0.5">✓</span>
-                <span>استشارات طبية فورية على مدار الساعة</span>
+                <span>نظام دفع آمن ومضمون</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#4A8B8E] mt-0.5">✓</span>
-                <span>شبكة واسعة من الأطباء والمستشفيات</span>
+                <span>تقارير مفصلة عن المبيعات والعمليات</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#4A8B8E] mt-0.5">✓</span>
+                <span>دعم فني متخصص على مدار الساعة</span>
               </li>
             </>
           )}
@@ -394,23 +396,11 @@ export function RegisterForm() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#4A8B8E] mt-0.5">✓</span>
-                <span>إدارة مواعيدك بسهولة</span>
-              </li>
-            </>
-          )}
-          {userType === 'merchant' && (
-            <>
-              <li className="flex items-start gap-2">
-                <span className="text-[#4A8B8E] mt-0.5">✓</span>
-                <span>زيادة عدد العملاء من خلال الشبكة</span>
+                <span>إدارة مواعيدك وحجوزاتك بسهولة</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#4A8B8E] mt-0.5">✓</span>
-                <span>نظام دفع آمن ومضمون</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-[#4A8B8E] mt-0.5">✓</span>
-                <span>تقارير مفصلة عن المبيعات</span>
+                <span>نظام سجلات طبية إلكتروني متكامل</span>
               </li>
             </>
           )}
@@ -422,11 +412,15 @@ export function RegisterForm() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#4A8B8E] mt-0.5">✓</span>
-                <span>أدوات تسويقية احترافية</span>
+                <span>أدوات تسويقية احترافية جاهزة</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#4A8B8E] mt-0.5">✓</span>
                 <span>تتبع دقيق للعمولات والأرباح</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#4A8B8E] mt-0.5">✓</span>
+                <span>دفعات شهرية منتظمة ومضمونة</span>
               </li>
             </>
           )}

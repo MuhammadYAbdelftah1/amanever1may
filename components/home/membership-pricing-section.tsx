@@ -119,10 +119,10 @@ function PricingCard({ tier, index, locale }: { tier: Tier; index: number; local
   return (
     <article
       ref={ref}
-      className={`relative rounded-3xl p-8 lg:p-10 border-2 bg-white hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 ${
+      className={`relative rounded-3xl overflow-hidden bg-white hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 ${
         tier.isRecommended
-          ? 'border-primary shadow-2xl scale-100 md:scale-105 lg:scale-110'
-          : 'border-slate-200'
+          ? 'border-2 border-primary shadow-2xl scale-100 md:scale-105 lg:scale-110'
+          : 'border-2 border-slate-200'
       } ${isVisible ? 'animate-in fade-in slide-in-from-bottom-4' : 'opacity-0'}`}
       style={{
         animationDelay: `${index * 150}ms`,
@@ -131,57 +131,92 @@ function PricingCard({ tier, index, locale }: { tier: Tier; index: number; local
     >
       {/* Recommended Badge */}
       {tier.isRecommended && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+        <div className="absolute top-4 left-4 bg-primary text-white text-xs font-black px-3 py-1.5 rounded-full shadow-lg z-20">
           {content.recommendedBadge}
         </div>
       )}
 
-      {/* Header */}
-      <div className={`${tier.headerBg} ${tier.headerTextColor} rounded-2xl p-6 mb-6`}>
-        <h3 className="text-3xl font-bold mb-2">{tier.name}</h3>
-        <p className="text-sm opacity-90">{tier.tagline}</p>
+      {/* Header with Name - Above Image */}
+      <div className={`${tier.headerBg} ${tier.headerTextColor} p-6 pb-4 relative z-10`}>
+        <h3 className="text-3xl md:text-4xl font-black mb-1">{tier.name}</h3>
+        <p className="text-sm font-medium opacity-90">{tier.tagline}</p>
       </div>
 
-      {/* Price */}
-      <div className="mb-6">
-        <div className="flex items-baseline gap-2 mb-1">
-          <span className="text-5xl md:text-6xl font-bold tracking-tight text-slate-900">
-            {tier.priceYearly}
-          </span>
-          <span className="text-2xl font-semibold text-slate-700">ر.س</span>
-          <span className="text-base text-slate-500">/سنوياً</span>
+      {/* Image - Card Visual (Credit Card Aspect Ratio) */}
+      <div className="h-56 md:h-64 relative overflow-hidden">
+        <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+          <div className="text-center p-6">
+            <div className="text-[#4d8080] font-black text-sm mb-2">إشعار للمصممة 🎨</div>
+            <div className="text-gray-600 font-bold text-xs">المقاس: 450×284 بكسل</div>
+            <div className="text-gray-500 text-[10px] mt-1">(نسبة كرت البنك القياسية 1.586:1)</div>
+          </div>
         </div>
-        <p className="text-sm text-slate-500">(~ {tier.priceMonthly} ريال/شهر)</p>
+        
+        {/* Decorative Overlay */}
+        <div className={`absolute inset-0 ${tier.isRecommended ? 'bg-gradient-to-t from-slate-900/10 to-transparent' : 'bg-gradient-to-t from-slate-50/50 to-transparent'}`} />
       </div>
 
-      {/* VIP Intro */}
-      {tier.isRecommended && (
-        <p className="text-sm font-semibold text-slate-700 mb-4">{content.vipIntro}</p>
-      )}
+      {/* Content Section */}
+      <div className="p-6 lg:p-8">
+        {/* Price */}
+        <div className="mb-6 pb-6 border-b border-slate-100">
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-5xl md:text-6xl font-black tracking-tight text-slate-900">
+              {tier.priceYearly}
+            </span>
+            <span className="text-2xl font-bold text-slate-700">ر.س</span>
+          </div>
+          <p className="text-sm text-slate-500 font-medium">
+            سنوياً (~ {tier.priceMonthly} ريال/شهر)
+          </p>
+        </div>
 
-      {/* Features */}
-      <ul className="space-y-3 mb-8">
-        {tier.features.map((feature, i) => (
-          <li key={i} className="flex items-start gap-3">
-            <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" aria-hidden="true" />
-            <span className="text-base leading-relaxed text-slate-700">{feature}</span>
-          </li>
-        ))}
-      </ul>
+        {/* Intro Text - For both tiers */}
+        <p className="text-sm font-bold text-slate-700 mb-4 bg-slate-50 px-3 py-2 rounded-lg">
+          {tier.isRecommended ? content.vipIntro : 'بطاقتك الأساسية للرعاية اليومية'}
+        </p>
 
-      {/* CTA */}
-      <Button
-        asChild
-        size="lg"
-        className={`w-full text-base font-semibold py-6 rounded-xl transition-transform duration-300 hover:scale-105 ${
-          tier.isRecommended ? 'bg-primary hover:bg-primary/90' : ''
-        }`}
-      >
-        <Link href={`/${locale}${tier.ctaHref}`}>{tier.ctaLabel}</Link>
-      </Button>
+        {/* Features */}
+        <ul className="space-y-3 mb-8">
+          {tier.features.map((feature, i) => (
+            <li key={i} className="flex items-start gap-3">
+              <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" aria-hidden="true" />
+              <span className="text-sm leading-relaxed text-slate-700 font-medium">{feature}</span>
+            </li>
+          ))}
+        </ul>
 
-      {/* Payment Note */}
-      <p className="text-xs text-slate-500 text-center mt-4">{content.paymentNote}</p>
+        {/* CTA */}
+        <Button
+          asChild
+          size="lg"
+          className={`w-full text-base font-black py-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg ${
+            tier.isRecommended 
+              ? 'bg-primary hover:bg-primary/90 shadow-primary/20' 
+              : 'bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20'
+          }`}
+        >
+          <Link href={`/${locale}${tier.ctaHref}`}>{tier.ctaLabel}</Link>
+        </Button>
+
+        {/* Payment Note */}
+        <div className="flex items-center justify-center gap-2 mt-4">
+          <p className="text-xs text-slate-500 font-medium">متاح بالتقسيط عبر</p>
+          <div className="flex items-center gap-2">
+            <img 
+              src="/images/Tabby-01.png" 
+              alt="Tabby" 
+              className="h-5 object-contain"
+            />
+            <span className="text-slate-300">/</span>
+            <img 
+              src="/images/Tamara.png" 
+              alt="Tamara" 
+              className="h-5 object-contain"
+            />
+          </div>
+        </div>
+      </div>
     </article>
   );
 }

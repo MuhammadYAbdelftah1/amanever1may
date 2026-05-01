@@ -7,10 +7,19 @@ import { knowledge } from "@/lib/knowledge";
 const channels = [
   {
     Icon: Phone,
-    title: "الخط الساخن",
+    title: "خدمة العملاء",
     description: "للاستفسارات العامة وحجز الاستشارات",
-    value: "920018041",
-    href: "tel:920018041",
+    value: "+966 92 000 18041",
+    href: "tel:+966920018041",
+    bgColor: "bg-emerald-50",
+    iconColor: "text-emerald-600",
+  },
+  {
+    Icon: PhoneCall,
+    title: "الهاتف الأرضي",
+    description: "رقم الهاتف برمز الدولة",
+    value: "+966 12 614 2206",
+    href: "tel:+966126142206",
     bgColor: "bg-emerald-50",
     iconColor: "text-emerald-600",
   },
@@ -18,19 +27,10 @@ const channels = [
     Icon: MessageCircle,
     title: "واتساب",
     description: "الأسرع للرد، 7 أيام في الأسبوع",
-    value: "0544608220",
-    href: "https://wa.me/966544608220",
+    value: "9200",
+    href: "https://wa.me/9200",
     bgColor: "bg-[#25D366]/10",
     iconColor: "text-[#25D366]",
-  },
-  {
-    Icon: PhoneCall,
-    title: "الهاتف الأرضي",
-    description: "للتواصل من داخل جدة",
-    value: "0126142206",
-    href: "tel:0126142206",
-    bgColor: "bg-emerald-50",
-    iconColor: "text-emerald-600",
   },
   {
     Icon: Mail,
@@ -53,34 +53,46 @@ export function ContactChannels() {
             <Link
               key={channel.value}
               href={channel.href}
-              className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md"
+              className="group rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm transition-all hover:shadow-md"
             >
-              {/* Icon */}
-              <div className="mb-4">
-                <div
-                  className={`inline-flex h-12 w-12 items-center justify-center rounded-full ${channel.bgColor}`}
-                >
-                  <Icon
-                    className={`h-6 w-6 ${channel.iconColor}`}
-                    aria-hidden="true"
-                  />
+              {/* Image Banner - Full Width at Top */}
+              <div className="w-full h-32 md:h-40 overflow-hidden bg-emerald-50 relative border-b-2 border-dashed border-emerald-300">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-3">
+                  <div className="text-xs md:text-sm font-bold text-emerald-700 mb-1">
+                    للمصممة
+                  </div>
+                  <div className="text-[10px] md:text-xs text-emerald-600 mb-2 px-2 leading-tight">
+                    {channel.title}
+                  </div>
+                  <div className="text-[9px] md:text-[10px] text-gray-500 font-semibold mb-0.5">
+                    Desktop: Full Width × 160px
+                  </div>
+                  <div className="text-[8px] md:text-[9px] text-gray-500 mb-0.5">
+                    Tablet: Full Width × 160px
+                  </div>
+                  <div className="text-[8px] md:text-[9px] text-gray-500">
+                    Mobile: Full Width × 128px
+                  </div>
                 </div>
               </div>
 
-              {/* Title */}
-              <h3 className="mb-2 text-lg font-semibold text-slate-900">
-                {channel.title}
-              </h3>
+              {/* Content Section */}
+              <div className="p-6">
+                {/* Title */}
+                <h3 className="mb-2 text-lg font-semibold text-slate-900">
+                  {channel.title}
+                </h3>
 
-              {/* Description */}
-              <p className="mb-3 text-sm text-slate-600">
-                {channel.description}
-              </p>
+                {/* Description */}
+                <p className="mb-3 text-sm text-slate-600">
+                  {channel.description}
+                </p>
 
-              {/* Value */}
-              <p className="font-medium text-slate-900">
-                <bdi>{channel.value}</bdi>
-              </p>
+                {/* Value */}
+                <p className="font-medium text-slate-900">
+                  <bdi>{channel.value}</bdi>
+                </p>
+              </div>
             </Link>
           );
         })}

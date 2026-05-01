@@ -25,36 +25,78 @@ export function ContactOffice() {
           </div>
 
           {/* Address */}
-          <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-6">
-            <h3 className="mb-2 text-lg font-semibold text-slate-900">العنوان</h3>
-            <p className="mb-4 text-slate-700">{address.full}</p>
-            <p className="text-sm text-slate-600">{address.ar}</p>
+          <div className="mb-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+            {/* Image Banner */}
+            <div className="w-full h-28 md:h-32 overflow-hidden bg-emerald-50 relative border-b-2 border-dashed border-emerald-300">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-2">
+                <div className="text-xs font-bold text-emerald-700 mb-1">
+                  للمصممة
+                </div>
+                <div className="text-[10px] text-emerald-600 mb-1 px-2 leading-tight">
+                  العنوان
+                </div>
+                <div className="text-[9px] text-gray-500 font-semibold mb-0.5">
+                  Desktop: Full Width × 128px
+                </div>
+                <div className="text-[8px] text-gray-500">
+                  Mobile: Full Width × 112px
+                </div>
+              </div>
+            </div>
+            
+            {/* Content */}
+            <div className="p-6">
+              <h3 className="mb-2 text-lg font-semibold text-slate-900">العنوان</h3>
+              <p className="mb-4 text-slate-700">{address.full}</p>
+              <p className="text-sm text-slate-600">{address.ar}</p>
+            </div>
           </div>
 
           {/* Office Hours */}
-          <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-6">
-            <div className="mb-3 flex items-center gap-2">
-              <Clock className="h-5 w-5 text-emerald-600" aria-hidden="true" />
-              <h3 className="text-lg font-semibold text-slate-900">ساعات العمل</h3>
+          <div className="mb-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+            {/* Image Banner */}
+            <div className="w-full h-28 md:h-32 overflow-hidden bg-emerald-50 relative border-b-2 border-dashed border-emerald-300">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-2">
+                <div className="text-xs font-bold text-emerald-700 mb-1">
+                  للمصممة
+                </div>
+                <div className="text-[10px] text-emerald-600 mb-1 px-2 leading-tight">
+                  ساعات العمل
+                </div>
+                <div className="text-[9px] text-gray-500 font-semibold mb-0.5">
+                  Desktop: Full Width × 128px
+                </div>
+                <div className="text-[8px] text-gray-500">
+                  Mobile: Full Width × 112px
+                </div>
+              </div>
             </div>
             
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-slate-700">الأحد - الخميس</span>
-                <span className="font-medium text-slate-900">
-                  <bdi>9:00 ص - 6:00 م</bdi>
-                </span>
+            {/* Content */}
+            <div className="p-6">
+              <div className="mb-3 flex items-center gap-2">
+                <Clock className="h-5 w-5 text-emerald-600" aria-hidden="true" />
+                <h3 className="text-lg font-semibold text-slate-900">ساعات العمل</h3>
               </div>
               
-              <div className="flex items-center justify-between">
-                <span className="text-slate-700">الجمعة - السبت</span>
-                <span className="font-medium text-red-600">مغلق</span>
-              </div>
-              
-              <div className="mt-4 rounded-lg bg-emerald-50 p-3">
-                <p className="text-sm font-medium text-emerald-800">
-                  {officeHours.emergency}
-                </p>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-700">الأحد - الخميس</span>
+                  <span className="font-medium text-slate-900">
+                    <bdi>9:00 ص - 6:00 م</bdi>
+                  </span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-700">الجمعة - السبت</span>
+                  <span className="font-medium text-red-600">مغلق</span>
+                </div>
+                
+                <div className="mt-4 rounded-lg bg-emerald-50 p-3">
+                  <p className="text-sm font-medium text-emerald-800">
+                    {officeHours.emergency}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

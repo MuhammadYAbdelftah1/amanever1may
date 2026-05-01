@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { MessageCircle } from "lucide-react";
 
 interface OmniyaAvatarProps {
   size?: "sm" | "md" | "lg";
@@ -21,6 +22,7 @@ export function OmniyaAvatar({
   className = "",
 }: OmniyaAvatarProps) {
   const dimension = sizeMap[size];
+  const whatsappIconSize = size === "lg" ? 18 : size === "md" ? 14 : 10;
 
   return (
     <div className={`relative ${className}`} style={{ width: dimension, height: dimension }}>
@@ -50,6 +52,23 @@ export function OmniyaAvatar({
           className="object-cover"
           priority
           unoptimized
+        />
+      </div>
+
+      {/* WhatsApp Badge - positioned at top right */}
+      <div
+        className="absolute -top-0.5 -right-0.5 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg ring-2 ring-white"
+        style={{
+          width: whatsappIconSize + 6,
+          height: whatsappIconSize + 6,
+        }}
+      >
+        <MessageCircle
+          className="text-white"
+          style={{
+            width: whatsappIconSize,
+            height: whatsappIconSize,
+          }}
         />
       </div>
     </div>

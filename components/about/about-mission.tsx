@@ -1,14 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Target, Infinity, Sparkles } from 'lucide-react';
 import { ABOUT_CONFIG } from '@/lib/data/about-config';
-
-const ICON_MAP = {
-  Target,
-  Infinity,
-  Sparkles,
-} as const;
 
 export function AboutMission() {
   const { mission } = ABOUT_CONFIG;
@@ -40,8 +33,6 @@ export function AboutMission() {
         {/* Pillar cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
           {mission.pillars.map((pillar, index) => {
-            const Icon = ICON_MAP[pillar.icon as keyof typeof ICON_MAP];
-            
             return (
               <motion.div
                 key={index}
@@ -49,17 +40,35 @@ export function AboutMission() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="rounded-2xl border border-slate-200 p-6 hover:shadow-lg transition"
+                className="rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition"
               >
-                <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6" aria-hidden="true" />
+                {/* Image Banner - Full Width at Top */}
+                <div className="w-full h-28 md:h-32 overflow-hidden bg-emerald-50 relative border-b-2 border-dashed border-emerald-300">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-2">
+                    <div className="text-xs font-bold text-emerald-700 mb-1">
+                      للمصممة
+                    </div>
+                    <div className="text-[10px] text-emerald-600 mb-1 px-2 leading-tight">
+                      {pillar.title}
+                    </div>
+                    <div className="text-[9px] text-gray-500 font-semibold mb-0.5">
+                      Desktop: Full Width × 128px
+                    </div>
+                    <div className="text-[8px] text-gray-500">
+                      Mobile: Full Width × 112px
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
-                  {pillar.title}
-                </h3>
-                <p className="text-slate-600 leading-relaxed">
-                  {pillar.description}
-                </p>
+
+                {/* Content Section */}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    {pillar.description}
+                  </p>
+                </div>
               </motion.div>
             );
           })}

@@ -24,11 +24,11 @@ export const knowledge = {
     },
     
     contact: {
-      hotline: "920018041",
-      landline: "0126142206",
+      hotline: "+966920018041",
+      landline: "+966126142206",
       whatsapp: {
-        number: "0544608220",
-        url: "https://wa.me/966544608220",
+        number: "9200",
+        url: "https://wa.me/9200",
       },
       email: "info@amanever.com",
       partnershipsEmail: "partnerships@amanever.com",
@@ -97,7 +97,7 @@ export const knowledge = {
         id: "how-to-book",
         question: "كيف أحجز استشارة طبية؟",
         answer:
-          "حمّل تطبيق أمان إيفر من App Store أو Google Play، سجّل حساب، واختر الطبيب والوقت المناسب. يمكنك أيضاً الحجز عبر الخط الساخن 920018041.",
+          "حمّل تطبيق أمان إيفر من App Store أو Google Play، سجّل حساب، واختر الطبيب والوقت المناسب. يمكنك أيضاً الحجز عبر خدمة العملاء +966 92 000 18041.",
       },
       {
         id: "payment-methods",

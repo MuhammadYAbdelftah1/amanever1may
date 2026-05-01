@@ -13,6 +13,7 @@ import {
   Waves
 } from 'lucide-react';
 import Image from 'next/image';
+import { NetworkMapPopover } from '@/components/shared/network-map-popover';
 
 interface NetworkSectionProps {
   locale: string;
@@ -117,6 +118,14 @@ export function NetworkSection({ locale }: NetworkSectionProps) {
             >
               {t('tabs.health')}
             </button>
+          </div>
+          
+          {/* Network Map Button */}
+          <div className="flex justify-center mb-8">
+            <NetworkMapPopover 
+              locale={locale} 
+              type={activeTab === 'medical' ? 'medical' : 'health'} 
+            />
           </div>
         </div>
 

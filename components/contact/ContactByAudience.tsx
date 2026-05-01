@@ -167,31 +167,48 @@ export function ContactByAudience() {
               key={audience.badge}
               className="group relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
             >
+              {/* Image Banner - Full Width at Top */}
+              <div className="absolute inset-x-0 top-0 h-32 md:h-40 overflow-hidden bg-emerald-50 relative border-b-2 border-dashed border-emerald-300 rounded-t-2xl">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-3">
+                  <div className="text-xs md:text-sm font-bold text-emerald-700 mb-1">
+                    للمصممة
+                  </div>
+                  <div className="text-[10px] md:text-xs text-emerald-600 mb-2 px-2 leading-tight">
+                    {audience.title}
+                  </div>
+                  <div className="text-[9px] md:text-[10px] text-gray-500 font-semibold mb-0.5">
+                    Desktop: Full Width × 160px
+                  </div>
+                  <div className="text-[8px] md:text-[9px] text-gray-500 mb-0.5">
+                    Tablet: Full Width × 160px
+                  </div>
+                  <div className="text-[8px] md:text-[9px] text-gray-500">
+                    Mobile: Full Width × 128px
+                  </div>
+                </div>
+              </div>
+
               {/* Badge */}
               <span
-                className={`absolute start-4 top-4 rounded-full border px-3 py-1 text-xs font-medium ${
+                className={`absolute start-4 top-36 md:top-44 z-10 rounded-full border px-3 py-1 text-xs font-medium ${
                   badgeColors[audience.badgeColor]
                 }`}
               >
                 {audience.badge}
               </span>
 
-              {/* Icon */}
-              <div className="mb-4 mt-8">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-slate-100">
-                  <Icon className="h-6 w-6 text-slate-700" aria-hidden="true" />
-                </div>
+              {/* Content Section */}
+              <div className="mt-32 md:mt-40">
+                {/* Title */}
+                <h3 className="mb-2 text-lg font-semibold text-slate-900">
+                  {audience.title}
+                </h3>
+
+                {/* Description */}
+                <p className="mb-6 text-sm text-slate-600">
+                  {audience.description}
+                </p>
               </div>
-
-              {/* Title */}
-              <h3 className="mb-2 text-lg font-semibold text-slate-900">
-                {audience.title}
-              </h3>
-
-              {/* Description */}
-              <p className="mb-6 text-sm text-slate-600">
-                {audience.description}
-              </p>
 
               {/* Actions */}
               <div className="flex flex-col gap-2">

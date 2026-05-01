@@ -10,33 +10,37 @@ interface B2BServiceRowProps {
 }
 
 export function B2BServiceRow({ service, index }: B2BServiceRowProps) {
-  // Dynamically get the icon component
-  const IconComponent = (LucideIcons as any)[service.icon] || LucideIcons.Circle;
-  
-  // Alternate layout: even indices have icon on right, odd on left
-  const isReversed = index % 2 === 1;
-
   return (
     <motion.article
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.6, delay: index * 0.15 }}
-      className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center ${
-        isReversed ? 'md:flex-row-reverse' : ''
-      }`}
+      className="rounded-3xl bg-white border border-slate-200 overflow-hidden hover:shadow-xl hover:border-emerald-200 transition-all duration-300"
     >
-      {/* Icon Side */}
-      <div
-        className={`flex items-center justify-center ${isReversed ? 'md:order-2' : 'md:order-1'}`}
-      >
-        <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-emerald-50 to-emerald-100 text-emerald-600 flex items-center justify-center">
-          <IconComponent className="w-16 h-16" aria-hidden="true" />
+      {/* Image Banner - Full Width at Top */}
+      <div className="w-full h-48 md:h-64 overflow-hidden bg-gradient-to-br from-emerald-50 to-emerald-100 relative border-b-4 border-dashed border-emerald-300">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+          <div className="text-sm md:text-base font-bold text-emerald-700 mb-2">
+            للمصممة
+          </div>
+          <div className="text-xs md:text-sm text-emerald-600 mb-3 px-4 leading-tight">
+            {service.title}
+          </div>
+          <div className="text-[10px] md:text-xs text-gray-600 font-semibold mb-1">
+            Desktop: Full Width × 256px
+          </div>
+          <div className="text-[9px] md:text-[10px] text-gray-500 mb-1">
+            Tablet: Full Width × 256px
+          </div>
+          <div className="text-[9px] md:text-[10px] text-gray-500">
+            Mobile: Full Width × 192px
+          </div>
         </div>
       </div>
 
-      {/* Content Side */}
-      <div className={isReversed ? 'md:order-1' : 'md:order-2'}>
+      {/* Content Section */}
+      <div className="p-8 md:p-10">
         {/* Title */}
         <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">{service.title}</h3>
 
@@ -45,14 +49,19 @@ export function B2BServiceRow({ service, index }: B2BServiceRowProps) {
 
         {/* Benefits */}
         <ul className="space-y-3" role="list">
-          {service.benefits.map((benefit, idx) => (
-            <li key={idx} className="flex items-start gap-3 text-sm text-slate-700">
-              <span className="text-lg flex-shrink-0" aria-hidden="true">
-                {benefit.split(' ')[0]}
-              </span>
-              <span>{benefit.substring(benefit.indexOf(' ') + 1)}</span>
-            </li>
-          ))}
+          {service.benefits.map((benefit, idx) => {
+            // Extract icon name from benefit string (first word)
+            const iconName = benefit.split(' ')[0];
+            const IconComponent = (LucideIcons as any)[iconName] || LucideIcons.Check;
+            const benefitText = benefit.substring(benefit.indexOf(' ') + 1);
+            
+            return (
+              <li key={idx} className="flex items-start gap-3 text-sm text-slate-700">
+                <IconComponent className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <span>{benefitText}</span>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </motion.article>

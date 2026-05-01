@@ -6,13 +6,10 @@ import { ArrowLeft, Check } from 'lucide-react';
 import {
   affiliatesSection,
   affiliateBenefits,
-  affiliateCommissions,
   affiliateTiers,
   affiliateSteps,
-  affiliateCalculator,
   affiliateCTAs,
 } from '@/lib/data/services-config';
-import * as LucideIcons from 'lucide-react';
 
 export function ServicesForAffiliates() {
   return (
@@ -63,7 +60,6 @@ export function ServicesForAffiliates() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {affiliateBenefits.map((benefit, index) => {
-              const IconComponent = (LucideIcons as any)[benefit.icon] || LucideIcons.Circle;
               return (
                 <motion.div
                   key={index}
@@ -71,68 +67,36 @@ export function ServicesForAffiliates() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300"
+                  className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden hover:bg-white/15 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center mb-4">
-                    <IconComponent className="w-6 h-6" aria-hidden="true" />
+                  {/* Image Banner - Full Width at Top */}
+                  <div className="w-full h-32 md:h-40 overflow-hidden bg-emerald-500/20 relative border-b-2 border-dashed border-emerald-400">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-3">
+                      <div className="text-xs md:text-sm font-bold text-emerald-300 mb-1">
+                        للمصممة
+                      </div>
+                      <div className="text-[10px] md:text-xs text-emerald-200 mb-2 px-2 leading-tight">
+                        {benefit.title}
+                      </div>
+                      <div className="text-[9px] text-emerald-100 font-semibold mb-0.5">
+                        Desktop: Full Width × 160px
+                      </div>
+                      <div className="text-[8px] text-emerald-100">
+                        Mobile: Full Width × 128px
+                      </div>
+                    </div>
                   </div>
-                  <h4 className="text-lg font-bold text-white mb-2">{benefit.title}</h4>
-                  <p className="text-sm text-emerald-100 leading-relaxed">{benefit.description}</p>
+                  
+                  {/* Content Section */}
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-white mb-2">{benefit.title}</h4>
+                    <p className="text-sm text-emerald-100 leading-relaxed">{benefit.description}</p>
+                  </div>
                 </motion.div>
               );
             })}
           </div>
         </div>
-
-        {/* Commission Structure */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto mb-20"
-        >
-          <h3 className="text-2xl font-bold text-white text-center mb-10">
-            {affiliatesSection.commissionsTitle}
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {affiliateCommissions.map((commission, index) => (
-              <div
-                key={index}
-                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-8"
-              >
-                <div className="text-center mb-6">
-                  <h4 className="text-2xl font-black text-white mb-2">{commission.plan}</h4>
-                  <p className="text-emerald-300 font-semibold">{commission.price}</p>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between pb-4 border-b border-white/20">
-                    <span className="text-emerald-100">عمولة أولية</span>
-                    <span className="text-xl font-bold text-white">
-                      {commission.initialCommission}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between pb-4 border-b border-white/20">
-                    <span className="text-emerald-100">المبلغ</span>
-                    <span className="text-xl font-bold text-emerald-300">{commission.amount}</span>
-                  </div>
-                  <div className="flex items-center justify-between pb-4 border-b border-white/20">
-                    <span className="text-emerald-100">عمولة متكررة</span>
-                    <span className="text-xl font-bold text-white">
-                      {commission.recurringCommission}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-emerald-100">عند التجديد</span>
-                    <span className="text-lg font-bold text-emerald-300">
-                      {commission.recurringAmount}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* Tiers */}
         <motion.div
@@ -147,7 +111,6 @@ export function ServicesForAffiliates() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {affiliateTiers.map((tier, index) => {
-              const IconComponent = (LucideIcons as any)[tier.icon] || LucideIcons.Circle;
               return (
                 <motion.div
                   key={tier.id}
@@ -155,71 +118,48 @@ export function ServicesForAffiliates() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-center hover:bg-white/15 transition-all duration-300"
+                  className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden hover:bg-white/15 transition-all duration-300"
                 >
-                  <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 text-white flex items-center justify-center mb-4">
-                    <IconComponent className="w-8 h-8" aria-hidden="true" />
+                  {/* Image Banner - Full Width at Top */}
+                  <div className="w-full h-32 overflow-hidden bg-gradient-to-br from-emerald-400 to-teal-500 relative border-b-2 border-dashed border-white">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-3">
+                      <div className="text-xs font-bold text-white mb-1">
+                        للمصممة
+                      </div>
+                      <div className="text-[10px] text-white/90 mb-2">
+                        {tier.name}
+                      </div>
+                      <div className="text-[9px] text-white/80 font-semibold mb-0.5">
+                        Desktop: Full Width × 128px
+                      </div>
+                      <div className="text-[8px] text-white/70">
+                        Mobile: Full Width × 128px
+                      </div>
+                    </div>
                   </div>
-                  <h4 className="text-xl font-bold text-white mb-2">{tier.name}</h4>
-                  <p className="text-sm text-emerald-200 mb-4">
-                    {tier.minReferrals}
-                    {tier.maxReferrals ? `-${tier.maxReferrals}` : '+'} إحالة/شهر
-                  </p>
-                  <div className="bg-emerald-500/20 rounded-lg px-3 py-2 mb-4">
-                    <p className="text-emerald-300 font-bold text-sm">{tier.bonus}</p>
+                  
+                  {/* Content Section */}
+                  <div className="p-6 text-center">
+                    <h4 className="text-xl font-bold text-white mb-2">{tier.name}</h4>
+                    <p className="text-sm text-emerald-200 mb-4">
+                      {tier.minReferrals}
+                      {tier.maxReferrals ? `-${tier.maxReferrals}` : '+'} إحالة/شهر
+                    </p>
+                    <div className="bg-emerald-500/20 rounded-lg px-3 py-2 mb-4">
+                      <p className="text-emerald-300 font-bold text-sm">{tier.bonus}</p>
+                    </div>
+                    <ul className="space-y-2 text-start">
+                      {tier.benefits.map((benefit, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-xs text-emerald-100">
+                          <Check className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                          <span>{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="space-y-2 text-start">
-                    {tier.benefits.map((benefit, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs text-emerald-100">
-                        <Check className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span>{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </motion.div>
               );
             })}
-          </div>
-        </motion.div>
-
-        {/* Calculator */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto mb-20"
-        >
-          <h3 className="text-2xl font-bold text-white text-center mb-4">
-            {affiliatesSection.calculatorTitle}
-          </h3>
-          <p className="text-emerald-200 text-center mb-8">{affiliatesSection.calculatorSubtitle}</p>
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-8">
-            <div className="space-y-4 mb-6">
-              {affiliateCalculator.breakdown.map((item, index) => (
-                <div key={index} className="flex items-center justify-between text-emerald-100">
-                  <span>{item.label}</span>
-                  <span className="font-bold text-white">{item.value}</span>
-                </div>
-              ))}
-              <div className="border-t border-white/20 pt-4 flex items-center justify-between">
-                <span className="text-lg font-bold text-white">إجمالي الشهر الأول:</span>
-                <span className="text-2xl font-black text-emerald-300">
-                  {affiliateCalculator.monthlyTotal}
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-emerald-100">
-                <span>العمولات المتكررة السنوية:</span>
-                <span className="font-bold text-white">{affiliateCalculator.yearlyRecurring}</span>
-              </div>
-              <div className="bg-emerald-500/20 rounded-xl p-4 flex items-center justify-between">
-                <span className="text-lg font-bold text-white">الدخل السنوي المتوقع:</span>
-                <span className="text-3xl font-black text-emerald-300">
-                  {affiliateCalculator.yearlyTotal}
-                </span>
-              </div>
-            </div>
-            <p className="text-xs text-emerald-200 text-center">{affiliateCalculator.note}</p>
           </div>
         </motion.div>
 

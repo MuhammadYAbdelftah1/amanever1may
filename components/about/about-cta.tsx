@@ -1,15 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { User, Stethoscope, Briefcase, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { ABOUT_CONFIG } from '@/lib/data/about-config';
-
-const ICON_MAP = {
-  User,
-  Stethoscope,
-  Briefcase,
-} as const;
 
 export function AboutCTA() {
   const { cta } = ABOUT_CONFIG;
@@ -47,7 +41,6 @@ export function AboutCTA() {
         {/* CTA cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {cta.paths.map((path, index) => {
-            const Icon = ICON_MAP[path.icon as keyof typeof ICON_MAP];
             const isExternal = path.url.startsWith('http') || path.url.startsWith('mailto');
             
             const content = (
@@ -56,18 +49,36 @@ export function AboutCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 p-8 hover:bg-white/20 transition text-center group cursor-pointer"
+                className="rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 overflow-hidden hover:bg-white/20 transition group cursor-pointer"
               >
-                <div className="w-16 h-16 rounded-2xl bg-white text-emerald-600 flex items-center justify-center mx-auto mb-5">
-                  <Icon className="w-8 h-8" aria-hidden="true" />
+                {/* Image Banner - Full Width at Top */}
+                <div className="w-full h-32 md:h-40 overflow-hidden bg-white/20 relative border-b-2 border-dashed border-white/40">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-3">
+                    <div className="text-xs md:text-sm font-bold text-white mb-1">
+                      للمصممة
+                    </div>
+                    <div className="text-[10px] md:text-xs text-white/90 mb-2 px-2 leading-tight">
+                      {path.forWhom}
+                    </div>
+                    <div className="text-[9px] text-white/80 font-semibold mb-0.5">
+                      Desktop: Full Width × 160px
+                    </div>
+                    <div className="text-[8px] text-white/70">
+                      Mobile: Full Width × 128px
+                    </div>
+                  </div>
                 </div>
-                <p className="text-sm font-semibold text-emerald-200 uppercase mb-2">
-                  {path.forWhom}
-                </p>
-                <p className="text-xl font-bold text-white mb-4 flex items-center justify-center gap-2">
-                  <span>{path.label}</span>
-                  <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
-                </p>
+
+                {/* Content Section */}
+                <div className="p-8 text-center">
+                  <p className="text-sm font-semibold text-emerald-200 uppercase mb-2">
+                    {path.forWhom}
+                  </p>
+                  <p className="text-xl font-bold text-white mb-4 flex items-center justify-center gap-2">
+                    <span>{path.label}</span>
+                    <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
+                  </p>
+                </div>
               </motion.div>
             );
 

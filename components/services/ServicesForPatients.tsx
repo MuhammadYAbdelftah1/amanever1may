@@ -1,16 +1,232 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { patientsSection, patientServices, membershipPlans, patientsCTA } from '@/lib/data/services-config';
-import { ServiceDetailCard } from './shared/ServiceDetailCard';
+import { useEffect, useRef, useState } from 'react';
+import * as LucideIcons from 'lucide-react';
+import { motion } from 'framer-motion';
+import { patientsSection } from '@/lib/data/services-config';
+import { NetworkMapPopover } from '@/components/shared/network-map-popover';
 
-export function ServicesForPatients() {
+type Service = {
+  id: string;
+  icon: string;
+  image: string;
+  title: string;
+  tagline: string;
+  description: string;
+  ctaLabel: string;
+  ctaHref: string;
+};
+
+const services: Service[] = [
+  {
+    id: 'membership',
+    icon: 'CreditCard',
+    image: '/services/membership.jpg',
+    title: 'بطاقات العضوية (بريمير و VIP)',
+    tagline: 'الأكثر طلباً',
+    description: 'خصومات تصل إلى 80% في مستشفى سليمان الحبيب، الموسى، السعودي الألماني، وأكثر من 2000 مركز طبي. إصدار فوري.',
+    ctaLabel: 'اكتشف المزيد',
+    ctaHref: '/pricing',
+  },
+  {
+    id: 'cashback',
+    icon: 'Wallet',
+    image: '/services/cashback.jpg',
+    title: 'برنامج الكاش باك',
+    tagline: 'CASHBACK',
+    description: 'استرداد نقدي يصل إلى 15% عند شراء البطاقة أو أول استخدام في الشبكة الطبية. عوائد مالية فورية.',
+    ctaLabel: 'اكتشف المزيد',
+    ctaHref: '/services#cashback',
+  },
+  {
+    id: 'points',
+    icon: 'Gift',
+    image: '/services/points.jpg',
+    title: 'محفظة النقاط',
+    tagline: 'محفظة نقاط',
+    description: 'اجمع نقاط ولاء مع كل زيارة طبية أو شراء من صيدليات النهدي والدواء واستبدلها برصيد خدمات',
+    ctaLabel: 'اكتشف المزيد',
+    ctaHref: '/services#points',
+  },
+  {
+    id: 'instant-booking',
+    icon: 'Zap',
+    image: '/services/booking.jpg',
+    title: 'حجوزات فورية',
+    tagline: 'فوري',
+    description: 'احجز مع أفضل الأطباء في الرياض، جدة، والدمام دون انتظار. استشارات أونلاين صوتية ومرئية وشات 24/7.',
+    ctaLabel: 'اكتشف المزيد',
+    ctaHref: '/services#booking',
+  },
+  {
+    id: 'home-care',
+    icon: 'Home',
+    image: '/services/home-care.jpg',
+    title: 'الرعاية المنزلية',
+    tagline: 'رعاية منزلية',
+    description: 'أطباء وممرضين معتمدين للزيارات المنزلية. رعاية كبار السن، فحوصات طبية، علاج طبيعي، وتمريض منزلي.',
+    ctaLabel: 'اكتشف المزيد',
+    ctaHref: '/services#home-care',
+  },
+  {
+    id: 'store',
+    icon: 'ShoppingBag',
+    image: '/services/store.jpg',
+    title: 'متجر أمان',
+    tagline: 'عروض حصرية',
+    description: 'منتجات طبية، مكملات غذائية، ومستحضرات تجميلية أصلية بأسعار مخفضة وعروض حصرية لأعضاء أمان.',
+    ctaLabel: 'اكتشف المزيد',
+    ctaHref: '/services#store',
+  },
+  {
+    id: 'medical-network',
+    icon: 'Building2',
+    image: '/services/medical-network.jpg',
+    title: 'الشبكة الطبية',
+    tagline: 'شبكة طبية',
+    description: 'وصول مباشر لأكثر من 2000 مركز طبي: مستشفيات، عيادات، مختبرات البرج، صيدليات النهدي والدواء في كافة مدن المملكة.',
+    ctaLabel: 'استكشف الشبكة',
+    ctaHref: '#', // Will be handled by onClick
+  },
+  {
+    id: 'health-network',
+    icon: 'Dumbbell',
+    image: '/services/health-network.jpg',
+    title: 'الشبكة الصحية',
+    tagline: 'شبكة صحية',
+    description: 'خصومات على فتنس تايم، جولدز جيم، عيادات التغذية، مراكز البصريات، والسبا لنمط حياة صحي متكامل.',
+    ctaLabel: 'استكشف الشبكة',
+    ctaHref: '#', // Will be handled by onClick
+  },
+];
+
+function ServiceCard({ service, index, locale }: { service: Service; index: number; locale?: string }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const [showNetworkDialog, setShowNetworkDialog] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  
+  // Dynamically get the icon component
+  const IconComponent = (LucideIcons as any)[service.icon] || LucideIcons.Circle;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Check if this is a network card
+  const isNetworkCard = service.id === 'medical-network' || service.id === 'health-network';
+  const networkType = service.id === 'medical-network' ? 'medical' : 'health';
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (isNetworkCard) {
+      e.preventDefault();
+      setShowNetworkDialog(true);
+    }
+  };
+
+  const CardWrapper = isNetworkCard ? 'div' : 'a';
+  const cardProps = isNetworkCard 
+    ? { onClick: handleClick }
+    : { href: service.ctaHref };
+
+  return (
+    <>
+      <CardWrapper
+        {...cardProps}
+        ref={ref}
+        className={`group relative h-full rounded-2xl bg-white overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 block ${
+          isVisible ? 'animate-in fade-in slide-in-from-bottom-4' : 'opacity-0'
+        } ${isNetworkCard ? 'cursor-pointer' : ''}`}
+        style={{
+          animationDelay: `${index * 100}ms`,
+          animationFillMode: 'forwards',
+        }}
+      >
+      {/* Image Section - Takes most of the card */}
+      <div className="relative w-full h-64 bg-gradient-to-br from-[#1a472a]/10 via-[#2d5a3d]/5 to-[#1a472a]/10 overflow-hidden">
+        {/* Placeholder for designer's image */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center p-6">
+            <div className="text-6xl mb-3 opacity-20">
+              <IconComponent className="w-16 h-16 mx-auto text-[#1a472a]" />
+            </div>
+            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 border-2 border-dashed border-gray-300">
+              <p className="text-xs font-bold text-gray-700 mb-1">إشعار للمصممة</p>
+              <p className="text-[10px] text-gray-600 mb-1">
+                صورة الخدمة: {service.title}
+              </p>
+              <p className="text-[9px] text-gray-500 font-semibold">
+                المقاس: 384×256 بكسل
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Badge */}
+        {service.tagline && (
+          <div className="absolute left-4 top-4 rounded-full bg-[#1a472a] px-3 py-1 text-xs font-semibold text-white shadow-lg z-10">
+            {service.tagline}
+          </div>
+        )}
+
+        {/* Overlay on hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      </div>
+
+      {/* Content Section */}
+      <div className="p-6">
+        {/* Title */}
+        <h3 className="text-xl font-bold text-gray-900 mb-3 transition-colors group-hover:text-[#1a472a]">
+          {service.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-3">
+          {service.description}
+        </p>
+
+        {/* CTA */}
+        <div className="flex items-center gap-2 text-sm font-semibold text-[#1a472a] transition-all group-hover:gap-3">
+          <span>{service.ctaLabel}</span>
+          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
+        </div>
+      </div>
+
+        {/* Decorative corner */}
+        <div className="absolute bottom-0 right-0 h-20 w-20 translate-x-10 translate-y-10 rounded-full bg-[#1a472a]/5 transition-transform duration-300 group-hover:translate-x-8 group-hover:translate-y-8" />
+      </CardWrapper>
+
+      {/* Network Dialog - Controlled */}
+      {isNetworkCard && (
+        <NetworkMapPopover 
+          locale={locale || 'ar'} 
+          type={networkType}
+          isOpen={showNetworkDialog}
+          onOpenChange={setShowNetworkDialog}
+        />
+      )}
+    </>
+  );
+}
+
+export function ServicesForPatients({ locale = 'ar' }: { locale?: string }) {
   return (
     <section
       id="for-patients"
-      className="py-20 md:py-28 bg-white"
+      className="py-20 md:py-28 bg-gradient-to-b from-white to-gray-50"
       aria-labelledby="patients-section-title"
     >
       <div className="container mx-auto px-4">
@@ -21,7 +237,7 @@ export function ServicesForPatients() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-sm font-bold text-emerald-600 uppercase tracking-wider mb-4"
+            className="text-sm font-bold text-[#1a472a] uppercase tracking-wider mb-4"
           >
             {patientsSection.tag}
           </motion.p>
@@ -48,71 +264,12 @@ export function ServicesForPatients() {
           </motion.p>
         </div>
 
-        {/* Services Grid - 6 Cards in 3 columns on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
-          {patientServices.map((service, index) => (
-            <ServiceDetailCard key={service.id} service={service} index={index} />
+        {/* Service Cards Grid - 8 Cards in 4 columns on desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {services.map((service, index) => (
+            <ServiceCard key={service.id} service={service} index={index} locale={locale} />
           ))}
         </div>
-
-        {/* Membership Plans Highlight (for the membership card) */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-8 max-w-7xl mx-auto"
-        >
-          <div className="rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 p-6 md:p-8">
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12">
-              <div className="text-center">
-                <p className="text-sm font-semibold text-emerald-700 mb-1">باقة بريمير</p>
-                <p className="text-2xl font-black text-slate-900">{membershipPlans[0].price}</p>
-              </div>
-              <div className="hidden md:block w-px h-12 bg-emerald-300" aria-hidden="true" />
-              <div className="text-center">
-                <p className="text-sm font-semibold text-emerald-700 mb-1">باقة VIP</p>
-                <p className="text-2xl font-black text-slate-900">{membershipPlans[1].price}</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* CTA for Patients */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16 max-w-4xl mx-auto"
-        >
-          <div className="rounded-3xl bg-gradient-to-br from-emerald-600 to-teal-600 p-8 md:p-12 text-center shadow-2xl">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              {patientsCTA.title}
-            </h3>
-            <p className="text-emerald-50 mb-8 text-lg">
-              {patientsCTA.subtitle}
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href={patientsCTA.primary.href}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-emerald-700 font-bold hover:bg-emerald-50 transition-colors shadow-lg hover:shadow-xl w-full sm:w-auto"
-              >
-                <span>{patientsCTA.primary.text}</span>
-                <ArrowLeft className="w-5 h-5" aria-hidden="true" />
-              </Link>
-
-              <Link
-                href={patientsCTA.secondary.href}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-transparent border-2 border-white text-white font-bold hover:bg-white/20 transition-colors w-full sm:w-auto"
-              >
-                <span>{patientsCTA.secondary.text}</span>
-                <ArrowLeft className="w-5 h-5" aria-hidden="true" />
-              </Link>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

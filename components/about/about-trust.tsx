@@ -1,15 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FileCheck, ShieldCheck, BadgeCheck, Flag } from 'lucide-react';
 import { ABOUT_CONFIG } from '@/lib/data/about-config';
-
-const ICON_MAP = {
-  FileCheck,
-  ShieldCheck,
-  BadgeCheck,
-  Flag,
-} as const;
 
 export function AboutTrust() {
   const { trust } = ABOUT_CONFIG;
@@ -39,8 +31,6 @@ export function AboutTrust() {
         {/* Trust cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {trust.items.map((item, index) => {
-            const Icon = ICON_MAP[item.icon as keyof typeof ICON_MAP];
-            
             return (
               <motion.div
                 key={index}
@@ -48,17 +38,35 @@ export function AboutTrust() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-6 hover:bg-white/10 transition"
+                className="rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden hover:bg-white/10 transition"
               >
-                <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6" aria-hidden="true" />
+                {/* Image Banner - Full Width at Top */}
+                <div className="w-full h-24 md:h-28 overflow-hidden bg-emerald-500/20 relative border-b-2 border-dashed border-emerald-400">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-2">
+                    <div className="text-xs font-bold text-emerald-400 mb-1">
+                      للمصممة
+                    </div>
+                    <div className="text-[9px] text-emerald-300 mb-1 px-1 leading-tight">
+                      {item.title}
+                    </div>
+                    <div className="text-[8px] text-emerald-200 font-semibold mb-0.5">
+                      Desktop: Full Width × 112px
+                    </div>
+                    <div className="text-[7px] text-emerald-100">
+                      Mobile: Full Width × 96px
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wide mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-base text-white leading-relaxed">
-                  {item.content}
-                </p>
+
+                {/* Content Section */}
+                <div className="p-6">
+                  <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wide mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-base text-white leading-relaxed">
+                    {item.content}
+                  </p>
+                </div>
               </motion.div>
             );
           })}
