@@ -246,10 +246,12 @@ const handleToggle = () => {
 
 */
 
-export default {
+const servicesPopoverTracking = {
   trackPopoverOpen,
   trackPopoverClose,
   trackServiceClick,
   trackViewAllServices,
   trackPopoverInteractionTime,
 };
+
+export default servicesPopoverTracking;

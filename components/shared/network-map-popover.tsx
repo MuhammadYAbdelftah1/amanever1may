@@ -179,7 +179,7 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
     };
-  }, [isOpen]);
+  }, [isOpen, setIsOpen]);
 
   // Close city dropdown when clicking outside
   useEffect(() => {
@@ -214,7 +214,7 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
-  }, [isOpen]);
+  }, [isOpen, setIsOpen]);
 
   // Filter regions based on selected zone
   const filteredRegions = selectedZone === 'all' 
