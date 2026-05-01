@@ -165,7 +165,7 @@ function ServiceCard({ service, index, locale }: { service: Service; index: numb
     <>
       <CardWrapper
         {...cardProps}
-        ref={ref}
+        ref={ref as any}
         className={`group relative h-full rounded-2xl bg-white overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 block ${
           isVisible ? 'animate-in fade-in slide-in-from-bottom-4' : 'opacity-0'
         } ${isNetworkCard ? 'cursor-pointer' : ''}`}
