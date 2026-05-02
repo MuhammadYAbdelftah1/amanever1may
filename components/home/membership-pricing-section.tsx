@@ -94,7 +94,7 @@ const content = {
       ],
       ctaLabel: 'تواصل معنا',
       ctaHref: '/contact?type=business',
-      headerBg: 'bg-gradient-to-br from-blue-900 to-indigo-900',
+      headerBg: 'bg-gradient-to-br from-emerald-700 to-teal-700',
       headerTextColor: 'text-white',
     },
   ],
