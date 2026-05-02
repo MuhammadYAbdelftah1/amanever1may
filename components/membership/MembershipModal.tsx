@@ -20,6 +20,7 @@ type Package = {
   ctaText: string;
   ctaHref: string;
   notification?: string;
+  features?: string[];
 };
 
 // Simplified packages with images
@@ -35,6 +36,12 @@ const packages: Package[] = [
     ctaText: 'اشترك الآن',
     ctaHref: '/ar/register?plan=individual',
     notification: 'خصم 20% لأول 100 مشترك',
+    features: [
+      'خصومات حتى 50% في +2000 مركز',
+      'رصيد خدمات 1,500 ريال',
+      'حجز فوري مع أفضل الأطباء',
+      '5 استشارات أونلاين مجانية',
+    ],
   },
   {
     id: 'premium',
@@ -47,6 +54,12 @@ const packages: Package[] = [
     ctaText: 'اشترك الآن',
     ctaHref: '/ar/register?plan=premium',
     notification: 'عرض خاص للعائلات',
+    features: [
+      'تغطية لشخصين (زوج وزوجة)',
+      'خصومات حتى 60%',
+      'رصيد خدمات 3,000 ريال',
+      '10 استشارات أونلاين مجانية',
+    ],
   },
   {
     id: 'gold',
@@ -59,6 +72,12 @@ const packages: Package[] = [
     ctaText: 'اشترك الآن',
     ctaHref: '/ar/register?plan=gold',
     notification: 'كاش باك 15%',
+    features: [
+      'خصومات حتى 70%',
+      'رصيد خدمات 5,000 ريال',
+      'استشارات أونلاين غير محدودة',
+      'فحص شامل سنوي مجاني',
+    ],
   },
   {
     id: 'family',
@@ -69,16 +88,30 @@ const packages: Package[] = [
     ctaText: 'اشترك الآن',
     ctaHref: '/ar/register?plan=family',
     notification: 'تغطية شاملة للعائلة',
+    features: [
+      'تغطية حتى 6 أفراد',
+      'خصومات حتى 80%',
+      'رصيد خدمات 10,000 ريال',
+      'زيارة طبيب منزلية مجانية شهرياً',
+    ],
   },
   {
-    id: 'business',
-    name: 'باقة الأعمال',
-    price: 'حسب الاتفاق',
-    description: 'للشركات والمؤسسات',
+    id: 'elderly',
+    name: 'باقة كبار السن',
+    price: '199',
+    description: 'رعاية خاصة لكبار السن',
     image: '/logo.jpeg',
-    ctaText: 'تواصل معنا',
-    ctaHref: '/ar/contact?type=business',
-    notification: 'أسعار خاصة للشركات',
+    badge: 'رعاية متميزة',
+    badgeColor: 'bg-indigo-500',
+    ctaText: 'اشترك الآن',
+    ctaHref: '/ar/register?plan=elderly',
+    notification: 'متابعة دورية مجانية',
+    features: [
+      'خصومات حتى 70% على الخدمات الطبية',
+      'رصيد خدمات 3,000 ريال',
+      'متابعة صحية دورية مجانية',
+      'أولوية في المواعيد والحجوزات',
+    ],
   },
   {
     id: 'special-needs',
@@ -92,6 +125,12 @@ const packages: Package[] = [
     ctaText: 'قدّم الآن',
     ctaHref: '/ar/register?plan=special-needs',
     notification: 'دعم مجاني كامل',
+    features: [
+      'خدمات طبية مجانية بالكامل',
+      'رعاية صحية متخصصة',
+      'دعم نفسي واجتماعي',
+      'أولوية في المواعيد',
+    ],
   },
   {
     id: 'orphans',
@@ -105,6 +144,12 @@ const packages: Package[] = [
     ctaText: 'قدّم الآن',
     ctaHref: '/ar/register?plan=orphans',
     notification: 'رعاية خاصة',
+    features: [
+      'خدمات طبية مجانية',
+      'فحوصات دورية مجانية',
+      'دعم تعليمي وصحي',
+      'متابعة صحية مستمرة',
+    ],
   },
   {
     id: 'widows',
@@ -117,6 +162,12 @@ const packages: Package[] = [
     ctaText: 'اشترك الآن',
     ctaHref: '/ar/register?plan=widows',
     notification: 'دعم نفسي مجاني',
+    features: [
+      'خصومات حتى 40%',
+      'دعم نفسي مجاني',
+      'استشارات عائلية',
+      'رصيد خدمات 1,000 ريال',
+    ],
   },
 ];
 
@@ -128,6 +179,9 @@ interface MembershipModalProps {
 export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
   const [showDownload, setShowDownload] = useState(false);
+  const [showPhoneInput, setShowPhoneInput] = useState(true); // NEW: Show phone input first
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [countryCode, setCountryCode] = useState('+966'); // Saudi Arabia default
   const [isMobile, setIsMobile] = useState(false);
 
   // Detect mobile on mount
@@ -142,6 +196,19 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handlePhoneSubmit = () => {
+    // Validate phone number
+    if (phoneNumber.length >= 9) {
+      // Save phone number (you can send to backend here)
+      console.log('Phone captured:', countryCode + phoneNumber);
+      
+      // Move to packages screen
+      setShowPhoneInput(false);
+    } else {
+      alert('الرجاء إدخال رقم جوال صحيح');
+    }
+  };
+
   const handleSelectPackage = (pkg: Package) => {
     setSelectedPackage(pkg);
   };
@@ -154,8 +221,11 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
   const handleBack = () => {
     if (showDownload) {
       setShowDownload(false);
-    } else {
+    } else if (!showPhoneInput && selectedPackage) {
       setSelectedPackage(null);
+    } else if (!showPhoneInput) {
+      // Go back to phone input
+      setShowPhoneInput(true);
     }
   };
 
@@ -201,13 +271,33 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
             >
               {/* Header */}
               <div className="flex items-center justify-between p-4 md:p-6 border-b border-slate-200 bg-gradient-to-r from-emerald-50 to-teal-50 flex-shrink-0">
-                <div>
+                {/* Back Button - Only show on packages screen */}
+                {!showPhoneInput && !showDownload && (
+                  <button
+                    onClick={() => setShowPhoneInput(true)}
+                    className="flex items-center gap-1 text-sm md:text-base text-slate-600 hover:text-emerald-600 transition-colors font-semibold"
+                  >
+                    <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    <span>رجوع</span>
+                  </button>
+                )}
+                
+                <div className="flex-1 text-center">
                   <h2 className="text-xl md:text-3xl font-bold text-slate-900">
-                    {showDownload ? 'حمّل التطبيق الآن' : 'للزوار فقط'}
+                    {showDownload ? 'حمّل التطبيق الآن' : showPhoneInput ? 'ابدأ رحلة الرعاية الآن' : 'اختر الباقة المناسبة لك'}
                   </h2>
-                  <p className="text-xs md:text-sm text-slate-600 mt-1">
-                    {showDownload ? 'اشترك من خلال التطبيق' : 'اختر الباقة المناسبة لك'}
-                  </p>
+                  {showPhoneInput && (
+                    <p className="text-xs md:text-sm text-slate-600 mt-1">
+                      أدخل رقم جوالك لنرسل لك تفاصيل الباقات
+                    </p>
+                  )}
+                  {showDownload && (
+                    <p className="text-xs md:text-sm text-slate-600 mt-1">
+                      اشترك من خلال التطبيق
+                    </p>
+                  )}
                 </div>
                 <button
                   onClick={onClose}
@@ -220,7 +310,87 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
 
               {/* Content - Scrollable */}
               <div className="flex-1 overflow-y-auto p-4 md:p-6">
-                {showDownload ? (
+                {showPhoneInput ? (
+                  /* Phone Input Screen */
+                  <div className="flex flex-col items-center justify-center h-full text-center space-y-6 py-8">
+                    {/* Icon */}
+                    <div className="relative w-24 h-24 md:w-32 md:h-32">
+                      <div className="absolute inset-0 bg-emerald-500 rounded-full animate-pulse opacity-20"></div>
+                      <div className="relative w-full h-full bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center shadow-xl">
+                        <svg className="w-12 h-12 md:w-16 md:h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <div className="space-y-2">
+                      <h3 className="text-2xl md:text-3xl font-black text-slate-900">
+                        أدخل رقم جوالك
+                      </h3>
+                      <p className="text-sm md:text-base text-slate-600 max-w-md">
+                        سنرسل لك تفاصيل الباقات وعروض حصرية عبر WhatsApp
+                      </p>
+                    </div>
+
+                    {/* Phone Input */}
+                    <div className="w-full max-w-md space-y-4">
+                      <div className="flex gap-2" dir="ltr">
+                        {/* Country Code */}
+                        <select
+                          value={countryCode}
+                          onChange={(e) => setCountryCode(e.target.value)}
+                          className="w-24 px-3 py-3 text-base border-2 border-slate-300 rounded-xl focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/20 outline-none transition-all bg-white font-semibold"
+                        >
+                          <option value="+966">🇸🇦 +966</option>
+                          <option value="+971">🇦🇪 +971</option>
+                          <option value="+965">🇰🇼 +965</option>
+                          <option value="+973">🇧🇭 +973</option>
+                          <option value="+974">🇶🇦 +974</option>
+                          <option value="+968">🇴🇲 +968</option>
+                        </select>
+
+                        {/* Phone Number */}
+                        <input
+                          type="tel"
+                          value={phoneNumber}
+                          onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
+                          placeholder="5xxxxxxxx"
+                          maxLength={9}
+                          className="flex-1 px-4 py-3 text-base border-2 border-slate-300 rounded-xl focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/20 outline-none transition-all font-semibold"
+                          dir="ltr"
+                        />
+                      </div>
+
+                      {/* Submit Button */}
+                      <Button
+                        onClick={handlePhoneSubmit}
+                        disabled={phoneNumber.length < 9}
+                        size="lg"
+                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-base md:text-lg py-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        متابعة ← شاهد الباقات
+                      </Button>
+
+                      {/* Trust Badges */}
+                      <div className="flex items-center justify-center gap-4 text-xs text-slate-500 pt-2">
+                        <div className="flex items-center gap-1">
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                          </svg>
+                          <span>آمن 100%</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                          </svg>
+                          <span>بدون إزعاج</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : showDownload ? (
                   /* Download Screen */
                   <div className="flex flex-col items-center justify-center h-full text-center space-y-6 py-8">
                     {/* Success Notification Card */}
@@ -300,8 +470,7 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                           key={pkg.id}
                           whileHover={{ y: -4 }}
                           whileTap={{ scale: 0.98 }}
-                          onClick={() => handleSelectPackage(pkg)}
-                          className={`relative rounded-2xl border-2 p-4 cursor-pointer transition-all ${
+                          className={`relative rounded-2xl border-2 p-4 transition-all ${
                             isSelected
                               ? 'border-emerald-500 bg-emerald-50 shadow-lg ring-2 ring-emerald-200'
                               : 'border-slate-200 hover:border-emerald-300 hover:shadow-md'
@@ -335,9 +504,9 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                             
                             {/* Notification Badge */}
                             {pkg.notification && (
-                              <div className="absolute bottom-2 left-2 right-2 bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1.5 flex items-center gap-1.5 shadow-md">
+                              <div className="absolute bottom-2 left-2 right-2 bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1.5 flex items-center justify-center gap-1.5 shadow-md">
                                 <Bell className="w-3 h-3 text-emerald-600 flex-shrink-0" />
-                                <span className="text-[10px] md:text-xs text-slate-700 font-medium line-clamp-1">
+                                <span className="text-[10px] md:text-xs text-slate-700 font-medium text-center">
                                   {pkg.notification}
                                 </span>
                               </div>
@@ -369,14 +538,29 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                                 </div>
                               )}
                             </div>
-                          </div>
 
-                          {/* Select Indicator */}
-                          {isSelected && (
-                            <div className="absolute top-2 right-2 w-6 h-6 md:w-7 md:h-7 rounded-full bg-emerald-600 flex items-center justify-center">
-                              <Check className="w-3 h-3 md:w-4 md:h-4 text-white" />
-                            </div>
-                          )}
+                            {/* Features */}
+                            {pkg.features && pkg.features.length > 0 && (
+                              <ul className="text-center space-y-1.5 mb-3 px-2">
+                                {pkg.features.map((feature, idx) => (
+                                  <li key={idx} className="flex items-center justify-center gap-1.5 text-[10px] md:text-xs text-slate-700">
+                                    <svg className="w-3 h-3 md:w-3.5 md:h-3.5 text-emerald-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                    </svg>
+                                    <span className="leading-tight">{feature}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+
+                            {/* Subscribe Button */}
+                            <button
+                              onClick={() => handleSelectPackage(pkg)}
+                              className="w-full py-2 md:py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs md:text-sm rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+                            >
+                              اشترك الآن
+                            </button>
+                          </div>
                         </motion.div>
                       );
                     })}

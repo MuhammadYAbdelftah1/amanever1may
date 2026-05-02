@@ -36,8 +36,8 @@ export default async function HomePage({
       <main id="main-content" className="min-h-screen">
         <HeroSection locale={locale} translations={{ title: t('title') }} />
         
-        {/* Why Best Section */}
-        <WhyBestSection locale={locale} />
+        {/* Core Services Section - بعد الهيرو مباشرة */}
+        <CoreServicesSection locale={locale} />
         
         {/* Mobile App Download Buttons - Only visible on mobile */}
         <div className="md:hidden py-6 px-4 bg-gradient-to-b from-slate-50 to-white">
@@ -47,16 +47,21 @@ export default async function HomePage({
           </div>
         </div>
         
-        <CoreServicesSection locale={locale} />
-        <PackagesCarouselSection locale={locale} />
+        {/* Why Best Section - المميزات */}
+        <WhyBestSection locale={locale} />
+        
+        {/* Aman Network Section - شبكة أمان الواسعة */}
         <AmanNetworkSection locale={locale} />
+        
+        {/* Membership Pricing Section - البطاقات Premier & VIP */}
+        <MembershipPricingSection locale={locale} />
+        
         <PartnersSection locale={locale} />
         <AvailableDoctorsSection locale={locale} />
-        <TopProvidersSection locale={locale} />
-        <ExclusiveDiscountsSection locale={locale} />
-        <PersonalizedResultsSection locale={locale} />
         <NearbyProvidersSection locale={locale} />
-        <MembershipPricingSection locale={locale} />
+        <ExclusiveDiscountsSection locale={locale} />
+        <TopProvidersSection locale={locale} />
+        <PersonalizedResultsSection locale={locale} />
         <BlogPreviewSection locale={locale} />
         <FAQSection />
         <FinalCTASection />

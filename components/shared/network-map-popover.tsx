@@ -23,6 +23,8 @@ interface NetworkMapPopoverProps {
   isMobile?: boolean;
   isOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  preSelectedRegion?: string;
+  preSelectedCity?: string;
 }
 
 // المناطق الإدارية الـ 13 في المملكة العربية السعودية
@@ -137,11 +139,20 @@ const geographicZones = [
   { id: 'central', nameAr: 'المنطقة الوسطى', nameEn: 'Central Zone', color: '#6BA5A8' }
 ];
 
-export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isOpen: controlledIsOpen, onOpenChange }: NetworkMapPopoverProps) {
+export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isOpen: controlledIsOpen, onOpenChange, preSelectedRegion, preSelectedCity }: NetworkMapPopoverProps) {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
-  const [selectedZone, setSelectedZone] = useState('all');
-  const [selectedRegion, setSelectedRegion] = useState('all');
-  const [selectedCity, setSelectedCity] = useState('');
+  
+  // Map region IDs to zone IDs
+  const getZoneFromRegion = (regionId: string): string => {
+    if (!regionId) return 'all';
+    const region = saudiRegions.find(r => r.id === regionId);
+    return region?.zone || 'all';
+  };
+
+  // Initialize with pre-selected values if provided
+  const [selectedZone, setSelectedZone] = useState(preSelectedRegion ? getZoneFromRegion(preSelectedRegion) : 'all');
+  const [selectedRegion, setSelectedRegion] = useState(preSelectedRegion || 'all');
+  const [selectedCity, setSelectedCity] = useState(preSelectedCity || '');
   const [searchQuery, setSearchQuery] = useState('');
   const [showCityDropdown, setShowCityDropdown] = useState(false);
   
@@ -156,6 +167,9 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
   const isArabic = locale === 'ar';
   const networkType = type === 'medical' ? 'الشبكة الطبية' : 'الشبكة الصحية';
   const networkTypeEn = type === 'medical' ? 'Medical Network' : 'Health Network';
+
+  // Determine if we should show selection UI or go directly to map
+  const hasPreSelection = preSelectedRegion && preSelectedCity;
 
   // Close popover when clicking outside
   useEffect(() => {
@@ -258,284 +272,225 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
 
   const providerCount = getProviderCount();
 
+  // Mock providers data for results list
+  const getMockProviders = () => {
+    const providers = [];
+    const count = Math.min(providerCount, 20); // Show max 20 in list
+    
+    for (let i = 0; i < count; i++) {
+      providers.push({
+        id: i + 1,
+        name: type === 'medical' 
+          ? `${['مستشفى', 'عيادة', 'مركز طبي'][i % 3]} ${['الحبيب', 'الموسى', 'السعودي الألماني', 'كينغز كوليدج', 'المركز الطبي'][i % 5]}`
+          : `${['نادي', 'مركز لياقة', 'عيادة تغذية', 'مركز سبا'][i % 4]} ${['فتنس تايم', 'جولدز جيم', 'الصحة', 'اللياقة'][i % 4]}`,
+        address: selectedCity || 'الرياض',
+        distance: `${(Math.random() * 10 + 0.5).toFixed(1)} كم`,
+        rating: (Math.random() * 1 + 4).toFixed(1),
+        type: type === 'medical' 
+          ? ['مستشفى', 'عيادة', 'مركز طبي'][i % 3]
+          : ['نادي رياضي', 'مركز لياقة', 'عيادة تغذية', 'مركز سبا'][i % 4]
+      });
+    }
+    
+    return providers;
+  };
+
+  const providers = getMockProviders();
   return (
     <>
-      {/* Trigger Button - Only show if not controlled externally */}
-      {!onOpenChange && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="inline-flex items-center gap-2 bg-[#5B9A9E] hover:bg-[#4A8B8E] text-white"
-        >
-          <MapPin className="w-5 h-5" />
-          <span>{isArabic ? 'استكشف الشبكة' : 'Explore Network'}</span>
-        </Button>
-      )}
-
       {/* Dialog */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden flex flex-col p-0">
-          <div className="flex flex-col h-full">
-          {/* Header */}
-          <DialogHeader className="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-[#5B9A9E]/5 to-[#6BA5A8]/5">
+        <DialogContent className="max-w-7xl max-h-[90vh] overflow-hidden flex flex-col p-0">
+          {/* Header - Minimalist */}
+          <DialogHeader className="px-4 md:px-6 py-3 md:py-4 border-b border-gray-100">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 {type === 'medical' ? (
-                  <Building2 className="w-6 h-6 text-[#5B9A9E]" />
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-[#5B9A9E]/10 flex items-center justify-center">
+                    <Building2 className="w-4 h-4 md:w-5 md:h-5 text-[#5B9A9E]" />
+                  </div>
                 ) : (
-                  <Stethoscope className="w-6 h-6 text-[#5B9A9E]" />
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-[#5B9A9E]/10 flex items-center justify-center">
+                    <Stethoscope className="w-4 h-4 md:w-5 md:h-5 text-[#5B9A9E]" />
+                  </div>
                 )}
                 <div>
-                  <DialogTitle className="text-xl font-bold text-gray-900">
-                    {isArabic ? `استكشف ${networkType}` : `Explore ${networkTypeEn}`}
+                  <DialogTitle className="text-sm md:text-lg font-bold text-gray-900">
+                    {isArabic ? networkType : networkTypeEn}
                   </DialogTitle>
-                  <p className="text-sm text-gray-600">
-                    {isArabic ? `${providerCount}+ مقدم خدمة في المملكة` : `${providerCount}+ providers in Saudi Arabia`}
+                  <p className="text-[10px] md:text-xs text-gray-500 truncate max-w-[150px] md:max-w-none">
+                    {selectedCity || (selectedRegion !== 'all' ? saudiRegions.find(r => r.id === selectedRegion)?.nameAr : 'المملكة العربية السعودية')}
                   </p>
                 </div>
+              </div>
+              <div className="text-left">
+                <p className="text-lg md:text-2xl font-bold text-[#5B9A9E]">{providerCount}+</p>
+                <p className="text-[10px] md:text-xs text-gray-500">{isArabic ? 'مقدم خدمة' : 'Providers'}</p>
               </div>
             </div>
           </DialogHeader>
 
-          {/* Content - Scrollable */}
-          <div className="flex-1 overflow-y-auto">
-            <div className="p-6 space-y-6">
-              {/* Geographic Zones */}
-              <div>
-                <label className="block text-sm font-bold text-gray-900 mb-3">
-                  {isArabic ? 'اختر المنطقة الجغرافية' : 'Select Geographic Zone'}
-                </label>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {geographicZones.map((zone) => (
-                    <button
-                      key={zone.id}
-                      onClick={() => {
-                        setSelectedZone(zone.id);
+          {/* Main Content - Responsive Layout */}
+          {/* Desktop: Split 50/50 | Mobile: Vertical Stack */}
+          <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+            {/* Left Side: Map (Desktop: 50% | Mobile: 40% height) */}
+            <div className="h-[40vh] md:h-auto md:w-1/2 border-b md:border-b-0 md:border-l border-gray-100 relative shrink-0">
+              <div className="absolute inset-0 bg-[#001a1a]">
+                <iframe 
+                  title="Saudi Arabia Network Map" 
+                  width="100%" 
+                  height="100%" 
+                  src={`https://maps.google.com/maps?q=${selectedCity || (selectedRegion !== 'all' ? saudiRegions.find(r => r.id === selectedRegion)?.nameAr : 'Saudi Arabia')}&t=&z=${selectedCity ? 13 : selectedRegion !== 'all' ? 8 : 6}&ie=UTF8&iwloc=&output=embed`}
+                  className="w-full h-full" 
+                  style={{ filter: 'invert(90%) hue-rotate(150deg) brightness(0.9) contrast(1.1)' }}
+                />
+                
+                {/* Map Overlay - Minimalist */}
+                <div className="absolute inset-0 pointer-events-none">
+                  {/* Location Badge */}
+                  <div className="absolute top-2 md:top-4 left-2 md:left-4 bg-white/95 backdrop-blur-sm px-2 md:px-4 py-1.5 md:py-2 rounded-lg md:rounded-xl shadow-lg border border-gray-100">
+                    <div className="flex items-center gap-1.5 md:gap-2">
+                      <MapPin className="w-3 h-3 md:w-4 md:h-4 text-[#5B9A9E]" />
+                      <div>
+                        <p className="text-[10px] md:text-xs font-bold text-gray-900 truncate max-w-[120px] md:max-w-none">
+                          {selectedCity || (selectedRegion !== 'all' ? saudiRegions.find(r => r.id === selectedRegion)?.nameAr : 'المملكة')}
+                        </p>
+                        <p className="text-[8px] md:text-[10px] text-gray-500">{providerCount}+ {isArabic ? 'مقدم خدمة' : 'providers'}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side: Results List (Desktop: 50% | Mobile: 60% height) */}
+            <div className="flex-1 md:w-1/2 flex flex-col bg-gray-50 overflow-hidden">
+              {/* Filters Bar - Only show if no pre-selection */}
+              {!hasPreSelection && (
+                <div className="p-2 md:p-4 bg-white border-b border-gray-100">
+                  {/* Mobile: Vertical Stack | Desktop: Horizontal */}
+                  <div className="flex flex-col md:flex-row gap-2">
+                    {/* Zone Filter */}
+                    <select
+                      value={selectedZone}
+                      onChange={(e) => {
+                        setSelectedZone(e.target.value);
                         setSelectedRegion('all');
                         setSelectedCity('');
                       }}
-                      className={`p-4 rounded-xl border-2 transition-all duration-200 ${
-                        selectedZone === zone.id
-                          ? 'border-[#5B9A9E] bg-[#5B9A9E]/10 shadow-md'
-                          : 'border-gray-200 hover:border-[#5B9A9E]/50 hover:bg-gray-50'
-                      }`}
+                      className="flex-1 px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5B9A9E] focus:border-transparent bg-white"
                     >
-                      <div className="flex items-center gap-2 mb-1">
-                        <div 
-                          className="w-3 h-3 rounded-full" 
-                          style={{ backgroundColor: zone.color }}
-                        />
-                        <span className="font-bold text-sm text-gray-900">
+                      {geographicZones.map((zone) => (
+                        <option key={zone.id} value={zone.id}>
                           {isArabic ? zone.nameAr : zone.nameEn}
-                        </span>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
+                        </option>
+                      ))}
+                    </select>
 
-              {/* Map Placeholder */}
-              <div className="relative h-64 md:h-80 bg-gradient-to-br from-[#5B9A9E]/10 to-[#6BA5A8]/10 rounded-2xl border-2 border-dashed border-[#5B9A9E]/30 overflow-hidden">
-                {/* Tactical Map */}
-                <div className="relative w-full h-full bg-[#001a1a] rounded-2xl overflow-hidden border-4 border-white/5 shadow-2xl">
-                  <iframe 
-                    title="Saudi Arabia Network Map" 
-                    width="100%" 
-                    height="100%" 
-                    src={`https://maps.google.com/maps?q=${selectedCity || (selectedRegion !== 'all' ? saudiRegions.find(r => r.id === selectedRegion)?.nameAr : 'Saudi Arabia')}&t=&z=${selectedCity ? 13 : selectedRegion !== 'all' ? 8 : 6}&ie=UTF8&iwloc=&output=embed`}
-                    className="transition-all duration-1000 grayscale-[0.8] contrast-[1.2] brightness-[0.7] opacity-100" 
-                    style={{ filter: 'invert(90%) hue-rotate(150deg) brightness(0.8) contrast(1.3)' }}
-                  />
-                  
-                  {/* Overlay Effects */}
-                  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    {/* Rotating Gradient */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] origin-center animate-[spin_10s_linear_infinite] opacity-20">
-                      <div className="w-1/2 h-1/2 bg-gradient-to-tr from-teal-500/40 to-transparent rounded-tr-full"></div>
-                    </div>
-                    
-                    {/* Grid Pattern */}
-                    <div 
-                      className="absolute inset-0 opacity-10" 
-                      style={{ 
-                        backgroundImage: 'radial-gradient(circle, rgb(45, 212, 191) 1px, transparent 0px)', 
-                        backgroundSize: '40px 40px' 
-                      }}
-                    />
-                    
-                    {/* Network Markers */}
-                    {providerCount > 0 && (
-                      <>
-                        {/* Central Marker */}
-                        <div className="absolute flex flex-col items-center transition-all duration-[2000ms] ease-linear" style={{ top: '50%', left: '50%' }}>
-                          <div className="relative group/marker cursor-crosshair animate-in fade-in zoom-in duration-500">
-                            <div className="absolute -inset-4 bg-teal-500 rounded-full opacity-20 animate-ping"></div>
-                            <div className="w-3 h-3 bg-teal-500 rounded-full shadow-[0_0_15px_rgba(255,255,255,0.5)] border-2 border-white"></div>
-                            <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md border border-white/10 px-2 py-1 rounded text-[8px] font-black tracking-widest text-white whitespace-nowrap opacity-60 group-hover/marker:opacity-100 transition-opacity">
-                              {providerCount}+ {isArabic ? 'مقدم خدمة' : 'Providers'}
-                            </div>
-                          </div>
-                        </div>
-                        
-                        {/* Additional Markers */}
-                        <div className="absolute flex flex-col items-center transition-all duration-[2000ms] ease-linear" style={{ top: '30%', left: '30%' }}>
-                          <div className="relative group/marker cursor-crosshair animate-in fade-in zoom-in duration-500" style={{ animationDelay: '500ms' }}>
-                            <div className="absolute -inset-4 bg-amber-500 rounded-full opacity-20 animate-ping"></div>
-                            <div className="w-3 h-3 bg-amber-500 rounded-full shadow-[0_0_15px_rgba(255,255,255,0.5)] border-2 border-white"></div>
-                            <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md border border-white/10 px-2 py-1 rounded text-[8px] font-black tracking-widest text-white whitespace-nowrap opacity-60 group-hover/marker:opacity-100 transition-opacity">
-                              {isArabic ? 'مستشفيات' : 'Hospitals'}
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="absolute flex flex-col items-center transition-all duration-[2000ms] ease-linear" style={{ top: '70%', left: '70%' }}>
-                          <div className="relative group/marker cursor-crosshair animate-in fade-in zoom-in duration-500" style={{ animationDelay: '1000ms' }}>
-                            <div className="absolute -inset-4 bg-blue-500 rounded-full opacity-20 animate-ping"></div>
-                            <div className="w-3 h-3 bg-blue-500 rounded-full shadow-[0_0_15px_rgba(255,255,255,0.5)] border-2 border-white"></div>
-                            <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md border border-white/10 px-2 py-1 rounded text-[8px] font-black tracking-widest text-white whitespace-nowrap opacity-60 group-hover/marker:opacity-100 transition-opacity">
-                              {isArabic ? 'عيادات' : 'Clinics'}
-                            </div>
-                          </div>
-                        </div>
-                      </>
-                    )}
-                    
-                    {/* Info Panel */}
-                    <div className="absolute top-4 left-4 p-3 bg-black/40 backdrop-blur-xl border border-white/10 rounded-xl">
-                      <div className="flex items-center gap-2 mb-2">
-                        <MapPin className="w-3 h-3 text-[#5B9A9E]" />
-                        <span className="text-[10px] font-black tracking-tighter text-white">
-                          {isArabic ? 'نظام الكشف' : 'Detection System'}
-                        </span>
-                      </div>
-                      <div className="font-mono text-[9px] text-teal-200 opacity-60">
-                        {selectedCity && <div>CITY: {selectedCity}</div>}
-                        {selectedRegion !== 'all' && <div>REGION: {saudiRegions.find(r => r.id === selectedRegion)?.nameAr}</div>}
-                        {selectedZone !== 'all' && <div>ZONE: {geographicZones.find(z => z.id === selectedZone)?.nameAr}</div>}
-                        <div>COUNT: {providerCount}+</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Administrative Regions */}
-              <div>
-                <label className="block text-sm font-bold text-gray-900 mb-3">
-                  {isArabic ? 'اختر المنطقة الإدارية' : 'Select Administrative Region'}
-                </label>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  {filteredRegions.map((region) => (
-                    <button
-                      key={region.id}
-                      onClick={() => {
-                        setSelectedRegion(region.id);
+                    {/* Region Filter */}
+                    <select
+                      value={selectedRegion}
+                      onChange={(e) => {
+                        setSelectedRegion(e.target.value);
                         setSelectedCity('');
                       }}
-                      className={`px-4 py-2.5 rounded-lg border transition-all duration-200 text-sm font-semibold ${
-                        selectedRegion === region.id
-                          ? 'border-[#5B9A9E] bg-[#5B9A9E] text-white shadow-md'
-                          : 'border-gray-200 text-gray-700 hover:border-[#5B9A9E] hover:bg-[#5B9A9E]/5'
-                      }`}
+                      className="flex-1 px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5B9A9E] focus:border-transparent bg-white"
                     >
-                      {isArabic ? region.nameAr : region.nameEn}
-                    </button>
-                  ))}
-                </div>
-              </div>
+                      {filteredRegions.map((region) => (
+                        <option key={region.id} value={region.id}>
+                          {isArabic ? region.nameAr : region.nameEn}
+                        </option>
+                      ))}
+                    </select>
 
-              {/* City Selection */}
-              {selectedRegion !== 'all' && availableCities.length > 0 && (
-                <div>
-                  <label className="block text-sm font-bold text-gray-900 mb-3">
-                    {isArabic ? 'اختر المدينة' : 'Select City'}
-                  </label>
-                  
-                  {/* Search Input */}
-                  <div className="relative mb-3">
-                    <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder={isArabic ? 'ابحث عن مدينة...' : 'Search for a city...'}
-                      className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5B9A9E] focus:border-transparent"
-                    />
-                  </div>
-
-                  {/* Cities Grid */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 max-h-48 overflow-y-auto">
-                    {filteredCities.map((city) => (
-                      <button
-                        key={city}
-                        onClick={() => setSelectedCity(city)}
-                        className={`px-3 py-2 rounded-lg border transition-all duration-200 text-sm ${
-                          selectedCity === city
-                            ? 'border-[#5B9A9E] bg-[#5B9A9E] text-white'
-                            : 'border-gray-200 text-gray-700 hover:border-[#5B9A9E] hover:bg-[#5B9A9E]/5'
-                        }`}
+                    {/* City Filter */}
+                    {selectedRegion !== 'all' && availableCities.length > 0 && (
+                      <select
+                        value={selectedCity}
+                        onChange={(e) => setSelectedCity(e.target.value)}
+                        className="flex-1 px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5B9A9E] focus:border-transparent bg-white"
                       >
-                        {city}
-                      </button>
-                    ))}
+                        <option value="">{isArabic ? 'جميع المدن' : 'All Cities'}</option>
+                        {availableCities.map((city) => (
+                          <option key={city} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+
+                    {/* Reset Button */}
+                    <button
+                      onClick={handleReset}
+                      className="px-2 md:px-3 py-1.5 md:py-2 text-xs md:text-sm border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                      title={isArabic ? 'إعادة تعيين' : 'Reset'}
+                    >
+                      <Filter className="w-3.5 h-3.5 md:w-4 md:h-4 text-gray-600" />
+                    </button>
                   </div>
                 </div>
               )}
 
-              {/* Results Summary */}
-              <div className="bg-gradient-to-r from-[#5B9A9E]/10 to-[#6BA5A8]/10 rounded-xl p-4 border border-[#5B9A9E]/20">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-600 mb-1">
-                      {isArabic ? 'النتائج المتاحة' : 'Available Results'}
-                    </p>
-                    <p className="text-2xl font-bold text-[#5B9A9E]">
-                      {providerCount}+ {isArabic ? 'مقدم خدمة' : 'providers'}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    {selectedCity && (
-                      <p className="text-sm font-semibold text-gray-900">{selectedCity}</p>
-                    )}
-                    {selectedRegion !== 'all' && (
-                      <p className="text-xs text-gray-600">
-                        {saudiRegions.find(r => r.id === selectedRegion)?.nameAr}
-                      </p>
-                    )}
-                  </div>
+              {/* Results List - Scrollable */}
+              <div className="flex-1 overflow-y-auto">
+                <div className="p-2 md:p-4 space-y-2 md:space-y-3">
+                  {providers.map((provider) => (
+                    <div
+                      key={provider.id}
+                      className="bg-white rounded-lg md:rounded-xl p-3 md:p-4 border border-gray-100 hover:border-[#5B9A9E] hover:shadow-md transition-all duration-200 cursor-pointer group"
+                    >
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-bold text-gray-900 text-xs md:text-sm mb-1 group-hover:text-[#5B9A9E] transition-colors truncate">
+                            {provider.name}
+                          </h3>
+                          <p className="text-[10px] md:text-xs text-gray-500 flex items-center gap-1">
+                            <MapPin className="w-2.5 h-2.5 md:w-3 md:h-3 shrink-0" />
+                            <span className="truncate">{provider.address}</span>
+                            <span className="shrink-0">• {provider.distance}</span>
+                          </p>
+                        </div>
+                        <div className="text-left mr-2 shrink-0">
+                          <div className="flex items-center gap-1 bg-amber-50 px-1.5 md:px-2 py-0.5 md:py-1 rounded-md md:rounded-lg">
+                            <span className="text-[10px] md:text-xs font-bold text-amber-600">⭐ {provider.rating}</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] md:text-xs px-1.5 md:px-2 py-0.5 md:py-1 bg-[#5B9A9E]/10 text-[#5B9A9E] rounded-md md:rounded-lg font-semibold">
+                          {provider.type}
+                        </span>
+                        <button className="text-[10px] md:text-xs text-[#5B9A9E] font-semibold hover:underline">
+                          {isArabic ? 'عرض التفاصيل ←' : 'View Details →'}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Footer Actions */}
+              <div className="p-2 md:p-4 bg-white border-t border-gray-100">
+                <div className="flex gap-2">
+                  <Button
+                    onClick={() => handleDownload('excel')}
+                    className="flex-1 bg-[#5B9A9E] hover:bg-[#4A8A8E] text-white text-xs md:text-sm py-1.5 md:py-2 h-auto"
+                  >
+                    <FileSpreadsheet className="w-3 h-3 md:w-4 md:h-4 ml-1 md:ml-2" />
+                    {isArabic ? 'Excel' : 'Excel'}
+                  </Button>
+                  
+                  <Button
+                    onClick={() => handleDownload('pdf')}
+                    className="flex-1 bg-[#5B9A9E] hover:bg-[#4A8A8E] text-white text-xs md:text-sm py-1.5 md:py-2 h-auto"
+                  >
+                    <FileText className="w-3 h-3 md:w-4 md:h-4 ml-1 md:ml-2" />
+                    {isArabic ? 'PDF' : 'PDF'}
+                  </Button>
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Footer Actions */}
-          <div className="border-t border-gray-200 bg-gray-50 px-6 py-4">
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button
-                onClick={handleReset}
-                variant="outline"
-                className="flex-1 border-gray-300"
-              >
-                <Filter className="w-4 h-4 ml-2" />
-                {isArabic ? 'إعادة تعيين' : 'Reset Filters'}
-              </Button>
-              
-              <Button
-                onClick={() => handleDownload('excel')}
-                className="flex-1 bg-green-600 hover:bg-green-700"
-              >
-                <FileSpreadsheet className="w-4 h-4 ml-2" />
-                {isArabic ? 'تحميل Excel' : 'Download Excel'}
-              </Button>
-              
-              <Button
-                onClick={() => handleDownload('pdf')}
-                className="flex-1 bg-red-600 hover:bg-red-700"
-              >
-                <FileText className="w-4 h-4 ml-2" />
-                {isArabic ? 'تحميل PDF' : 'Download PDF'}
-              </Button>
-            </div>
-          </div>
           </div>
         </DialogContent>
       </Dialog>

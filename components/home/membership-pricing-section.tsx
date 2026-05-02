@@ -7,17 +7,20 @@ import { CheckCircle2, XCircle, Calculator, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { MembershipModal } from '@/components/membership/MembershipModal';
+import { BusinessContactModal } from '@/components/membership/BusinessContactModal';
+import Image from 'next/image';
 
 interface MembershipPricingSectionProps {
   locale: string;
 }
 
 type Tier = {
-  id: 'premier' | 'vip';
+  id: 'premier' | 'vip' | 'business';
   name: string;
   tagline: string;
-  priceYearly: number;
-  priceMonthly: number;
+  priceYearly: number | string;
+  priceMonthly: number | string;
   features: string[];
   isRecommended?: boolean;
   ctaLabel: string;
@@ -39,8 +42,8 @@ const content = {
       id: 'premier' as const,
       name: 'Premier',
       tagline: 'بطاقتك الأساسية للرعاية اليومية',
-      priceYearly: 199,
-      priceMonthly: 16.5,
+      priceYearly: 299,
+      priceMonthly: 24.9,
       features: [
         'خصم حتى ٦٠٪ على الشبكة الطبية',
         'حجوزات فورية مع الأطباء',
@@ -68,10 +71,30 @@ const content = {
         'فحص شامل سنوي مجاني',
         'أولوية في الحجوزات + أطباء VIP',
         'كاش باك ١٠٪ (بدلاً من ٥٪)',
+        'مدير حساب شخصي عبر WhatsApp',
       ],
-      ctaLabel: 'اشترك في VIP',
-      ctaHref: '/register',
+      ctaLabel: 'اشترك مباشرة عبر WhatsApp',
+      ctaHref: 'https://wa.me/966500000000?text=مرحباً، أريد الاشتراك في باقة VIP',
       headerBg: 'bg-gradient-to-br from-slate-900 to-emerald-900',
+      headerTextColor: 'text-white',
+    },
+    {
+      id: 'business' as const,
+      name: 'Business',
+      tagline: 'حلول صحية متكاملة للشركات والمؤسسات',
+      priceYearly: 'حسب الاتفاق',
+      priceMonthly: 'حسب الاتفاق',
+      features: [
+        'تغطية شاملة لجميع الموظفين',
+        'خصومات مخصصة حسب عدد الموظفين',
+        'لوحة تحكم خاصة للإدارة',
+        'تقارير صحية دورية للموظفين',
+        'مدير حساب مخصص ٢٤/٧',
+        'فواتير موحدة وتسهيلات دفع',
+      ],
+      ctaLabel: 'تواصل معنا',
+      ctaHref: '/contact?type=business',
+      headerBg: 'bg-gradient-to-br from-blue-900 to-indigo-900',
       headerTextColor: 'text-white',
     },
   ],
@@ -95,7 +118,7 @@ const content = {
   },
 };
 
-function PricingCard({ tier, index, locale }: { tier: Tier; index: number; locale: string }) {
+function PricingCard({ tier, index, locale, onPremierClick, onBusinessClick }: { tier: Tier; index: number; locale: string; onPremierClick?: () => void; onBusinessClick?: () => void }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -116,10 +139,25 @@ function PricingCard({ tier, index, locale }: { tier: Tier; index: number; local
     return () => observer.disconnect();
   }, []);
 
+  // Handle CTA click
+  const handleCtaClick = (e: React.MouseEvent) => {
+    // If it's Premier tier and we have the callback, open modal instead
+    if (tier.id === 'premier' && onPremierClick) {
+      e.preventDefault();
+      onPremierClick();
+    }
+    // If it's Business tier and we have the callback, open business modal
+    else if (tier.id === 'business' && onBusinessClick) {
+      e.preventDefault();
+      onBusinessClick();
+    }
+    // Otherwise, let the Link handle navigation for VIP
+  };
+
   return (
     <article
       ref={ref}
-      className={`relative rounded-3xl overflow-hidden bg-white hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 ${
+      className={`relative rounded-3xl overflow-hidden bg-white hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 flex flex-col h-full ${
         tier.isRecommended
           ? 'border-2 border-primary shadow-2xl scale-100 md:scale-105 lg:scale-110'
           : 'border-2 border-slate-200'
@@ -157,27 +195,46 @@ function PricingCard({ tier, index, locale }: { tier: Tier; index: number; local
       </div>
 
       {/* Content Section */}
-      <div className="p-6 lg:p-8">
+      <div className="p-6 lg:p-8 flex-1 flex flex-col">
         {/* Price */}
         <div className="mb-6 pb-6 border-b border-slate-100">
-          <div className="flex items-baseline gap-2 mb-1">
-            <span className="text-5xl md:text-6xl font-black tracking-tight text-slate-900">
-              {tier.priceYearly}
-            </span>
-            <span className="text-2xl font-bold text-slate-700">ر.س</span>
-          </div>
-          <p className="text-sm text-slate-500 font-medium">
-            سنوياً (~ {tier.priceMonthly} ريال/شهر)
-          </p>
+          {typeof tier.priceYearly === 'number' ? (
+            <>
+              <div className="flex items-baseline gap-2 mb-1 justify-center" dir="rtl">
+                <span className="text-5xl md:text-6xl font-black tracking-tight text-slate-900">
+                  {tier.priceYearly.toLocaleString('ar-SA')}
+                </span>
+                <Image 
+                  src="/images/riyal-symbol.png" 
+                  alt="ريال سعودي" 
+                  width={32} 
+                  height={32} 
+                  className="object-contain"
+                />
+              </div>
+              <p className="text-sm text-slate-500 font-medium text-center">
+                سنوياً (~ {typeof tier.priceMonthly === 'number' ? tier.priceMonthly.toLocaleString('ar-SA') : tier.priceMonthly} ريال/شهر)
+              </p>
+            </>
+          ) : (
+            <div className="text-center">
+              <span className="text-3xl md:text-4xl font-black text-slate-900">
+                {tier.priceYearly}
+              </span>
+              <p className="text-sm text-slate-500 font-medium mt-2">
+                أسعار تنافسية حسب عدد الموظفين
+              </p>
+            </div>
+          )}
         </div>
 
-        {/* Intro Text - For both tiers */}
+        {/* Intro Text - For all tiers */}
         <p className="text-sm font-bold text-slate-700 mb-4 bg-slate-50 px-3 py-2 rounded-lg">
-          {tier.isRecommended ? content.vipIntro : 'بطاقتك الأساسية للرعاية اليومية'}
+          {tier.isRecommended ? content.vipIntro : tier.id === 'business' ? 'حلول صحية متكاملة لموظفيك' : 'بطاقتك الأساسية للرعاية اليومية'}
         </p>
 
         {/* Features */}
-        <ul className="space-y-3 mb-8">
+        <ul className="space-y-3 mb-8 flex-1">
           {tier.features.map((feature, i) => (
             <li key={i} className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" aria-hidden="true" />
@@ -188,15 +245,28 @@ function PricingCard({ tier, index, locale }: { tier: Tier; index: number; local
 
         {/* CTA */}
         <Button
-          asChild
+          asChild={tier.id !== 'premier' && tier.id !== 'business'}
           size="lg"
+          onClick={(tier.id === 'premier' || tier.id === 'business') ? handleCtaClick : undefined}
           className={`w-full text-base font-black py-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg ${
             tier.isRecommended 
-              ? 'bg-primary hover:bg-primary/90 shadow-primary/20' 
+              ? 'bg-primary hover:bg-primary/90 shadow-primary/20 text-white' 
+              : tier.id === 'business'
+              ? 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-emerald-900/20'
               : 'bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20'
           }`}
         >
-          <Link href={`/${locale}${tier.ctaHref}`}>{tier.ctaLabel}</Link>
+          {tier.id === 'premier' || tier.id === 'business' ? (
+            <span>{tier.ctaLabel}</span>
+          ) : (
+            <Link 
+              href={tier.id === 'vip' ? tier.ctaHref : `/${locale}${tier.ctaHref}`}
+              target={tier.id === 'vip' ? '_blank' : undefined}
+              rel={tier.id === 'vip' ? 'noopener noreferrer' : undefined}
+            >
+              {tier.ctaLabel}
+            </Link>
+          )}
         </Button>
 
         {/* Payment Note */}
@@ -225,15 +295,15 @@ function ComparisonTable() {
   const [isOpen, setIsOpen] = useState(false);
 
   const comparisonData = [
-    { feature: 'السعر السنوي', premier: '199 ر.س', vip: '499 ر.س' },
-    { feature: 'الخصم الأقصى', premier: 'حتى 60%', vip: 'حتى 80%' },
-    { feature: 'عدد أفراد العائلة', premier: '1', vip: '4' },
-    { feature: 'كاش باك', premier: '5%', vip: '10%' },
+    { feature: 'السعر السنوي', premier: '٢٩٩ ر.س', vip: '٤٩٩ ر.س' },
+    { feature: 'الخصم الأقصى', premier: 'حتى ٦٠٪', vip: 'حتى ٨٠٪' },
+    { feature: 'عدد أفراد العائلة', premier: '١', vip: '٤' },
+    { feature: 'كاش باك', premier: '٥٪', vip: '١٠٪' },
     { feature: 'استشارة "اسأل طبيب"', premier: '✓', vip: '✓' },
     { feature: 'زيارة طبيب منزلية', premier: '✗', vip: 'مجانية شهرياً' },
     { feature: 'فحص شامل سنوي', premier: '✗', vip: 'مجاني' },
     { feature: 'أولوية في الحجوزات', premier: '✗', vip: '✓' },
-    { feature: 'دعم العملاء', premier: '24/7', vip: '24/7 + مدير حساب' },
+    { feature: 'دعم العملاء', premier: '٢٤/٧', vip: '٢٤/٧ + مدير حساب' },
   ];
 
   return (
@@ -279,90 +349,124 @@ function ComparisonTable() {
 }
 
 export function MembershipPricingSection({ locale }: MembershipPricingSectionProps) {
-  return (
-    <section className="py-16 md:py-24 bg-white" aria-labelledby="membership-pricing-heading">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12 md:mb-16 max-w-4xl mx-auto">
-          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
-            {content.eyebrow}
-          </p>
-          <h2
-            id="membership-pricing-heading"
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4"
-          >
-            {content.title}
-          </h2>
-          <p className="text-lg md:text-xl text-slate-600">{content.subtitle}</p>
-        </div>
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBusinessModalOpen, setIsBusinessModalOpen] = useState(false);
 
-        {/* Savings Calculator Strip */}
-        <div className="max-w-5xl mx-auto mb-12">
-          <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-6 md:p-8">
-            <div className="flex items-start gap-4">
-              <Calculator className="w-8 h-8 text-amber-600 flex-shrink-0 mt-1" aria-hidden="true" />
-              <div className="flex-1">
-                <p className="text-base md:text-lg text-slate-700 leading-relaxed mb-4">
-                  {content.calculator.body}
-                </p>
-                <Button asChild variant="outline" className="border-amber-600 text-amber-700 hover:bg-amber-100">
-                  <Link href={`/${locale}/pricing`}>{content.calculator.cta}</Link>
-                </Button>
+  const handlePremierClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleBusinessClick = () => {
+    setIsBusinessModalOpen(true);
+  };
+
+  const handleCloseBusinessModal = () => {
+    setIsBusinessModalOpen(false);
+  };
+
+  return (
+    <>
+      <section className="py-16 md:py-24 bg-white" aria-labelledby="membership-pricing-heading">
+        <div className="container mx-auto px-4">
+          {/* Header */}
+          <div className="text-center mb-12 md:mb-16 max-w-4xl mx-auto">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+              {content.eyebrow}
+            </p>
+            <h2
+              id="membership-pricing-heading"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4"
+            >
+              {content.title}
+            </h2>
+            <p className="text-lg md:text-xl text-slate-600">{content.subtitle}</p>
+          </div>
+
+          {/* Savings Calculator Strip */}
+          <div className="max-w-5xl mx-auto mb-12">
+            <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-6 md:p-8">
+              <div className="flex items-start gap-4">
+                <Calculator className="w-8 h-8 text-amber-600 flex-shrink-0 mt-1" aria-hidden="true" />
+                <div className="flex-1">
+                  <p className="text-base md:text-lg text-slate-700 leading-relaxed mb-4">
+                    {content.calculator.body}
+                  </p>
+                  <Button asChild variant="outline" className="border-amber-600 text-amber-700 hover:bg-amber-100">
+                    <Link href={`/${locale}/pricing`}>{content.calculator.cta}</Link>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto mb-8">
-          {content.tiers.map((tier, index) => (
-            <PricingCard key={tier.id} tier={tier} index={index} locale={locale} />
-          ))}
-        </div>
+          {/* Pricing Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto mb-8">
+            {content.tiers.map((tier, index) => (
+              <PricingCard 
+                key={tier.id} 
+                tier={tier} 
+                index={index} 
+                locale={locale}
+                onPremierClick={tier.id === 'premier' ? handlePremierClick : undefined}
+                onBusinessClick={tier.id === 'business' ? handleBusinessClick : undefined}
+              />
+            ))}
+          </div>
 
-        {/* Comparison Table */}
-        <ComparisonTable />
+          {/* Comparison Table */}
+          <ComparisonTable />
 
-        {/* Trust Strip */}
-        <div className="max-w-5xl mx-auto mt-12 mb-12">
-          <div className="bg-slate-50 rounded-2xl p-6">
-            <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 text-sm text-slate-600">
-              {content.trustStrip.map((item, i) => (
-                <span key={i} className="whitespace-nowrap">
-                  {item}
-                </span>
-              ))}
+          {/* Trust Strip */}
+          <div className="max-w-5xl mx-auto mt-12 mb-12">
+            <div className="bg-slate-50 rounded-2xl p-6">
+              <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 text-sm text-slate-600">
+                {content.trustStrip.map((item, i) => (
+                  <span key={i} className="whitespace-nowrap">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Final CTA Band */}
+          <div className="max-w-4xl mx-auto bg-emerald-50 rounded-2xl p-8 md:p-10 text-center">
+            <div className="flex justify-center mb-4">
+              <Gift className="w-12 h-12 text-primary" aria-hidden="true" />
+            </div>
+            <p className="text-lg md:text-xl text-slate-700 leading-relaxed mb-6">
+              {content.finalCta.body}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button
+                asChild
+                size="lg"
+                className="text-base md:text-lg px-8 py-6 rounded-xl hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
+              >
+                <Link href={`/${locale}/register`}>{content.finalCta.primaryButton}</Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="text-base md:text-lg px-8 py-6 rounded-xl hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
+              >
+                <Link href={`/${locale}/pricing`}>{content.finalCta.secondaryButton}</Link>
+              </Button>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Final CTA Band */}
-        <div className="max-w-4xl mx-auto bg-emerald-50 rounded-2xl p-8 md:p-10 text-center">
-          <div className="flex justify-center mb-4">
-            <Gift className="w-12 h-12 text-primary" aria-hidden="true" />
-          </div>
-          <p className="text-lg md:text-xl text-slate-700 leading-relaxed mb-6">
-            {content.finalCta.body}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              asChild
-              size="lg"
-              className="text-base md:text-lg px-8 py-6 rounded-xl hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
-            >
-              <Link href={`/${locale}/register`}>{content.finalCta.primaryButton}</Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="text-base md:text-lg px-8 py-6 rounded-xl hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
-            >
-              <Link href={`/${locale}/pricing`}>{content.finalCta.secondaryButton}</Link>
-            </Button>
-          </div>
-        </div>
-      </div>
-    </section>
+      {/* Membership Modal */}
+      <MembershipModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      
+      {/* Business Contact Modal */}
+      <BusinessContactModal isOpen={isBusinessModalOpen} onClose={handleCloseBusinessModal} />
+    </>
   );
 }

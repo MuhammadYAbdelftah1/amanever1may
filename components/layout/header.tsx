@@ -11,6 +11,7 @@ import { AppDownloadModal } from '@/components/shared/app-download-modal';
 import { ServicesPopover } from './services-popover';
 import { FeaturesPopover } from './features-popover';
 import { PlatformsPopover } from './platforms-popover';
+import { SpecialOffersPopover } from './special-offers-popover';
 import { AboutPopover } from './about-popover';
 import { BlogPopover } from './blog-popover';
 import { ContactPopover } from './contact-popover';
@@ -68,12 +69,23 @@ export function Header({ locale }: HeaderProps) {
         {/* Logo with scale animation */}
         <Link 
           href={`/${locale}`} 
-          className={`flex items-center focus:outline-none focus:ring-2 focus:ring-[#4A8B8E]/50 focus:ring-offset-2 rounded-lg transition-all duration-300 hover:scale-105 ${
+          className={`flex items-center gap-2 md:gap-3 focus:outline-none focus:ring-2 focus:ring-[#4A8B8E]/50 focus:ring-offset-2 rounded-lg transition-all duration-300 hover:scale-105 ${
             isScrolled ? 'scale-90' : 'scale-100'
           }`}
           aria-label={t('home')}
         >
           <Logo size="small" />
+          <div className="flex flex-col gap-[2px]">
+            <h1 className="text-[#4A8B8E] font-extrabold text-sm md:text-base lg:text-lg">
+              شركة أمان إيفر
+            </h1>
+            <p className="text-[#4A8B8E]/80 font-extrabold text-[10px] md:text-xs">
+              والرعاية الشاملة للخدمات الطبية
+            </p>
+            <p className="text-[#4A8B8E]/70 font-extrabold text-[9px] md:text-[10px]">
+              AmanEver - Comprehensive Medical Services
+            </p>
+          </div>
         </Link>
 
         {/* Desktop Navigation with modern styling */}
@@ -94,6 +106,9 @@ export function Header({ locale }: HeaderProps) {
             <span className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#4A8B8E]/0 via-[#4A8B8E]/5 to-[#4A8B8E]/0" />
           </Link>
           
+          {/* About Popover - من نحن */}
+          <AboutPopover locale={locale} />
+          
           {/* Services Popover */}
           <ServicesPopover locale={locale} />
           
@@ -105,8 +120,8 @@ export function Header({ locale }: HeaderProps) {
           <PlatformsPopover locale={locale} type="doctors" />
           <PlatformsPopover locale={locale} type="affiliates" />
           
-          {/* About Popover */}
-          <AboutPopover locale={locale} />
+          {/* Special Offers Popover - العروض الخاصة */}
+          <SpecialOffersPopover locale={locale} />
           
           {/* Blog Popover */}
           <BlogPopover locale={locale} />
@@ -176,7 +191,7 @@ export function Header({ locale }: HeaderProps) {
               </SheetTitle>
               
               {/* Logo at the top */}
-              <div className="flex justify-center pt-6 pb-4 border-b border-gray-200">
+              <div className="flex flex-col items-center pt-6 pb-4 border-b border-gray-200 gap-3">
                 <Link 
                   href={`/${locale}`}
                   className="focus:outline-none focus:ring-2 focus:ring-[#4A8B8E]/50 focus:ring-offset-2 rounded-lg transition-all duration-300 hover:scale-105"
@@ -184,6 +199,19 @@ export function Header({ locale }: HeaderProps) {
                 >
                   <Logo size="medium" />
                 </Link>
+                
+                {/* Company Text */}
+                <div className="flex flex-col items-center gap-1 text-center">
+                  <h2 className="text-[#4A8B8E] font-extrabold text-base">
+                    شركة أمان إيفر
+                  </h2>
+                  <p className="text-[#4A8B8E]/80 font-extrabold text-xs">
+                    والرعاية الشاملة للخدمات الطبية
+                  </p>
+                  <p className="text-[#4A8B8E]/70 font-extrabold text-[10px]">
+                    AmanEver - Comprehensive Medical Services
+                  </p>
+                </div>
               </div>
               
               {/* Navigation Links - Centered */}
@@ -210,6 +238,9 @@ export function Header({ locale }: HeaderProps) {
                   <span className="flex-1 text-center">{t('home')}</span>
                 </Link>
                 
+                {/* About Popover - من نحن */}
+                <AboutPopover locale={locale} isMobile />
+                
                 {/* Services Popover */}
                 <ServicesPopover locale={locale} isMobile />
                 
@@ -221,8 +252,8 @@ export function Header({ locale }: HeaderProps) {
                 <PlatformsPopover locale={locale} type="doctors" isMobile />
                 <PlatformsPopover locale={locale} type="affiliates" isMobile />
                 
-                {/* About Popover */}
-                <AboutPopover locale={locale} isMobile />
+                {/* Special Offers Popover - العروض الخاصة */}
+                <SpecialOffersPopover locale={locale} isMobile />
                 
                 {/* Blog Popover */}
                 <BlogPopover locale={locale} isMobile />

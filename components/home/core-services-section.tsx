@@ -13,6 +13,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import * as LucideIcons from 'lucide-react';
 import { NetworkMapPopover } from '@/components/shared/network-map-popover';
+import { ServiceDetailsModal } from '@/components/shared/service-details-modal';
 
 interface CoreServicesSectionProps {
   locale: string;
@@ -71,7 +72,7 @@ const content = {
       id: 'instant-booking',
       icon: 'Zap',
       image: '/services/booking.jpg',
-      title: 'حجوزات فورية',
+      title: 'حجوزات واستشارات طبية فورية',
       tagline: 'فوري',
       description: 'احجز مع أفضل الأطباء في الرياض، جدة، والدمام دون انتظار. استشارات أونلاين صوتية ومرئية وشات 24/7.',
       ctaLabel: 'اكتشف المزيد',
@@ -81,17 +82,27 @@ const content = {
       id: 'home-care',
       icon: 'Home',
       image: '/services/home-care.jpg',
-      title: 'الرعاية المنزلية',
+      title: 'خدمات الرعاية المنزلية',
       tagline: 'رعاية منزلية',
       description: 'أطباء وممرضين معتمدين للزيارات المنزلية. رعاية كبار السن، فحوصات طبية، علاج طبيعي، وتمريض منزلي.',
       ctaLabel: 'اكتشف المزيد',
       ctaHref: '/home-care',
     },
     {
+      id: 'ask-doctor',
+      icon: 'MessageCircle',
+      image: '/services/ask-doctor.jpg',
+      title: 'اسأل طبيب',
+      tagline: 'استشارة فورية',
+      description: 'استشارات طبية فورية على مدار الساعة مع نخبة من الأطباء المعتمدين. رد خلال 15 دقيقة عبر الشات، الصوت، أو الفيديو.',
+      ctaLabel: 'اكتشف المزيد',
+      ctaHref: '/ask-doctor',
+    },
+    {
       id: 'store',
       icon: 'ShoppingBag',
       image: '/services/store.jpg',
-      title: 'متجر أمان',
+      title: 'متجر أمان إيفر الإلكتروني',
       tagline: 'عروض حصرية',
       description: 'منتجات طبية، مكملات غذائية، ومستحضرات تجميلية أصلية بأسعار مخفضة وعروض حصرية لأعضاء أمان.',
       ctaLabel: 'اكتشف المزيد',
@@ -101,7 +112,7 @@ const content = {
       id: 'medical-network',
       icon: 'Building2',
       image: '/services/medical-network.jpg',
-      title: 'الشبكة الطبية',
+      title: 'استكشف الشبكة الطبية',
       tagline: 'شبكة طبية',
       description: 'وصول مباشر لأكثر من 2000 مركز طبي: مستشفيات، عيادات، مختبرات البرج، صيدليات النهدي والدواء في كافة مدن المملكة.',
       ctaLabel: 'استكشف الشبكة',
@@ -111,7 +122,7 @@ const content = {
       id: 'health-network',
       icon: 'Dumbbell',
       image: '/services/health-network.jpg',
-      title: 'الشبكة الصحية',
+      title: 'استكشف الشبكة الصحية',
       tagline: 'شبكة صحية',
       description: 'خصومات على فتنس تايم، جولدز جيم، عيادات التغذية، مراكز البصريات، والسبا لنمط حياة صحي متكامل.',
       ctaLabel: 'استكشف الشبكة',
@@ -123,6 +134,7 @@ const content = {
 function ServiceCard({ service, index, locale }: { service: Service; index: number; locale: string }) {
   const [isVisible, setIsVisible] = useState(false);
   const [showNetworkDialog, setShowNetworkDialog] = useState(false);
+  const [showServiceModal, setShowServiceModal] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   
   // Dynamically get the icon component
@@ -150,25 +162,25 @@ function ServiceCard({ service, index, locale }: { service: Service; index: numb
   const networkType = service.id === 'medical-network' ? 'medical' : 'health';
 
   const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     if (isNetworkCard) {
-      e.preventDefault();
       setShowNetworkDialog(true);
+    } else {
+      setShowServiceModal(true);
     }
   };
 
-  const CardWrapper = isNetworkCard ? 'div' : 'a';
-  const cardProps = isNetworkCard 
-    ? { onClick: handleClick }
-    : { href: `/${locale}${service.ctaHref}` };
+  const CardWrapper = 'div';
+  const cardProps = { onClick: handleClick };
 
   return (
     <>
       <CardWrapper
         {...cardProps}
         ref={ref as any}
-        className={`group relative h-full rounded-2xl bg-white overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 block ${
+        className={`group relative h-full rounded-2xl bg-white overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 block cursor-pointer ${
           isVisible ? 'animate-in fade-in slide-in-from-bottom-4' : 'opacity-0'
-        } ${isNetworkCard ? 'cursor-pointer' : ''}`}
+        }`}
         style={{
           animationDelay: `${index * 100}ms`,
           animationFillMode: 'forwards',
@@ -235,6 +247,16 @@ function ServiceCard({ service, index, locale }: { service: Service; index: numb
         type={networkType}
         isOpen={showNetworkDialog}
         onOpenChange={setShowNetworkDialog}
+      />
+    )}
+    
+    {/* Service Details Modal */}
+    {!isNetworkCard && (
+      <ServiceDetailsModal
+        isOpen={showServiceModal}
+        onClose={() => setShowServiceModal(false)}
+        serviceId={service.id}
+        locale={locale}
       />
     )}
   </>

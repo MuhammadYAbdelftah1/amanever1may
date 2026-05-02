@@ -147,9 +147,19 @@ export function WhyBestSection({ locale }: WhyBestSectionProps) {
                     {feature.description}
                   </p>
 
-                  {/* Download Buttons */}
+                  {/* Download Button */}
                   <div className="pt-4 border-t border-gray-100">
-                    <AppDownloadButtons layout="horizontal" showHuawei={true} />
+                    <button className="w-full bg-gradient-to-r from-[#4A8B8E] to-[#356B6E] hover:from-[#356B6E] hover:to-[#4A8B8E] text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group shadow-md hover:shadow-lg">
+                      <span>حمل التطبيق</span>
+                      <svg 
+                        className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
               </div>

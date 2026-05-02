@@ -42,7 +42,7 @@ const services: Service[] = [
   {
     id: 'instant-booking',
     icon: Video,
-    title: 'حجوزات فورية',
+    title: 'حجوزات واستشارات طبية فورية',
     description: 'احجز مع أفضل الأطباء دون انتظار',
     href: '/services#for-patients',
     image: '/images/services/booking.jpg'
@@ -50,7 +50,7 @@ const services: Service[] = [
   {
     id: 'home-care',
     icon: Home,
-    title: 'الرعاية المنزلية',
+    title: 'خدمات الرعاية المنزلية',
     description: 'أطباء وممرضين معتمدين للزيارات المنزلية',
     href: '/services#for-patients',
     image: '/images/services/home-care.jpg'
@@ -58,7 +58,7 @@ const services: Service[] = [
   {
     id: 'medical-network',
     icon: Building2,
-    title: 'الشبكة الطبية',
+    title: 'استكشف الشبكة الطبية',
     description: '2000+ مركز طبي في كافة مدن المملكة',
     href: '/services#for-patients',
     image: '/images/services/medical-network.jpg'
@@ -66,7 +66,7 @@ const services: Service[] = [
   {
     id: 'health-network',
     icon: Dumbbell,
-    title: 'الشبكة الصحية',
+    title: 'استكشف الشبكة الصحية',
     description: 'جيم، سبا، صالونات تجميل، وأكثر',
     href: '/services#for-patients',
     image: '/images/services/health-network.jpg'
@@ -74,7 +74,7 @@ const services: Service[] = [
   {
     id: 'store',
     icon: MessageCircle,
-    title: 'متجر أمان',
+    title: 'متجر أمان إيفر الإلكتروني',
     description: 'منتجات طبية ومكملات غذائية بأسعار مخفضة',
     href: '/services#for-patients',
     badge: 'عروض حصرية',

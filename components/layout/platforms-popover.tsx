@@ -25,8 +25,8 @@ const platformsConfig = {
   merchants: {
     id: 'merchants',
     icon: Store,
-    title: 'منصة التجار',
-    titleEn: 'Merchants Platform',
+    title: 'منصة دخول التاجر',
+    titleEn: 'Merchant Login Platform',
     description: 'انضم لشبكة التجار واحصل على عمولات وفرص تجارية',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     identifierLabel: 'رقم السجل التجاري / الجوال / البريد',
@@ -39,8 +39,8 @@ const platformsConfig = {
   doctors: {
     id: 'doctors',
     icon: Stethoscope,
-    title: 'منصة الأطباء',
-    titleEn: 'Doctors Platform',
+    title: 'منصة دخول الأطباء',
+    titleEn: 'Doctors Login Platform',
     description: 'انضم لمنصة الأطباء ووسّع قاعدة مرضاك',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     identifierLabel: 'رقم الترخيص الطبي / الجوال / البريد',

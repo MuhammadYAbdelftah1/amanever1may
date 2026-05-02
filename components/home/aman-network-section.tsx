@@ -21,7 +21,8 @@ import {
   Dumbbell,
   Salad,
   Glasses,
-  Sparkle
+  Sparkle,
+  X
 } from 'lucide-react';
 import { NetworkMapPopover } from '@/components/shared/network-map-popover';
 
@@ -205,6 +206,75 @@ function ServiceCard({ service }: { service: NetworkService }) {
 export function AmanNetworkSection({ locale }: AmanNetworkSectionProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<'medical' | 'health'>('medical');
+  const [showRegionSelector, setShowRegionSelector] = useState(false);
+  const [showNetworkMap, setShowNetworkMap] = useState(false);
+  const [selectedNetworkType, setSelectedNetworkType] = useState<'medical' | 'health'>('medical');
+  const [selectedZoneId, setSelectedZoneId] = useState(''); // For the region selector dialog
+  const [selectedCityName, setSelectedCityName] = useState(''); // For the region selector dialog
+  const [mapRegionId, setMapRegionId] = useState(''); // For passing to NetworkMapPopover
+  const [mapCityName, setMapCityName] = useState(''); // For passing to NetworkMapPopover
+
+  const regions = [
+    {
+      id: 'central',
+      regionId: 'riyadh', // Maps to NetworkMapPopover region ID
+      name: 'المنطقة الوسطى',
+      cities: ['الرياض', 'الخرج', 'الدوادمي', 'الزلفي', 'المجمعة', 'شقراء', 'الأفلاج', 'وادي الدواسر', 'السليل', 'عفيف']
+    },
+    {
+      id: 'western',
+      regionId: 'makkah', // Maps to NetworkMapPopover region ID
+      name: 'المنطقة الغربية',
+      cities: ['مكة', 'جدة', 'المدينة المنورة', 'الطائف', 'ينبع', 'رابغ', 'القنفذة', 'الليث', 'بدر', 'خليص']
+    },
+    {
+      id: 'eastern',
+      regionId: 'eastern', // Maps to NetworkMapPopover region ID
+      name: 'المنطقة الشرقية',
+      cities: ['الدمام', 'الخبر', 'الظهران', 'الأحساء (الهفوف)', 'الأحساء (المبرز)', 'الجبيل', 'القطيف', 'الخفجي', 'رأس تنورة', 'بقيق', 'النعيرية', 'حفر الباطن']
+    },
+    {
+      id: 'northern',
+      regionId: 'tabuk', // Maps to NetworkMapPopover region ID (using tabuk as representative)
+      name: 'المنطقة الشمالية',
+      cities: ['تبوك', 'عرعر', 'سكاكا', 'دومة الجندل', 'القريات', 'رفحاء', 'طريف']
+    },
+    {
+      id: 'southern',
+      regionId: 'asir', // Maps to NetworkMapPopover region ID (using asir as representative)
+      name: 'المنطقة الجنوبية',
+      cities: ['أبها', 'خميس مشيط', 'نجران', 'جازان', 'الباحة', 'صبيا', 'بيش', 'محايل عسير', 'أحد رفيدة', 'شرورة', 'بلجرشي', 'المخواة']
+    },
+    {
+      id: 'qassim',
+      regionId: 'qassim', // Maps to NetworkMapPopover region ID
+      name: 'منطقة القصيم',
+      cities: ['بريدة', 'عنيزة', 'الرس', 'البكيرية', 'البدائع', 'رياض الخبراء', 'عيون الجواء']
+    }
+  ];
+
+  const handleNetworkButtonClick = (networkType: 'medical' | 'health') => {
+    setSelectedNetworkType(networkType);
+    setSelectedZoneId('');
+    setSelectedCityName('');
+    setMapRegionId('');
+    setMapCityName('');
+    setShowRegionSelector(true);
+  };
+
+  const handleContinue = () => {
+    if (selectedZoneId && selectedCityName) {
+      const regionData = regions.find(r => r.id === selectedZoneId);
+      if (regionData) {
+        setMapRegionId(regionData.regionId);
+        setMapCityName(selectedCityName);
+        setShowRegionSelector(false);
+        setShowNetworkMap(true);
+      }
+    }
+  };
+
+  const selectedRegionData = regions.find(r => r.id === selectedZoneId);
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
@@ -274,27 +344,121 @@ export function AmanNetworkSection({ locale }: AmanNetworkSectionProps) {
         {/* Tabs */}
         <div className="flex justify-center gap-4 mb-12">
           <button
-            onClick={() => setActiveTab('medical')}
+            onClick={() => handleNetworkButtonClick('medical')}
             className={`px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 ${
               activeTab === 'medical'
                 ? 'bg-gradient-to-r from-[#5B9A9E] to-[#6BA5A8] text-white shadow-lg scale-105'
                 : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-[#5B9A9E] hover:text-[#5B9A9E]'
             }`}
           >
-            الشبكة الطبية
+            استكشف الشبكة الطبية
           </button>
           <button
-            onClick={() => setActiveTab('health')}
+            onClick={() => handleNetworkButtonClick('health')}
             className={`px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 ${
               activeTab === 'health'
                 ? 'bg-gradient-to-r from-[#5B9A9E] to-[#6BA5A8] text-white shadow-lg scale-105'
                 : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-[#5B9A9E] hover:text-[#5B9A9E]'
             }`}
           >
-            الشبكة الصحية
+            استكشف الشبكة الصحية
           </button>
         </div>
       </div>
+
+      {/* Region Selector Dialog - Simple & Easy */}
+      {showRegionSelector && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-[#5B9A9E] to-[#6BA5A8] px-8 py-6 rounded-t-3xl">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-2xl font-bold text-white">اختر منطقتك ومدينتك</h3>
+                  <p className="text-white/90 text-sm mt-1">
+                    {selectedNetworkType === 'medical' ? 'الشبكة الطبية' : 'الشبكة الصحية'}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowRegionSelector(false)}
+                  className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                >
+                  <X className="w-6 h-6 text-white" />
+                </button>
+              </div>
+            </div>
+
+            {/* Content - Simple Form */}
+            <div className="p-8 space-y-6">
+              {/* Step 1: Select Region */}
+              <div>
+                <label className="block text-lg font-bold text-gray-900 mb-3">
+                  1️⃣ اختر المنطقة
+                </label>
+                <select
+                  value={selectedZoneId}
+                  onChange={(e) => {
+                    setSelectedZoneId(e.target.value);
+                    setSelectedCityName(''); // Reset city when region changes
+                  }}
+                  className="w-full px-6 py-4 text-lg border-2 border-gray-300 rounded-2xl focus:border-[#5B9A9E] focus:ring-4 focus:ring-[#5B9A9E]/20 outline-none transition-all bg-white cursor-pointer"
+                >
+                  <option value="">-- اختر المنطقة --</option>
+                  {regions.map((region) => (
+                    <option key={region.id} value={region.id}>
+                      {region.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Step 2: Select City (only shows when region is selected) */}
+              {selectedZoneId && selectedRegionData && (
+                <div className="animate-in fade-in slide-in-from-top-4 duration-300">
+                  <label className="block text-lg font-bold text-gray-900 mb-3">
+                    2️⃣ اختر المدينة
+                  </label>
+                  <select
+                    value={selectedCityName}
+                    onChange={(e) => setSelectedCityName(e.target.value)}
+                    className="w-full px-6 py-4 text-lg border-2 border-gray-300 rounded-2xl focus:border-[#5B9A9E] focus:ring-4 focus:ring-[#5B9A9E]/20 outline-none transition-all bg-white cursor-pointer"
+                  >
+                    <option value="">-- اختر المدينة --</option>
+                    {selectedRegionData.cities.map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              {/* Continue Button */}
+              <button
+                onClick={handleContinue}
+                disabled={!selectedZoneId || !selectedCityName}
+                className={`w-full py-5 rounded-2xl font-bold text-xl transition-all duration-300 ${
+                  selectedZoneId && selectedCityName
+                    ? 'bg-gradient-to-r from-[#5B9A9E] to-[#6BA5A8] text-white shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer'
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                }`}
+              >
+                {selectedZoneId && selectedCityName ? '✅ استكشف الشبكة الآن' : '⬆️ اختر المنطقة والمدينة أولاً'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Network Map Dialog */}
+      <NetworkMapPopover 
+        locale={locale} 
+        type={selectedNetworkType}
+        isOpen={showNetworkMap}
+        onOpenChange={setShowNetworkMap}
+        preSelectedRegion={mapRegionId}
+        preSelectedCity={mapCityName}
+      />
 
       {/* Infinite Scrolling Carousel */}
       <div className="relative">
