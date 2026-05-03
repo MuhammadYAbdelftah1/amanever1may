@@ -2,10 +2,26 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Check, Bell } from 'lucide-react';
+import { X, Check, Bell, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { AppDownloadButtons } from '@/components/shared/app-download-buttons';
+import Link from 'next/link';
+
+// Card tier type (Premier, VIP, Business)
+type CardTier = {
+  id: 'premier' | 'vip' | 'business';
+  name: string;
+  tagline: string;
+  priceYearly: number | string;
+  priceMonthly: number | string;
+  features: string[];
+  isRecommended?: boolean;
+  ctaLabel: string;
+  ctaHref: string;
+  headerBg: string;
+  headerTextColor: string;
+};
 
 // Package type matching the project structure
 type Package = {
@@ -22,6 +38,69 @@ type Package = {
   notification?: string;
   features?: string[];
 };
+
+// Card tiers data (Premier, VIP, Business)
+const cardTiers: CardTier[] = [
+  {
+    id: 'premier' as const,
+    name: 'Premier',
+    tagline: 'بطاقتك الأساسية للرعاية اليومية',
+    priceYearly: 299,
+    priceMonthly: 24.9,
+    features: [
+      'خصم حتى ٦٠٪ على الشبكة الطبية',
+      'حجوزات فورية مع الأطباء',
+      'استشارة "اسأل طبيب" مجاناً',
+      'كاش باك ٥٪ على كل فاتورة',
+      'نقاط ولاء قابلة للاستبدال',
+      'دعم عملاء ٢٤/٧',
+    ],
+    ctaLabel: 'اشترك في Premier',
+    ctaHref: '/register',
+    headerBg: 'bg-emerald-50',
+    headerTextColor: 'text-slate-900',
+  },
+  {
+    id: 'vip' as const,
+    name: 'VIP',
+    tagline: 'للعائلات والأشخاص الأعلى استخداماً',
+    priceYearly: 499,
+    priceMonthly: 41.5,
+    isRecommended: true,
+    features: [
+      'خصم حتى ٨٠٪ (بدلاً من ٦٠٪)',
+      'تغطية لـ ٤ أفراد من العائلة',
+      'زيارة طبيب منزلية مجانية (شهرياً)',
+      'فحص شامل سنوي مجاني',
+      'أولوية في الحجوزات + أطباء VIP',
+      'كاش باك ١٠٪ (بدلاً من ٥٪)',
+      'مدير حساب شخصي عبر WhatsApp',
+    ],
+    ctaLabel: 'اشترك مباشرة عبر WhatsApp',
+    ctaHref: 'https://wa.me/966500000000?text=مرحباً، أريد الاشتراك في باقة VIP',
+    headerBg: 'bg-gradient-to-br from-slate-900 to-emerald-900',
+    headerTextColor: 'text-white',
+  },
+  {
+    id: 'business' as const,
+    name: 'Business',
+    tagline: 'حلول صحية متكاملة للشركات والمؤسسات',
+    priceYearly: 'حسب الاتفاق',
+    priceMonthly: 'حسب الاتفاق',
+    features: [
+      'تغطية شاملة لجميع الموظفين',
+      'خصومات مخصصة حسب عدد الموظفين',
+      'لوحة تحكم خاصة للإدارة',
+      'تقارير صحية دورية للموظفين',
+      'مدير حساب مخصص ٢٤/٧',
+      'فواتير موحدة وتسهيلات دفع',
+    ],
+    ctaLabel: 'تواصل معنا',
+    ctaHref: '/contact?type=business',
+    headerBg: 'bg-gradient-to-br from-emerald-700 to-teal-700',
+    headerTextColor: 'text-white',
+  },
+];
 
 // Simplified packages with images
 const packages: Package[] = [
@@ -177,9 +256,11 @@ interface MembershipModalProps {
 }
 
 export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
+  const [selectedCard, setSelectedCard] = useState<CardTier | null>(null); // NEW: Track selected card
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
   const [showDownload, setShowDownload] = useState(false);
-  const [showPhoneInput, setShowPhoneInput] = useState(true); // NEW: Show phone input first
+  const [showPhoneInput, setShowPhoneInput] = useState(false);
+  const [showPackages, setShowPackages] = useState(false); // NEW: Show packages after card selection
   const [phoneNumber, setPhoneNumber] = useState('');
   const [countryCode, setCountryCode] = useState('+966'); // Saudi Arabia default
   const [isMobile, setIsMobile] = useState(false);
@@ -196,14 +277,31 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleCardSelect = (card: CardTier) => {
+    setSelectedCard(card);
+    if (card.id === 'premier') {
+      // Show packages for Premier
+      setShowPackages(true);
+    } else if (card.id === 'vip') {
+      // VIP goes to WhatsApp directly
+      window.open(card.ctaHref, '_blank');
+      onClose();
+    } else if (card.id === 'business') {
+      // Business opens business modal (you can handle this separately)
+      onClose();
+      // TODO: Open business modal
+    }
+  };
+
   const handlePhoneSubmit = () => {
     // Validate phone number
     if (phoneNumber.length >= 9) {
       // Save phone number (you can send to backend here)
       console.log('Phone captured:', countryCode + phoneNumber);
       
-      // Move to packages screen
+      // Move to download screen
       setShowPhoneInput(false);
+      setShowDownload(true);
     } else {
       alert('الرجاء إدخال رقم جوال صحيح');
     }
@@ -211,21 +309,22 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
 
   const handleSelectPackage = (pkg: Package) => {
     setSelectedPackage(pkg);
-  };
-
-  const handleCheckout = () => {
-    // Show download screen instead of redirecting
-    setShowDownload(true);
+    // Show phone input after selecting package
+    setShowPhoneInput(true);
   };
 
   const handleBack = () => {
     if (showDownload) {
       setShowDownload(false);
-    } else if (!showPhoneInput && selectedPackage) {
-      setSelectedPackage(null);
-    } else if (!showPhoneInput) {
-      // Go back to phone input
       setShowPhoneInput(true);
+    } else if (showPhoneInput) {
+      // Go back to packages
+      setShowPhoneInput(false);
+      setSelectedPackage(null);
+    } else if (showPackages) {
+      // Go back to cards
+      setShowPackages(false);
+      setSelectedCard(null);
     }
   };
 
@@ -271,10 +370,10 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
             >
               {/* Header */}
               <div className="flex items-center justify-between p-4 md:p-6 border-b border-slate-200 bg-gradient-to-r from-emerald-50 to-teal-50 flex-shrink-0">
-                {/* Back Button - Only show on packages screen */}
-                {!showPhoneInput && !showDownload && (
+                {/* Back Button - Show on packages, phone input and download screens */}
+                {(showPackages || showPhoneInput || showDownload) && (
                   <button
-                    onClick={() => setShowPhoneInput(true)}
+                    onClick={handleBack}
                     className="flex items-center gap-1 text-sm md:text-base text-slate-600 hover:text-emerald-600 transition-colors font-semibold"
                   >
                     <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -286,16 +385,26 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                 
                 <div className="flex-1 text-center">
                   <h2 className="text-xl md:text-3xl font-bold text-slate-900">
-                    {showDownload ? 'حمّل التطبيق الآن' : showPhoneInput ? 'ابدأ رحلة الرعاية الآن' : 'اختر الباقة المناسبة لك'}
+                    {showDownload ? 'حمّل التطبيق الآن' : showPhoneInput ? 'أدخل رقم جوالك' : showPackages ? 'اختر الباقة المناسبة لك' : 'اختر البطاقة المناسبة لك'}
                   </h2>
                   {showPhoneInput && (
                     <p className="text-xs md:text-sm text-slate-600 mt-1">
-                      أدخل رقم جوالك لنرسل لك تفاصيل الباقات
+                      سنرسل لك تفاصيل الباقة عبر WhatsApp
                     </p>
                   )}
                   {showDownload && (
                     <p className="text-xs md:text-sm text-slate-600 mt-1">
                       اشترك من خلال التطبيق
+                    </p>
+                  )}
+                  {showPackages && (
+                    <p className="text-xs md:text-sm text-slate-600 mt-1">
+                      اختر الباقة وابدأ رحلة الرعاية الصحية
+                    </p>
+                  )}
+                  {!showPackages && !showPhoneInput && !showDownload && (
+                    <p className="text-xs md:text-sm text-slate-600 mt-1">
+                      بطاقة واحدة — وفّر حتى ٨٠٪ على احتياجاتك الصحية
                     </p>
                   )}
                 </div>
@@ -310,7 +419,129 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
 
               {/* Content - Scrollable */}
               <div className="flex-1 overflow-y-auto p-4 md:p-6">
-                {showPhoneInput ? (
+                {!showPackages && !showPhoneInput && !showDownload ? (
+                  /* Cards Screen (Premier, VIP, Business) */
+                  <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
+                    {cardTiers.map((tier, index) => (
+                      <article
+                        key={tier.id}
+                        className={`relative rounded-3xl overflow-hidden bg-white hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 flex flex-col ${
+                          tier.isRecommended
+                            ? 'border-2 border-primary shadow-2xl'
+                            : 'border-2 border-slate-200'
+                        }`}
+                      >
+                        {/* Recommended Badge */}
+                        {tier.isRecommended && (
+                          <div className="absolute top-4 left-4 bg-primary text-white text-xs font-black px-3 py-1.5 rounded-full shadow-lg z-20">
+                            الأكثر توفيراً
+                          </div>
+                        )}
+
+                        {/* Header with Name */}
+                        <div className={`${tier.headerBg} ${tier.headerTextColor} p-6 pb-4 relative z-10`}>
+                          <h3 className="text-3xl md:text-4xl font-black mb-1">{tier.name}</h3>
+                          <p className="text-sm font-medium opacity-90">{tier.tagline}</p>
+                        </div>
+
+                        {/* Image Placeholder */}
+                        <div className="h-56 md:h-64 relative overflow-hidden">
+                          <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                            <div className="text-center p-6">
+                              <div className="text-[#4d8080] font-black text-sm mb-2">إشعار للمصممة 🎨</div>
+                              <div className="text-gray-600 font-bold text-xs">المقاس: 450×284 بكسل</div>
+                              <div className="text-gray-500 text-[10px] mt-1">(نسبة كرت البنك القياسية 1.586:1)</div>
+                            </div>
+                          </div>
+                          <div className={`absolute inset-0 ${tier.isRecommended ? 'bg-gradient-to-t from-slate-900/10 to-transparent' : 'bg-gradient-to-t from-slate-50/50 to-transparent'}`} />
+                        </div>
+
+                        {/* Content Section */}
+                        <div className="p-6 lg:p-8 flex-1 flex flex-col">
+                          {/* Price */}
+                          <div className="mb-6 pb-6 border-b border-slate-100">
+                            {typeof tier.priceYearly === 'number' ? (
+                              <>
+                                <div className="flex items-baseline gap-2 mb-1 justify-center" dir="rtl">
+                                  <span className="text-5xl md:text-6xl font-black tracking-tight text-slate-900">
+                                    {tier.priceYearly.toLocaleString('ar-SA')}
+                                  </span>
+                                  <Image 
+                                    src="/images/riyal-symbol.png" 
+                                    alt="ريال سعودي" 
+                                    width={32} 
+                                    height={32} 
+                                    className="object-contain"
+                                  />
+                                </div>
+                                <p className="text-sm text-slate-500 font-medium text-center">
+                                  سنوياً (~ {typeof tier.priceMonthly === 'number' ? tier.priceMonthly.toLocaleString('ar-SA') : tier.priceMonthly} ريال/شهر)
+                                </p>
+                              </>
+                            ) : (
+                              <div className="text-center">
+                                <span className="text-3xl md:text-4xl font-black text-slate-900">
+                                  {tier.priceYearly}
+                                </span>
+                                <p className="text-sm text-slate-500 font-medium mt-2">
+                                  أسعار تنافسية حسب عدد الموظفين
+                                </p>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Intro Text */}
+                          <p className="text-sm font-bold text-slate-700 mb-4 bg-slate-50 px-3 py-2 rounded-lg">
+                            {tier.isRecommended ? 'كل مزايا Premier، بالإضافة إلى:' : tier.id === 'business' ? 'حلول صحية متكاملة لموظفيك' : 'بطاقتك الأساسية للرعاية اليومية'}
+                          </p>
+
+                          {/* Features */}
+                          <ul className="space-y-3 mb-8 flex-1">
+                            {tier.features.map((feature, i) => (
+                              <li key={i} className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" aria-hidden="true" />
+                                <span className="text-sm leading-relaxed text-slate-700 font-medium">{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+
+                          {/* CTA */}
+                          <Button
+                            onClick={() => handleCardSelect(tier)}
+                            size="lg"
+                            className={`w-full text-base font-black py-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg ${
+                              tier.isRecommended 
+                                ? 'bg-primary hover:bg-primary/90 shadow-primary/20 text-white' 
+                                : tier.id === 'business'
+                                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-emerald-900/20'
+                                : 'bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20'
+                            }`}
+                          >
+                            {tier.ctaLabel}
+                          </Button>
+
+                          {/* Payment Note */}
+                          <div className="flex items-center justify-center gap-2 mt-4">
+                            <p className="text-xs text-slate-500 font-medium">متاح بالتقسيط عبر</p>
+                            <div className="flex items-center gap-2">
+                              <img 
+                                src="/images/Tabby-01.png" 
+                                alt="Tabby" 
+                                className="h-5 object-contain"
+                              />
+                              <span className="text-slate-300">/</span>
+                              <img 
+                                src="/images/Tamara.png" 
+                                alt="Tamara" 
+                                className="h-5 object-contain"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                ) : showPhoneInput ? (
                   /* Phone Input Screen */
                   <div className="flex flex-col items-center justify-center h-full text-center space-y-6 py-8">
                     {/* Icon */}
@@ -329,7 +560,7 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                         أدخل رقم جوالك
                       </h3>
                       <p className="text-sm md:text-base text-slate-600 max-w-md">
-                        سنرسل لك تفاصيل الباقات وعروض حصرية عبر WhatsApp
+                        سنرسل لك تفاصيل باقة <span className="font-bold text-emerald-600">{selectedPackage?.name}</span> عبر WhatsApp
                       </p>
                     </div>
 
@@ -369,7 +600,7 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                         size="lg"
                         className="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-base md:text-lg py-6 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        متابعة ← شاهد الباقات
+                        متابعة ← حمّل التطبيق
                       </Button>
 
                       {/* Trust Badges */}
@@ -459,7 +690,7 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                       ← رجوع للباقات
                     </Button>
                   </div>
-                ) : (
+                ) : showPackages ? (
                   /* Packages Grid */
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                     {packages.map((pkg) => {
@@ -565,31 +796,8 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                       );
                     })}
                   </div>
-                )}
+                ) : null}
               </div>
-
-              {/* Footer - Fixed at bottom */}
-              {selectedPackage && !showDownload && (
-                <motion.div
-                  initial={{ y: 100, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  className="border-t border-slate-200 p-4 md:p-6 bg-white flex-shrink-0"
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="flex-1">
-                      <p className="text-xs md:text-sm text-slate-600">الباقة المختارة</p>
-                      <p className="text-base md:text-lg font-bold text-slate-900">{selectedPackage.name}</p>
-                    </div>
-                    <Button
-                      onClick={handleCheckout}
-                      size="lg"
-                      className="bg-emerald-600 hover:bg-emerald-700 text-sm md:text-base px-6 md:px-8"
-                    >
-                      {selectedPackage.ctaText} ←
-                    </Button>
-                  </div>
-                </motion.div>
-              )}
             </motion.div>
           </div>
         </>
