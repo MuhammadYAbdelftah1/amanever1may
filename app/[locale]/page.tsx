@@ -34,7 +34,14 @@ export default async function HomePage({
     <>
       <Header locale={locale} />
       <main id="main-content" className="min-h-screen">
-        <HeroSection locale={locale} translations={{ title: t('title') }} />
+        <HeroSection 
+          locale={locale} 
+          translations={{ 
+            title: t('title'),
+            subtitle: t('subtitle'),
+            cta: t('cta')
+          }} 
+        />
         
         {/* Core Services Section - بعد الهيرو مباشرة */}
         <CoreServicesSection locale={locale} />
