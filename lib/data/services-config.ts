@@ -156,9 +156,11 @@ export const audienceTabs: AudienceTab[] = [
 // ============================================================================
 
 export const patientsSection = {
-  tag: 'خدماتنا الطبية',
-  title: 'كل اللي تحتاجه لصحتك وصحة عيلتك — في منصة واحدة',
-  subtitle: 'من حجز المواعيد لين الرعاية المنزلية، من الاستشارات الطبية لين الشبكة الصيدلية — أمان إيفر توفّر لك كل شي.',
+  tag: 'باقة خدماتنا',
+  title: 'رعاية متكاملة.. صُممت لأجلك',
+  subtitle: 'وش تحتاج اليوم؟',
+  description: 'راحتك هي أولويتنا.. استكشف باقة خدماتنا الشاملة واختر ما يلبي احتياجك بضغطة زر واحدة عبر تطبيق أمان إيفر.',
+  sectionSubtitle: 'حلول صحية مبتكرة صممت لضمان راحتك وسلامتك',
 } as const;
 
 export const patientServices: PatientService[] = [
@@ -272,7 +274,7 @@ export const patientServices: PatientService[] = [
 ];
 
 export const membershipPlans = [
-  { name: 'Premier', price: '199 ريال/سنة' },
+  { name: 'Premier', price: '299 ريال/سنة' },
   { name: 'VIP', price: '499 ريال/سنة' },
 ] as const;
 
@@ -285,7 +287,7 @@ export const patientsCTA = {
   },
   secondary: {
     text: 'اشترك في بريمير — 199 ريال/سنة',
-    href: '/ar/pricing',
+    href: '/services#membership',
   },
 } as const;
 

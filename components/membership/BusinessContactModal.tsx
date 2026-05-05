@@ -94,7 +94,7 @@ export function BusinessContactModal({ isOpen, onClose }: BusinessContactModalPr
                     </div>
                   </div>
                   <h2 className="text-2xl md:text-3xl font-black mb-2">باقة الأعمال</h2>
-                  <p className="text-sm text-white/90">حلول صحية متكاملة لموظفيك</p>
+                  <p className="text-sm text-white/90">استثمر في صحة فريقك.. لنجاح مستدام</p>
                 </div>
               </div>
 

@@ -27,7 +27,7 @@ const services: Service[] = [
     tagline: 'الأكثر طلباً',
     description: 'خصومات تصل إلى 80% في مستشفى سليمان الحبيب، الموسى، السعودي الألماني، وأكثر من 2000 مركز طبي. إصدار فوري.',
     ctaLabel: 'اكتشف المزيد',
-    ctaHref: '/pricing',
+    ctaHref: '/services#membership',
   },
   {
     id: 'cashback',
@@ -57,7 +57,7 @@ const services: Service[] = [
     tagline: 'فوري',
     description: 'طبيبك معك أينما كنت.. احجز موعدك دون انتظار، أو احصل على استشارتك الطبية (صوت، فيديو، محادثة) على مدار الساعة.',
     ctaLabel: 'اكتشف المزيد',
-    ctaHref: '/services#booking',
+    ctaHref: '/services#instant-booking',
   },
   {
     id: 'home-care',
@@ -68,6 +68,16 @@ const services: Service[] = [
     description: 'رعاية طبية متكاملة تصلك إلى باب بيتك.. طاقم معتمد للزيارات الطبية، العلاج الطبيعي، وعناية خاصة بالأطفال وكبار السن.',
     ctaLabel: 'اكتشف المزيد',
     ctaHref: '/services#home-care',
+  },
+  {
+    id: 'ask-doctor',
+    icon: 'MessageCircle',
+    image: '/services/ask-doctor.jpg',
+    title: 'اسأل طبيب',
+    tagline: 'استشارة فورية',
+    description: 'استشارات طبية فورية على مدار الساعة مع نخبة من الأطباء المعتمدين. رد خلال 15 دقيقة عبر الشات، الصوت، أو الفيديو.',
+    ctaLabel: 'اكتشف المزيد',
+    ctaHref: '/services#ask-doctor',
   },
   {
     id: 'store',
@@ -83,7 +93,7 @@ const services: Service[] = [
     id: 'medical-network',
     icon: 'Building2',
     image: '/services/medical-network.jpg',
-    title: 'استكشف الشبكة الطبية',
+    title: 'استكشف الشبكة الطبية الآن',
     tagline: 'شبكة طبية',
     description: 'وصول مباشر لأكثر من 2000 مركز طبي: مستشفيات، عيادات، مختبرات البرج، صيدليات النهدي والدواء في كافة مدن المملكة.',
     ctaLabel: 'استكشف الشبكة',
@@ -93,9 +103,9 @@ const services: Service[] = [
     id: 'health-network',
     icon: 'Dumbbell',
     image: '/services/health-network.jpg',
-    title: 'استكشف الشبكة الصحية',
+    title: 'استكشف الشبكة الصحية الآن',
     tagline: 'شبكة صحية',
-    description: 'خصومات على فتنس تايم، جولدز جيم، عيادات التغذية، مراكز البصريات، والسبا لنمط حياة صحي متكامل.',
+    description: 'لأنك من عائلة أمان إيفر، فتحنا لك أبواب التوفير مع كبرى العلامات الطبية والصحية.. عروض حصرية صُممت خصيصاً لتلبي احتياجاتك.',
     ctaLabel: 'استكشف الشبكة',
     ctaHref: '#', // Will be handled by onClick
   },
@@ -144,17 +154,21 @@ function ServiceCard({ service, index, locale }: { service: Service; index: numb
 
   return (
     <>
-      <CardWrapper
-        {...cardProps}
-        ref={ref as any}
-        className={`group relative h-full rounded-2xl bg-white overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 block ${
-          isVisible ? 'animate-in fade-in slide-in-from-bottom-4' : 'opacity-0'
-        } ${isNetworkCard ? 'cursor-pointer' : ''}`}
-        style={{
-          animationDelay: `${index * 100}ms`,
-          animationFillMode: 'forwards',
-        }}
-      >
+      <div className="relative">
+        {/* Anchor point for hash navigation */}
+        <div id={service.id} className="absolute -top-24" aria-hidden="true" />
+        
+        <CardWrapper
+          {...cardProps}
+          ref={ref as any}
+          className={`group relative h-full rounded-2xl bg-white overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 block ${
+            isVisible ? 'animate-in fade-in slide-in-from-bottom-4' : 'opacity-0'
+          } ${isNetworkCard ? 'cursor-pointer' : ''}`}
+          style={{
+            animationDelay: `${index * 100}ms`,
+            animationFillMode: 'forwards',
+          }}
+        >
       {/* Image Section - Takes most of the card */}
       <div className="relative w-full h-64 bg-gradient-to-br from-[#1a472a]/10 via-[#2d5a3d]/5 to-[#1a472a]/10 overflow-hidden">
         {/* Placeholder for designer's image */}
@@ -208,6 +222,7 @@ function ServiceCard({ service, index, locale }: { service: Service; index: numb
         {/* Decorative corner */}
         <div className="absolute bottom-0 right-0 h-20 w-20 translate-x-10 translate-y-10 rounded-full bg-[#1a472a]/5 transition-transform duration-300 group-hover:translate-x-8 group-hover:translate-y-8" />
       </CardWrapper>
+      </div>
 
       {/* Network Dialog - Controlled */}
       {isNetworkCard && (

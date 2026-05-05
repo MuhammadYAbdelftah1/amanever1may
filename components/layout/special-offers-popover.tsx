@@ -15,7 +15,7 @@ const offers = [
     id: 'new-member',
     icon: Gift,
     title: 'عرض الأعضاء الجدد',
-    description: 'خصم 30% على أول اشتراك',
+    description: 'استثمر عضويتك.. وضاعف توفيرك',
     discount: '30%',
     gradient: 'from-emerald-500 to-teal-600',
     link: '/ar/register?offer=new-member',
@@ -24,19 +24,19 @@ const offers = [
     id: 'family-package',
     icon: Sparkles,
     title: 'عرض العائلة',
-    description: 'وفّر 40% عند إضافة 4 أفراد أو أكثر',
+    description: 'عروض حصرية صُممت خصيصاً لتلبي احتياجاتك',
     discount: '40%',
     gradient: 'from-blue-500 to-indigo-600',
-    link: '/ar/pricing?offer=family',
+    link: '/services#membership',
   },
   {
     id: 'seasonal',
     icon: Percent,
-    title: 'عرض الموسم',
-    description: 'خصومات حصرية لفترة محدودة',
+    title: 'عالمٌ من التوفير',
+    description: 'أبواب التوفير مع كبرى العلامات الطبية والصحية',
     discount: '50%',
     gradient: 'from-purple-500 to-pink-600',
-    link: '/ar/pricing?offer=seasonal',
+    link: '/services#membership',
   },
   {
     id: 'cashback-bonus',
@@ -45,7 +45,7 @@ const offers = [
     description: 'استرداد نقدي مضاعف هذا الشهر',
     discount: '2X',
     gradient: 'from-amber-500 to-orange-600',
-    link: '/ar/cashback?offer=bonus',
+    link: '/services#cashback',
   },
 ];
 
@@ -82,81 +82,107 @@ export function SpecialOffersPopover({ locale, isMobile = false }: SpecialOffers
     setIsOpen(false);
   }, [pathname]);
 
-  // Mobile version - Full page dialog
+  // Mobile version - Minimalist Popover
   if (isMobile) {
     return (
-      <>
+      <div className="relative w-full">
         <button
           ref={triggerRef}
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-3 text-lg font-medium transition-all duration-300 rounded-lg px-4 py-3 text-[#4A8B8E]/80 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5 w-full"
+          className={`flex items-center gap-3 text-base font-medium transition-all duration-300 rounded-lg px-4 py-2.5 w-full ${
+            isOpen
+              ? 'text-[#4A8B8E] bg-[#4A8B8E]/10'
+              : 'text-[#4A8B8E]/80 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5'
+          }`}
         >
           {/* Image Placeholder */}
-          <div className="flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden bg-gray-50 relative border-2 border-dashed border-gray-300">
+          <div className="flex-shrink-0 w-10 h-10 rounded-lg overflow-hidden bg-gray-50 relative border-2 border-dashed border-gray-300">
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-              <div className="text-[9px] font-semibold text-gray-700">للمصممة</div>
-              <div className="text-[8px] text-gray-500">48×48</div>
+              <div className="text-[8px] font-semibold text-gray-700">للمصممة</div>
+              <div className="text-[7px] text-gray-500">40×40</div>
             </div>
           </div>
           <span className="flex-1 text-center">العروض الخاصة</span>
         </button>
 
-        {/* Mobile Full Screen Dialog */}
+        {/* Mobile Minimalist Popover */}
         {isOpen && (
-          <div className="fixed inset-0 z-[100] bg-white">
-            {/* Header */}
-            <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-gray-900">العروض الخاصة</h2>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                aria-label="إغلاق"
-              >
-                <X className="w-5 h-5 text-gray-600" />
-              </button>
-            </div>
+          <>
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 z-[90] bg-black/20 backdrop-blur-sm"
+              onClick={() => setIsOpen(false)}
+            />
+            
+            {/* Popover */}
+            <div
+              ref={popoverRef}
+              className="fixed left-4 right-4 top-24 z-[100] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden animate-in fade-in slide-in-from-top-4 duration-200 max-h-[70vh] flex flex-col"
+            >
+              {/* Minimalist Header */}
+              <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between bg-gradient-to-r from-gray-50 to-white">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#5B9A9E] to-[#4A8B8E] flex items-center justify-center shadow-sm">
+                    <Tag className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900">العروض الخاصة</h3>
+                    <p className="text-xs text-gray-500">عروض حصرية لفترة محدودة</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  aria-label="إغلاق"
+                >
+                  <X className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
 
-            {/* Content */}
-            <div className="p-4 space-y-4 overflow-y-auto h-[calc(100vh-73px)]">
-              {offers.map((offer) => {
-                const OfferIcon = offer.icon;
-                return (
-                  <Link
-                    key={offer.id}
-                    href={offer.link}
-                    onClick={() => setIsOpen(false)}
-                    className="block group"
-                  >
-                    <div className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${offer.gradient} p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}>
-                      {/* Discount Badge */}
-                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 shadow-md">
-                        <span className="text-sm font-bold text-gray-900">{offer.discount}</span>
-                      </div>
+              {/* Offers List - Minimalist Cards */}
+              <div className="p-4 space-y-3 overflow-y-auto">
+                {offers.map((offer) => {
+                  const OfferIcon = offer.icon;
+                  return (
+                    <Link
+                      key={offer.id}
+                      href={offer.link}
+                      onClick={() => setIsOpen(false)}
+                      className="block group"
+                    >
+                      <div className="relative overflow-hidden rounded-xl bg-white border-2 border-gray-100 p-4 hover:border-[#5B9A9E] hover:shadow-md transition-all duration-300">
+                        <div className="flex items-start gap-3">
+                          {/* Icon */}
+                          <div className={`flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br ${offer.gradient} flex items-center justify-center shadow-sm`}>
+                            <OfferIcon className="w-6 h-6 text-white" />
+                          </div>
 
-                      {/* Icon */}
-                      <div className="mb-4">
-                        <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                          <OfferIcon className="w-6 h-6 text-white" />
+                          {/* Content */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-start justify-between gap-2 mb-1">
+                              <h4 className="text-base font-bold text-gray-900 leading-tight">{offer.title}</h4>
+                              {/* Discount Badge */}
+                              <div className="flex-shrink-0 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg px-2 py-1 shadow-sm">
+                                <span className="text-xs font-black text-white">{offer.discount}</span>
+                              </div>
+                            </div>
+                            <p className="text-sm text-gray-600 leading-snug line-clamp-2">{offer.description}</p>
+                          </div>
+                        </div>
+
+                        {/* Arrow indicator */}
+                        <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <ArrowLeft className="w-4 h-4 text-[#5B9A9E]" />
                         </div>
                       </div>
-
-                      {/* Content */}
-                      <h3 className="text-xl font-bold text-white mb-2">{offer.title}</h3>
-                      <p className="text-white/90 text-sm mb-4">{offer.description}</p>
-
-                      {/* CTA */}
-                      <div className="flex items-center gap-2 text-white font-semibold">
-                        <span>اعرف المزيد</span>
-                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          </>
         )}
-      </>
+      </div>
     );
   }
 
@@ -192,7 +218,14 @@ export function SpecialOffersPopover({ locale, isMobile = false }: SpecialOffers
           </div>
 
           {/* Offers Grid */}
-          <div className="p-4 grid grid-cols-2 gap-4 max-h-[500px] overflow-y-auto">
+          <div 
+            className="p-4 grid grid-cols-2 gap-4 overflow-y-scroll"
+            style={{ 
+              maxHeight: '400px',
+              scrollbarWidth: 'thin',
+              scrollbarColor: '#cbd5e0 #f1f1f1'
+            }}
+          >
             {offers.map((offer) => {
               const OfferIcon = offer.icon;
               return (
@@ -233,4 +266,35 @@ export function SpecialOffersPopover({ locale, isMobile = false }: SpecialOffers
       )}
     </div>
   );
+}
+
+// Add custom scrollbar styles
+const styles = `
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+  }
+`;
+
+// Inject styles
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = styles;
+  if (!document.head.querySelector('style[data-special-offers-scrollbar]')) {
+    styleSheet.setAttribute('data-special-offers-scrollbar', 'true');
+    document.head.appendChild(styleSheet);
+  }
 }

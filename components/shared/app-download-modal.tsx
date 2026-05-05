@@ -95,12 +95,12 @@ export function AppDownloadModal({ isOpen, onClose, locale }: AppDownloadModalPr
               </div>
               <div>
                 <h4 className="font-bold text-[#1A2B2C] text-sm mb-1">
-                  {isArabic ? 'خصومات حصرية' : 'Exclusive Discounts'}
+                  {isArabic ? 'عالمٌ من التوفير' : 'A World of Savings'}
                 </h4>
                 <p className="text-xs text-[#5A6B6C]">
                   {isArabic 
-                    ? 'استفد من عروض وخصومات تصل إلى 80% حصرياً لمستخدمي التطبيق.' 
-                    : 'Get up to 80% discounts on medical services'}
+                    ? 'لأنك من عائلة أمان إيفر، فتحنا لك أبواب التوفير مع كبرى العلامات الطبية والصحية.' 
+                    : 'Exclusive offers with major medical and health brands designed for you'}
                 </p>
               </div>
             </div>

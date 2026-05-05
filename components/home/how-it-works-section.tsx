@@ -19,7 +19,7 @@ const content = {
       arabicNumber: '٠١',
       image: '/logo.jpeg', // TODO: Replace with actual step image
       title: 'بطاقتك جاهزة في ٦٠ ثانية',
-      description: 'ما تحتاج تنتظر موافقات ولا تعبّي نماذج طويلة. اختر باقتك (Premier بـ ١٩٩ ريال أو VIP بـ ٤٩٩ ريال)، ادفع بأمان، وقسّطها على ٤ دفعات عبر تابي أو تمارا — حتى على الخدمات الطبية نفسها.',
+      description: 'ما تحتاج تنتظر موافقات ولا تعبّي نماذج طويلة. اختر باقتك (Premier بـ ٢٩٩ ريال أو VIP بـ ٤٩٩ ريال)، ادفع بأمان، وقسّطها على ٤ دفعات عبر تابي أو تمارا — حتى على الخدمات الطبية نفسها.',
       trustChips: ['✓ دفع آمن ومرخّص', '✓ تقسيط بدون فوائد'],
       cta: { text: 'حمّل التطبيق الحين', href: '/register' },
       microCopy: 'أول استشارة "اسأل طبيب" مجاناً — بدون بطاقة ائتمان',
@@ -41,7 +41,7 @@ const content = {
       title: 'وفّر حتى ٨٠٪ + كاش باك يرجع لك',
       description: 'خصم مباشر على الاستشارات، التحاليل، الأدوية، وحتى الجيم (فتنس تايم). كل ريال تصرفه يرجع لك كاش باك (٥٪ Premier، ١٠٪ VIP) + نقاط تتحول رصيد. ما فيه موافقات مسبقة — الخصم يطبّق فوراً.',
       trustChips: ['💰 كاش باك فوري', '🚫 بدون موافقات مسبقة'],
-      cta: { text: 'احسب كم بتوفّر', href: '/pricing' },
+      cta: { text: 'احسب كم بتوفّر', href: '/services#membership' },
       microCopy: 'عائلة من ٤ أفراد توفّر في المتوسط ٣,٥٠٠ ريال سنوياً',
     },
   ],
@@ -230,7 +230,7 @@ export function HowItWorksSection({ locale }: HowItWorksSectionProps) {
               size="lg"
               className="text-base md:text-lg px-8 py-6 rounded-xl hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
             >
-              <Link href={`/${locale}/pricing`}>
+              <Link href={`/${locale}/services#membership`}>
                 {content.ctaBand.secondaryButton}
               </Link>
             </Button>

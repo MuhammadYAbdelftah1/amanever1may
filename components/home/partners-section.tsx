@@ -1,5 +1,5 @@
 /**
- * Partners Section (شركاء أمان إيفر)
+ * Partners Section (شركاء "أمان".. شركاء الثقة)
  * Displays partner logos with links in an infinite scrolling marquee
  */
 
@@ -62,7 +62,7 @@ export function PartnersSection({ locale }: PartnersSectionProps) {
       <div className="container mx-auto px-4 mb-12 md:mb-16">
         <div className="flex flex-col items-center text-center">
           <h2 className="text-3xl md:text-5xl font-black text-[#4d8080] mb-4 tracking-tight">
-            شركاء أمان إيفر
+            شركاء &quot;أمان&quot;.. شركاء الثقة
           </h2>
           <div className="w-24 h-1.5 bg-[#4d8080] rounded-full mb-6" />
           <p className="text-[#4d8080]/80 font-bold text-lg md:text-xl max-w-3xl">

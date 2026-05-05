@@ -53,8 +53,8 @@ const serviceDetails: Record<string, {
   },
   'instant-booking': {
     title: 'حجوزات واستشارات طبية فورية',
-    subtitle: 'احجز موعدك مع أفضل الأطباء في ثوانٍ',
-    description: 'نوفر لك خدمة حجز المواعيد الطبية الفورية مع نخبة من الأطباء المعتمدين في جميع التخصصات الطبية عبر تطبيق أمان إيفر. احصل على موعدك خلال دقائق دون الحاجة للانتظار أو الاتصال الهاتفي.',
+    subtitle: 'طبيبك معك أينما كنت',
+    description: 'احجز موعدك دون انتظار، أو احصل على استشارتك الطبية (صوت، فيديو، محادثة) على مدار الساعة مع نخبة من الأطباء المعتمدين في جميع التخصصات الطبية عبر تطبيق أمان إيفر.',
     features: [
       'حجز فوري مع أكثر من 2000 طبيب معتمد',
       'استشارات أونلاين (صوتية ومرئية وشات)',
@@ -81,8 +81,8 @@ const serviceDetails: Record<string, {
   },
   'home-care': {
     title: 'خدمات الرعاية المنزلية',
-    subtitle: 'رعاية طبية متكاملة في منزلك',
-    description: 'نقدم لك خدمات الرعاية الصحية المنزلية الشاملة من خلال فريق طبي متخصص ومعتمد. نوفر لك الراحة والأمان بتقديم الرعاية الطبية في منزلك دون الحاجة للتنقل.',
+    subtitle: 'رعاية طبية متكاملة تصلك إلى باب بيتك',
+    description: 'طاقم معتمد للزيارات الطبية، العلاج الطبيعي، وعناية خاصة بالأطفال وكبار السن. نوفر لك الراحة والأمان بتقديم الرعاية الطبية في منزلك دون الحاجة للتنقل.',
     features: [
       'تمريض منزلي متخصص على مدار الساعة',
       'رعاية كبار السن والمرضى المزمنين',
@@ -108,7 +108,7 @@ const serviceDetails: Record<string, {
     pricing: 'أسعار تنافسية مع خصومات خاصة لأعضاء أمان إيفر'
   },
   'medical-network': {
-    title: 'استكشف الشبكة الطبية',
+    title: 'استكشف الشبكة الطبية الآن',
     subtitle: 'أكثر من 2000 مركز طبي في خدمتك',
     description: 'شبكة طبية واسعة تضم أفضل المستشفيات والعيادات والمراكز الطبية المعتمدة في جميع مدن المملكة. نوفر لك وصولاً مباشراً لخدمات طبية متميزة بأسعار مخفضة.',
     features: [
@@ -135,7 +135,7 @@ const serviceDetails: Record<string, {
     ]
   },
   'health-network': {
-    title: 'استكشف الشبكة الصحية',
+    title: 'استكشف الشبكة الصحية الآن',
     subtitle: 'نمط حياة صحي متكامل',
     description: 'شبكة واسعة من مراكز اللياقة البدنية والصحة والجمال. نوفر لك خصومات حصرية على أفضل الأندية الرياضية ومراكز العناية بالصحة والجمال.',
     features: [
@@ -352,7 +352,7 @@ export function ServiceDetailsModal({ isOpen, onClose, serviceId, locale = 'ar' 
             className="flex-1 bg-gradient-to-r from-[#4A8B8E] to-[#356B6E] hover:from-[#356B6E] hover:to-[#4A8B8E] text-white font-bold py-4 md:py-5 text-base md:text-lg rounded-xl shadow-lg"
             onClick={() => {
               if (serviceId === 'membership') {
-                window.location.href = `/${locale}/pricing`;
+                window.location.href = `/${locale}/services#membership`;
               } else {
                 window.location.href = `/${locale}/register`;
               }

@@ -68,10 +68,27 @@ const features: Feature[] = [
     image: '/images/features/booking.jpg'
   },
   {
+    id: 'home-care',
+    icon: Home,
+    title: 'المستشفى.. في منزلك',
+    description: 'نأتيك بالرعاية التي تستحقها إلى باب بيتك؛ طاقم طبي متخصص',
+    gradient: 'from-[#4A8B8E] to-[#356B6E]',
+    image: '/images/features/home-care.jpg'
+  },
+  {
+    id: 'response',
+    icon: MessageCircle,
+    title: 'استجابة فورية (استشارتك الأولى علينا)',
+    description: 'رد طبي موثوق خلال 15 دقيقة. سؤالك الأول مجاني بالكامل',
+    gradient: 'from-[#4A8B8E] to-[#356B6E]',
+    badge: 'مجاناً',
+    image: '/images/features/response.jpg'
+  },
+  {
     id: 'financial',
     icon: Wallet,
-    title: 'توفير يتخطى التوقعات',
-    description: 'خصومات حتى 80% + كاش باك + نقاط مكافآت',
+    title: 'عالمٌ من التوفير',
+    description: 'استثمر عضويتك.. وضاعف توفيرك مع كبرى العلامات الطبية',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     badge: 'حتى 80%',
     image: '/images/features/financial.jpg'
@@ -83,6 +100,14 @@ const features: Feature[] = [
     description: 'دفع إلكتروني + تقسيط مريح عبر تابي وتمارا',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     image: '/images/features/payment.jpg'
+  },
+  {
+    id: 'transparency',
+    icon: Star,
+    title: 'شفافية تمنحك الثقة',
+    description: 'اطلع على التقييمات الحقيقية للمراكز الطبية من عملاء سبقوك',
+    gradient: 'from-[#4A8B8E] to-[#356B6E]',
+    image: '/images/features/transparency.jpg'
   }
 ];
 
@@ -282,7 +307,7 @@ export function FeaturesPopover({ locale, isMobile = false }: FeaturesPopoverPro
       {isOpen && (
         <div
           ref={popoverRef}
-          className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-[600px] bg-white rounded-2xl shadow-2xl border border-gray-200 animate-in fade-in slide-in-from-top-2 duration-200 z-50"
+          className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-[900px] max-w-[95vw] bg-white rounded-2xl shadow-2xl border border-gray-200 animate-in fade-in slide-in-from-top-2 duration-200 z-50"
           role="dialog"
           aria-label={locale === 'ar' ? 'قائمة المميزات' : 'Features menu'}
         >
@@ -299,8 +324,8 @@ export function FeaturesPopover({ locale, isMobile = false }: FeaturesPopoverPro
             </p>
           </div>
 
-          {/* Features Grid - 2 columns */}
-          <div className="grid grid-cols-2 gap-3 p-4">
+          {/* Features Grid - 3 columns */}
+          <div className="grid grid-cols-3 gap-3 p-4">
             {features.map((feature) => {
               const Icon = feature.icon;
               return (

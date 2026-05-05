@@ -110,7 +110,7 @@ const packages: Package[] = [
     name: 'باقة الأعمال',
     price: 'حسب الاتفاق',
     description: 'للشركات والمؤسسات',
-    tagline: 'حلول صحية متكاملة لموظفيك',
+    tagline: 'استثمر في صحة فريقك.. لنجاح مستدام',
     image: '/logo.jpeg',
     icon: Briefcase,
     features: [
@@ -354,7 +354,7 @@ export function PackagesCarouselSection({ locale }: PackagesCarouselSectionProps
         {/* Bottom CTA */}
         <div className="text-center mt-12">
           <Link
-            href={`/${locale}/pricing`}
+            href={`/${locale}/services#membership`}
             className="inline-flex items-center gap-2 text-emerald-600 font-bold hover:text-emerald-700 transition-colors text-lg"
           >
             شوف كل الباقات بالتفصيل ←

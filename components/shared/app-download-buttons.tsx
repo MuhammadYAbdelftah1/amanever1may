@@ -12,7 +12,7 @@ export function AppDownloadButtons({
 }: AppDownloadButtonsProps) {
   const containerClass =
     layout === "horizontal"
-      ? "flex flex-wrap items-center justify-center gap-3"
+      ? "flex flex-row items-center justify-center gap-2 md:gap-3"
       : "flex flex-col items-center gap-3";
 
   return (
@@ -30,7 +30,7 @@ export function AppDownloadButtons({
           alt="حمّل من App Store"
           width={160}
           height={48}
-          className="h-12 w-auto"
+          className="h-9 md:h-11 lg:h-12 w-auto"
         />
       </Link>
 
@@ -47,7 +47,7 @@ export function AppDownloadButtons({
           alt="حمّل من Google Play"
           width={160}
           height={48}
-          className="h-12 w-auto"
+          className="h-9 md:h-11 lg:h-12 w-auto"
         />
       </Link>
 
@@ -65,7 +65,7 @@ export function AppDownloadButtons({
             alt="حمّل من Huawei AppGallery"
             width={160}
             height={48}
-            className="h-12 w-auto"
+            className="h-9 md:h-11 lg:h-12 w-auto"
           />
         </Link>
       )}

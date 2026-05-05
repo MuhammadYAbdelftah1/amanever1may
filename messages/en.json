@@ -6,7 +6,9 @@
     "services": "Our Services",
     "vision": "Our Vision",
     "values": "Our Values",
-    "contact": "Contact Us"
+    "contact": "Contact Us",
+    "medicalNetwork": "Medical Network",
+    "healthNetwork": "Health Network"
   },
   "home": {
     "hero": {
@@ -20,7 +22,22 @@
       "subtitle": "We provide a comprehensive range of medical and healthcare services",
       "membership": {
         "title": "Aman Ever Membership",
-        "description": "Your Premier & VIP Card - Your gateway to direct discounts up to 80% on all medical and cosmetic services. You can issue your electronic card instantly through the app in seconds."
+        "description": "One card.. saves you up to 80% of your healthcare expenses! Choose the coverage that suits you best, and issue your card electronically in just 60 seconds. No prior approvals, and no age restrictions."
+      },
+      "packages": {
+        "eyebrow": "Aman Ever Packages",
+        "title": "Comprehensive Care.. Choose What Suits You",
+        "subtitle": "8 packages carefully designed to meet everyone's needs; from individuals and families, to companies and special community groups.",
+        "calculator": {
+          "body": "Statistics indicate that the average family spending in Saudi Arabia is 4,800 riyals annually on medical and cosmetic services. With Aman Ever, your savings reach 3,400 riyals annually (equivalent to 10 times your subscription value!).",
+          "cta": "Calculate Your Savings Now"
+        },
+        "finalCta": {
+          "title": "Hesitant to Choose the Right Package?",
+          "body": "Our team is available now to help you choose the ideal coverage that meets your needs precisely.",
+          "primaryButton": "Talk to Us Now",
+          "secondaryButton": "Compare Packages in Detail"
+        }
       },
       "cashback": {
         "title": "Loyalty Program (Cashback)",
@@ -32,11 +49,11 @@
       },
       "instantBooking": {
         "title": "Instant Bookings & Consultations",
-        "description": "Book your appointments with elite doctors without waiting. Online consultations via voice and video calls, or through Ask a Doctor service (chat) with guaranteed quick response."
+        "description": "Your doctor is with you wherever you are.. Book your appointment without waiting, or get your medical consultation (voice, video, chat) around the clock."
       },
       "homeCare": {
         "title": "Home Care Services",
-        "description": "We provide you with elite doctors in various specialties and specialized nursing services to visit you at home, saving you the hassle of waiting in hospitals. Elderly care + home lab tests + physiotherapy and cupping come to your home with a complete team"
+        "description": "Comprehensive medical care delivered to your doorstep.. Certified team for medical visits, physiotherapy, and special care for children and the elderly."
       },
       "store": {
         "title": "Aman Electronic Store",
@@ -94,7 +111,7 @@
       }
     },
     "partners": {
-      "title": "Aman Ever Partners",
+      "title": "Aman Partners.. Partners of Trust",
       "subtitle": "We are proud of our partnership with a selection of the largest hospitals and medical, health and cosmetic centers in the Kingdom",
       "trustBadge": "More than 500+ trusted partners throughout the Kingdom"
     },
@@ -114,6 +131,39 @@
         "discount": "Discounts"
       },
       "cta": "Discover More"
+    },
+    "network": {
+      "title": "Aman's Wide Network.. Care Without Limits",
+      "tabs": {
+        "medical": "Medical Network",
+        "health": "Health Network"
+      },
+      "medical": {
+        "hospitals": "Hospitals",
+        "hospitalsDesc": "Wide network of the best hospitals and specialized medical centers",
+        "clinics": "Clinics",
+        "clinicsDesc": "Specialized clinics in all medical specialties",
+        "pharmacies": "Pharmacies",
+        "pharmaciesDesc": "Certified pharmacies providing all medicines and medical supplies",
+        "labs": "Laboratories",
+        "labsDesc": "Advanced medical laboratories for all types of tests"
+      },
+      "health": {
+        "gyms": "Sports Clubs",
+        "gymsDesc": "Exclusive discounts on subscriptions to the finest fitness centers and sports clubs",
+        "nutrition": "Healthy Nutrition and Supplements",
+        "nutritionDesc": "Nutritional consultations and certified supplements for a healthier lifestyle",
+        "opticals": "Opticals",
+        "opticalsDesc": "Best providers of glasses, lenses and certified optical services",
+        "spa": "SPA and Massage",
+        "spaDesc": "Wellness and therapeutic massage services to enhance health and vitality"
+      }
+    },
+    "exclusiveDiscounts": {
+      "tag": "A World of Savings",
+      "title": "Invest Your Membership.. Multiply Your Savings",
+      "description": "Because you're part of the Aman Ever family, we've opened the doors of savings with major medical and health brands.. Exclusive offers designed specifically to meet your needs.",
+      "cta": "Get Your Card Now.. Start Saving"
     }
   },
   "about": {

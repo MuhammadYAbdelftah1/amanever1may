@@ -46,7 +46,7 @@ const content = {
       tagline: 'الأكثر طلباً',
       description: 'خصومات تصل إلى 80% في مستشفى سليمان الحبيب، الموسى، السعودي الألماني، وأكثر من 2000 مركز طبي. إصدار فوري.',
       ctaLabel: 'اكتشف المزيد',
-      ctaHref: '/pricing',
+      ctaHref: '/services#membership',
     },
     {
       id: 'cashback',
@@ -56,7 +56,7 @@ const content = {
       tagline: 'CASHBACK',
       description: 'استرداد نقدي يصل إلى 15% عند شراء البطاقة أو أول استخدام في الشبكة الطبية. عوائد مالية فورية.',
       ctaLabel: 'اكتشف المزيد',
-      ctaHref: '/cashback',
+      ctaHref: '/services#cashback',
     },
     {
       id: 'points',
@@ -66,7 +66,7 @@ const content = {
       tagline: 'محفظة نقاط',
       description: 'اجمع نقاط ولاء مع كل زيارة طبية أو شراء من صيدليات النهدي والدواء واستبدلها برصيد خدمات',
       ctaLabel: 'اكتشف المزيد',
-      ctaHref: '/points',
+      ctaHref: '/services#points',
     },
     {
       id: 'instant-booking',
@@ -76,7 +76,7 @@ const content = {
       tagline: 'فوري',
       description: 'طبيبك معك أينما كنت.. احجز موعدك دون انتظار، أو احصل على استشارتك الطبية (صوت، فيديو، محادثة) على مدار الساعة.',
       ctaLabel: 'اكتشف المزيد',
-      ctaHref: '/booking',
+      ctaHref: '/services#instant-booking',
     },
     {
       id: 'home-care',
@@ -86,7 +86,7 @@ const content = {
       tagline: 'رعاية منزلية',
       description: 'رعاية طبية متكاملة تصلك إلى باب بيتك.. طاقم معتمد للزيارات الطبية، العلاج الطبيعي، وعناية خاصة بالأطفال وكبار السن.',
       ctaLabel: 'اكتشف المزيد',
-      ctaHref: '/home-care',
+      ctaHref: '/services#home-care',
     },
     {
       id: 'ask-doctor',
@@ -96,7 +96,7 @@ const content = {
       tagline: 'استشارة فورية',
       description: 'استشارات طبية فورية على مدار الساعة مع نخبة من الأطباء المعتمدين. رد خلال 15 دقيقة عبر الشات، الصوت، أو الفيديو.',
       ctaLabel: 'اكتشف المزيد',
-      ctaHref: '/ask-doctor',
+      ctaHref: '/services#ask-doctor',
     },
     {
       id: 'store',
@@ -106,13 +106,13 @@ const content = {
       tagline: 'عروض حصرية',
       description: 'منتجات طبية، مكملات غذائية، ومستحضرات تجميلية أصلية بأسعار مخفضة وعروض حصرية لأعضاء أمان.',
       ctaLabel: 'اكتشف المزيد',
-      ctaHref: '/store',
+      ctaHref: '/services#store',
     },
     {
       id: 'medical-network',
       icon: 'Building2',
       image: '/services/medical-network.jpg',
-      title: 'استكشف الشبكة الطبية',
+      title: 'استكشف الشبكة الطبية الآن',
       tagline: 'شبكة طبية',
       description: 'وصول مباشر لأكثر من 2000 مركز طبي: مستشفيات، عيادات، مختبرات البرج، صيدليات النهدي والدواء في كافة مدن المملكة.',
       ctaLabel: 'استكشف الشبكة',
@@ -122,7 +122,7 @@ const content = {
       id: 'health-network',
       icon: 'Dumbbell',
       image: '/services/health-network.jpg',
-      title: 'استكشف الشبكة الصحية',
+      title: 'استكشف الشبكة الصحية الآن',
       tagline: 'شبكة صحية',
       description: 'خصومات على فتنس تايم، جولدز جيم، عيادات التغذية، مراكز البصريات، والسبا لنمط حياة صحي متكامل.',
       ctaLabel: 'استكشف الشبكة',

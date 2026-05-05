@@ -99,7 +99,7 @@ const content = {
   closingCta: {
     text: 'جاهز تجرب الفرق؟',
     links: [
-      { label: 'اختر باقتك', href: '/ar/pricing' },
+      { label: 'اختر باقتك', href: '/services#membership' },
       { label: 'جرّب "اسأل طبيب" مجاناً', href: '/services#instant-booking' },
     ],
   },

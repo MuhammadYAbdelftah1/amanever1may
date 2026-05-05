@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { Menu, Smartphone } from 'lucide-react';
+import { Menu, Smartphone, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { LanguageSwitcher } from './language-switcher';
@@ -17,6 +17,7 @@ import { SpecialOffersPopover } from './special-offers-popover';
 import { AboutPopover } from './about-popover';
 import { BlogPopover } from './blog-popover';
 import { ContactPopover } from './contact-popover';
+import { NetworkMapPopover } from '@/components/shared/network-map-popover';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -31,9 +32,83 @@ export function Header({ locale }: HeaderProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isAppModalOpen, setIsAppModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // Network selection states (same as aman-network-section)
+  const [showRegionSelector, setShowRegionSelector] = useState(false);
+  const [showNetworkMap, setShowNetworkMap] = useState(false);
+  const [selectedNetworkType, setSelectedNetworkType] = useState<'medical' | 'health'>('medical');
+  const [selectedZoneId, setSelectedZoneId] = useState('');
+  const [selectedCityName, setSelectedCityName] = useState('');
+  const [mapRegionId, setMapRegionId] = useState('');
+  const [mapCityName, setMapCityName] = useState('');
 
   // Check if we're on the home page
   const isHomePage = pathname === `/${locale}` || pathname === `/${locale}/`;
+
+  // Regions data (same as aman-network-section)
+  const regions = [
+    {
+      id: 'central',
+      regionId: 'riyadh',
+      name: 'المنطقة الوسطى',
+      cities: ['الرياض', 'الخرج', 'الدوادمي', 'الزلفي', 'المجمعة', 'شقراء', 'الأفلاج', 'وادي الدواسر', 'السليل', 'عفيف']
+    },
+    {
+      id: 'western',
+      regionId: 'makkah',
+      name: 'المنطقة الغربية',
+      cities: ['مكة', 'جدة', 'المدينة المنورة', 'الطائف', 'ينبع', 'رابغ', 'القنفذة', 'الليث', 'بدر', 'خليص']
+    },
+    {
+      id: 'eastern',
+      regionId: 'eastern',
+      name: 'المنطقة الشرقية',
+      cities: ['الدمام', 'الخبر', 'الظهران', 'الأحساء (الهفوف)', 'الأحساء (المبرز)', 'الجبيل', 'القطيف', 'الخفجي', 'رأس تنورة', 'بقيق', 'النعيرية', 'حفر الباطن']
+    },
+    {
+      id: 'northern',
+      regionId: 'tabuk',
+      name: 'المنطقة الشمالية',
+      cities: ['تبوك', 'عرعر', 'سكاكا', 'دومة الجندل', 'القريات', 'رفحاء', 'طريف']
+    },
+    {
+      id: 'southern',
+      regionId: 'asir',
+      name: 'المنطقة الجنوبية',
+      cities: ['أبها', 'خميس مشيط', 'نجران', 'جازان', 'الباحة', 'صبيا', 'بيش', 'محايل عسير', 'أحد رفيدة', 'شرورة', 'بلجرشي', 'المخواة']
+    },
+    {
+      id: 'qassim',
+      regionId: 'qassim',
+      name: 'منطقة القصيم',
+      cities: ['بريدة', 'عنيزة', 'الرس', 'البكيرية', 'البدائع', 'رياض الخبراء', 'عيون الجواء']
+    }
+  ];
+
+  const handleNetworkButtonClick = (networkType: 'medical' | 'health') => {
+    setSelectedNetworkType(networkType);
+    setSelectedZoneId('');
+    setSelectedCityName('');
+    setMapRegionId('');
+    setMapCityName('');
+    setIsMobileMenuOpen(false); // Close mobile menu
+    setShowRegionSelector(true);
+  };
+
+  const handleContinue = () => {
+    if (selectedZoneId && selectedCityName) {
+      const regionData = regions.find(r => r.id === selectedZoneId);
+      if (regionData) {
+        setMapRegionId(regionData.regionId);
+        setMapCityName(selectedCityName);
+        setShowRegionSelector(false);
+        setShowNetworkMap(true);
+      }
+    }
+  };
+
+  const selectedRegionData = regions.find(r => r.id === selectedZoneId);
 
   const navLinks = [
     { href: `/${locale}`, label: t('home') },
@@ -122,36 +197,22 @@ export function Header({ locale }: HeaderProps) {
           <PlatformsPopover locale={locale} type="doctors" />
           
           {/* Medical Network - الشبكة الطبية */}
-          <Link
-            href={`/${locale}/medical-network`}
-            className={`relative text-sm font-medium transition-all duration-300 rounded-lg px-4 py-2.5 group whitespace-nowrap ${
-              isActive(`/${locale}/medical-network`)
-                ? 'text-[#4A8B8E] bg-[#4A8B8E]/10'
-                : 'text-gray-700 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5'
-            }`}
+          <button
+            onClick={() => handleNetworkButtonClick('medical')}
+            className="relative text-sm font-medium transition-all duration-300 rounded-lg px-4 py-2.5 group whitespace-nowrap text-gray-700 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5"
           >
             {t('medicalNetwork')}
-            {isActive(`/${locale}/medical-network`) && (
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 rounded-full bg-[#4A8B8E]" />
-            )}
             <span className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#4A8B8E]/0 via-[#4A8B8E]/5 to-[#4A8B8E]/0" />
-          </Link>
+          </button>
           
           {/* Health Network - الشبكة الصحية */}
-          <Link
-            href={`/${locale}/health-network`}
-            className={`relative text-sm font-medium transition-all duration-300 rounded-lg px-4 py-2.5 group whitespace-nowrap ${
-              isActive(`/${locale}/health-network`)
-                ? 'text-[#4A8B8E] bg-[#4A8B8E]/10'
-                : 'text-gray-700 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5'
-            }`}
+          <button
+            onClick={() => handleNetworkButtonClick('health')}
+            className="relative text-sm font-medium transition-all duration-300 rounded-lg px-4 py-2.5 group whitespace-nowrap text-gray-700 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5"
           >
             {t('healthNetwork')}
-            {isActive(`/${locale}/health-network`) && (
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 rounded-full bg-[#4A8B8E]" />
-            )}
             <span className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#4A8B8E]/0 via-[#4A8B8E]/5 to-[#4A8B8E]/0" />
-          </Link>
+          </button>
           
           {/* Special Offers Popover - العروض الخاصة */}
           <SpecialOffersPopover locale={locale} />
@@ -206,7 +267,7 @@ export function Header({ locale }: HeaderProps) {
           </div>
 
           {/* Mobile Menu with animation */}
-          <Sheet>
+          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button 
                 variant="ghost" 
@@ -285,13 +346,9 @@ export function Header({ locale }: HeaderProps) {
                 <PlatformsPopover locale={locale} type="doctors" isMobile />
                 
                 {/* Medical Network - الشبكة الطبية */}
-                <Link
-                  href={`/${locale}/medical-network`}
-                  className={`flex items-center gap-3 text-base font-medium transition-all duration-300 rounded-lg px-4 py-2.5 ${
-                    isActive(`/${locale}/medical-network`)
-                      ? 'text-[#4A8B8E] bg-[#4A8B8E]/10'
-                      : 'text-[#4A8B8E]/80 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5'
-                  }`}
+                <button
+                  onClick={() => handleNetworkButtonClick('medical')}
+                  className="flex items-center gap-3 text-base font-medium transition-all duration-300 rounded-lg px-4 py-2.5 text-[#4A8B8E]/80 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5 w-full"
                 >
                   {/* Image Placeholder */}
                   <div className="flex-shrink-0 w-10 h-10 rounded-lg overflow-hidden bg-gray-50 relative border-2 border-dashed border-gray-300">
@@ -301,16 +358,12 @@ export function Header({ locale }: HeaderProps) {
                     </div>
                   </div>
                   <span className="flex-1 text-center">{t('medicalNetwork')}</span>
-                </Link>
+                </button>
                 
                 {/* Health Network - الشبكة الصحية */}
-                <Link
-                  href={`/${locale}/health-network`}
-                  className={`flex items-center gap-3 text-base font-medium transition-all duration-300 rounded-lg px-4 py-2.5 ${
-                    isActive(`/${locale}/health-network`)
-                      ? 'text-[#4A8B8E] bg-[#4A8B8E]/10'
-                      : 'text-[#4A8B8E]/80 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5'
-                  }`}
+                <button
+                  onClick={() => handleNetworkButtonClick('health')}
+                  className="flex items-center gap-3 text-base font-medium transition-all duration-300 rounded-lg px-4 py-2.5 text-[#4A8B8E]/80 hover:text-[#4A8B8E] hover:bg-[#4A8B8E]/5 w-full"
                 >
                   {/* Image Placeholder */}
                   <div className="flex-shrink-0 w-10 h-10 rounded-lg overflow-hidden bg-gray-50 relative border-2 border-dashed border-gray-300">
@@ -320,7 +373,7 @@ export function Header({ locale }: HeaderProps) {
                     </div>
                   </div>
                   <span className="flex-1 text-center">{t('healthNetwork')}</span>
-                </Link>
+                </button>
                 
                 {/* Special Offers Popover - العروض الخاصة */}
                 <SpecialOffersPopover locale={locale} isMobile />
@@ -423,6 +476,100 @@ export function Header({ locale }: HeaderProps) {
         isOpen={isAppModalOpen} 
         onClose={() => setIsAppModalOpen(false)} 
         locale={locale}
+      />
+
+      {/* Region Selector Dialog - Same as aman-network-section */}
+      {showRegionSelector && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 pt-24 md:pt-32">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto my-auto">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-[#5B9A9E] to-[#6BA5A8] px-8 py-6 rounded-t-3xl">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-2xl font-bold text-white">اختر منطقتك ومدينتك</h3>
+                  <p className="text-white/90 text-sm mt-1">
+                    {selectedNetworkType === 'medical' ? 'الشبكة الطبية' : 'الشبكة الصحية'}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowRegionSelector(false)}
+                  className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                >
+                  <X className="w-6 h-6 text-white" />
+                </button>
+              </div>
+            </div>
+
+            {/* Content - Simple Form */}
+            <div className="p-8 space-y-6">
+              {/* Step 1: Select Region */}
+              <div>
+                <label className="block text-lg font-bold text-gray-900 mb-3">
+                  1️⃣ اختر المنطقة
+                </label>
+                <select
+                  value={selectedZoneId}
+                  onChange={(e) => {
+                    setSelectedZoneId(e.target.value);
+                    setSelectedCityName('');
+                  }}
+                  className="w-full px-6 py-4 text-lg border-2 border-gray-300 rounded-2xl focus:border-[#5B9A9E] focus:ring-4 focus:ring-[#5B9A9E]/20 outline-none transition-all bg-white cursor-pointer"
+                >
+                  <option value="">-- اختر المنطقة --</option>
+                  {regions.map((region) => (
+                    <option key={region.id} value={region.id}>
+                      {region.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Step 2: Select City */}
+              {selectedZoneId && selectedRegionData && (
+                <div className="animate-in fade-in slide-in-from-top-4 duration-300">
+                  <label className="block text-lg font-bold text-gray-900 mb-3">
+                    2️⃣ اختر المدينة
+                  </label>
+                  <select
+                    value={selectedCityName}
+                    onChange={(e) => setSelectedCityName(e.target.value)}
+                    className="w-full px-6 py-4 text-lg border-2 border-gray-300 rounded-2xl focus:border-[#5B9A9E] focus:ring-4 focus:ring-[#5B9A9E]/20 outline-none transition-all bg-white cursor-pointer"
+                  >
+                    <option value="">-- اختر المدينة --</option>
+                    {selectedRegionData.cities.map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              {/* Continue Button */}
+              <button
+                onClick={handleContinue}
+                disabled={!selectedZoneId || !selectedCityName}
+                className={`w-full py-5 rounded-2xl font-bold text-xl transition-all duration-300 ${
+                  selectedZoneId && selectedCityName
+                    ? 'bg-gradient-to-r from-[#5B9A9E] to-[#6BA5A8] text-white shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer'
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                }`}
+              >
+                {selectedZoneId && selectedCityName ? '✅ استكشف الشبكة الآن' : '⬆️ اختر المنطقة والمدينة أولاً'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Network Map Dialog */}
+      <NetworkMapPopover 
+        locale={locale} 
+        type={selectedNetworkType}
+        isOpen={showNetworkMap}
+        onOpenChange={setShowNetworkMap}
+        preSelectedRegion={mapRegionId}
+        preSelectedCity={mapCityName}
       />
     </header>
   );

@@ -30,9 +30,9 @@ type Tier = {
 };
 
 const content = {
-  eyebrow: 'عضويتك الطبية الذكية',
-  title: 'بطاقة واحدة.. توفّر لك حتى ٨٠٪ من نفقاتك الصحية!',
-  subtitle: 'اختر التغطية الأنسب لك، وأصدر بطاقتك إلكترونياً خلال ٦٠ ثانية فقط. بلا موافقات مسبقة، وبدون أي قيود للعمر.',
+  eyebrow: 'باقات أمان إيفر',
+  title: 'رعاية متكاملة.. اختر ما يناسبك',
+  subtitle: '8 باقات صُممت بعناية لتلبي احتياجات الجميع؛ من الأفراد والعائلات، إلى الشركات والفئات المجتمعية الخاصة.',
   calculator: {
     body: 'تشير الإحصائيات إلى أن متوسط إنفاق العائلة في السعودية يبلغ ٤٬٨٠٠ ريال سنوياً على الخدمات الطبية والتجميلية. مع أمان إيفر، يصل توفيرك إلى ٣٬٤٠٠ ريال سنوياً (ما يعادل ١٠ أضعاف قيمة اشتراكك!).',
     cta: 'احسب توفيرك الآن',
@@ -112,8 +112,9 @@ const content = {
     '✓ معتمد في السعودية',
   ],
   finalCta: {
-    body: 'مش متأكد أي باقة تناسبك؟ جرّب التطبيق مجاناً — أول استشارة "اسأل طبيب" مجانية بالكامل بدون اشتراك.',
-    primaryButton: 'ابدأ مجاناً',
+    title: 'متردد في اختيار الباقة الأنسب؟',
+    body: 'فريقنا متواجد الآن لمساعدتك في اختيار التغطية المثالية التي تلبي احتياجاتك بكل دقة.',
+    primaryButton: 'تحدث معنا الآن',
     secondaryButton: 'قارن الباقات بالتفصيل',
   },
 };
@@ -396,7 +397,7 @@ export function MembershipPricingSection({ locale }: MembershipPricingSectionPro
                     {content.calculator.body}
                   </p>
                   <Button asChild variant="outline" className="border-amber-600 text-amber-700 hover:bg-amber-100">
-                    <Link href={`/${locale}/pricing`}>{content.calculator.cta}</Link>
+                    <Link href={`/${locale}/services#membership`}>{content.calculator.cta}</Link>
                   </Button>
                 </div>
               </div>
@@ -435,9 +436,9 @@ export function MembershipPricingSection({ locale }: MembershipPricingSectionPro
 
           {/* Final CTA Band */}
           <div className="max-w-4xl mx-auto bg-emerald-50 rounded-2xl p-8 md:p-10 text-center">
-            <div className="flex justify-center mb-4">
-              <Gift className="w-12 h-12 text-primary" aria-hidden="true" />
-            </div>
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
+              {content.finalCta.title}
+            </h3>
             <p className="text-lg md:text-xl text-slate-700 leading-relaxed mb-6">
               {content.finalCta.body}
             </p>
@@ -447,7 +448,7 @@ export function MembershipPricingSection({ locale }: MembershipPricingSectionPro
                 size="lg"
                 className="text-base md:text-lg px-8 py-6 rounded-xl hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
               >
-                <Link href={`/${locale}/register`}>{content.finalCta.primaryButton}</Link>
+                <Link href={`/${locale}/contact`}>{content.finalCta.primaryButton}</Link>
               </Button>
               <Button
                 asChild
@@ -455,7 +456,7 @@ export function MembershipPricingSection({ locale }: MembershipPricingSectionPro
                 size="lg"
                 className="text-base md:text-lg px-8 py-6 rounded-xl hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
               >
-                <Link href={`/${locale}/pricing`}>{content.finalCta.secondaryButton}</Link>
+                <Link href={`/${locale}/services#membership`}>{content.finalCta.secondaryButton}</Link>
               </Button>
             </div>
           </div>

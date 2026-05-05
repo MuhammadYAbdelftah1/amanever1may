@@ -65,7 +65,7 @@ export function HeroSection({ locale, translations }: HeroSectionProps) {
       </div>
 
       {/* App Download Buttons */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+      <div className="absolute bottom-4 md:bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 z-20 w-full px-4">
         <AppDownloadButtons layout="horizontal" showHuawei={true} />
       </div>
     </section>

@@ -408,7 +408,7 @@ export function MedicalNetworkSection({ locale }: MedicalNetworkSectionProps) {
           <p className="text-lg md:text-xl font-bold text-slate-900 mb-6">{content.cta.question}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button asChild size="lg" className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700">
-              <Link href={`/${locale}/pricing`}>{content.cta.primary} ←</Link>
+              <Link href={`/${locale}/services#membership`}>{content.cta.primary} ←</Link>
             </Button>
             <Link
               href={`/${locale}/medical-network`}

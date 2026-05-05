@@ -34,7 +34,7 @@ export const FOOTER_CONFIG = {
     { label: "عن أمان إيفر", url: "https://amanever.com/#about" }, // TODO: Convert to /ar/about
     { label: "مميزاتنا", url: "https://amanever.com/#features" }, // TODO: Convert to /ar/features
     { label: "حجوزاتي واستشاراتي الطبية", url: "https://amanever.com/#my-bookings" },
-    { label: "خدماتنا الطبية", url: "https://amanever.com/#services-package" },
+    { label: "رعاية متكاملة.. صُممت لأجلك", url: "https://amanever.com/#services-package" },
     { label: "خدمات الرعاية المنزلية", url: "https://amanever.com/#service-homeCare" },
     { label: "عن بطاقات وباقات أمان إيفر", url: "https://amanever.com/#service-membership" },
     { label: "الشبكة الطبية والصحية", url: "https://amanever.com/#network" },

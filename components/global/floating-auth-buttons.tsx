@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { User, MapPin, Phone } from 'lucide-react';
@@ -16,6 +16,19 @@ export function FloatingAuthButtons() {
   const [showLocationTooltip, setShowLocationTooltip] = useState(false);
   const [showConsultationTooltip, setShowConsultationTooltip] = useState(false);
   const [showConsultationPopup, setShowConsultationPopup] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Detect screen size dynamically
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 1024); // lg breakpoint
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   // Hide on auth pages
   const isAuthPage = pathname?.includes('/login') || pathname?.includes('/register');
@@ -226,58 +239,64 @@ export function FloatingAuthButtons() {
         onClose={() => setShowMembershipModal(false)} 
       />
 
-      {/* Consultation Options Popup */}
+      {/* Consultation Options Popup/Popover */}
       <AnimatePresence>
         {showConsultationPopup && (
           <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowConsultationPopup(false)}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
-            />
+            {/* Backdrop - only for desktop popup */}
+            {isDesktop && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShowConsultationPopup(false)}
+                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+              />
+            )}
             
-            {/* Popup */}
+            {/* Popup/Popover */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              initial={isDesktop ? { opacity: 0, scale: 0.9, y: 20 } : { opacity: 0, x: -20 }}
+              animate={isDesktop ? { opacity: 1, scale: 1, y: 0 } : { opacity: 1, x: 0 }}
+              exit={isDesktop ? { opacity: 0, scale: 0.9, y: 20 } : { opacity: 0, x: -20 }}
               transition={{ type: "spring", duration: 0.3 }}
-              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[90%] max-w-md"
+              className={
+                isDesktop
+                  ? "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[90%] max-w-md"
+                  : "fixed left-20 md:left-24 bottom-[180px] z-50 w-[calc(100vw-7rem)] max-w-sm"
+              }
             >
               <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
                 {/* Header */}
-                <div className="bg-gradient-to-br from-emerald-600 to-teal-700 p-6 text-white">
-                  <h3 className="text-xl md:text-2xl font-bold text-center">
+                <div className="bg-gradient-to-br from-emerald-600 to-teal-700 p-4 md:p-6 text-white">
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-center">
                     اختر نوع الخدمة
                   </h3>
-                  <p className="text-emerald-50 text-sm text-center mt-2">
+                  <p className="text-emerald-50 text-xs md:text-sm text-center mt-1 md:mt-2">
                     سيتم تحويلك للتواصل مع خدمة العملاء
                   </p>
                 </div>
 
                 {/* Options */}
-                <div className="p-6 space-y-4">
+                <div className="p-4 md:p-6 space-y-3 md:space-y-4">
                   {/* Medical Appointment Option */}
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleConsultationOption(appointmentUrl)}
-                    className="w-full p-5 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 hover:from-blue-100 hover:to-cyan-100 border-2 border-blue-200 hover:border-blue-300 transition-all duration-200 text-right group"
+                    className="w-full p-4 md:p-5 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 hover:from-blue-100 hover:to-cyan-100 border-2 border-blue-200 hover:border-blue-300 transition-all duration-200 text-right group"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-center gap-3 md:gap-4">
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                        <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-lg font-bold text-slate-800 mb-1">
+                        <h4 className="text-base md:text-lg font-bold text-slate-800 mb-0.5 md:mb-1">
                           حجز موعد طبي
                         </h4>
-                        <p className="text-sm text-slate-600">
+                        <p className="text-xs md:text-sm text-slate-600">
                           احجز موعد مع طبيب متخصص
                         </p>
                       </div>
@@ -289,11 +308,11 @@ export function FloatingAuthButtons() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleConsultationOption(urgentConsultationUrl)}
-                    className="w-full p-5 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100 border-2 border-emerald-200 hover:border-emerald-300 transition-all duration-200 text-right group"
+                    className="w-full p-4 md:p-5 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100 border-2 border-emerald-200 hover:border-emerald-300 transition-all duration-200 text-right group"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform relative">
-                        <Phone className="w-6 h-6 text-white" />
+                    <div className="flex items-center gap-3 md:gap-4">
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform relative">
+                        <Phone className="w-5 h-5 md:w-6 md:h-6 text-white" />
                         {/* Pulsing indicator */}
                         <span className="absolute -top-1 -right-1 flex h-3 w-3">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -301,10 +320,10 @@ export function FloatingAuthButtons() {
                         </span>
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-lg font-bold text-slate-800 mb-1">
+                        <h4 className="text-base md:text-lg font-bold text-slate-800 mb-0.5 md:mb-1">
                           استشارة طبية عاجلة
                         </h4>
-                        <p className="text-sm text-slate-600">
+                        <p className="text-xs md:text-sm text-slate-600">
                           تواصل فوري مع طبيب متاح الآن
                         </p>
                       </div>
@@ -313,14 +332,22 @@ export function FloatingAuthButtons() {
                 </div>
 
                 {/* Close Button */}
-                <div className="px-6 pb-6">
+                <div className="px-4 md:px-6 pb-4 md:pb-6">
                   <button
                     onClick={() => setShowConsultationPopup(false)}
-                    className="w-full py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition-colors"
+                    className="w-full py-2.5 md:py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition-colors text-sm md:text-base"
                   >
                     إلغاء
                   </button>
                 </div>
+
+                {/* Arrow pointer for mobile/tablet popover */}
+                {!isDesktop && (
+                  <div className="absolute right-full top-[120px] mr-2">
+                    <div className="w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white" 
+                         style={{ filter: 'drop-shadow(2px 0 4px rgba(0,0,0,0.1))' }} />
+                  </div>
+                )}
               </div>
             </motion.div>
           </>
