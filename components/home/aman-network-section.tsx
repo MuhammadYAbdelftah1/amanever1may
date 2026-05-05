@@ -286,7 +286,8 @@ export function AmanNetworkSection({ locale }: AmanNetworkSectionProps) {
 
     const scroll = () => {
       if (!isPaused && scrollContainer) {
-        scrollPos += 1;
+        // Scroll from right to left (increase scrollLeft)
+        scrollPos += 0.5; // Slower speed for smooth infinite scroll
         scrollContainer.scrollLeft = scrollPos;
 
         // When we reach the middle, reset to start (seamless because content is duplicated)
@@ -301,6 +302,7 @@ export function AmanNetworkSection({ locale }: AmanNetworkSectionProps) {
 
     animationId = requestAnimationFrame(scroll);
 
+    // Pause on hover
     const handleMouseEnter = () => { isPaused = true; };
     const handleMouseLeave = () => { isPaused = false; };
 
@@ -326,19 +328,11 @@ export function AmanNetworkSection({ locale }: AmanNetworkSectionProps) {
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-10">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
-            شبكة أمان الواسعة
+            شبكة أمان الواسعة.. رعاية بلا حدود
           </h2>
-          <p className="text-lg text-gray-600 mb-6">
-            شبكة متكاملة من أفضل مقدمي الخدمات الطبية والصحية في المملكة
+          <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+            نضع بين يديك نخبة من أكبر الصروح الطبية والصحية والتجميلية في المملكة، لنضمن لك ولعائلتك جودة الرعاية التي تستحقونها، أينما كنتم.
           </p>
-          
-          {/* Network Map Button */}
-          <div className="flex justify-center">
-            <NetworkMapPopover 
-              locale={locale} 
-              type={activeTab === 'medical' ? 'medical' : 'health'} 
-            />
-          </div>
         </div>
 
         {/* Tabs */}
@@ -351,7 +345,7 @@ export function AmanNetworkSection({ locale }: AmanNetworkSectionProps) {
                 : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-[#5B9A9E] hover:text-[#5B9A9E]'
             }`}
           >
-            استكشف الشبكة الطبية
+            استكشف الشبكة الطبية الآن
           </button>
           <button
             onClick={() => handleNetworkButtonClick('health')}
@@ -361,7 +355,7 @@ export function AmanNetworkSection({ locale }: AmanNetworkSectionProps) {
                 : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-[#5B9A9E] hover:text-[#5B9A9E]'
             }`}
           >
-            استكشف الشبكة الصحية
+            استكشف الشبكة الصحية الآن
           </button>
         </div>
       </div>

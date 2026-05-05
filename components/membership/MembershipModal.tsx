@@ -116,12 +116,12 @@ const packages: Package[] = [
     badgeColor: 'bg-emerald-500',
     ctaText: 'اشترك الآن',
     ctaHref: '/ar/register?plan=individual',
-    notification: 'خصم 20% لأول 100 مشترك',
+    notification: '1,500 نقطة أمان ترحيبية',
     features: [
-      'خصومات حتى 50% في +2000 مركز',
-      'رصيد خدمات 1,500 ريال',
-      'حجز فوري مع أفضل الأطباء',
-      '5 استشارات أونلاين مجانية',
+      '1,500 نقطة أمان في محفظتك',
+      'كاش باك 5% على خدماتك',
+      '5 استشارات طبية مجانية',
+      'خصومات حتى 50% في المتجر',
     ],
   },
   {
@@ -130,16 +130,16 @@ const packages: Package[] = [
     price: '399',
     description: 'للزوج والزوجة',
     image: '/logo.jpeg',
-    badge: 'الأكثر طلباً',
+    badge: 'الخيار المفضل',
     badgeColor: 'bg-blue-500',
     ctaText: 'اشترك الآن',
     ctaHref: '/ar/register?plan=premium',
-    notification: 'عرض خاص للعائلات',
+    notification: '3,000 نقطة أمان + كاش باك 10%',
     features: [
-      'تغطية لشخصين (زوج وزوجة)',
-      'خصومات حتى 60%',
-      'رصيد خدمات 3,000 ريال',
-      '10 استشارات أونلاين مجانية',
+      '3,000 نقطة أمان للزوجين',
+      'كاش باك 10% + نقاط 1.5x',
+      '5 استشارات طبية مجانية',
+      'تنظيف أسنان مرتين مجاناً',
     ],
   },
   {
@@ -152,12 +152,30 @@ const packages: Package[] = [
     badgeColor: 'bg-amber-500',
     ctaText: 'اشترك الآن',
     ctaHref: '/ar/register?plan=gold',
-    notification: 'كاش باك 15%',
+    notification: 'كاش باك 15% + نقاط 2x',
     features: [
-      'خصومات حتى 70%',
-      'رصيد خدمات 5,000 ريال',
-      'استشارات أونلاين غير محدودة',
-      'فحص شامل سنوي مجاني',
+      '5,000 نقطة أمان فورية',
+      'كاش باك 15% + نقاط 2x',
+      '5 استشارات + تنظيف أسنان',
+      'دعم فني VIP مخصص 24/7',
+    ],
+  },
+  {
+    id: 'seniors',
+    name: 'باقة كبار السن',
+    price: '599',
+    description: 'لرعاية كبار السن',
+    image: '/logo.jpeg',
+    badge: 'تاج الوفاء',
+    badgeColor: 'bg-indigo-500',
+    ctaText: 'اشترك الآن',
+    ctaHref: '/ar/register?plan=seniors',
+    notification: 'كاش باك 20% + زيارات منزلية',
+    features: [
+      '6,000 نقطة أمان فورية',
+      'كاش باك 20% أعلى نسبة',
+      'زيارات تمريضية منزلية',
+      'دعم فني "عناية" مخصص',
     ],
   },
   {
@@ -166,70 +184,54 @@ const packages: Package[] = [
     price: '999',
     description: 'حتى 6 أفراد',
     image: '/logo.jpeg',
+    badge: 'رعاية شاملة',
+    badgeColor: 'bg-emerald-600',
     ctaText: 'اشترك الآن',
     ctaHref: '/ar/register?plan=family',
-    notification: 'تغطية شاملة للعائلة',
+    notification: '6,000 نقطة + كاش باك 20%',
     features: [
-      'تغطية حتى 6 أفراد',
-      'خصومات حتى 80%',
-      'رصيد خدمات 10,000 ريال',
-      'زيارة طبيب منزلية مجانية شهرياً',
-    ],
-  },
-  {
-    id: 'elderly',
-    name: 'باقة كبار السن',
-    price: '199',
-    description: 'رعاية خاصة لكبار السن',
-    image: '/logo.jpeg',
-    badge: 'رعاية متميزة',
-    badgeColor: 'bg-indigo-500',
-    ctaText: 'اشترك الآن',
-    ctaHref: '/ar/register?plan=elderly',
-    notification: 'متابعة دورية مجانية',
-    features: [
-      'خصومات حتى 70% على الخدمات الطبية',
-      'رصيد خدمات 3,000 ريال',
-      'متابعة صحية دورية مجانية',
-      'أولوية في المواعيد والحجوزات',
+      '6,000 نقطة لجميع الأفراد',
+      'كاش باك 20% + نقاط 2x',
+      '4 استشارات + تنظيف لكل فرد',
+      'إدارة حسابات متعددة',
     ],
   },
   {
     id: 'special-needs',
     name: 'باقة ذوي الاحتياجات الخاصة',
     price: 'مجاناً',
-    description: 'كلنا معكم',
+    description: 'دعم مجتمعي',
     image: '/logo.jpeg',
     isFree: true,
-    badge: 'باقة مجتمعية',
+    badge: 'دعم مجتمعي',
     badgeColor: 'bg-purple-500',
     ctaText: 'قدّم الآن',
     ctaHref: '/ar/register?plan=special-needs',
-    notification: 'دعم مجاني كامل',
+    notification: '6,000 نقطة مجانية',
     features: [
-      'خدمات طبية مجانية بالكامل',
-      'رعاية صحية متخصصة',
-      'دعم نفسي واجتماعي',
-      'أولوية في المواعيد',
+      '6,000 نقطة أمان مجانية',
+      'كاش باك 10% تقديراً لكم',
+      '5 استشارات + تنظيف مجاناً',
+      'رعاية خاصة ومتابعة دورية',
     ],
   },
   {
     id: 'orphans',
-    name: 'باقة الأيتام وحفّاظ القرآن',
+    name: 'باقة الأيتام وحفاظ القرآن',
     price: 'مجاناً',
-    description: 'دعم الأيتام وحفظة القرآن',
+    description: 'دعم مجتمعي',
     image: '/logo.jpeg',
     isFree: true,
-    badge: 'باقة مجتمعية',
+    badge: 'دعم مجتمعي',
     badgeColor: 'bg-teal-500',
     ctaText: 'قدّم الآن',
     ctaHref: '/ar/register?plan=orphans',
-    notification: 'رعاية خاصة',
+    notification: '6,000 نقطة مجانية',
     features: [
-      'خدمات طبية مجانية',
-      'فحوصات دورية مجانية',
-      'دعم تعليمي وصحي',
-      'متابعة صحية مستمرة',
+      '6,000 نقطة أمان مجانية',
+      'كاش باك 10% للتوفير',
+      'تغطية شاملة في أرقى المراكز',
+      'دعم نفسي واجتماعي متكامل',
     ],
   },
   {
@@ -242,12 +244,12 @@ const packages: Package[] = [
     badgeColor: 'bg-pink-500',
     ctaText: 'اشترك الآن',
     ctaHref: '/ar/register?plan=widows',
-    notification: 'دعم نفسي مجاني',
+    notification: '6,000 نقطة + دعم نفسي',
     features: [
-      'خصومات حتى 40%',
-      'دعم نفسي مجاني',
-      'استشارات عائلية',
-      'رصيد خدمات 1,000 ريال',
+      '6,000 نقطة أمان',
+      'كاش باك 10% لدعم ميزانيتك',
+      'تغطية شاملة + 5 استشارات',
+      'دعم نفسي وبرامج تأهيل',
     ],
   },
 ];
@@ -830,6 +832,39 @@ export function MembershipModal({ isOpen, onClose, onOpenBusinessModal }: Member
                     })}
                   </div>
                 ) : null}
+
+                {/* CTA Footer - Show only on packages screen */}
+                {showPackages && (
+                  <div className="mt-8 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-2xl p-6 md:p-8 text-center shadow-xl">
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                      متردد في اختيار الباقة الأنسب؟
+                    </h3>
+                    <p className="text-sm md:text-base text-emerald-50 mb-6 max-w-2xl mx-auto leading-relaxed">
+                      فريقنا متواجد الآن لمساعدتك في اختيار التغطية المثالية التي تلبي احتياجاتك بكل دقة.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                      <Button
+                        asChild
+                        size="lg"
+                        className="bg-white text-emerald-700 hover:bg-emerald-50 font-bold shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto"
+                      >
+                        <Link href="https://wa.me/966544608220" target="_blank">
+                          تحدث معنا الآن ←
+                        </Link>
+                      </Button>
+                      <Button
+                        asChild
+                        size="lg"
+                        variant="outline"
+                        className="border-2 border-white text-white hover:bg-white/20 font-bold w-full sm:w-auto"
+                      >
+                        <Link href="/ar/contact">
+                          تواصل عبر النموذج ←
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.div>
           </div>

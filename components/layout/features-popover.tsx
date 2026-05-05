@@ -36,8 +36,8 @@ const features: Feature[] = [
   {
     id: 'inclusive',
     icon: Shield,
-    title: 'شمولية تامة بلا قيود',
-    description: 'متاحة للجميع (مواطنين، مقيمين، وزوار) دون أي قيود',
+    title: 'رعاية تحتضن الجميع',
+    description: 'خدماتنا متاحة للجميع؛ مواطنين، مقيمين، وزواراً بكل حب',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     badge: 'للجميع',
     image: '/images/features/inclusive.jpg'
@@ -45,16 +45,16 @@ const features: Feature[] = [
   {
     id: 'coverage',
     icon: Globe,
-    title: 'تغطية واسعة وميسرة',
-    description: 'تغطية جغرافية شاملة بلا موافقات مسبقة',
+    title: 'راحة بال.. بلا موافقات مسبقة',
+    description: 'تغطية طبية واسعة فوراً دون انتظار موافقات',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     image: '/images/features/coverage.jpg'
   },
   {
     id: 'speed',
     icon: Zap,
-    title: 'سهولة وسرعة فائقة',
-    description: 'إصدار فوري للبطاقة في ثوانٍ معدودة',
+    title: 'بطاقتك جاهزة في ثوانٍ',
+    description: 'إصدار فوري للبطاقة مع دعم على مدار الساعة',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     badge: 'فوري',
     image: '/images/features/speed.jpg'
@@ -62,16 +62,16 @@ const features: Feature[] = [
   {
     id: 'booking',
     icon: Calendar,
-    title: 'حجوزات واستشارات فورية',
-    description: 'احجز موعدك مع نخبة من الأطباء فوراً',
+    title: 'طبيبك بانتظارك دائماً',
+    description: 'احجز موعدك أو احصل على استشارة فورية بضغطة زر',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     image: '/images/features/booking.jpg'
   },
   {
     id: 'financial',
     icon: Wallet,
-    title: 'مزايا مالية وتوفير',
-    description: 'خصومات حتى 80% + كاش باك + نقاط ولاء',
+    title: 'توفير يتخطى التوقعات',
+    description: 'خصومات حتى 80% + كاش باك + نقاط مكافآت',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     badge: 'حتى 80%',
     image: '/images/features/financial.jpg'
@@ -79,8 +79,8 @@ const features: Feature[] = [
   {
     id: 'payment',
     icon: CreditCard,
-    title: 'خيارات دفع مرنة',
-    description: 'دفع إلكتروني + تقسيط عبر تابي وتمارا',
+    title: 'دفع مرن.. بدون ضغوط',
+    description: 'دفع إلكتروني + تقسيط مريح عبر تابي وتمارا',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     image: '/images/features/payment.jpg'
   }
@@ -292,10 +292,10 @@ export function FeaturesPopover({ locale, isMobile = false }: FeaturesPopoverPro
           {/* Header */}
           <div className="px-6 py-4 border-b border-gray-200">
             <h3 className="text-lg font-bold text-gray-900">
-              {locale === 'ar' ? 'مميزاتنا التنافسية' : 'Our Competitive Features'}
+              {locale === 'ar' ? 'لماذا "أمان إيفر" هي خيارك الأول؟' : 'Why "Aman Ever" is Your First Choice?'}
             </h3>
             <p className="text-sm text-gray-600 mt-1">
-              {locale === 'ar' ? 'لماذا نحن الأفضل في السوق السعودي' : 'Why we are the best in Saudi market'}
+              {locale === 'ar' ? 'مميزات صُممت خصيصاً لتمنحك رعاية شاملة' : 'Features designed specifically for comprehensive care'}
             </p>
           </div>
 

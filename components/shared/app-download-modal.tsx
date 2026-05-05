@@ -19,11 +19,11 @@ export function AppDownloadModal({ isOpen, onClose, locale }: AppDownloadModalPr
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-white via-[#F8FAFB] to-[#E8F1F1]">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl md:text-3xl font-bold text-[#1A2B2C] mb-2">
-            {isArabic ? 'حمّل تطبيق أمان إيفر' : 'Download Aman Ever App'}
+            {isArabic ? 'عالم أمان إيفر.. بين يديك' : 'Download Aman Ever App'}
           </DialogTitle>
           <DialogDescription className="text-center text-base text-[#5A6B6C]">
             {isArabic 
-              ? 'احصل على أفضل تجربة للرعاية الصحية الرقمية من خلال تطبيقنا' 
+              ? 'لخدمة أسرع وتجربة أكثر أماناً، حمّل تطبيق أمان إيفر الآن واستمتع بإدارة رعاية صحتك بضغطة زر.' 
               : 'Get the best digital healthcare experience through our app'}
           </DialogDescription>
         </DialogHeader>
@@ -65,7 +65,7 @@ export function AppDownloadModal({ isOpen, onClose, locale }: AppDownloadModalPr
                 </h4>
                 <p className="text-xs text-[#5A6B6C]">
                   {isArabic 
-                    ? 'ادخل لحسابك بلمسة واحدة واحصل على خدماتك فوراً' 
+                    ? 'إدارة كاملة لحسابك، ومتابعة فورية لخدماتك بكل سهولة.' 
                     : 'Access your account with one tap and get services instantly'}
                 </p>
               </div>
@@ -82,7 +82,7 @@ export function AppDownloadModal({ isOpen, onClose, locale }: AppDownloadModalPr
                 </h4>
                 <p className="text-xs text-[#5A6B6C]">
                   {isArabic 
-                    ? 'بياناتك محمية بأعلى معايير الأمان والتشفير' 
+                    ? 'بياناتك الطبية والمالية مشفرة بأعلى معايير الأمان العالمية.' 
                     : 'Your data is protected with highest security standards'}
                 </p>
               </div>
@@ -99,7 +99,7 @@ export function AppDownloadModal({ isOpen, onClose, locale }: AppDownloadModalPr
                 </h4>
                 <p className="text-xs text-[#5A6B6C]">
                   {isArabic 
-                    ? 'احصل على خصومات تصل إلى 80% على الخدمات الطبية' 
+                    ? 'استفد من عروض وخصومات تصل إلى 80% حصرياً لمستخدمي التطبيق.' 
                     : 'Get up to 80% discounts on medical services'}
                 </p>
               </div>
@@ -116,7 +116,7 @@ export function AppDownloadModal({ isOpen, onClose, locale }: AppDownloadModalPr
                 </h4>
                 <p className="text-xs text-[#5A6B6C]">
                   {isArabic 
-                    ? 'تواصل مع الأطباء على مدار الساعة من أي مكان' 
+                    ? 'طبيبك معك أينما كنت.. استشارات طبية موثوقة على مدار الساعة.' 
                     : 'Connect with doctors 24/7 from anywhere'}
                 </p>
               </div>
@@ -141,13 +141,13 @@ export function AppDownloadModal({ isOpen, onClose, locale }: AppDownloadModalPr
                 <div className="text-xs text-gray-500">QR Code</div>
               </div>
               <p className="text-xs text-[#5A6B6C]">
-                {isArabic ? 'امسح للتحميل' : 'Scan to download'}
+                {isArabic ? 'امسح الرمز (QR) للتحميل المباشر.' : 'Scan to download'}
               </p>
             </div>
             <div className="flex-1 max-w-xs">
               <p className="text-sm text-[#5A6B6C]">
                 {isArabic 
-                  ? 'امسح رمز QR بكاميرا هاتفك للانتقال مباشرة إلى صفحة التحميل' 
+                  ? 'امسح الرمز (QR) للتحميل المباشر.' 
                   : 'Scan the QR code with your phone camera to go directly to the download page'}
               </p>
             </div>
@@ -160,7 +160,7 @@ export function AppDownloadModal({ isOpen, onClose, locale }: AppDownloadModalPr
             <span className="text-yellow-600 mt-0.5">💡</span>
             <span>
               {isArabic 
-                ? 'هذه الصفحة مخصصة للتجار والأطباء والمسوقين. إذا كنت مشتركاً أو مستخدماً عادياً، يرجى تحميل التطبيق للوصول إلى حسابك.' 
+                ? 'ملاحظة هامة: تسجيل الدخول من المتصفح مخصص حالياً لشركائنا (الأطباء، التجار، والمسوقين). لتجربة مثالية، يرجى من عملائنا الكرام استخدام التطبيق لإدارة حساباتهم.' 
                 : 'This page is for merchants, doctors, and affiliates. If you are a subscriber or regular user, please download the app to access your account.'}
             </span>
           </p>

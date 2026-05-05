@@ -1,28 +1,17 @@
 /**
- * Partners Section (شركاء النجاح)
- * Displays partner logos/names in an infinite scrolling marquee
+ * Partners Section (شركاء أمان إيفر)
+ * Displays partner logos with links in an infinite scrolling marquee
  */
 
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
+import { partners } from '@/lib/data/partners-config';
 
 interface PartnersSectionProps {
   locale: string;
 }
-
-const partners = [
-  { id: 1, name: 'مستشفى د. سليمان الحبيب', nameEn: 'Dr. Sulaiman Al Habib' },
-  { id: 2, name: 'مستشفى المواساة', nameEn: 'Mouwasat Hospital' },
-  { id: 3, name: 'مستشفى دله', nameEn: 'Dallah Hospital' },
-  { id: 4, name: 'السعودي الألماني الصحية', nameEn: 'Saudi German Health' },
-  { id: 5, name: 'صيدليات النهدي', nameEn: 'Nahdi Pharmacy' },
-  { id: 6, name: 'صيدليات الدواء', nameEn: 'Al-Dawaa Pharmacy' },
-  { id: 7, name: 'فتنس تايم', nameEn: 'Fitness Time' },
-  { id: 8, name: 'بوبا العربية', nameEn: 'Bupa Arabia' },
-  { id: 9, name: 'مستشفيات مغربي', nameEn: 'Magrabi Hospitals' },
-  { id: 10, name: 'فقيه كير', nameEn: 'Fakeeh Care' },
-];
 
 export function PartnersSection({ locale }: PartnersSectionProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -73,7 +62,7 @@ export function PartnersSection({ locale }: PartnersSectionProps) {
       <div className="container mx-auto px-4 mb-12 md:mb-16">
         <div className="flex flex-col items-center text-center">
           <h2 className="text-3xl md:text-5xl font-black text-[#4d8080] mb-4 tracking-tight">
-            شركاء النجاح
+            شركاء أمان إيفر
           </h2>
           <div className="w-24 h-1.5 bg-[#4d8080] rounded-full mb-6" />
           <p className="text-[#4d8080]/80 font-bold text-lg md:text-xl max-w-3xl">
@@ -90,18 +79,34 @@ export function PartnersSection({ locale }: PartnersSectionProps) {
 
         <div
           ref={scrollRef}
-          className="flex gap-16 md:gap-32 items-center whitespace-nowrap py-8 overflow-x-scroll scrollbar-hide"
+          className="flex gap-12 md:gap-20 items-center py-8 overflow-x-scroll scrollbar-hide"
           style={{ scrollBehavior: 'auto' }}
         >
           {duplicatedPartners.map((partner, index) => (
-            <div
+            <a
               key={`${partner.id}-${index}`}
-              className="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100 px-4"
+              href={partner.website || partner.social || '#'}
+              target={partner.website || partner.social ? '_blank' : '_self'}
+              rel={partner.website || partner.social ? 'noopener noreferrer' : undefined}
+              className="flex flex-col items-center justify-center gap-4 group cursor-pointer flex-shrink-0 px-4"
+              aria-label={`زيارة موقع ${partner.name}`}
             >
-              <span className="text-[#4d8080] font-black text-2xl md:text-3xl">
-                {partner.name}
-              </span>
-            </div>
+              {/* Partner Logo */}
+              <div className="relative w-32 h-32 md:w-40 md:h-40 grayscale group-hover:grayscale-0 transition-all duration-500 opacity-60 group-hover:opacity-100">
+                <Image
+                  src={partner.logo}
+                  alt={`شعار ${partner.name}`}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 128px, 160px"
+                />
+              </div>
+              
+              {/* Partner Name */}
+              <p className="text-[#4d8080] font-bold text-sm md:text-base text-center whitespace-normal max-w-[160px] group-hover:text-[#3d6a6a] transition-colors">
+                {locale === 'ar' ? partner.name : partner.nameEn}
+              </p>
+            </a>
           ))}
         </div>
       </div>

@@ -15,6 +15,7 @@ export function FloatingAuthButtons() {
   const [showMembershipModal, setShowMembershipModal] = useState(false);
   const [showLocationTooltip, setShowLocationTooltip] = useState(false);
   const [showConsultationTooltip, setShowConsultationTooltip] = useState(false);
+  const [showConsultationPopup, setShowConsultationPopup] = useState(false);
 
   // Hide on auth pages
   const isAuthPage = pathname?.includes('/login') || pathname?.includes('/register');
@@ -24,6 +25,13 @@ export function FloatingAuthButtons() {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_DEFAULT_MESSAGE)}`;
   const urgentConsultationMessage = 'استشارة عاجلة - أحتاج للتواصل مع طبيب فوراً';
   const urgentConsultationUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(urgentConsultationMessage)}`;
+  const appointmentMessage = 'أرغب في حجز موعد طبي';
+  const appointmentUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(appointmentMessage)}`;
+
+  const handleConsultationOption = (url: string) => {
+    setShowConsultationPopup(false);
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   const scrollToProviders = () => {
     const providersSection = document.getElementById('nearby-providers');
@@ -88,12 +96,10 @@ export function FloatingAuthButtons() {
             </motion.button>
 
             {/* Urgent Consultation Button */}
-            <motion.a
+            <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              href={urgentConsultationUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => setShowConsultationPopup(true)}
               onMouseEnter={() => setShowConsultationTooltip(true)}
               onMouseLeave={() => setShowConsultationTooltip(false)}
               className="relative w-12 h-12 md:w-14 md:h-14 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 bg-gradient-to-br from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 flex items-center justify-center group"
@@ -113,7 +119,7 @@ export function FloatingAuthButtons() {
                 استشارة عاجلة
                 <div className="absolute top-1/2 -left-1 -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-r-4 border-r-slate-900" />
               </div>
-            </motion.a>
+            </motion.button>
 
             {/* Customer Service Chatbot Button (Omniya) */}
             <div className="relative group">
@@ -219,6 +225,107 @@ export function FloatingAuthButtons() {
         isOpen={showMembershipModal} 
         onClose={() => setShowMembershipModal(false)} 
       />
+
+      {/* Consultation Options Popup */}
+      <AnimatePresence>
+        {showConsultationPopup && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowConsultationPopup(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            />
+            
+            {/* Popup */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ type: "spring", duration: 0.3 }}
+              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[90%] max-w-md"
+            >
+              <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+                {/* Header */}
+                <div className="bg-gradient-to-br from-emerald-600 to-teal-700 p-6 text-white">
+                  <h3 className="text-xl md:text-2xl font-bold text-center">
+                    اختر نوع الخدمة
+                  </h3>
+                  <p className="text-emerald-50 text-sm text-center mt-2">
+                    سيتم تحويلك للتواصل مع خدمة العملاء
+                  </p>
+                </div>
+
+                {/* Options */}
+                <div className="p-6 space-y-4">
+                  {/* Medical Appointment Option */}
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleConsultationOption(appointmentUrl)}
+                    className="w-full p-5 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 hover:from-blue-100 hover:to-cyan-100 border-2 border-blue-200 hover:border-blue-300 transition-all duration-200 text-right group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-lg font-bold text-slate-800 mb-1">
+                          حجز موعد طبي
+                        </h4>
+                        <p className="text-sm text-slate-600">
+                          احجز موعد مع طبيب متخصص
+                        </p>
+                      </div>
+                    </div>
+                  </motion.button>
+
+                  {/* Urgent Consultation Option */}
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleConsultationOption(urgentConsultationUrl)}
+                    className="w-full p-5 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100 border-2 border-emerald-200 hover:border-emerald-300 transition-all duration-200 text-right group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform relative">
+                        <Phone className="w-6 h-6 text-white" />
+                        {/* Pulsing indicator */}
+                        <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-lg font-bold text-slate-800 mb-1">
+                          استشارة طبية عاجلة
+                        </h4>
+                        <p className="text-sm text-slate-600">
+                          تواصل فوري مع طبيب متاح الآن
+                        </p>
+                      </div>
+                    </div>
+                  </motion.button>
+                </div>
+
+                {/* Close Button */}
+                <div className="px-6 pb-6">
+                  <button
+                    onClick={() => setShowConsultationPopup(false)}
+                    className="w-full py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition-colors"
+                  >
+                    إلغاء
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }

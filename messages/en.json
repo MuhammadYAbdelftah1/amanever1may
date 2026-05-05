@@ -52,49 +52,49 @@
       }
     },
     "whyUs": {
-      "title": "Why We're the Best?",
-      "subtitle": "Competitive Advantages",
+      "title": "Why \"Aman Ever\" is Your First Choice?",
+      "subtitle": "Features designed specifically to provide you with comprehensive care that suits you, with ease.",
       "features": {
         "inclusive": {
-          "title": "Complete Inclusivity Without Restrictions",
-          "description": "Our services and cards are available to all segments of society (citizens, residents, and visitors), for all ages and health conditions without any restrictions or exceptions."
+          "title": "Care That Embraces Everyone",
+          "description": "Because your health knows no boundaries, our services are available to everyone; citizens, residents, and visitors, with love and without any restrictions or exceptions."
         },
         "coverage": {
-          "title": "Wide and Accessible Coverage",
-          "description": "We provide you with comprehensive geographical coverage without credit limits, and most importantly: our services do not require any prior approvals from the company."
+          "title": "Peace of Mind.. Without Prior Approvals",
+          "description": "We've overcome all complexities for you. Enjoy wide medical coverage instantly, without waiting for any prior approvals from the company."
         },
         "speed": {
-          "title": "Exceptional Ease and Speed",
-          "description": "Instant issuance of electronic card in seconds through the app, with a customer service team available to serve you 24/7."
+          "title": "Your Card Ready in Seconds",
+          "description": "Your time is precious; that's why we made issuing your electronic card instant through the app, with a support team that accompanies you passionately 24/7."
         },
         "booking": {
-          "title": "Medical Bookings and Instant Consultations",
-          "description": "Book your medical appointment and get instant consultation with elite doctors in seconds through the app."
+          "title": "Your Doctor is Always Waiting",
+          "description": "With a click of a button, book your appointment or get instant medical consultation with elite doctors, wherever you are."
         },
         "home-care": {
-          "title": "Home Care Services",
-          "description": "Specialized nursing services, elderly care, home lab tests, physiotherapy, and cupping; we bring a complete medical team to your home."
+          "title": "The Hospital.. In Your Home",
+          "description": "We bring you the care you deserve to your doorstep; a specialized medical team ensures your comfort and the comfort of your loved ones among your family."
         },
         "response": {
-          "title": "Fast Medical Response (Your First Question Free)",
-          "description": "We guarantee you in Ask a Doctor service exceptional response speed and replies within 15 minutes maximum, and because your health matters to us, we made your first question and consultation completely free."
+          "title": "Instant Response (Your First Consultation is On Us)",
+          "description": "Don't hesitate to ask.. We guarantee you a reliable medical response within 15 minutes. And because your health matters to us, your first question is completely free."
         },
         "financial": {
-          "title": "Financial Benefits and World of Savings",
-          "description": "We give you direct discounts up to 80%, in addition to cashback and an integrated points wallet within the loyalty program."
+          "title": "Savings Beyond Expectations",
+          "description": "Enjoy real discounts up to 80%, in addition to cashback and points that reward you with every use."
         },
         "payment": {
-          "title": "Flexible and Accessible Payment Options",
-          "description": "We provide you with all electronic payment methods, in addition to providing comfortable installment payment services through (Tabby and Tamara) to facilitate your access to care."
+          "title": "Flexible Payment.. Without Pressure",
+          "description": "We provide you with multiple electronic payment options, with the possibility of comfortable installment through (Tabby and Tamara) to enjoy care without any financial worry."
         },
         "transparency": {
-          "title": "Transparency and Reliability",
-          "description": "We believe in absolute transparency, where the app allows you to view real ratings of services and medical facilities by customers to make your decision with confidence."
+          "title": "Transparency That Gives You Confidence",
+          "description": "Make your decision with confidence; the app allows you to view real ratings of medical centers from customers who preceded you in the experience."
         }
       }
     },
     "partners": {
-      "title": "Success Partners",
+      "title": "Aman Ever Partners",
       "subtitle": "We are proud of our partnership with a selection of the largest hospitals and medical, health and cosmetic centers in the Kingdom",
       "trustBadge": "More than 500+ trusted partners throughout the Kingdom"
     },

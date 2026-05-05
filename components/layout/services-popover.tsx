@@ -43,7 +43,7 @@ const services: Service[] = [
     id: 'instant-booking',
     icon: Video,
     title: 'حجوزات واستشارات طبية فورية',
-    description: 'احجز مع أفضل الأطباء دون انتظار',
+    description: 'طبيبك معك أينما كنت.. احجز موعدك دون انتظار',
     href: '/services#for-patients',
     image: '/images/services/booking.jpg'
   },
@@ -51,7 +51,7 @@ const services: Service[] = [
     id: 'home-care',
     icon: Home,
     title: 'خدمات الرعاية المنزلية',
-    description: 'أطباء وممرضين معتمدين للزيارات المنزلية',
+    description: 'رعاية طبية متكاملة تصلك إلى باب بيتك',
     href: '/services#for-patients',
     image: '/images/services/home-care.jpg'
   },
