@@ -75,7 +75,7 @@ export function BusinessContactModal({ isOpen, onClose }: BusinessContactModalPr
               className="pointer-events-auto w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden"
             >
               {/* Header */}
-              <div className="relative bg-gradient-to-br from-blue-900 to-indigo-900 p-6 text-white">
+              <div className="relative bg-gradient-to-br from-[#4A8B8E] to-[#356B6E] p-6 text-white">
                 <button
                   onClick={onClose}
                   className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
@@ -85,8 +85,13 @@ export function BusinessContactModal({ isOpen, onClose }: BusinessContactModalPr
                 </button>
 
                 <div className="text-center pt-2">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm mb-3">
-                    <Building2 className="w-8 h-8" />
+                  {/* Banner Image Placeholder */}
+                  <div className="inline-flex items-center justify-center w-full h-32 rounded-xl bg-white/10 backdrop-blur-sm mb-3 overflow-hidden">
+                    <div className="text-center p-4">
+                      <div className="text-white/80 font-black text-sm mb-2">إشعار للمصممة 🎨</div>
+                      <div className="text-white/60 font-bold text-xs">المقاس: 400×128 بكسل</div>
+                      <div className="text-white/50 text-[10px] mt-1">(بانر باقة الأعمال)</div>
+                    </div>
                   </div>
                   <h2 className="text-2xl md:text-3xl font-black mb-2">باقة الأعمال</h2>
                   <p className="text-sm text-white/90">حلول صحية متكاملة لموظفيك</p>
@@ -98,7 +103,7 @@ export function BusinessContactModal({ isOpen, onClose }: BusinessContactModalPr
                 {/* Company Name */}
                 <div>
                   <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2">
-                    <Building2 className="w-4 h-4 text-blue-600" />
+                    <Building2 className="w-4 h-4 text-[#4A8B8E]" />
                     اسم الشركة
                   </label>
                   <input
@@ -106,36 +111,36 @@ export function BusinessContactModal({ isOpen, onClose }: BusinessContactModalPr
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
                     placeholder="مثال: شركة التقنية المتقدمة"
-                    className="w-full px-4 py-3 text-base border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 outline-none transition-all"
+                    className="w-full px-4 py-3 text-base border-2 border-slate-200 rounded-xl focus:border-[#4A8B8E] focus:ring-4 focus:ring-[#4A8B8E]/20 outline-none transition-all"
                   />
                 </div>
 
                 {/* Contact Name */}
                 <div>
                   <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2">
-                    <User className="w-4 h-4 text-blue-600" />
-                    اسمك
+                    <User className="w-4 h-4 text-[#4A8B8E]" />
+                    اسم ممثل الشركة/المؤسسة
                   </label>
                   <input
                     type="text"
                     value={contactName}
                     onChange={(e) => setContactName(e.target.value)}
                     placeholder="مثال: أحمد محمد"
-                    className="w-full px-4 py-3 text-base border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 outline-none transition-all"
+                    className="w-full px-4 py-3 text-base border-2 border-slate-200 rounded-xl focus:border-[#4A8B8E] focus:ring-4 focus:ring-[#4A8B8E]/20 outline-none transition-all"
                   />
                 </div>
 
                 {/* Phone Number */}
                 <div>
                   <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2">
-                    <Phone className="w-4 h-4 text-blue-600" />
+                    <Phone className="w-4 h-4 text-[#4A8B8E]" />
                     رقم الجوال
                   </label>
                   <div className="flex gap-2" dir="ltr">
                     <select
                       value={countryCode}
                       onChange={(e) => setCountryCode(e.target.value)}
-                      className="w-24 px-3 py-3 text-base border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 outline-none transition-all bg-white font-semibold"
+                      className="w-24 px-3 py-3 text-base border-2 border-slate-200 rounded-xl focus:border-[#4A8B8E] focus:ring-4 focus:ring-[#4A8B8E]/20 outline-none transition-all bg-white font-semibold"
                     >
                       <option value="+966">🇸🇦 +966</option>
                       <option value="+971">🇦🇪 +971</option>
@@ -151,7 +156,7 @@ export function BusinessContactModal({ isOpen, onClose }: BusinessContactModalPr
                       onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
                       placeholder="5xxxxxxxx"
                       maxLength={9}
-                      className="flex-1 px-4 py-3 text-base border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 outline-none transition-all font-semibold"
+                      className="flex-1 px-4 py-3 text-base border-2 border-slate-200 rounded-xl focus:border-[#4A8B8E] focus:ring-4 focus:ring-[#4A8B8E]/20 outline-none transition-all font-semibold"
                       dir="ltr"
                     />
                   </div>
@@ -160,13 +165,13 @@ export function BusinessContactModal({ isOpen, onClose }: BusinessContactModalPr
                 {/* Employee Count */}
                 <div>
                   <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2">
-                    <Users className="w-4 h-4 text-blue-600" />
+                    <Users className="w-4 h-4 text-[#4A8B8E]" />
                     عدد الموظفين
                   </label>
                   <select
                     value={employeeCount}
                     onChange={(e) => setEmployeeCount(e.target.value)}
-                    className="w-full px-4 py-3 text-base border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 outline-none transition-all bg-white font-semibold"
+                    className="w-full px-4 py-3 text-base border-2 border-slate-200 rounded-xl focus:border-[#4A8B8E] focus:ring-4 focus:ring-[#4A8B8E]/20 outline-none transition-all bg-white font-semibold"
                   >
                     <option value="">اختر عدد الموظفين</option>
                     {employeeRanges.map((range) => (
@@ -188,6 +193,11 @@ export function BusinessContactModal({ isOpen, onClose }: BusinessContactModalPr
                   </svg>
                   تواصل عبر WhatsApp ←
                 </Button>
+
+                {/* Description Text */}
+                <p className="text-center text-xs text-slate-600 pt-2">
+                  لإرسال العرض الخاص لشركتك أو لمؤسستك
+                </p>
 
                 {/* Trust Badge */}
                 <div className="flex items-center justify-center gap-2 text-xs text-slate-500 pt-2">

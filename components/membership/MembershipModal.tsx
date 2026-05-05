@@ -7,6 +7,8 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { AppDownloadButtons } from '@/components/shared/app-download-buttons';
 import Link from 'next/link';
+import { PersonalInfoStep, PaymentStep } from './MembershipModalSteps';
+import { SuccessStep } from './SuccessStep';
 
 // Card tier type (Premier, VIP, Business)
 type CardTier = {
@@ -253,17 +255,30 @@ const packages: Package[] = [
 interface MembershipModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onOpenBusinessModal?: () => void; // NEW: Callback to open business modal
 }
 
-export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
+export function MembershipModal({ isOpen, onClose, onOpenBusinessModal }: MembershipModalProps) {
   const [selectedCard, setSelectedCard] = useState<CardTier | null>(null); // NEW: Track selected card
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null);
   const [showDownload, setShowDownload] = useState(false);
   const [showPhoneInput, setShowPhoneInput] = useState(false);
   const [showPackages, setShowPackages] = useState(false); // NEW: Show packages after card selection
+  const [showPersonalInfo, setShowPersonalInfo] = useState(false); // NEW: Personal info step
+  const [showPayment, setShowPayment] = useState(false); // NEW: Payment step
+  const [showSuccess, setShowSuccess] = useState(false); // NEW: Success step
   const [phoneNumber, setPhoneNumber] = useState('');
   const [countryCode, setCountryCode] = useState('+966'); // Saudi Arabia default
   const [isMobile, setIsMobile] = useState(false);
+  
+  // Personal Info State
+  const [fullName, setFullName] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [idType, setIdType] = useState<'national' | 'iqama' | 'passport'>('national');
+  const [idNumber, setIdNumber] = useState('');
+  
+  // Payment State
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null);
 
   // Detect mobile on mount
   useEffect(() => {
@@ -287,9 +302,11 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
       window.open(card.ctaHref, '_blank');
       onClose();
     } else if (card.id === 'business') {
-      // Business opens business modal (you can handle this separately)
+      // Business opens business modal
       onClose();
-      // TODO: Open business modal
+      if (onOpenBusinessModal) {
+        onOpenBusinessModal();
+      }
     }
   };
 
@@ -299,12 +316,39 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
       // Save phone number (you can send to backend here)
       console.log('Phone captured:', countryCode + phoneNumber);
       
-      // Move to download screen
+      // Move to personal info screen
       setShowPhoneInput(false);
-      setShowDownload(true);
+      setShowPersonalInfo(true);
     } else {
       alert('الرجاء إدخال رقم جوال صحيح');
     }
+  };
+
+  const handlePersonalInfoSubmit = () => {
+    // Validate personal info
+    if (!fullName || !birthDate || !idNumber) {
+      alert('الرجاء إدخال جميع البيانات المطلوبة');
+      return;
+    }
+    
+    console.log('Personal Info:', { fullName, birthDate, idType, idNumber });
+    
+    // Move to payment screen
+    setShowPersonalInfo(false);
+    setShowPayment(true);
+  };
+
+  const handlePaymentSubmit = () => {
+    if (!selectedPaymentMethod) {
+      alert('الرجاء اختيار طريقة الدفع');
+      return;
+    }
+    
+    console.log('Payment Method:', selectedPaymentMethod);
+    
+    // Move to success screen
+    setShowPayment(false);
+    setShowSuccess(true);
   };
 
   const handleSelectPackage = (pkg: Package) => {
@@ -314,8 +358,14 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
   };
 
   const handleBack = () => {
-    if (showDownload) {
-      setShowDownload(false);
+    if (showSuccess) {
+      // Close modal on success screen
+      onClose();
+    } else if (showPayment) {
+      setShowPayment(false);
+      setShowPersonalInfo(true);
+    } else if (showPersonalInfo) {
+      setShowPersonalInfo(false);
       setShowPhoneInput(true);
     } else if (showPhoneInput) {
       // Go back to packages
@@ -370,8 +420,8 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
             >
               {/* Header */}
               <div className="flex items-center justify-between p-4 md:p-6 border-b border-slate-200 bg-gradient-to-r from-emerald-50 to-teal-50 flex-shrink-0">
-                {/* Back Button - Show on packages, phone input and download screens */}
-                {(showPackages || showPhoneInput || showDownload) && (
+                {/* Back Button - Show on packages, phone input, personal info, payment and success screens */}
+                {(showPackages || showPhoneInput || showPersonalInfo || showPayment || showSuccess) && (
                   <button
                     onClick={handleBack}
                     className="flex items-center gap-1 text-sm md:text-base text-slate-600 hover:text-emerald-600 transition-colors font-semibold"
@@ -379,22 +429,42 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                     <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                    <span>رجوع</span>
+                    <span>{showSuccess ? 'إغلاق' : 'رجوع'}</span>
                   </button>
                 )}
                 
                 <div className="flex-1 text-center">
                   <h2 className="text-xl md:text-3xl font-bold text-slate-900">
-                    {showDownload ? 'حمّل التطبيق الآن' : showPhoneInput ? 'أدخل رقم جوالك' : showPackages ? 'اختر الباقة المناسبة لك' : 'اختر البطاقة المناسبة لك'}
+                    {showSuccess 
+                      ? 'تم الاشتراك بنجاح! 🎉' 
+                      : showPayment 
+                      ? 'اختر طريقة الدفع' 
+                      : showPersonalInfo 
+                      ? 'أدخل بياناتك الشخصية' 
+                      : showPhoneInput 
+                      ? 'أدخل رقم جوالك' 
+                      : showPackages 
+                      ? 'اختر الباقة المناسبة لك' 
+                      : 'اختر البطاقة المناسبة لك'}
                   </h2>
                   {showPhoneInput && (
                     <p className="text-xs md:text-sm text-slate-600 mt-1">
                       سنرسل لك تفاصيل الباقة عبر WhatsApp
                     </p>
                   )}
-                  {showDownload && (
+                  {showPersonalInfo && (
                     <p className="text-xs md:text-sm text-slate-600 mt-1">
-                      اشترك من خلال التطبيق
+                      نحتاج بعض المعلومات لإتمام الاشتراك
+                    </p>
+                  )}
+                  {showPayment && (
+                    <p className="text-xs md:text-sm text-slate-600 mt-1">
+                      جميع طرق الدفع آمنة ومشفرة 100%
+                    </p>
+                  )}
+                  {showSuccess && (
+                    <p className="text-xs md:text-sm text-slate-600 mt-1">
+                      حمّل التطبيق الآن وابدأ رحلتك الصحية
                     </p>
                   )}
                   {showPackages && (
@@ -402,7 +472,7 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                       اختر الباقة وابدأ رحلة الرعاية الصحية
                     </p>
                   )}
-                  {!showPackages && !showPhoneInput && !showDownload && (
+                  {!showPackages && !showPhoneInput && !showPersonalInfo && !showPayment && !showSuccess && (
                     <p className="text-xs md:text-sm text-slate-600 mt-1">
                       بطاقة واحدة — وفّر حتى ٨٠٪ على احتياجاتك الصحية
                     </p>
@@ -419,7 +489,7 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
 
               {/* Content - Scrollable */}
               <div className="flex-1 overflow-y-auto p-4 md:p-6">
-                {!showPackages && !showPhoneInput && !showDownload ? (
+                {!showPackages && !showPhoneInput && !showPersonalInfo && !showPayment && !showSuccess ? (
                   /* Cards Screen (Premier, VIP, Business) */
                   <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
                     {cardTiers.map((tier, index) => (
@@ -621,75 +691,38 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                       </div>
                     </div>
                   </div>
-                ) : showDownload ? (
-                  /* Download Screen */
-                  <div className="flex flex-col items-center justify-center h-full text-center space-y-6 py-8">
-                    {/* Success Notification Card */}
-                    <div className="relative w-full max-w-sm">
-                      <div className="relative bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 rounded-3xl p-8 shadow-2xl border border-emerald-100">
-                        {/* Success Icon */}
-                        <div className="relative mx-auto w-32 h-32 mb-6">
-                          <div className="absolute inset-0 bg-emerald-500 rounded-full animate-ping opacity-20"></div>
-                          <div className="relative w-full h-full bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center shadow-xl">
-                            <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                            </svg>
-                          </div>
-                          {/* Decorative rings */}
-                          <div className="absolute -inset-2 border-4 border-emerald-200 rounded-full opacity-50"></div>
-                          <div className="absolute -inset-4 border-2 border-emerald-100 rounded-full opacity-30"></div>
-                        </div>
-
-                        {/* Success Message */}
-                        <div className="space-y-2 mb-6">
-                          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-md">
-                            <Bell className="w-4 h-4 text-emerald-600" />
-                            <span className="text-sm font-bold text-emerald-700">تم اختيار الباقة بنجاح!</span>
-                          </div>
-                          <h3 className="text-2xl md:text-3xl font-black text-slate-900">
-                            {selectedPackage?.name}
-                          </h3>
-                          <div className="inline-block px-6 py-2 bg-white rounded-full shadow-md">
-                            <p className="text-xl md:text-2xl text-emerald-600 font-black">
-                              {selectedPackage?.price === 'مجاناً' || selectedPackage?.price === 'حسب الاتفاق' 
-                                ? selectedPackage?.price 
-                                : `${selectedPackage?.price} ريال/سنة`}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Decorative elements */}
-                        <div className="absolute top-4 right-4 w-20 h-20 bg-emerald-200 rounded-full opacity-20 blur-2xl"></div>
-                        <div className="absolute bottom-4 left-4 w-16 h-16 bg-teal-200 rounded-full opacity-20 blur-2xl"></div>
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-3 px-4">
-                      <p className="text-slate-700 text-sm md:text-base max-w-md mx-auto font-medium">
-                        حمّل تطبيق أمان إيفر الآن واشترك في الباقة بكل سهولة وأمان
-                      </p>
-                      <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                        </svg>
-                        <span>آمن ومشفر 100%</span>
-                      </div>
-                    </div>
-
-                    <div className="w-full max-w-xs space-y-3">
-                      <p className="text-xs font-bold text-slate-600 uppercase tracking-wider">حمّل التطبيق من</p>
-                      <AppDownloadButtons layout="vertical" showHuawei={true} />
-                    </div>
-
-                    <Button
-                      onClick={handleBack}
-                      variant="outline"
-                      size="lg"
-                      className="mt-4 border-2 hover:bg-slate-50"
-                    >
-                      ← رجوع للباقات
-                    </Button>
-                  </div>
+                ) : showPersonalInfo ? (
+                  /* Personal Info Screen */
+                  <PersonalInfoStep
+                    fullName={fullName}
+                    setFullName={setFullName}
+                    birthDate={birthDate}
+                    setBirthDate={setBirthDate}
+                    idType={idType}
+                    setIdType={setIdType}
+                    idNumber={idNumber}
+                    setIdNumber={setIdNumber}
+                    onSubmit={handlePersonalInfoSubmit}
+                  />
+                ) : showPayment ? (
+                  /* Payment Screen */
+                  <PaymentStep
+                    selectedPaymentMethod={selectedPaymentMethod}
+                    setSelectedPaymentMethod={setSelectedPaymentMethod}
+                    onSubmit={handlePaymentSubmit}
+                    packagePrice={selectedPackage?.price}
+                  />
+                ) : showSuccess ? (
+                  /* Success Screen */
+                  <SuccessStep
+                    selectedPackage={selectedPackage}
+                    fullName={fullName}
+                    phoneNumber={phoneNumber}
+                    countryCode={countryCode}
+                    idType={idType}
+                    idNumber={idNumber}
+                    selectedCard={selectedCard}
+                  />
                 ) : showPackages ? (
                   /* Packages Grid */
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">

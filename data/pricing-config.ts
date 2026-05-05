@@ -62,8 +62,8 @@ export const PRICING_CONFIG = {
 
   // Guarantee
   guarantee: {
-    days: 14,
-    description: 'ضمان استرداد كامل خلال 14 يوم',
+    days: 0,
+    description: '',
   },
 
   // B2B Stats

@@ -107,7 +107,6 @@ const content = {
   },
   trustStrip: [
     '✓ بيانات آمنة (PDPL/SDAIA)',
-    '✓ استرداد خلال ١٤ يوم',
     '✓ إصدار فوري إلكتروني',
     '✓ معتمد في السعودية',
   ],
@@ -463,7 +462,11 @@ export function MembershipPricingSection({ locale }: MembershipPricingSectionPro
       </section>
 
       {/* Membership Modal */}
-      <MembershipModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      <MembershipModal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal}
+        onOpenBusinessModal={handleBusinessClick}
+      />
       
       {/* Business Contact Modal */}
       <BusinessContactModal isOpen={isBusinessModalOpen} onClose={handleCloseBusinessModal} />

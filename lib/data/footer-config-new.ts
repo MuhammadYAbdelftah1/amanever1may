@@ -54,6 +54,9 @@ export const FOOTER_CONFIG_NEW = {
     { label: "من نحن", url: "/ar/about" },
     { label: "خدماتنا", url: "/ar/services" },
     { label: "مميزاتنا", url: "/ar#why-best-section" },
+    { label: "الشبكة الطبية", url: "/ar/medical-network" },
+    { label: "الشبكة الصحية", url: "/ar/health-network" },
+    { label: "منصة رحلة الثراء", url: "/ar/login?type=affiliate" },
     { label: "العروض الخاصة", url: "/ar#special-offers" },
     { label: "المدونة", url: "/ar/blog" },
     { label: "تواصل معنا", url: "/ar/contact" },
@@ -61,9 +64,8 @@ export const FOOTER_CONFIG_NEW = {
 
   // Section B: للشركاء
   partnerLinks: [
-    { label: "منصة دخول الأطباء", url: "/ar/login?type=doctor" },
     { label: "منصة دخول التاجر", url: "/ar/login?type=merchant" },
-    { label: "منصة المسوق بالعمولة", url: "/ar/login?type=affiliate" },
+    { label: "منصة دخول الأطباء", url: "/ar/login?type=doctor" },
   ],
 
   // Section C: قانوني (Bottom bar)
