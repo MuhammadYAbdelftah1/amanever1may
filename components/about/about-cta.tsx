@@ -3,10 +3,13 @@
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { ABOUT_CONFIG } from '@/lib/data/about-config';
+import { getAboutConfig } from '@/lib/data/about-config-localized';
+import { useParams } from 'next/navigation';
 
 export function AboutCTA() {
-  const { cta } = ABOUT_CONFIG;
+  const params = useParams();
+  const locale = (params?.locale as string) || 'ar';
+  const { cta } = getAboutConfig(locale);
 
   return (
     <section className="relative bg-gradient-to-br from-emerald-600 to-teal-700 py-24 md:py-32 overflow-hidden">

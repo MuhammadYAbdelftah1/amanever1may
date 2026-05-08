@@ -12,9 +12,9 @@
   },
   "home": {
     "hero": {
-      "title": "Your Smart Partner in Healthcare Journey",
-      "subtitle": "We are Aman Ever, a leading Saudi technology platform specialized in technical and marketing mediation for medical services",
-      "cta": "Discover Our Services",
+      "title": "Your Health is a Trust and Continuous Care",
+      "subtitle": "Join the world of Aman Ever comprehensive services discounts up to 80% bookings and audio and video medical consultations home care services loyalty program cashback and points wallet",
+      "cta": "Start Your Medical Care Journey Now",
       "ctaSecondary": "Contact Us"
     },
     "services": {
@@ -40,16 +40,16 @@
         }
       },
       "cashback": {
-        "title": "Loyalty Program (Cashback)",
-        "description": "Get cash back when purchasing the card or with first use of services. Enjoy instant financial returns to your wallet."
+        "title": "Cashback Program",
+        "description": "Your investment in your health.. returns to you as service credit! Instant cashback added to your wallet to cover your future medical service costs."
       },
       "points": {
-        "title": "Aman Points Wallet",
-        "description": "Collect your points with every purchase invoice and redeem them for service credit for your future purchases"
+        "title": "Aman Ever Points Wallet",
+        "description": "The more you care for your health.. the more we reward you! Collect automatic points when ordering our services or with every purchase, and use them as additional credit to pay for your future services."
       },
       "instantBooking": {
-        "title": "Instant Bookings & Consultations",
-        "description": "Your doctor is with you wherever you are.. Book your appointment without waiting, or get your medical consultation (voice, video, chat) around the clock."
+        "title": "Instant Medical Bookings & Consultations (Audio & Video)",
+        "description": "Your doctor is with you wherever you are.. Book your appointment without waiting, or get your medical consultation (voice, video, chat) around the clock with elite doctors."
       },
       "homeCare": {
         "title": "Home Care Services",
@@ -113,7 +113,7 @@
     "partners": {
       "title": "Aman Partners.. Partners of Trust",
       "subtitle": "We are proud of our partnership with a selection of the largest hospitals and medical, health and cosmetic centers in the Kingdom",
-      "trustBadge": "More than 500+ trusted partners throughout the Kingdom"
+      "trustBadge": "More than 2000+ trusted medical and health partners throughout the Kingdom"
     },
     "about": {
       "title": "About Us",
@@ -121,7 +121,7 @@
       "description": "A leading Saudi technology platform connecting you with the best medical and health services in the Kingdom. We provide comprehensive and innovative care solutions supporting Vision 2030 in digital health transformation.",
       "highlights": {
         "vision2030": "Supporting Saudi Vision 2030 in health and technical transformation",
-        "partners": "Network of 500+ trusted medical partners throughout the Kingdom",
+        "partners": "Network of 2000+ trusted medical and health partners throughout the Kingdom",
         "technology": "Advanced and secure technology for a seamless healthcare experience"
       },
       "stats": {

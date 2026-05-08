@@ -11,8 +11,9 @@ export const FOOTER_CONFIG = {
   },
   address: {
     city: "جدة، البغدادية الشرقية",
-    building: "مبنى البغدادية بلازا",
+    building: "برج البغدادية بلازا الدور الثاني 203 B",
     country: "SA",
+    googleMapsUrl: "https://maps.app.goo.gl/jh4XycU53gYX5sZ98",
   },
   contact: {
     hotline: "920018041",

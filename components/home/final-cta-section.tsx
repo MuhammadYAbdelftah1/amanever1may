@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CreditCard, Lock } from 'lucide-react';
 import { AppDownloadButtons } from '@/components/shared/app-download-buttons';
 
 export function FinalCTASection() {
@@ -25,17 +24,17 @@ export function FinalCTASection() {
         >
           {/* Eyebrow */}
           <p className="text-sm font-semibold text-emerald-200 uppercase tracking-wide mb-4">
-            وقت البداية
+            استثمر في صحتك
           </p>
 
           {/* H2 */}
           <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
-            ابدأ رحلتك الصحية بتكلفة أقل اليوم
+            ابدأ رحلة العناية بصحتك.. بذكاء وتوفير
           </h2>
 
           {/* Subtitle */}
           <p className="text-lg md:text-xl text-emerald-50 leading-relaxed max-w-3xl mx-auto">
-            انضم لآلاف المستخدمين اللي يوفّرون حتى 80% على خدماتهم الطبية في 500+ مستشفى وعيادة وصيدلية. الاشتراك يبدأ من 199 ريال فقط، والتوفير يبدأ من أول زيارة.
+            انضم إلى عائلة «أمان إيفر»، وكن واحداً من آلاف المستفيدين الذين يتمتعون بخصومات تصل إلى 80% في أكثر من +2000 مستشفى وعيادة وصيدلية. باقاتنا تبدأ من 299 ريالاً سنوياً فقط.. لتشعر بفرق التوفير من زيارتك الأولى!
           </p>
         </motion.div>
 
@@ -48,7 +47,7 @@ export function FinalCTASection() {
           className="text-center"
         >
           <h3 className="text-2xl font-bold text-white mb-8">
-            حمّل التطبيق الآن
+            حمّل التطبيق الآن.. وابدأ التوفير
           </h3>
 
           {/* App Download Buttons */}
@@ -66,12 +65,12 @@ export function FinalCTASection() {
           className="text-center mt-8 space-y-3"
         >
           <p className="text-sm text-emerald-100 flex items-center justify-center gap-2 flex-wrap">
-            <CreditCard className="w-4 h-4" />
+            <span>💳</span>
             <span>طرق الدفع: مدى · فيزا · ماستركارد · Apple Pay · تابي · تمارا</span>
           </p>
           <p className="text-sm text-emerald-100 flex items-center justify-center gap-2 flex-wrap">
-            <Lock className="w-4 h-4" />
-            <span>دفع آمن 100% · بدون تجديد تلقائي · ضمان استرداد خلال 14 يوم</span>
+            <span>🔒</span>
+            <span>دفع آمن 100% · بدون تجديد تلقائي · تفعيل فوري للاشتراك</span>
           </p>
         </motion.div>
 

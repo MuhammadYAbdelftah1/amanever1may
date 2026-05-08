@@ -79,7 +79,7 @@ const features: Feature[] = [
     id: 'response',
     icon: MessageCircle,
     title: 'استجابة فورية (استشارتك الأولى علينا)',
-    description: 'رد طبي موثوق خلال 15 دقيقة. سؤالك الأول مجاني بالكامل',
+    description: 'رد طبي موثوق خلال 15 دقيقة. استشارتك الأولى علينا بالكامل',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     badge: 'مجاناً',
     image: '/images/features/response.jpg'

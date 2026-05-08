@@ -40,17 +40,17 @@ const contactMethods: ContactMethod[] = [
   {
     id: 'landline',
     icon: Phone,
-    title: 'الهاتف الأرضي',
+    title: 'رقم الهاتف',
     description: 'رقم الهاتف برمز الدولة',
-    value: '+966 12 123 4567',
-    href: 'tel:+966121234567',
+    value: '+966 12 614 2206',
+    href: 'tel:+966126142206',
     image: '/images/contact/landline.jpg'
   },
   {
     id: 'whatsapp',
     icon: MessageCircle,
     title: 'واتساب',
-    description: 'الأسرع للرد، 7 أيام في الأسبوع',
+    description: 'خدمة على مدار الساعة',
     value: '9200',
     href: 'https://wa.me/9200',
     image: '/images/contact/whatsapp.jpg'
@@ -68,9 +68,9 @@ const contactMethods: ContactMethod[] = [
     id: 'location',
     icon: MapPin,
     title: 'موقعنا',
-    description: 'جدة، المملكة العربية السعودية',
-    value: 'زيارة المقر',
-    href: '/ar/contact#location',
+    description: 'المملكة العربية السعودية، جدة، البغدادية الشرقية - برج البغدادية بلازا الدور الثاني 203 B',
+    value: 'زيارة الموقع',
+    href: 'https://maps.app.goo.gl/jh4XycU53gYX5sZ98',
     image: '/images/contact/location.jpg'
   }
 ];
@@ -193,10 +193,14 @@ export function ContactPopover({ locale, isMobile = false }: ContactPopoverProps
             <div className="p-4 space-y-3">
               {contactMethods.map((method) => {
                 const Icon = method.icon;
+                const isExternal = method.id === 'location';
+                
                 return (
                   <a
                     key={method.id}
                     href={method.href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
                     onClick={() => setIsOpen(false)}
                     className="flex items-start gap-4 p-4 rounded-xl border border-gray-200 hover:border-[#4A8B8E]/30 hover:bg-gray-50 transition-all duration-200"
                   >
@@ -291,10 +295,14 @@ export function ContactPopover({ locale, isMobile = false }: ContactPopoverProps
           <div className="p-4 space-y-2">
             {contactMethods.map((method) => {
               const Icon = method.icon;
+              const isExternal = method.id === 'location';
+              
               return (
                 <a
                   key={method.id}
                   href={method.href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
                   onClick={() => setIsOpen(false)}
                   className="flex items-start gap-3 p-3 rounded-xl border border-gray-200 hover:border-[#4A8B8E]/30 hover:bg-gray-50 transition-all duration-200"
                 >

@@ -1,10 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ABOUT_CONFIG } from '@/lib/data/about-config';
+import { getAboutConfig } from '@/lib/data/about-config-localized';
+import { useParams } from 'next/navigation';
 
 export function AboutHero() {
-  const { hero } = ABOUT_CONFIG;
+  const params = useParams();
+  const locale = (params?.locale as string) || 'ar';
+  const { hero } = getAboutConfig(locale);
 
   return (
     <section className="relative bg-gradient-to-b from-emerald-50 via-white to-white py-24 md:py-32 overflow-hidden">

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Phone, MessageCircle, PhoneCall, Mail } from "lucide-react";
+import { Phone, MessageCircle, PhoneCall, Mail, MapPin } from "lucide-react";
 import { knowledge } from "@/lib/knowledge";
 
 const channels = [
@@ -16,7 +16,7 @@ const channels = [
   },
   {
     Icon: PhoneCall,
-    title: "الهاتف الأرضي",
+    title: "رقم الهاتف",
     description: "رقم الهاتف برمز الدولة",
     value: "+966 12 614 2206",
     href: "tel:+966126142206",
@@ -26,7 +26,7 @@ const channels = [
   {
     Icon: MessageCircle,
     title: "واتساب",
-    description: "الأسرع للرد، 7 أيام في الأسبوع",
+    description: "خدمة على مدار الساعة",
     value: "9200",
     href: "https://wa.me/9200",
     bgColor: "bg-[#25D366]/10",
@@ -41,18 +41,32 @@ const channels = [
     bgColor: "bg-emerald-50",
     iconColor: "text-emerald-600",
   },
+  {
+    Icon: MapPin,
+    title: "موقعنا",
+    description: "المملكة العربية السعودية، جدة، البغدادية الشرقية - برج البغدادية بلازا الدور الثاني 203 B",
+    value: "زيارة الموقع",
+    href: "https://maps.app.goo.gl/jh4XycU53gYX5sZ98",
+    bgColor: "bg-emerald-50",
+    iconColor: "text-emerald-600",
+    isExternal: true,
+  },
 ];
 
 export function ContactChannels() {
   return (
     <section className="container mx-auto px-4 py-16">
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
         {channels.map((channel) => {
           const { Icon } = channel;
+          const isExternal = channel.isExternal || false;
+          
           return (
             <Link
               key={channel.value}
               href={channel.href}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
               className="group rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm transition-all hover:shadow-md"
             >
               {/* Image Banner - Full Width at Top */}

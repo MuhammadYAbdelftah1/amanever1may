@@ -23,7 +23,7 @@ const generalFAQItems: FAQItemData[] = [
             <strong className="text-slate-900 font-bold">• خصومات أعلى:</strong> تصل إلى 50% (بريمير) أو 80% (VIP) على جميع الخدمات الطبية والصحية والتجميلية.
           </li>
           <li>
-            <strong className="text-slate-900 font-bold">• برنامج الكاش باك:</strong> رصيد مالي فوري في محفظتك عند الاشتراك.
+            <strong className="text-slate-900 font-bold">• برنامج الكاش باك:</strong> استثمارك في صحتك يعود إليك كرصيد خدمات فوري في محفظتك.
           </li>
           <li>
             <strong className="text-slate-900 font-bold">• محفظة نقاط أمان:</strong> اجمع نقاط مع كل استخدام واستبدلها بخدمات مجانية.

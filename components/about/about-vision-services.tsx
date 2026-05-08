@@ -1,10 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ABOUT_CONFIG } from '@/lib/data/about-config';
+import { getAboutConfig } from '@/lib/data/about-config-localized';
+import { useParams } from 'next/navigation';
 
 export function AboutVisionServices() {
-  const { vision } = ABOUT_CONFIG;
+  const params = useParams();
+  const locale = (params?.locale as string) || 'ar';
+  const { vision } = getAboutConfig(locale);
 
   return (
     <section className="bg-slate-50 py-20 md:py-28">

@@ -7,7 +7,7 @@ export function FooterContactNew() {
   return (
     <div>
       <h3 className="text-[#1A2B2C] font-bold text-base mb-4 text-center">
-        تواصل معنا
+        نحن هنا لخدمتك في أي وقت
       </h3>
       
       {/* Mobile: Vertical layout */}
@@ -72,7 +72,7 @@ export function FooterContactNew() {
             </div>
             <div>
               <div className="text-xs text-[#8A9899] mb-1">
-                الهاتف الثابت
+                رقم الهاتف
               </div>
               <div className="text-sm text-[#1A2B2C] hover:text-[#4A8B8E] transition font-medium">
                 {contact.landline}
@@ -178,7 +178,7 @@ export function FooterContactNew() {
             </div>
             <div>
               <div className="text-xs text-[#8A9899] mb-0.5">
-                الهاتف الثابت
+                رقم الهاتف
               </div>
               <div className="text-xs text-[#1A2B2C] hover:text-[#4A8B8E] transition font-medium">
                 {contact.landline}

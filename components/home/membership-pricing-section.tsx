@@ -47,7 +47,7 @@ const content = {
       features: [
         'خصم يصل إلى ٦٠٪ على الشبكة الطبية',
         'حجوزات فورية مع أفضل الأطباء',
-        'استشارة "اسأل طبيب" مجاناً',
+        'استشارة "اسأل طبيب" علينا',
         'كاش باك ٥٪ على كل فاتورة',
         'نقاط ولاء قابلة للاستبدال الفوري',
         'دعم عملاء يرافقك ٢٤/٧',
@@ -223,7 +223,7 @@ function PricingCard({ tier, index, locale, onPremierClick, onBusinessClick }: {
                 {tier.priceYearly}
               </span>
               <p className="text-sm text-slate-500 font-medium mt-2">
-                أسعار تنافسية حسب عدد الموظفين
+                عروض خاصة لموظفيّ الشركات والمؤسسات تناسب احتياجاتهم
               </p>
             </div>
           )}
