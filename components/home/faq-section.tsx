@@ -26,7 +26,7 @@ const generalFAQItems: FAQItemData[] = [
             <strong className="text-slate-900 font-bold">• برنامج الكاش باك:</strong> استثمارك في صحتك يعود إليك كرصيد خدمات فوري في محفظتك.
           </li>
           <li>
-            <strong className="text-slate-900 font-bold">• محفظة نقاط أمان:</strong> اجمع نقاط مع كل استخدام واستبدلها بخدمات مجانية.
+            <strong className="text-slate-900 font-bold">• محفظة نقاط أمان:</strong> ولاءٌ يُقدّر اهتمامك بصحتك - اجمع نقاط مع كل استخدام واستبدلها بخدمات مجانية.
           </li>
           <li>
             <strong className="text-slate-900 font-bold">• خدمات مجانية (VIP):</strong> 5 حجوزات طبية + 5 استشارات &quot;اسأل طبيب&quot; مجاناً.
@@ -168,7 +168,7 @@ const cardholderFAQItems: FAQItemData[] = [
         </p>
         <ul className="list-none space-y-2 ps-0 mb-4">
           <li>• خصومات تصل إلى <strong className="text-slate-900 font-bold">50%</strong> على جميع الخدمات الطبية والصحية والتجميلية.</li>
-          <li>• برنامج كاش باك ومحفظة نقاط أمان.</li>
+          <li>• برنامج كاش باك ومحفظة نقاط أمان - ولاءٌ يُقدّر اهتمامك بصحتك.</li>
           <li>• حجز مواعيد واستشارات طبية عبر الفيديو بأسعار مخفضة.</li>
           <li>• الشراء من المتجر الإلكتروني بأسعار حصرية.</li>
         </ul>

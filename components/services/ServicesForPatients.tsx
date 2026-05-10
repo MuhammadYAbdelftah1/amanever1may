@@ -6,6 +6,7 @@ import * as LucideIcons from 'lucide-react';
 import { motion } from 'framer-motion';
 import { patientsSection } from '@/lib/data/services-config';
 import { NetworkMapPopover } from '@/components/shared/network-map-popover';
+import { ServiceDetailsModal } from '@/components/shared/service-details-modal';
 
 type Service = {
   id: string;
@@ -16,6 +17,8 @@ type Service = {
   description: string;
   ctaLabel: string;
   ctaHref: string;
+  features?: string[];
+  secondaryCtaLabel?: string;
 };
 
 const services: Service[] = [
@@ -25,7 +28,7 @@ const services: Service[] = [
     image: '/services/membership.jpg',
     title: 'بطاقات العضوية (بريمير و VIP)',
     tagline: 'الأكثر طلباً',
-    description: 'استمتع بخصومات كبرى تصل إلى 80% في شبكة واسعة تضم أفضل المستشفيات والمراكز الطبية والصحية والتجميلية في المملكة',
+    description: 'استثمارك في صحتك.. يعود إليك كأرباح فورية! برنامج مكافآت ذكي يحول نفقاتك الطبية إلى قيمة مضافة حقيقية مع خصومات تصل إلى 80%',
     ctaLabel: 'اكتشف المزيد',
     ctaHref: '/services#membership',
   },
@@ -33,10 +36,18 @@ const services: Service[] = [
     id: 'cashback',
     icon: 'Wallet',
     image: '/services/cashback.jpg',
-    title: 'برنامج الكاش باك',
-    tagline: 'CASHBACK',
-    description: 'استثمارك في صحتك.. يعود إليك كرصيد خدمات! كاش باك فوري يُضاف لمحفظتك لتستخدمه في تغطية تكاليف خدماتك الطبية.',
-    ctaLabel: 'اكتشف المزيد',
+    title: 'برنامج الكاش باك من أمان إيفر',
+    tagline: 'استثمارك في صحتك.. يعود إليك كأرباح فورية!',
+    description: 'لأننا نقدر حرصك على عافيتك، صممنا لك برنامج مكافآت ذكي يحول نفقاتك الطبية والصحية والتجميلية إلى قيمة مضافة. بمجرد اشتراكك في إحدى بطاقاتنا أو باقاتنا، ستحصل على رصيد خدمات فوري يُودع في محفظتك الإلكترونية بدون أي تعقيدات.',
+    features: [
+      'عضوية "أمان إيفر بريمير" (Premier): انضم إلى الفئة النخبوية واستمتع بأعلى نسب الكاش باك المتاحة حصرياً لمشتركي "بريمير".',
+      'عضوية الـ VIP: احصل على النسبة الأعلى من الكاش باك والمميزات الحصرية عند اشتراكك في فئة الـ VIP.',
+      'رصيد خدمات مباشر: احصل على رصيدك فور الاشتراك دون شروط معقدة أو فترات انتظار.',
+      'توفير من اللحظة الأولى: رصيدك متاح للاستخدام الفوري عند تنفيذ أول عملية شراء لخدماتك الطبية أو الصحية أو التجميلية.',
+      'شبكة واسعة: استخدم الكاش باك لتغطية تكاليف فحوصاتك وعلاجاتك لدى أكبر مجموعة من مقدمي الرعاية الصحية.'
+    ],
+    ctaLabel: 'ابدأ رحلة التوفير الآن',
+    secondaryCtaLabel: 'اشترك في بطاقات أمان إيفر',
     ctaHref: '/services#cashback',
   },
   {
@@ -44,8 +55,8 @@ const services: Service[] = [
     icon: 'Gift',
     image: '/services/points.jpg',
     title: 'محفظة نقاط أمان إيفر',
-    tagline: 'محفظة نقاط',
-    description: 'كلما اعتنيت بصحتك أكثر.. كافأناك أكثر! اجمع النقاط التلقائية عند طلب خدماتنا او مع كل عملية شراء، واستخدمها كرصيد إضافي لدفع قيمة خدماتك القادمة.',
+    tagline: 'ولاءٌ يُقدّر اهتمامك بصحتك',
+    description: 'بصفتك حاملاً لإحدى بطاقاتنا الحصرية أو مشتركاً في إحدى باقاتنا المميزة، نحن لا نقدم لك الرعاية الطبية فحسب، بل نكافئك عليها. اجعل من رحلتك العلاجية استثماراً ذكياً، حيث تتحول كل عملية شراء أو طلب خدمة إلى نقاط تُضاف تلقائياً إلى محفظتك.',
     ctaLabel: 'اكتشف المزيد',
     ctaHref: '/services#points',
   },
@@ -64,9 +75,16 @@ const services: Service[] = [
     icon: 'Home',
     image: '/services/home-care.jpg',
     title: 'خدمات الرعاية المنزلية',
-    tagline: 'رعاية منزلية',
-    description: 'رعاية طبية متكاملة تصلك إلى باب بيتك.. طاقم معتمد للزيارات الطبية، العلاج الطبيعي، وعناية خاصة بالأطفال وكبار السن.',
-    ctaLabel: 'اكتشف المزيد',
+    tagline: 'رعاية طبية متكاملة تصلك إلى باب بيتك',
+    description: 'نقدم لكم طاقماً معتمداً للزيارات الطبية يضم نخبة من الأطباء والاستشاريين والممرضين والممرضات المؤهلين لتقديم أعلى مستويات الرعاية. نوفر لك الراحة والأمان بتلقي العلاج في منزلك دون الحاجة للتنقل، مع عناية خاصة بالأطفال وكبار السن.',
+    features: [
+      'رعاية شاملة لكل العائلة: تمريض وعناية طبية متخصصة تغطي جميع أفراد أسرتك (من الأطفال وحتى كبار السن) تحت إشراف أطباء مختصين.',
+      'عيادة متكاملة في غرفتك: إجراء الفحوصات المخبرية، جلسات العلاج الطبيعي، التأهيل، الحجامة، والعديد من خدمات الرعاية المنزلية دون الحاجة لمغادرة منزلك.',
+      'عناية متخصصة ومستمرة: متابعة دقيقة لأصحاب الأمراض المزمنة، ورعاية فائقة واحترافية لما بعد العمليات الجراحية يقدمها ممرضون وممرضات ذوي خبرة.',
+      'راحة بالك هي الأهم: تجربة علاجية آمنة وموثوقة، توفر عليك الجهد وتمنحك الطمأنينة في بيتك وبين عائلتك.'
+    ],
+    ctaLabel: 'اطلب الخدمة الآن',
+    secondaryCtaLabel: 'اشترك في احدى بطاقاتنا او باقاتنا',
     ctaHref: '/services#home-care',
   },
   {
@@ -84,9 +102,16 @@ const services: Service[] = [
     icon: 'ShoppingBag',
     image: '/services/store.jpg',
     title: 'متجر أمان الإلكتروني',
-    tagline: 'كل احتياجاتك بضغطة زر',
-    description: 'كل ما تحتاجه من منتجات وخدمات طبية وصحية وتجميلية في مكان واحد. تسوق بذكاء، واستمتع بأسعار مخفضة وتجربة شراء سلسة ومريحة.',
-    ctaLabel: 'اكتشف المزيد',
+    tagline: 'بوابتك المتكاملة للصحة والجمال بضغطة زر',
+    description: 'استمتع بتجربة تسوق ذكية وفريدة تجمع لك كل ما تحتاجه من منتجات وخدمات طبية، صحية، وتجميلية في مكان واحد. مع بطاقات أمان إيفر وباقاتها الخاصة، نمنحك قوة توفير إضافية ومزايا حصرية تجعل من العناية بصحتك وجمالك تجربة سلسة ومجزية.',
+    features: [
+      'تنوع بلا حدود: خيارات واسعة وشاملة من المنتجات والخدمات التي تلبي كافة احتياجاتك اليومية واحتياجات عائلتك.',
+      'عروض حصرية لمشتركي الباقات: استفد من خصومات وتخفيضات مستمرة ومخصصة حصرياً لحاملي بطاقات أمان إيفر، لضمان حصولك على أفضل قيمة.',
+      'توصيل سريع وآمن: طلباتك تصلك إلى باب منزلك بأقصى سرعة، مع تغليف احترافي يضمن أعلى معايير الأمان والجودة.',
+      'دفع مرن وميسر: تجربة تسوق مريحة بالكامل مع خيارات دفع متعددة ومتنوعة تتناسب مع ميزانيتك.'
+    ],
+    ctaLabel: 'تصفح المتجر الآن',
+    secondaryCtaLabel: 'واشترك الان في إحدى بطاقات وباقات أمان إيفر',
     ctaHref: '/services#store',
   },
   {
@@ -114,6 +139,7 @@ const services: Service[] = [
 function ServiceCard({ service, index, locale }: { service: Service; index: number; locale?: string }) {
   const [isVisible, setIsVisible] = useState(false);
   const [showNetworkDialog, setShowNetworkDialog] = useState(false);
+  const [showServiceModal, setShowServiceModal] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   
   // Dynamically get the icon component
@@ -141,16 +167,16 @@ function ServiceCard({ service, index, locale }: { service: Service; index: numb
   const networkType = service.id === 'medical-network' ? 'medical' : 'health';
 
   const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     if (isNetworkCard) {
-      e.preventDefault();
       setShowNetworkDialog(true);
+    } else {
+      setShowServiceModal(true);
     }
   };
 
-  const CardWrapper = isNetworkCard ? 'div' : 'a';
-  const cardProps = isNetworkCard 
-    ? { onClick: handleClick }
-    : { href: service.ctaHref };
+  const CardWrapper = 'div';
+  const cardProps = { onClick: handleClick };
 
   return (
     <>
@@ -161,9 +187,9 @@ function ServiceCard({ service, index, locale }: { service: Service; index: numb
         <CardWrapper
           {...cardProps}
           ref={ref as any}
-          className={`group relative h-full rounded-2xl bg-white overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 block ${
+          className={`group relative h-full rounded-2xl bg-white overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 block cursor-pointer ${
             isVisible ? 'animate-in fade-in slide-in-from-bottom-4' : 'opacity-0'
-          } ${isNetworkCard ? 'cursor-pointer' : ''}`}
+          }`}
           style={{
             animationDelay: `${index * 100}ms`,
             animationFillMode: 'forwards',
@@ -231,6 +257,15 @@ function ServiceCard({ service, index, locale }: { service: Service; index: numb
           type={networkType}
           isOpen={showNetworkDialog}
           onOpenChange={setShowNetworkDialog}
+        />
+      )}
+
+      {/* Service Details Modal */}
+      {!isNetworkCard && (
+        <ServiceDetailsModal
+          serviceId={service.id}
+          isOpen={showServiceModal}
+          onClose={() => setShowServiceModal(false)}
         />
       )}
     </>
