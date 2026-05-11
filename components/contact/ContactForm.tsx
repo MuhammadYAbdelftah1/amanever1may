@@ -47,28 +47,55 @@ export function ContactForm() {
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
     
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+    // Retry configuration
+    const maxRetries = 3;
+    const retryDelay = 1000; // 1 second
+    
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+        
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+          signal: controller.signal,
+        });
+        
+        clearTimeout(timeoutId);
 
-      if (response.ok) {
-        setSubmittedTopic(data.topic);
-        setIsSuccess(true);
-        reset();
-      } else {
-        const error = await response.json();
-        console.error("Form submission error:", error);
-        alert("حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.");
+        if (response.ok) {
+          setSubmittedTopic(data.topic);
+          setIsSuccess(true);
+          reset();
+          return; // Success, exit the retry loop
+        } else {
+          const error = await response.json();
+          console.error("Form submission error:", error);
+          
+          if (attempt === maxRetries) {
+            alert("حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى أو التواصل معنا عبر واتساب.");
+          }
+        }
+      } catch (error: any) {
+        console.error(`Network error (attempt ${attempt}/${maxRetries}):`, error);
+        
+        if (attempt === maxRetries) {
+          // Last attempt failed
+          if (error.name === 'AbortError') {
+            alert("انتهت مهلة الاتصال. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.");
+          } else {
+            alert("تعذّر الإرسال. يرجى التحقق من اتصالك بالإنترنت أو راسلنا على واتساب.");
+          }
+        } else {
+          // Wait before retrying
+          await new Promise(resolve => setTimeout(resolve, retryDelay * attempt));
+        }
       }
-    } catch (error) {
-      console.error("Network error:", error);
-      alert("تعذّر الإرسال. حاول مرة أخرى أو راسلنا على واتساب.");
-    } finally {
-      setIsSubmitting(false);
     }
+    
+    setIsSubmitting(false);
   };
 
   const handleReset = () => {

@@ -9,7 +9,9 @@ import { Header } from '@/components/layout/header';
 import { FooterNew } from '@/components/global/footer-new';
 import { ChatLauncher } from '@/components/chatbot/ChatLauncher';
 import { FloatingAuthButtons } from '@/components/global/floating-auth-buttons';
+import { NetworkStatus } from '@/components/global/network-status';
 import '../globals.css';
+import '../chunk-error-handler';
 
 export const metadata: Metadata = {
   title: 'أمان إيفر | Aman Ever',
@@ -75,6 +77,7 @@ export default async function RootLayout({
           {locale === 'ar' ? 'انتقل إلى المحتوى الرئيسي' : locale === 'ur' ? 'مرکزی مواد پر جائیں' : 'Skip to main content'}
         </a>
         <NextIntlClientProvider messages={messages}>
+          <NetworkStatus />
           <Header locale={locale} />
           {children}
           <FloatingAuthButtons />
