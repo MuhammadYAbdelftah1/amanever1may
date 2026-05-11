@@ -90,7 +90,7 @@ const services: Service[] = [
   {
     id: 'ask-doctor',
     icon: 'MessageCircle',
-    image: '/services/ask-doctor.jpg',
+    image: '/images/ask-doctor.webp',
     title: 'اسأل طبيب',
     tagline: 'استشارة فورية',
     description: 'استشارات طبية فورية (صوتية ومرئية) على مدار الساعة مع نخبة من الأطباء المعتمدين. رد خلال 15 دقيقة عبر الشات، الصوت، أو الفيديو.',

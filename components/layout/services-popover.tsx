@@ -118,7 +118,7 @@ const services: Service[] = [
     description: 'استشارات طبية فورية (صوتية ومرئية) على مدار الساعة مع نخبة من الأطباء المعتمدين. رد خلال 15 دقيقة عبر الشات، الصوت، أو الفيديو.',
     href: '/services#ask-doctor',
     badge: 'استشارة فورية',
-    image: '/services/ask-doctor.jpg',
+    image: '/images/ask-doctor.webp',
     features: [
       'رد خلال 15 دقيقة',
       'أطباء معتمدين من جميع الجنسيات',
