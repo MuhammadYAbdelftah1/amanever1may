@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { 
-  Shield, 
+  Users, 
   Globe, 
   Zap, 
   Calendar, 
@@ -29,18 +29,18 @@ interface Feature {
   description: string;
   gradient: string;
   badge?: string;
-  image: string;
+  image: string | null;
 }
 
 const features: Feature[] = [
   {
     id: 'inclusive',
-    icon: Shield,
+    icon: Users,
     title: 'رعاية تحتضن الجميع',
     description: 'خدماتنا متاحة للجميع؛ مواطنين، مقيمين، وزواراً بكل حب',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     badge: 'للجميع',
-    image: '/images/features/inclusive.jpg'
+    image: '/images/feature-1-care-for-all.webp'
   },
   {
     id: 'coverage',
@@ -48,7 +48,7 @@ const features: Feature[] = [
     title: 'راحة بال.. بلا موافقات مسبقة',
     description: 'تغطية طبية واسعة فوراً دون انتظار موافقات',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
-    image: '/images/features/coverage.jpg'
+    image: '/images/feature-2-no-approvals.webp'
   },
   {
     id: 'speed',
@@ -57,7 +57,7 @@ const features: Feature[] = [
     description: 'إصدار فوري للبطاقة مع دعم على مدار الساعة',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     badge: 'فوري',
-    image: '/images/features/speed.jpg'
+    image: null
   },
   {
     id: 'booking',
@@ -65,7 +65,7 @@ const features: Feature[] = [
     title: 'طبيبك بانتظارك دائماً',
     description: 'احجز موعدك أو احصل على استشارة فورية بضغطة زر',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
-    image: '/images/features/booking.jpg'
+    image: '/images/feature-4-doctor-ready.webp'
   },
   {
     id: 'home-care',
@@ -73,7 +73,7 @@ const features: Feature[] = [
     title: 'المستشفى.. في منزلك',
     description: 'نأتيك بالرعاية التي تستحقها إلى باب بيتك؛ طاقم طبي متخصص',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
-    image: '/images/features/home-care.jpg'
+    image: '/images/feature-5-home-hospital.webp'
   },
   {
     id: 'response',
@@ -82,7 +82,7 @@ const features: Feature[] = [
     description: 'رد طبي موثوق خلال 15 دقيقة. استشارتك الأولى علينا بالكامل',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     badge: 'مجاناً',
-    image: '/images/features/response.jpg'
+    image: '/images/feature-6-instant-response.webp'
   },
   {
     id: 'financial',
@@ -91,7 +91,7 @@ const features: Feature[] = [
     description: 'استثمر عضويتك.. وضاعف توفيرك مع كبرى العلامات الطبية',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
     badge: 'حتى 80%',
-    image: '/images/features/financial.jpg'
+    image: null
   },
   {
     id: 'payment',
@@ -99,7 +99,7 @@ const features: Feature[] = [
     title: 'دفع مرن.. بدون ضغوط',
     description: 'دفع إلكتروني + تقسيط مريح عبر تابي وتمارا',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
-    image: '/images/features/payment.jpg'
+    image: '/images/feature-8-flexible-payment.webp'
   },
   {
     id: 'transparency',
@@ -107,7 +107,7 @@ const features: Feature[] = [
     title: 'شفافية تمنحك الثقة',
     description: 'اطلع على التقييمات الحقيقية للمراكز الطبية من عملاء سبقوك',
     gradient: 'from-[#4A8B8E] to-[#356B6E]',
-    image: '/images/features/transparency.jpg'
+    image: null
   }
 ];
 
@@ -235,15 +235,23 @@ export function FeaturesPopover({ locale, isMobile = false }: FeaturesPopoverPro
                     className="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-all duration-200 group"
                   >
                     {/* Image */}
-                    <div className={`flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden bg-gray-50 relative border-2 border-dashed border-gray-300`}>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center">
-                        <div className="text-[10px] font-semibold text-gray-700 mb-0.5">
-                          للمصممة
+                    <div className={`flex-shrink-0 rounded-xl overflow-hidden bg-gray-50 relative ${!feature.image ? 'w-20 h-20 border-2 border-dashed border-gray-300' : ''}`}>
+                      {feature.image ? (
+                        <img
+                          src={feature.image}
+                          alt={feature.title}
+                          className="w-auto h-20"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center">
+                          <div className="text-[10px] font-semibold text-gray-700 mb-0.5">
+                            للمصممة
+                          </div>
+                          <div className="text-[9px] text-gray-500">
+                            80×80
+                          </div>
                         </div>
-                        <div className="text-[9px] text-gray-500">
-                          80×80
-                        </div>
-                      </div>
+                      )}
                     </div>
                     
                     <div className="flex-1 min-w-0">
@@ -341,15 +349,23 @@ export function FeaturesPopover({ locale, isMobile = false }: FeaturesPopoverPro
                   )}
 
                   {/* Image */}
-                  <div className={`w-full h-24 rounded-xl overflow-hidden bg-gray-50 relative border-2 border-dashed border-gray-300`}>
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center">
-                      <div className="text-[11px] font-semibold text-gray-700 mb-1">
-                        للمصممة
+                  <div className={`w-full rounded-xl overflow-hidden bg-gray-50 relative ${!feature.image ? 'h-24 border-2 border-dashed border-gray-300' : ''}`}>
+                    {feature.image ? (
+                      <img
+                        src={feature.image}
+                        alt={feature.title}
+                        className="w-full h-auto"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center">
+                        <div className="text-[11px] font-semibold text-gray-700 mb-1">
+                          للمصممة
+                        </div>
+                        <div className="text-[10px] text-gray-500">
+                          280×96 بكسل
+                        </div>
                       </div>
-                      <div className="text-[10px] text-gray-500">
-                        280×96 بكسل
-                      </div>
-                    </div>
+                    )}
                   </div>
 
                   {/* Content */}
