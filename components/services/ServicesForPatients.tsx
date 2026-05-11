@@ -63,7 +63,7 @@ const services: Service[] = [
   {
     id: 'instant-booking',
     icon: 'Zap',
-    image: '/services/booking.jpg',
+    image: '/images/instant-booking.webp',
     title: 'حجوزات واستشارات طبية فورية (صوتية ومرئية)',
     tagline: 'فوري',
     description: 'طبيبك معك أينما كنت.. احجز موعدك دون انتظار، أو احصل على استشارتك الطبية (صوت، فيديو، محادثة) على مدار الساعة مع نخبة من الأطباء.',
@@ -73,7 +73,7 @@ const services: Service[] = [
   {
     id: 'home-care',
     icon: 'Home',
-    image: '/services/home-care.jpg',
+    image: '/images/home-care.webp',
     title: 'خدمات الرعاية المنزلية',
     tagline: 'رعاية طبية متكاملة تصلك إلى باب بيتك',
     description: 'نقدم لكم طاقماً معتمداً للزيارات الطبية يضم نخبة من الأطباء والاستشاريين والممرضين والممرضات المؤهلين لتقديم أعلى مستويات الرعاية. نوفر لك الراحة والأمان بتلقي العلاج في منزلك دون الحاجة للتنقل، مع عناية خاصة بالأطفال وكبار السن.',
@@ -100,7 +100,7 @@ const services: Service[] = [
   {
     id: 'store',
     icon: 'ShoppingBag',
-    image: '/services/store.jpg',
+    image: '/images/store.webp',
     title: 'متجر أمان الإلكتروني',
     tagline: 'بوابتك المتكاملة للصحة والجمال بضغطة زر',
     description: 'استمتع بتجربة تسوق ذكية وفريدة تجمع لك كل ما تحتاجه من منتجات وخدمات طبية، صحية، وتجميلية في مكان واحد. مع بطاقات أمان إيفر وباقاتها الخاصة، نمنحك قوة توفير إضافية ومزايا حصرية تجعل من العناية بصحتك وجمالك تجربة سلسة ومجزية.',
@@ -117,7 +117,7 @@ const services: Service[] = [
   {
     id: 'medical-network',
     icon: 'Building2',
-    image: '/services/medical-network.jpg',
+    image: '/images/medical-network.webp',
     title: 'استكشف الشبكة الطبية الآن',
     tagline: 'شبكة طبية',
     description: 'وصول مباشر لأكثر من 2000 مركز طبي: مستشفيات، عيادات، مختبرات البرج، صيدليات النهدي والدواء في كافة مدن المملكة.',
@@ -127,7 +127,7 @@ const services: Service[] = [
   {
     id: 'health-network',
     icon: 'Dumbbell',
-    image: '/services/health-network.jpg',
+    image: '/images/health-network.webp',
     title: 'استكشف الشبكة الصحية الآن',
     tagline: 'شبكة صحية',
     description: 'لأنك من عائلة أمان إيفر، فتحنا لك أبواب التوفير مع كبرى العلامات الطبية والصحية.. عروض حصرية صُممت خصيصاً لتلبي احتياجاتك.',
@@ -195,25 +195,34 @@ function ServiceCard({ service, index, locale }: { service: Service; index: numb
             animationFillMode: 'forwards',
           }}
         >
-      {/* Image Section - Takes most of the card */}
-      <div className="relative w-full h-64 bg-gradient-to-br from-[#1a472a]/10 via-[#2d5a3d]/5 to-[#1a472a]/10 overflow-hidden">
-        {/* Placeholder for designer's image */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center p-6">
-            <div className="text-6xl mb-3 opacity-20">
-              <IconComponent className="w-16 h-16 mx-auto text-[#1a472a]" />
-            </div>
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 border-2 border-dashed border-gray-300">
-              <p className="text-xs font-bold text-gray-700 mb-1">إشعار للمصممة</p>
-              <p className="text-[10px] text-gray-600 mb-1">
-                صورة الخدمة: {service.title}
-              </p>
-              <p className="text-[9px] text-gray-500 font-semibold">
-                المقاس: 384×256 بكسل
-              </p>
+      {/* Image Section - Natural size */}
+      <div className="relative w-full bg-gradient-to-br from-[#1a472a]/10 via-[#2d5a3d]/5 to-[#1a472a]/10 overflow-hidden">
+        {/* Service Image */}
+        {service.image ? (
+          <img
+            src={service.image}
+            alt={service.title}
+            className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
+          />
+        ) : (
+          /* Placeholder for designer's image */
+          <div className="flex items-center justify-center min-h-[256px]">
+            <div className="text-center p-6">
+              <div className="text-6xl mb-3 opacity-20">
+                <IconComponent className="w-16 h-16 mx-auto text-[#1a472a]" />
+              </div>
+              <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 border-2 border-dashed border-gray-300">
+                <p className="text-xs font-bold text-gray-700 mb-1">إشعار للمصممة</p>
+                <p className="text-[10px] text-gray-600 mb-1">
+                  صورة الخدمة: {service.title}
+                </p>
+                <p className="text-[9px] text-gray-500 font-semibold">
+                  المقاس: 384×256 بكسل
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Badge */}
         {service.tagline && (

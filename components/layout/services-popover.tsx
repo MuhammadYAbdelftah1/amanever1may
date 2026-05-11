@@ -87,7 +87,7 @@ const services: Service[] = [
     description: 'طبيبك معك أينما كنت.. احجز موعدك دون انتظار، أو احصل على استشارتك الطبية (صوت، فيديو، محادثة) على مدار الساعة مع نخبة من الأطباء.',
     href: '/services#instant-booking',
     badge: 'فوري',
-    image: '/services/booking.jpg',
+    image: '/images/instant-booking.webp',
     features: [
       'حجز فوري بدون انتظار',
       'استشارات صوت وفيديو ومحادثة',
@@ -103,7 +103,7 @@ const services: Service[] = [
     description: 'نقدم لكم طاقماً معتمداً للزيارات الطبية يضم نخبة من الأطباء والاستشاريين والممرضين والممرضات المؤهلين لتقديم أعلى مستويات الرعاية. نوفر لك الراحة والأمان بتلقي العلاج في منزلك دون الحاجة للتنقل، مع عناية خاصة بالأطفال وكبار السن.',
     href: '/services#home-care',
     badge: 'رعاية طبية متكاملة تصلك إلى باب بيتك',
-    image: '/services/home-care.jpg',
+    image: '/images/home-care.webp',
     features: [
       'رعاية شاملة لكل العائلة تحت إشراف أطباء مختصين',
       'عيادة متكاملة في غرفتك: فحوصات مخبرية وعلاج طبيعي',
@@ -134,7 +134,7 @@ const services: Service[] = [
     description: 'استمتع بتجربة تسوق ذكية وفريدة تجمع لك كل ما تحتاجه من منتجات وخدمات طبية، صحية، وتجميلية في مكان واحد. مع بطاقات أمان إيفر وباقاتها الخاصة، نمنحك قوة توفير إضافية ومزايا حصرية تجعل من العناية بصحتك وجمالك تجربة سلسة ومجزية.',
     href: '/services#store',
     badge: 'بوابتك المتكاملة للصحة والجمال بضغطة زر',
-    image: '/services/store.jpg',
+    image: '/images/store.webp',
     features: [
       'تنوع بلا حدود: خيارات واسعة وشاملة من المنتجات والخدمات التي تلبي كافة احتياجاتك اليومية واحتياجات عائلتك',
       'عروض حصرية لمشتركي الباقات: استفد من خصومات وتخفيضات مستمرة ومخصصة حصرياً لحاملي بطاقات أمان إيفر، لضمان حصولك على أفضل قيمة',
@@ -149,7 +149,7 @@ const services: Service[] = [
     description: 'وصول مباشر لأكثر من 2000 مركز طبي: مستشفيات، عيادات، مختبرات البرج، صيدليات النهدي والدواء في كافة مدن المملكة.',
     href: '#',
     badge: 'شبكة طبية',
-    image: '/services/medical-network.jpg',
+    image: '/images/medical-network.webp',
     features: [
       '2000+ مركز طبي معتمد',
       'مستشفيات رائدة في المملكة',
@@ -165,7 +165,7 @@ const services: Service[] = [
     description: 'لأنك من عائلة أمان إيفر، فتحنا لك أبواب التوفير مع كبرى العلامات الطبية والصحية.. عروض حصرية صُممت خصيصاً لتلبي احتياجاتك.',
     href: '#',
     badge: 'شبكة صحية',
-    image: '/services/health-network.jpg',
+    image: '/images/health-network.webp',
     features: [
       'نوادي رياضية: فتنس تايم، جولدز جيم',
       'مراكز سبا وتجميل فاخرة',
@@ -305,15 +305,23 @@ export function ServicesPopover({ locale, isMobile = false }: ServicesPopoverPro
                     {/* Header with Image and Title */}
                     <div className="flex items-center gap-3">
                       {/* Image */}
-                      <div className="flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden bg-gray-50 relative border-2 border-dashed border-gray-300">
-                        <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center">
-                          <div className="text-[9px] font-semibold text-gray-700 mb-0.5">
-                            للمصممة
+                      <div className="flex-shrink-0 rounded-xl overflow-hidden bg-gray-50 relative">
+                        {service.image ? (
+                          <img
+                            src={service.image}
+                            alt={service.title}
+                            className="w-16 h-auto"
+                          />
+                        ) : (
+                          <div className="w-16 h-16 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center p-2 text-center">
+                            <div className="text-[9px] font-semibold text-gray-700 mb-0.5">
+                              للمصممة
+                            </div>
+                            <div className="text-[8px] text-gray-500">
+                              64×64
+                            </div>
                           </div>
-                          <div className="text-[8px] text-gray-500">
-                            64×64
-                          </div>
-                        </div>
+                        )}
                       </div>
                       
                       <div className="flex-1">
@@ -447,22 +455,31 @@ export function ServicesPopover({ locale, isMobile = false }: ServicesPopoverPro
                   className="flex flex-col gap-3 p-4 rounded-xl hover:bg-gray-50 transition-all duration-200 group relative overflow-hidden"
                 >
                   {/* Badge */}
-                  {service.badge && (
-                    <span className="absolute top-2 right-2 text-xs font-bold text-[#1a472a] bg-[#1a472a]/10 px-2 py-1 rounded-full z-10">
-                      {service.badge}
-                    </span>
-                  )}
-
                   {/* Image */}
-                  <div className="w-full h-24 rounded-xl overflow-hidden bg-gray-50 relative border-2 border-dashed border-gray-300">
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center">
-                      <div className="text-[11px] font-semibold text-gray-700 mb-1">
-                        للمصممة
+                  <div className="w-full rounded-xl overflow-hidden bg-gray-50 relative">
+                    {service.image ? (
+                      <>
+                        <img
+                          src={service.image}
+                          alt={service.title}
+                          className="w-full h-auto"
+                        />
+                        {service.badge && (
+                          <span className="absolute top-2 right-2 text-xs font-bold text-[#1a472a] bg-[#1a472a]/10 px-2 py-1 rounded-full z-10">
+                            {service.badge}
+                          </span>
+                        )}
+                      </>
+                    ) : (
+                      <div className="h-24 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center p-3 text-center">
+                        <div className="text-[11px] font-semibold text-gray-700 mb-1">
+                          للمصممة
+                        </div>
+                        <div className="text-[10px] text-gray-500">
+                          280×96 بكسل
+                        </div>
                       </div>
-                      <div className="text-[10px] text-gray-500">
-                        280×96 بكسل
-                      </div>
-                    </div>
+                    )}
                   </div>
 
                   {/* Content */}

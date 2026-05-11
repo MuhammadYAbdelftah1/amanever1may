@@ -22,6 +22,7 @@ const serviceDetails: Record<string, {
   benefits: string[];
   howItWorks: string[];
   pricing?: string;
+  image?: string;
 }> = {
   'membership': {
     title: 'بطاقات العضوية (بريمير و VIP)',
@@ -55,6 +56,7 @@ const serviceDetails: Record<string, {
     title: 'حجوزات واستشارات طبية فورية (صوتية ومرئية)',
     subtitle: 'طبيبك معك أينما كنت',
     description: 'احجز موعدك دون انتظار، أو احصل على استشارتك الطبية (صوت، فيديو، محادثة) على مدار الساعة مع نخبة من الأطباء.',
+    image: '/images/instant-booking.webp',
     features: [
       'حجز مواعيد طبية مع نخبة من الأطباء في مختلف التخصصات بدون انتظار أو تأخير',
       'استشارات طبية اونلاين (صوت، فيديو، أو محادثة نصية آمنة)',
@@ -107,6 +109,7 @@ const serviceDetails: Record<string, {
     title: 'استكشف الشبكة الطبية الآن',
     subtitle: 'أكثر من 2000 مركز طبي في خدمتك',
     description: 'شبكة طبية واسعة تضم أفضل المستشفيات والعيادات والمراكز الطبية المعتمدة في جميع مدن المملكة. نوفر لك وصولاً مباشراً لخدمات طبية متميزة بأسعار مخفضة.',
+    image: '/images/medical-network.webp',
     features: [
       'مستشفيات رائدة (سليمان الحبيب، الموسى، السعودي الألماني)',
       'عيادات متخصصة في جميع التخصصات',
@@ -134,6 +137,7 @@ const serviceDetails: Record<string, {
     title: 'استكشف الشبكة الصحية الآن',
     subtitle: 'نمط حياة صحي متكامل',
     description: 'شبكة واسعة من مراكز اللياقة البدنية والصحة والجمال. نوفر لك خصومات حصرية على أفضل الأندية الرياضية ومراكز العناية بالصحة والجمال.',
+    image: '/images/health-network.webp',
     features: [
       'أندية رياضية (فتنس تايم، جولدز جيم)',
       'عيادات التغذية العلاجية',
@@ -213,6 +217,7 @@ const serviceDetails: Record<string, {
     title: 'اسأل طبيب',
     subtitle: 'استشارات طبية فورية على مدار الساعة',
     description: 'احصل على استشارة طبية موثوقة (صوتية ومرئية) مع نخبة من الأطباء المعتمدين في المملكة خلال 15 دقيقة، خدمة متاحة 24 ساعة وأنت في مكانك',
+    image: '/images/ask-doctor.webp',
     features: [
       'رد فوري خلال 15 دقيقة كحد أقصى',
       'أطباء معتمدون في جميع التخصصات (أطباء من جميع الجنسيات)',
@@ -284,14 +289,21 @@ export function ServiceDetailsModal({ isOpen, onClose, serviceId, locale = 'ar' 
   const content = (
     <div className="space-y-0">
       {/* Banner Image - Full Width at Top */}
-      <div className="relative w-full h-48 md:h-56 bg-gray-100 overflow-hidden">
-        {/* Simple text notice for designer */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <p className="text-sm md:text-base text-gray-600 mb-1">إشعار للمصممة</p>
-            <p className="text-xs md:text-sm text-gray-500">المقاس: 800×{typeof window !== 'undefined' && window.innerWidth >= 768 ? '224' : '192'} بكسل</p>
+      <div className="relative w-full bg-gray-100 overflow-hidden">
+        {service.image ? (
+          <img
+            src={service.image}
+            alt={service.title}
+            className="w-full h-auto"
+          />
+        ) : (
+          <div className="h-48 md:h-56 flex items-center justify-center">
+            <div className="text-center">
+              <p className="text-sm md:text-base text-gray-600 mb-1">إشعار للمصممة</p>
+              <p className="text-xs md:text-sm text-gray-500">المقاس: 800×{typeof window !== 'undefined' && window.innerWidth >= 768 ? '224' : '192'} بكسل</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="px-6 py-6 space-y-6">
