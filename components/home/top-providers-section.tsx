@@ -103,10 +103,34 @@ const providers: Provider[] = [
 
 const cities = ['الكل', 'الرياض', 'جدة', 'الدمام', 'الأحساء'];
 const types = [
-  { value: 'all', label: 'الكل', icon: Building2 },
-  { value: 'hospital', label: 'مستشفيات', icon: Building2 },
-  { value: 'clinic', label: 'عيادات', icon: Stethoscope },
-  { value: 'center', label: 'مراكز', icon: Heart },
+  { value: 'all', label: 'الكل', count: 4000, icon: Building2 },
+  { value: 'hospitals', label: 'مستشفيات', count: 500, icon: Building2 },
+  { value: 'clinics', label: 'عيادات', count: 1200, icon: Stethoscope },
+  { value: 'specialized', label: 'مراكز متخصصة', count: 300, icon: Heart },
+  { value: 'pharmacies', label: 'صيدليات', count: 800, icon: Building2 },
+  { value: 'labs', label: 'مختبرات', count: 400, icon: Stethoscope },
+  { value: 'radiology', label: 'أشعة وتصوير', count: 200, icon: Heart },
+  { value: 'mental', label: 'صحة نفسية', count: 150, icon: Heart },
+  { value: 'dental', label: 'طب أسنان', count: 350, icon: Stethoscope },
+  { value: 'homecare', label: 'رعاية منزلية', count: 100, icon: Heart },
+];
+
+const quickSearchTags = [
+  'مستشفيات',
+  'عيادات',
+  'صيدليات',
+  'مختبرات',
+  'أشعة',
+  'طب أسنان',
+  'عيون',
+  'جلدية',
+  'نساء وولادة',
+  'أطفال',
+  'قلب',
+  'عظام',
+  'صحة نفسية',
+  'رعاية منزلية',
+  'طوارئ',
 ];
 
 function ProviderCard({ provider }: { provider: Provider }) {
@@ -176,6 +200,10 @@ export function TopProvidersSection({ locale }: TopProvidersSectionProps) {
   const [selectedCity, setSelectedCity] = useState('الكل');
   const [selectedType, setSelectedType] = useState('all');
 
+  const handleQuickSearch = (tag: string) => {
+    setSearchQuery(tag);
+  };
+
   // Filter providers
   const filteredProviders = providers.filter(provider => {
     const matchesSearch = provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -200,56 +228,52 @@ export function TopProvidersSection({ locale }: TopProvidersSectionProps) {
           </p>
         </div>
 
-        {/* Search & Filters */}
-        <div className="mb-12">
-          {/* Search Bar - Full Width */}
-          <div className="relative mb-8 max-w-4xl mx-auto">
-            <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+        {/* Category Filter Pills */}
+        <div className="max-w-6xl mx-auto mb-4">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            {types.map((type) => (
+              <button
+                key={type.value}
+                onClick={() => setSelectedType(type.value)}
+                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                  selectedType === type.value
+                    ? 'bg-[#159A9C] text-white shadow-md'
+                    : 'bg-white text-gray-700 border border-gray-200 hover:border-[#159A9C]'
+                }`}
+              >
+                {type.label} ({type.count})
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Search Box with Quick Tags */}
+        <div className="max-w-6xl mx-auto mb-8">
+          <div className="relative">
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+              <Search className="w-5 h-5 text-gray-400" aria-hidden="true" />
+            </div>
             <input
               type="text"
-              placeholder="ابحث عن مستشفى، عيادة، أو تخصص..."
+              placeholder="ابحث عن نوع النشاط... (مثل: صيدلية، مستشفى، عيادة)"
+              className="w-full pr-12 pl-12 py-4 rounded-2xl border-2 border-gray-200 focus:border-[#159A9C] focus:outline-none text-right transition-colors"
+              dir="rtl"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pr-12 pl-6 py-4 rounded-2xl border-2 border-slate-200 focus:border-[#4d8080] focus:outline-none text-lg transition-colors"
             />
           </div>
 
-          {/* Filters Row - Distributed */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-7xl mx-auto">
-            {/* Type Filter - Left Side */}
-            <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-              {types.map((type) => {
-                const Icon = type.icon;
-                return (
-                  <button
-                    key={type.value}
-                    onClick={() => setSelectedType(type.value)}
-                    className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 ${
-                      selectedType === type.value
-                        ? 'bg-[#4d8080] text-white shadow-lg scale-105'
-                        : 'bg-white text-gray-700 border-2 border-slate-200 hover:border-[#4d8080]'
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    {type.label}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* City Filter - Right Side */}
-            <div className="flex flex-wrap gap-3 justify-center md:justify-end">
-              {cities.map((city) => (
+          {/* Quick Search Tags */}
+          <div className="mt-3">
+            <p className="text-xs text-gray-500 mb-2 px-1">بحث سريع:</p>
+            <div className="flex flex-wrap gap-2">
+              {quickSearchTags.map((tag) => (
                 <button
-                  key={city}
-                  onClick={() => setSelectedCity(city)}
-                  className={`px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 ${
-                    selectedCity === city
-                      ? 'bg-gradient-to-r from-[#4d8080] to-[#3d6666] text-white shadow-md'
-                      : 'bg-slate-100 text-gray-700 hover:bg-slate-200'
-                  }`}
+                  key={tag}
+                  onClick={() => handleQuickSearch(tag)}
+                  className="px-3 py-1.5 bg-gradient-to-r from-blue-50 to-purple-50 text-gray-700 rounded-full text-xs font-medium hover:from-blue-100 hover:to-purple-100 transition-all border border-gray-200 hover:border-[#159A9C] hover:shadow-sm"
                 >
-                  {city}
+                  {tag}
                 </button>
               ))}
             </div>

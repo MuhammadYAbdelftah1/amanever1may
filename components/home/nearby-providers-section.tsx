@@ -6,7 +6,7 @@
 'use client';
 
 import { useState } from 'react';
-import { MapPin, Star, Navigation2, Building2, Stethoscope, Pill, Sparkles } from 'lucide-react';
+import { MapPin, Star, Navigation2, Building2, Stethoscope, Pill, Sparkles, Search } from 'lucide-react';
 
 interface NearbyProvidersSectionProps {
   locale: string;
@@ -164,11 +164,34 @@ const providers: Provider[] = [
 ];
 
 const categories = [
-  { id: 'all', label: 'الكل', icon: Building2 },
-  { id: 'hospital', label: 'مستشفيات', icon: Building2 },
-  { id: 'clinic', label: 'عيادات', icon: Stethoscope },
-  { id: 'pharmacy', label: 'صيدليات', icon: Pill },
-  { id: 'beauty', label: 'مراكز تجميل', icon: Sparkles },
+  { id: 'all', label: 'الكل', count: 4000, icon: Building2 },
+  { id: 'hospitals', label: 'مستشفيات', count: 500, icon: Building2 },
+  { id: 'clinics', label: 'عيادات', count: 1200, icon: Stethoscope },
+  { id: 'specialized', label: 'مراكز متخصصة', count: 300, icon: Building2 },
+  { id: 'pharmacies', label: 'صيدليات', count: 800, icon: Pill },
+  { id: 'labs', label: 'مختبرات', count: 400, icon: Stethoscope },
+  { id: 'radiology', label: 'أشعة وتصوير', count: 200, icon: Building2 },
+  { id: 'mental', label: 'صحة نفسية', count: 150, icon: Stethoscope },
+  { id: 'dental', label: 'طب أسنان', count: 350, icon: Stethoscope },
+  { id: 'homecare', label: 'رعاية منزلية', count: 100, icon: Building2 },
+];
+
+const quickSearchTags = [
+  'مستشفيات',
+  'عيادات',
+  'صيدليات',
+  'مختبرات',
+  'أشعة',
+  'طب أسنان',
+  'عيون',
+  'جلدية',
+  'نساء وولادة',
+  'أطفال',
+  'قلب',
+  'عظام',
+  'صحة نفسية',
+  'رعاية منزلية',
+  'طوارئ',
 ];
 
 function ProviderCard({ provider }: { provider: Provider }) {
@@ -228,11 +251,16 @@ function ProviderCard({ provider }: { provider: Provider }) {
 
 export function NearbyProvidersSection({ locale }: NearbyProvidersSectionProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const filteredProviders =
     selectedCategory === 'all'
       ? providers
       : providers.filter((p) => p.category === selectedCategory);
+
+  const handleQuickSearch = (tag: string) => {
+    setSearchQuery(tag);
+  };
 
   return (
     <section id="nearby-providers" className="py-16 md:py-20 bg-gradient-to-b from-slate-50/30 to-white">
@@ -247,25 +275,56 @@ export function NearbyProvidersSection({ locale }: NearbyProvidersSectionProps) 
           </p>
         </div>
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
-          {categories.map((category) => {
-            const Icon = category.icon;
-            return (
+        {/* Category Filter Pills */}
+        <div className="max-w-6xl mx-auto mb-4">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`flex items-center gap-2 px-5 py-3 rounded-xl font-black text-sm transition-all duration-300 ${
+                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
                   selectedCategory === category.id
-                    ? 'bg-[#4d8080] text-white shadow-lg shadow-teal-900/20'
-                    : 'bg-white text-gray-600 hover:bg-slate-50 border border-slate-100'
+                    ? 'bg-[#159A9C] text-white shadow-md'
+                    : 'bg-white text-gray-700 border border-gray-200 hover:border-[#159A9C]'
                 }`}
               >
-                <Icon className="w-4 h-4" aria-hidden="true" />
-                {category.label}
+                {category.label} ({category.count})
               </button>
-            );
-          })}
+            ))}
+          </div>
+        </div>
+
+        {/* Search Box with Quick Tags */}
+        <div className="max-w-6xl mx-auto mb-8">
+          <div className="relative">
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+              <Search className="w-5 h-5 text-gray-400" aria-hidden="true" />
+            </div>
+            <input
+              type="text"
+              placeholder="ابحث عن نوع النشاط... (مثل: صيدلية، مستشفى، عيادة)"
+              className="w-full pr-12 pl-12 py-4 rounded-2xl border-2 border-gray-200 focus:border-[#159A9C] focus:outline-none text-right transition-colors"
+              dir="rtl"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+
+          {/* Quick Search Tags */}
+          <div className="mt-3">
+            <p className="text-xs text-gray-500 mb-2 px-1">بحث سريع:</p>
+            <div className="flex flex-wrap gap-2">
+              {quickSearchTags.map((tag) => (
+                <button
+                  key={tag}
+                  onClick={() => handleQuickSearch(tag)}
+                  className="px-3 py-1.5 bg-gradient-to-r from-blue-50 to-purple-50 text-gray-700 rounded-full text-xs font-medium hover:from-blue-100 hover:to-purple-100 transition-all border border-gray-200 hover:border-[#159A9C] hover:shadow-sm"
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Results Count */}

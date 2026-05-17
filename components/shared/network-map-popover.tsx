@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   MapPin, 
   Search, 
@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { AppointmentBookingModal } from '@/components/shared/appointment-booking-modal';
 
 interface NetworkMapPopoverProps {
   locale: string;
@@ -139,8 +140,78 @@ const geographicZones = [
   { id: 'central', nameAr: 'المنطقة الوسطى', nameEn: 'Central Zone', color: '#6BA5A8' }
 ];
 
+// فئات الشبكة الطبية
+const medicalCategories = [
+  { id: 'all', label: 'الكل', count: 4000 },
+  { id: 'hospitals', label: 'مستشفيات', count: 500 },
+  { id: 'clinics', label: 'عيادات', count: 1200 },
+  { id: 'specialized', label: 'مراكز طبية متخصصة', count: 300 },
+  { id: 'pharmacies', label: 'صيدليات', count: 800 },
+  { id: 'labs', label: 'مختبرات طبية', count: 400 },
+  { id: 'radiology', label: 'مراكز أشعة وتصوير', count: 200 },
+  { id: 'mental', label: 'صحة نفسية', count: 150 },
+  { id: 'dental', label: 'طب أسنان', count: 350 },
+  { id: 'homecare', label: 'رعاية منزلية', count: 100 },
+];
+
+// فئات الشبكة الصحية
+const healthCategories = [
+  { id: 'all', label: 'الكل', count: 1500 },
+  { id: 'gyms', label: 'نوادي رياضية', count: 400 },
+  { id: 'fitness', label: 'مراكز لياقة', count: 350 },
+  { id: 'yoga', label: 'يوجا وبيلاتس', count: 100 },
+  { id: 'nutrition', label: 'عيادات تغذية', count: 200 },
+  { id: 'spa', label: 'مراكز سبا', count: 150 },
+  { id: 'beauty', label: 'مراكز تجميل', count: 200 },
+  { id: 'optics', label: 'بصريات', count: 80 },
+  { id: 'physio', label: 'علاج طبيعي', count: 120 },
+  { id: 'supplements', label: 'مكملات غذائية', count: 100 },
+];
+
+// تاجات البحث السريع للشبكة الطبية
+const medicalQuickSearchTags = [
+  'مستشفيات',
+  'عيادات',
+  'صيدليات',
+  'مختبرات',
+  'أشعة',
+  'طب أسنان',
+  'عيون',
+  'جلدية',
+  'نساء وولادة',
+  'أطفال',
+  'قلب',
+  'عظام',
+  'صحة نفسية',
+  'رعاية منزلية',
+  'طوارئ',
+];
+
+// تاجات البحث السريع للشبكة الصحية
+const healthQuickSearchTags = [
+  'فتنس تايم',
+  'جولدز جيم',
+  'يوجا',
+  'بيلاتس',
+  'كروس فت',
+  'تغذية',
+  'سبا',
+  'تدليك',
+  'ساونا',
+  'بصريات',
+  'علاج طبيعي',
+  'مكملات',
+  'بروتين',
+  'فيتامينات',
+  'تجميل',
+];
+
 export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isOpen: controlledIsOpen, onOpenChange, preSelectedRegion, preSelectedCity }: NetworkMapPopoverProps) {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const [showSelectionDialog, setShowSelectionDialog] = useState(false);
+  const [showMapDialog, setShowMapDialog] = useState(false);
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const [selectedProvider, setSelectedProvider] = useState<any>(null);
   
   // Map region IDs to zone IDs
   const getZoneFromRegion = (regionId: string): string => {
@@ -150,9 +221,10 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
   };
 
   // Initialize with pre-selected values if provided
-  const [selectedZone, setSelectedZone] = useState(preSelectedRegion ? getZoneFromRegion(preSelectedRegion) : 'all');
-  const [selectedRegion, setSelectedRegion] = useState(preSelectedRegion || 'all');
+  const [selectedZone, setSelectedZone] = useState(preSelectedRegion ? getZoneFromRegion(preSelectedRegion) : '');
+  const [selectedRegion, setSelectedRegion] = useState(preSelectedRegion || '');
   const [selectedCity, setSelectedCity] = useState(preSelectedCity || '');
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showCityDropdown, setShowCityDropdown] = useState(false);
   
@@ -170,6 +242,32 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
 
   // Determine if we should show selection UI or go directly to map
   const hasPreSelection = preSelectedRegion && preSelectedCity;
+
+  // Handle opening - show selection dialog first if no pre-selection
+  React.useEffect(() => {
+    if (isOpen && !hasPreSelection) {
+      setShowSelectionDialog(true);
+      setShowMapDialog(false);
+    } else if (isOpen && hasPreSelection) {
+      setShowSelectionDialog(false);
+      setShowMapDialog(true);
+    }
+  }, [isOpen, hasPreSelection]);
+
+  // Handle selection confirmation
+  const handleConfirmSelection = () => {
+    if (selectedZone && selectedCity) {
+      setShowSelectionDialog(false);
+      setShowMapDialog(true);
+    }
+  };
+
+  // Handle closing
+  const handleClose = () => {
+    setShowSelectionDialog(false);
+    setShowMapDialog(false);
+    setIsOpen(false);
+  };
 
   // Close popover when clicking outside
   useEffect(() => {
@@ -231,12 +329,12 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
   }, [isOpen, setIsOpen]);
 
   // Filter regions based on selected zone
-  const filteredRegions = selectedZone === 'all' 
+  const filteredRegions = selectedZone === '' || selectedZone === 'all'
     ? saudiRegions 
     : saudiRegions.filter(r => r.zone === selectedZone || r.id === 'all');
 
   // Get cities for selected region
-  const availableCities = selectedRegion === 'all' 
+  const availableCities = selectedRegion === '' || selectedRegion === 'all'
     ? [] 
     : saudiRegions.find(r => r.id === selectedRegion)?.cities || [];
 
@@ -258,7 +356,13 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
     setSelectedZone('all');
     setSelectedRegion('all');
     setSelectedCity('');
+    setSelectedCategory('all');
     setSearchQuery('');
+  };
+
+  // Handle quick search
+  const handleQuickSearch = (tag: string) => {
+    setSearchQuery(tag);
   };
 
   // Get provider count (mock data - replace with real API)
@@ -286,8 +390,9 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
         address: selectedCity || 'الرياض',
         distance: `${(Math.random() * 10 + 0.5).toFixed(1)} كم`,
         rating: (Math.random() * 1 + 4).toFixed(1),
+        phone: `920${Math.floor(100000 + Math.random() * 900000)}`,
         type: type === 'medical' 
-          ? ['مستشفى', 'عيادة', 'مركز طبي'][i % 3]
+          ? ['مستشفى', 'عيادة', 'مركز طبي', 'صيدلية', 'مختبر', 'مركز أشعة'][i % 6]
           : ['نادي رياضي', 'مركز لياقة', 'عيادة تغذية', 'مركز سبا'][i % 4]
       });
     }
@@ -296,10 +401,131 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
   };
 
   const providers = getMockProviders();
+
+  // Handle provider click
+  const handleProviderClick = (provider: any) => {
+    // Only show booking modal for medical network and exclude pharmacies
+    if (type === 'medical' && !provider.type.includes('صيدلية')) {
+      setSelectedProvider(provider);
+      setShowBookingModal(true);
+    }
+  };
+  
   return (
     <>
-      {/* Dialog */}
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      {/* Selection Dialog - Step 1 */}
+      <Dialog open={showSelectionDialog} onOpenChange={(open) => {
+        if (!open) handleClose();
+      }}>
+        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto p-0">
+          {/* Header */}
+          <DialogHeader className="bg-gradient-to-r from-[#5B9A9E] to-[#6BA5A8] px-8 py-6 rounded-t-3xl">
+            <div className="flex items-center justify-between">
+              <div>
+                <DialogTitle className="text-2xl font-bold text-white">اختر منطقتك ومدينتك</DialogTitle>
+                <p className="text-white/90 text-sm mt-1">{networkType}</p>
+              </div>
+              <button 
+                onClick={handleClose}
+                className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+              >
+                <X className="w-6 h-6 text-white" />
+              </button>
+            </div>
+          </DialogHeader>
+
+          {/* Content */}
+          <div className="p-8 space-y-6">
+            {/* Zone Selection */}
+            <div>
+              <label className="block text-lg font-bold text-gray-900 mb-3">
+                1️⃣ اختر المنطقة
+              </label>
+              <select
+                value={selectedZone}
+                onChange={(e) => {
+                  setSelectedZone(e.target.value);
+                  setSelectedRegion('');
+                  setSelectedCity('');
+                }}
+                className="w-full px-6 py-4 text-lg border-2 border-gray-300 rounded-2xl focus:border-[#5B9A9E] focus:ring-4 focus:ring-[#5B9A9E]/20 outline-none transition-all bg-white cursor-pointer"
+              >
+                <option value="">-- اختر المنطقة --</option>
+                {geographicZones.filter(z => z.id !== 'all').map((zone) => (
+                  <option key={zone.id} value={zone.id}>
+                    {zone.nameAr}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Region Selection */}
+            {selectedZone && (
+              <div>
+                <label className="block text-lg font-bold text-gray-900 mb-3">
+                  2️⃣ اختر المنطقة الإدارية
+                </label>
+                <select
+                  value={selectedRegion}
+                  onChange={(e) => {
+                    setSelectedRegion(e.target.value);
+                    setSelectedCity('');
+                  }}
+                  className="w-full px-6 py-4 text-lg border-2 border-gray-300 rounded-2xl focus:border-[#5B9A9E] focus:ring-4 focus:ring-[#5B9A9E]/20 outline-none transition-all bg-white cursor-pointer"
+                >
+                  <option value="">-- اختر المنطقة الإدارية --</option>
+                  {filteredRegions.filter(r => r.id !== 'all').map((region) => (
+                    <option key={region.id} value={region.id}>
+                      {region.nameAr}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {/* City Selection */}
+            {selectedRegion && availableCities.length > 0 && (
+              <div>
+                <label className="block text-lg font-bold text-gray-900 mb-3">
+                  3️⃣ اختر المدينة
+                </label>
+                <select
+                  value={selectedCity}
+                  onChange={(e) => setSelectedCity(e.target.value)}
+                  className="w-full px-6 py-4 text-lg border-2 border-gray-300 rounded-2xl focus:border-[#5B9A9E] focus:ring-4 focus:ring-[#5B9A9E]/20 outline-none transition-all bg-white cursor-pointer"
+                >
+                  <option value="">-- اختر المدينة --</option>
+                  {availableCities.map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {/* Confirm Button */}
+            <button
+              onClick={handleConfirmSelection}
+              disabled={!selectedZone || !selectedCity}
+              className={`w-full py-5 rounded-2xl font-bold text-xl transition-all duration-300 ${
+                selectedZone && selectedCity
+                  ? 'bg-gradient-to-r from-[#5B9A9E] to-[#6BA5A8] text-white hover:shadow-xl hover:scale-[1.02] cursor-pointer'
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              {selectedZone && selectedCity 
+                ? '✅ استكشف الشبكة الآن' 
+                : '⬆️ اختر المنطقة والمدينة أولاً'}
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Map Dialog - Step 2 */}
+      <Dialog open={showMapDialog} onOpenChange={(open) => {
+        if (!open) handleClose();
+      }}>
         <DialogContent className="max-w-7xl max-h-[90vh] overflow-hidden flex flex-col p-0">
           {/* Header - Minimalist */}
           <DialogHeader className="px-4 md:px-6 py-3 md:py-4 border-b border-gray-100">
@@ -365,8 +591,66 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
 
             {/* Right Side: Results List (Desktop: 50% | Mobile: 60% height) */}
             <div className="flex-1 md:w-1/2 flex flex-col bg-gray-50 overflow-hidden">
-              {/* Filters Bar - Only show if no pre-selection */}
+              {/* Filters Bar - New UI for Both Networks */}
               {!hasPreSelection && (
+                <div className="p-2 md:p-4 bg-white border-b border-gray-100 space-y-3">
+                  {/* Category Filter Pills */}
+                  <div className="overflow-x-auto pb-2 scrollbar-hide">
+                    <div className="flex items-center gap-2">
+                      {(type === 'medical' ? medicalCategories : healthCategories).map((category) => (
+                        <button
+                          key={category.id}
+                          onClick={() => setSelectedCategory(category.id)}
+                          className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                            selectedCategory === category.id
+                              ? 'bg-[#159A9C] text-white shadow-md'
+                              : 'bg-white text-gray-700 border border-gray-200 hover:border-[#159A9C]'
+                          }`}
+                        >
+                          {category.label} ({category.count})
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Search Box */}
+                  <div className="relative">
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <Search className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                    </div>
+                    <input
+                      type="text"
+                      placeholder={type === 'medical' 
+                        ? "ابحث عن نوع النشاط... (مثل: صيدلية، مستشفى، عيادة)"
+                        : "ابحث عن نوع النشاط... (مثل: نادي رياضي، سبا، تغذية)"
+                      }
+                      className="w-full pr-12 pl-12 py-3 rounded-2xl border-2 border-gray-200 focus:border-[#159A9C] focus:outline-none text-right transition-colors text-sm"
+                      dir="rtl"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                  </div>
+
+                  {/* Quick Search Tags */}
+                  <div>
+                    <p className="text-xs text-gray-500 mb-2 px-1">بحث سريع:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {(type === 'medical' ? medicalQuickSearchTags : healthQuickSearchTags).map((tag) => (
+                        <button
+                          key={tag}
+                          onClick={() => handleQuickSearch(tag)}
+                          className="px-3 py-1.5 bg-gradient-to-r from-blue-50 to-purple-50 text-gray-700 rounded-full text-xs font-medium hover:from-blue-100 hover:to-purple-100 transition-all border border-gray-200 hover:border-[#159A9C] hover:shadow-sm"
+                        >
+                          {tag}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Old Filters Bar - Only with pre-selection */}
+              {hasPreSelection && (
                 <div className="p-2 md:p-4 bg-white border-b border-gray-100">
                   {/* Mobile: Vertical Stack | Desktop: Horizontal */}
                   <div className="flex flex-col md:flex-row gap-2">
@@ -437,7 +721,10 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
                   {providers.map((provider) => (
                     <div
                       key={provider.id}
-                      className="bg-white rounded-lg md:rounded-xl p-3 md:p-4 border border-gray-100 hover:border-[#5B9A9E] hover:shadow-md transition-all duration-200 cursor-pointer group"
+                      onClick={() => handleProviderClick(provider)}
+                      className={`bg-white rounded-lg md:rounded-xl p-3 md:p-4 border border-gray-100 hover:border-[#5B9A9E] hover:shadow-md transition-all duration-200 group ${
+                        type === 'medical' && !provider.type.includes('صيدلية') ? 'cursor-pointer' : ''
+                      }`}
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex-1 min-w-0">
@@ -461,9 +748,15 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
                         <span className="text-[10px] md:text-xs px-1.5 md:px-2 py-0.5 md:py-1 bg-[#5B9A9E]/10 text-[#5B9A9E] rounded-md md:rounded-lg font-semibold">
                           {provider.type}
                         </span>
-                        <button className="text-[10px] md:text-xs text-[#5B9A9E] font-semibold hover:underline">
-                          {isArabic ? 'عرض التفاصيل ←' : 'View Details →'}
-                        </button>
+                        {type === 'medical' && !provider.type.includes('صيدلية') ? (
+                          <button className="text-[10px] md:text-xs text-[#5B9A9E] font-semibold hover:underline">
+                            {isArabic ? 'حجز موعد ←' : 'Book Appointment →'}
+                          </button>
+                        ) : (
+                          <button className="text-[10px] md:text-xs text-[#5B9A9E] font-semibold hover:underline">
+                            {isArabic ? 'عرض التفاصيل ←' : 'View Details →'}
+                          </button>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -494,6 +787,18 @@ export function NetworkMapPopover({ locale, type, trigger, isMobile = false, isO
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Appointment Booking Modal */}
+      {selectedProvider && (
+        <AppointmentBookingModal
+          isOpen={showBookingModal}
+          onClose={() => {
+            setShowBookingModal(false);
+            setSelectedProvider(null);
+          }}
+          provider={selectedProvider}
+        />
+      )}
     </>
   );
 }

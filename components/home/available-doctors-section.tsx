@@ -1,5 +1,5 @@
 /**
- * Available Doctors Section (أطباء متاحون 24 ساعة)
+ * Available Doctors Section (أطباء متاحون على مدار 24 ساعة)
  * Displays available doctors in an infinite scrolling carousel
  */
 
@@ -153,7 +153,7 @@ export function AvailableDoctorsSection({ locale }: AvailableDoctorsSectionProps
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-black text-[#003d3d] mb-4">
-            أطباء متاحون 24 ساعة
+            أطباء متاحون على مدار 24 ساعة
           </h2>
           <div className="h-1.5 w-24 bg-[#4d8080] mx-auto rounded-full" />
         </div>

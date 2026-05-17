@@ -246,8 +246,8 @@ export function PersonalizedResultsSection({ locale }: PersonalizedResultsSectio
           </p>
         </div>
 
-        {/* City Selector */}
-        <div className="flex items-center justify-center gap-3 mb-10">
+        {/* City Selector - Hidden */}
+        {/* <div className="flex items-center justify-center gap-3 mb-10">
           <MapPin className="w-5 h-5 text-[#4d8080]" aria-hidden="true" />
           <div className="flex gap-2">
             {cities.map((city) => (
@@ -264,7 +264,7 @@ export function PersonalizedResultsSection({ locale }: PersonalizedResultsSectio
               </button>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Results Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-7xl mx-auto mb-8">
