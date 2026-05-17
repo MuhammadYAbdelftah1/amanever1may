@@ -19,7 +19,7 @@ interface FAQItemProps {
 
 export function FAQItem({ item, isOpen, onToggle }: FAQItemProps) {
   return (
-    <div id={item.id} className="border-b border-slate-200 last:border-b-0">
+    <div id={item.id} className="border-b border-slate-200 last:border-b-0" dir="rtl">
       <button
         onClick={onToggle}
         aria-expanded={isOpen}
@@ -32,7 +32,7 @@ export function FAQItem({ item, isOpen, onToggle }: FAQItemProps) {
           }`}
           aria-hidden="true"
         />
-        <span className="text-lg md:text-xl font-bold text-slate-900 group-hover:text-emerald-700 transition ps-4">
+        <span className="text-lg md:text-xl font-bold text-slate-900 group-hover:text-emerald-700 transition ps-4 text-right flex-1">
           {item.question}
         </span>
       </button>
@@ -49,7 +49,7 @@ export function FAQItem({ item, isOpen, onToggle }: FAQItemProps) {
             transition={{ duration: 0.3, ease: 'easeOut' }}
             className="overflow-hidden"
           >
-            <div className="pb-6 text-base text-slate-700 leading-relaxed space-y-3">
+            <div className="pb-6 text-base text-slate-700 leading-relaxed space-y-3 text-right">
               {item.answer}
             </div>
           </motion.div>

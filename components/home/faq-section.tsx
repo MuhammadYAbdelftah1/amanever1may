@@ -13,27 +13,7 @@ const generalFAQItems: FAQItemData[] = [
     answer: (
       <>
         <p>
-          <strong className="text-slate-900 font-bold">لا، ليس إلزامياً.</strong>
-        </p>
-        <p>
-          يمكنك استخدام التطبيق بدون بطاقة عضوية، لكن حاملي البطاقات يحصلون على مزايا حصرية:
-        </p>
-        <ul className="list-none space-y-2 ps-0">
-          <li>
-            <strong className="text-slate-900 font-bold">• خصومات أعلى:</strong> تصل إلى 50% (بريمير) أو 80% (VIP) على جميع الخدمات الطبية والصحية والتجميلية.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• برنامج الكاش باك:</strong> استثمارك في صحتك يعود إليك كرصيد خدمات فوري في محفظتك.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• محفظة نقاط أمان:</strong> ولاءٌ يُقدّر اهتمامك بصحتك - اجمع نقاط مع كل استخدام واستبدلها بخدمات مجانية.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• خدمات مجانية (VIP):</strong> 5 حجوزات طبية + 5 استشارات &quot;اسأل طبيب&quot; مجاناً.
-          </li>
-        </ul>
-        <p>
-          بدون البطاقة، يمكنك الاستفادة من خدمات التطبيق الأساسية مثل حجز المواعيد والمتجر الإلكتروني، لكن بدون الخصومات والمزايا الحصرية.
+          <strong className="text-slate-900 font-bold">أبَداً!</strong> تطبيق أمان إيفر هو منصة صحية مفتوحة للجميع. يمكنك تحميل التطبيق والاستفادة من كافة خدماته الرقمية مثل حجز المواعيد، استشارات الفيديو مع الأطباء، طلب الرعاية المنزلية، والتسوق من المتجر الإلكتروني الطبي، حتى بدون امتلاك بطاقة عضوية.
         </p>
       </>
     ),
@@ -45,26 +25,10 @@ const generalFAQItems: FAQItemData[] = [
     answer: (
       <>
         <p>
-          <strong className="text-slate-900 font-bold">بدون بطاقة عضوية:</strong>
+          <strong className="text-slate-900 font-bold">التطبيق يوفر لك الوصول والراحة، أما البطاقة فهي توفر لك المال.</strong>
         </p>
-        <ul className="list-none space-y-2 ps-0 mb-4">
-          <li>• يمكنك تصفح الخدمات والمنتجات.</li>
-          <li>• حجز المواعيد الطبية بالأسعار العادية.</li>
-          <li>• الشراء من المتجر الإلكتروني بدون خصومات.</li>
-          <li>• لا توجد مزايا إضافية أو نقاط ولاء.</li>
-        </ul>
         <p>
-          <strong className="text-slate-900 font-bold">مع بطاقة عضوية (بريمير أو VIP):</strong>
-        </p>
-        <ul className="list-none space-y-2 ps-0">
-          <li>• <strong className="text-slate-900 font-bold">خصومات فورية:</strong> 50% إلى 80% على جميع الخدمات.</li>
-          <li>• <strong className="text-slate-900 font-bold">كاش باك:</strong> رصيد مالي ترحيبي في محفظتك.</li>
-          <li>• <strong className="text-slate-900 font-bold">نقاط أمان:</strong> اجمع نقاط واستبدلها بخدمات مجانية.</li>
-          <li>• <strong className="text-slate-900 font-bold">أسعار حصرية:</strong> في المتجر الإلكتروني والرعاية المنزلية.</li>
-          <li>• <strong className="text-slate-900 font-bold">خدمات مجانية (VIP فقط):</strong> حجوزات واستشارات طبية مجانية.</li>
-        </ul>
-        <p className="mt-3">
-          <strong className="text-slate-900 font-bold">النتيجة:</strong> البطاقة توفر لك مئات الريالات شهرياً وتسدد تكلفتها من أول استخدام.
+          بدون البطاقة، ستحصل على الخدمات والمنتجات بأسعارها العادية. أما عند امتلاكك لبطاقة (بريمير أو VIP)، فإنك تفتح بوابة من الخصومات الكبرى التي تصل إلى 80%، بالإضافة إلى استعادة النقود (Cash Back) ونظام النقاط والمزايا المجانية.
         </p>
       </>
     ),
@@ -76,24 +40,10 @@ const generalFAQItems: FAQItemData[] = [
     answer: (
       <>
         <p>
-          <strong className="text-slate-900 font-bold">نعم، يمكنك الشراء.</strong>
+          <strong className="text-slate-900 font-bold">نعم</strong>، المتجر متاح لجميع مستخدمي التطبيق لتسوق أرقى المنتجات الطبية والتجميلية.
         </p>
         <p>
-          المتجر الإلكتروني متاح للجميع، لكن حاملي البطاقات يحصلون على:
-        </p>
-        <ul className="list-none space-y-2 ps-0">
-          <li>
-            <strong className="text-slate-900 font-bold">• أسعار حصرية:</strong> خصومات إضافية على المنتجات الطبية والصحية والتجميلية.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• نقاط أمان:</strong> تجمع نقاط مع كل عملية شراء تستبدلها بخصومات أو خدمات مجانية.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• أولوية في الشحن:</strong> توصيل أسرع لحاملي بطاقة VIP.
-          </li>
-        </ul>
-        <p>
-          بدون البطاقة، تدفع السعر العادي بدون الخصومات والمزايا الإضافية.
+          ولكن، يحصل حاملوا بطاقات أمان إيفر على <strong className="text-slate-900 font-bold">"أسعار خاصة وحصرية"</strong> وعروض كاش باك لا تظهر للمستخدم العادي، مما يجعل تجربة التسوق مع البطاقة أكثر ذكاءً وتوفيراً.
         </p>
       </>
     ),
@@ -105,21 +55,10 @@ const generalFAQItems: FAQItemData[] = [
     answer: (
       <>
         <p>
-          <strong className="text-slate-900 font-bold">نعم، بكل تأكيد.</strong>
+          <strong className="text-slate-900 font-bold">بكل تأكيد</strong>، خدماتنا الرقمية (رعاية منزلية، حجز موعد، استشارة فيديو) متاحة لكل مستخدمي التطبيق من مواطنين ومقيمين وزوار.
         </p>
         <p>
-          خدمات أمان إيفر متاحة للجميع: <strong className="text-slate-900 font-bold">مواطنين، مقيمين، وزوار</strong> (بموجب وثائق إثبات نظامية).
-        </p>
-        <p>
-          يمكنك طلب خدمات الرعاية المنزلية عبر التطبيق مباشرة، وإذا كنت تحمل بطاقة أمان إيفر، ستحصل على:
-        </p>
-        <ul className="list-none space-y-2 ps-0">
-          <li>• أسعار مخفضة على جميع خدمات الرعاية المنزلية.</li>
-          <li>• إمكانية استخدام نقاط أمان للحصول على خصومات إضافية.</li>
-          <li>• أولوية في الحجز والاستجابة السريعة.</li>
-        </ul>
-        <p>
-          لا قيود على الجنسية أو حالة الإقامة — الخدمة متاحة للجميع.
+          والبطاقة هي خيار إضافي متاح لك إذا كنت ترغب في الحصول على هذه الخدمات بأسعار مخفضة جداً بدلاً من السعر الكامل.
         </p>
       </>
     ),
@@ -131,24 +70,87 @@ const generalFAQItems: FAQItemData[] = [
     answer: (
       <>
         <p>
-          <strong className="text-slate-900 font-bold">لأن البطاقة توفر لك أكثر مما تدفع بكثير:</strong>
+          لأن البطاقة تحول <strong className="text-slate-900 font-bold">"مصاريفك الصحية" إلى "استثمار"</strong>.
         </p>
-        <ul className="list-none space-y-2 ps-0">
-          <li>
-            <strong className="text-slate-900 font-bold">• توفير حقيقي:</strong> زيارة طبيب واحدة بخصم 50% توفر لك 150-300 ريال — أكثر من نصف تكلفة البطاقة السنوية.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• لا قيود:</strong> استخدم البطاقة بدون حدود — كل زيارة إضافية هي توفير صافي.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• مزايا مجانية:</strong> كاش باك، نقاط ولاء، وخدمات مجانية (VIP).
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• راحة البال:</strong> تغطية شاملة لك ولعائلتك بتكلفة رمزية.
-          </li>
-        </ul>
-        <p className="mt-3">
-          <strong className="text-slate-900 font-bold">النتيجة:</strong> البطاقة تسدد تكلفتها من أول استخدام، وكل استخدام بعدها هو ربح صافي لك.
+        <p>
+          فبينما يستمتع الجميع بسهولة الاستخدام عبر التطبيق، ينفرد حاملو البطاقات باسترداد مالي (Cash Back) ونقاط ولاء تتحول لخدمات مجانية، فضلاً عن الخصومات المباشرة التي تجعل تكلفة الرعاية الصحية والتجميلية في متناول اليد دائماً.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 'faq-general-6',
+    question: 'أين يمكنني استخدام بطاقة أمان إيفر؟ وهل تقتصر على مدينة محددة؟',
+    category: 'coverage',
+    answer: (
+      <>
+        <p>
+          <strong className="text-slate-900 font-bold">أمان إيفر صُممت لتكون معك أينما كنت!</strong>
+        </p>
+        <p>
+          يمكنك استخدام البطاقة في شبكة واسعة ومتنامية من المستشفيات، المجمعات الطبية، مراكز التجميل، والمختبرات المعتمدة في مختلف المدن. كما أن خدماتنا الرقمية (استشارات الفيديو والمتجر) تخدمك في أي مكان وفي أي وقت عبر التطبيق.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 'faq-general-7',
+    question: 'ما هي مدة صلاحية بطاقة أمان إيفر؟ وكيف يمكنني تجديدها؟',
+    category: 'value',
+    answer: (
+      <>
+        <p>
+          تمنحك بطاقة أمان إيفر (بريمير أو VIP) <strong className="text-slate-900 font-bold">عاماً كاملاً (12 شهراً)</strong> من التوفير اللامحدود والرعاية المميزة من تاريخ إصدارها.
+        </p>
+        <p>
+          وقبل انتهاء اشتراكك، سنقوم بتذكيرك عبر التطبيق لتجديد عضويتك بسهولة وبضغطة زر واحدة لضمان استمرار تمتعك بالخصومات والمزايا.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 'faq-general-8',
+    question: 'هل هناك حد أقصى لعدد مرات استخدام البطاقة خلال العام؟',
+    category: 'value',
+    answer: (
+      <>
+        <p>
+          <strong className="text-slate-900 font-bold">لا يوجد حدود لطموحنا في رعايتك!</strong>
+        </p>
+        <p>
+          يمكنك استخدام بطاقة أمان إيفر لعدد غير محدود من المرات طوال فترة صلاحية الاشتراك. سواء احتجت لزيارة الطبيب مرة واحدة أو عشرات المرات، فإن خصوماتك ثابتة ومستمرة في كل زيارة.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 'faq-general-9',
+    question: 'قمت بشراء البطاقة عبر الموقع، كيف أبدأ باستخدامها؟',
+    category: 'support',
+    answer: (
+      <>
+        <p>
+          تفعيل بطاقة "أمان إيفر" عملية بسيطة وتتم خلال دقائق:
+        </p>
+        <ol className="list-decimal list-inside space-y-2 ps-0">
+          <li><strong className="text-slate-900 font-bold">تحميل التطبيق:</strong> قم بتحميل تطبيق أمان إيفر من متجر التطبيقات (iOS أو Android).</li>
+          <li><strong className="text-slate-900 font-bold">تسجيل الدخول:</strong> استخدم رقم الجوال الذي استخدمته عند الشراء.</li>
+          <li><strong className="text-slate-900 font-bold">تفعيل العضوية:</strong> ستجد بطاقتك الرقمية بانتظارك في ملفك الشخصي، ومن هنا يمكنك البدء بحجز المواعيد واستخدام رصيد "الكاش باك" الترحيبي فوراً.</li>
+        </ol>
+      </>
+    ),
+  },
+  {
+    id: 'faq-general-10',
+    question: 'هل بياناتي الطبية وتاريخ استشاراتي في التطبيق آمنة؟',
+    category: 'privacy',
+    answer: (
+      <>
+        <p>
+          <strong className="text-slate-900 font-bold">خصوصيتك هي أولويتنا القصوى.</strong>
+        </p>
+        <p>
+          تطبيق "أمان إيفر" يستخدم أعلى معايير التشفير والأمان لضمان سرية بياناتك الطبية، ولا يمكن لأي جهة الاطلاع على استشاراتك أو تاريخك المرضي إلا الأطباء المختصين الذين تختار التواصل معهم.
         </p>
       </>
     ),
@@ -159,228 +161,140 @@ const generalFAQItems: FAQItemData[] = [
 const cardholderFAQItems: FAQItemData[] = [
   {
     id: 'faq-card-1',
-    question: 'ما الفرق بين بطاقة أمان إيفر بريمير (Premier) وبطاقة في آي بي (VIP)؟',
-    category: 'comparison',
+    question: 'من هم الفئات الذين يمكنهم الاستفادة من بطاقات أمان إيفر؟',
+    category: 'identity',
     answer: (
       <>
         <p>
-          <strong className="text-slate-900 font-bold">بطاقة بريمير (199 ريال سنوياً):</strong>
-        </p>
-        <ul className="list-none space-y-2 ps-0 mb-4">
-          <li>• خصومات تصل إلى <strong className="text-slate-900 font-bold">50%</strong> على جميع الخدمات الطبية والصحية والتجميلية.</li>
-          <li>• برنامج كاش باك ومحفظة نقاط أمان - ولاءٌ يُقدّر اهتمامك بصحتك.</li>
-          <li>• حجز مواعيد واستشارات طبية عبر الفيديو بأسعار مخفضة.</li>
-          <li>• الشراء من المتجر الإلكتروني بأسعار حصرية.</li>
-        </ul>
-        <p>
-          <strong className="text-slate-900 font-bold">بطاقة VIP (499 ريال سنوياً) — الفئة النخبوية:</strong>
-        </p>
-        <ul className="list-none space-y-2 ps-0">
-          <li>• خصومات تصل إلى <strong className="text-slate-900 font-bold">80%</strong> (أعلى خصم متاح).</li>
-          <li>• <strong className="text-slate-900 font-bold">5 حجوزات طبية مجانية</strong> + <strong className="text-slate-900 font-bold">5 استشارات &quot;اسأل طبيب&quot; مجانية</strong>.</li>
-          <li>• كاش باك أقوى ونقاط ذهبية (ضعف نقاط البريمير).</li>
-          <li>• موافقة فورية ومسبقة من الشركة — لا انتظار.</li>
-          <li>• أسعار VIP حصرية في المتجر الإلكتروني والرعاية المنزلية.</li>
-        </ul>
-        <p className="mt-3">
-          <strong className="text-slate-900 font-bold">النتيجة:</strong> بريمير مثالية للاستخدام العادي، VIP للعائلات أو من يحتاج رعاية طبية متكررة.
+          بطاقاتنا مصممة للجميع؛ تشمل <strong className="text-slate-900 font-bold">المواطن، المقيم، والزائر</strong>. كل ما تحتاجه هو وجود إثبات هوية أو وثائق نظامية سارية لتستمتع بكافة الخصومات والمزايا.
         </p>
       </>
     ),
   },
   {
     id: 'faq-card-2',
-    question: 'ما هي الخدمات المشمولة في بطاقة أمان إيفر؟',
-    category: 'value',
+    question: 'هل هناك قيود تتعلق بالعمر أو الحالة الصحية قبل الاشتراك؟',
+    category: 'identity',
     answer: (
       <>
         <p>
-          <strong className="text-slate-900 font-bold">تغطية شاملة لجميع احتياجاتك الطبية والصحية والتجميلية:</strong>
-        </p>
-        <ul className="list-none space-y-2 ps-0">
-          <li>
-            <strong className="text-slate-900 font-bold">• الخدمات الطبية:</strong> الكشوفات، التحاليل المخبرية، والأشعة.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• طب الأسنان:</strong> كافة معالجات وتجميل الأسنان.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• العمليات الجراحية:</strong> العمليات الكبرى، المتوسطة، والصغرى.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• الأمومة والطفل:</strong> حالات الولادة الطبيعية والقيصرية.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• عالم التجميل:</strong> جميع خدمات التجميل والليزر والعناية بالبشرة.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">• الأدوية والمنتجات:</strong> خصومات على الأدوية والمنتجات الطبية والصحية.
-          </li>
-        </ul>
-        <p className="mt-3">
-          <strong className="text-slate-900 font-bold">الخصومات:</strong> تصل إلى 50% (بريمير) أو 80% (VIP) على جميع الخدمات بلا استثناء.
-        </p>
-        <p>
-          <strong className="text-slate-900 font-bold">لا قيود:</strong> لا حدود على عدد الزيارات، لا موافقات مسبقة، لا استثناءات.
+          <strong className="text-slate-900 font-bold">أبداً</strong>، بطاقات أمان إيفر تتميز بأنها غير مقيدة بعمر معين أو حالة صحية محددة. كما أنها لا تتطلب فحصاً طبياً قبل الاشتراك أو موافقات مسبقة من الشركة، فالموافقة تعتبر موجودة مسبقاً لكل حاملي البطاقة.
         </p>
       </>
     ),
   },
   {
     id: 'faq-card-3',
-    question: 'هل راح تشتغل في المستشفى أو العيادة اللي أروح لها؟',
-    category: 'coverage',
+    question: 'ما هو الفرق الجوهري بين بطاقة "بريمير" وبطاقة "VIP"؟',
+    category: 'comparison',
     answer: (
       <>
-        <p>شبكتنا تضم 500+ مقدم خدمة في أكثر من 50 مدينة، بما فيهم:</p>
+        <p>
+          الفرق يكمن في سقف التوفير والمزايا المجانية:
+        </p>
         <ul className="list-none space-y-2 ps-0">
           <li>
-            <strong className="text-slate-900 font-bold">المستشفيات الكبرى:</strong> سليمان الحبيب، المواساة، دله، السعودي الألماني، الحمادي، الحبيب التخصصي، مغربي.
+            <strong className="text-slate-900 font-bold">• بطاقة بريمير:</strong> تمنحك خصومات تصل من 20% إلى 50%
           </li>
           <li>
-            <strong className="text-slate-900 font-bold">سلاسل الصيدليات:</strong> النهدي، الدواء، وسلاسل محلية.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">عيادات التخصصات:</strong> أسنان، جلدية، عيون، وأكثر.
+            <strong className="text-slate-900 font-bold">• بطاقة VIP:</strong> تمنحك خصومات هائلة تصل من 30% إلى 80%، بالإضافة إلى خدمات مجانية تشمل 5 حجوزات طبية و5 استشارات "اسأل طبيب" مجانية تماماً في تطبيقنا الرقمي.
           </li>
         </ul>
-        <p>
-          <strong className="text-slate-900 font-bold">قبل ما تشترك</strong>، استخدم{' '}
-          <a href="#medical-network" className="text-emerald-600 underline underline-offset-4 hover:text-emerald-700">
-            مستكشف الشبكة الطبية
-          </a>{' '}
-          فوق وشوف المستشفيات المتوفرة في مدينتك.
-        </p>
-        <p>
-          لو مقدم الخدمة المفضل لك مو ضمن الشبكة، تواصل معنا — نوسّع الشبكة باستمرار بناءً على طلبات العملاء.
-        </p>
       </>
     ),
   },
   {
     id: 'faq-card-4',
-    question: 'إذا اشتركت وما استفدت، هل أقدر أسترد فلوسي؟',
-    category: 'refund',
+    question: 'هل تشمل البطاقة العمليات الجراحية الكبيرة والولادة؟',
+    category: 'coverage',
     answer: (
       <>
         <p>
-          <strong className="text-slate-900 font-bold">نعم.</strong> سياسة الاسترداد واضحة:
-        </p>
-        <ul className="list-none space-y-2 ps-0">
-          <li>
-            <strong className="text-slate-900 font-bold">خلال أول 14 يوم من الاشتراك:</strong> استرداد كامل 100% بدون أي شروط.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">بعد 14 يوم:</strong> استرداد جزئي محسوب على الفترة المتبقية (ما عدا قيمة الخدمات المُستخدمة).
-          </li>
-        </ul>
-        <p>
-          بدون أسئلة، بدون رسوم خفية. استرداد مباشر على نفس وسيلة الدفع خلال <strong className="text-slate-900 font-bold">5-7 أيام عمل</strong>.
-        </p>
-        <p>
-          <strong className="text-slate-900 font-bold">نحن واثقون بقيمة الخدمة</strong> — والضمان هذا مجرد تأكيد على ثقتنا.
+          <strong className="text-slate-900 font-bold">نعم</strong>، تغطي البطاقات كافة المستويات الطبية بدءاً من الكشوفات والمختبرات، وصولاً إلى العمليات الجراحية (الكبرى، المتوسطة، والصغرى) وحالات الولادة الطبيعية والقيصرية بخصومات مباشرة.
         </p>
       </>
     ),
   },
   {
     id: 'faq-card-5',
-    question: 'بياناتي الطبية والشخصية آمنة؟',
-    category: 'privacy',
+    question: 'هل يمكنني استخدام البطاقة في مراكز التجميل والليزر؟',
+    category: 'coverage',
     answer: (
       <>
         <p>
-          <strong className="text-slate-900 font-bold">نعم، وبجدية كاملة.</strong>
-        </p>
-        <ul className="list-none space-y-2 ps-0">
-          <li>
-            <strong className="text-slate-900 font-bold">متوافقون مع قانون حماية البيانات الشخصية السعودي (PDPL)</strong> تحت إشراف هيئة البيانات والذكاء الاصطناعي (سدايا).
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">تشفير كامل</strong> لجميع البيانات أثناء النقل والتخزين (TLS 1.3 + AES-256).
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">لا نبيع أو نشارك بياناتك</strong> مع أطراف ثالثة لأغراض تسويقية — أبداً.
-          </li>
-          <li>
-            مشاركة البيانات مع مقدم الخدمة الطبية تتم <strong className="text-slate-900 font-bold">بموافقتك الصريحة</strong> ولغرض الحجز فقط.
-          </li>
-          <li>
-            بتقدر تطلب <strong className="text-slate-900 font-bold">حذف حسابك وبياناتك</strong> في أي وقت من إعدادات الحساب.
-          </li>
-        </ul>
-        <p>
-          مرجعنا الرسمي: رقم السجل التجاري <strong className="text-slate-900 font-bold">7038166471</strong>، ومرخّصون من وزارة الصحة للعمل كمنصة خدمات صحية في المملكة.
+          <strong className="text-slate-900 font-bold">بالتأكيد</strong>، خصومات أمان إيفر تشمل كافة الخدمات التجميلية، إجراءات الليزر، والعناية بالبشرة في المراكز المعتمدة لدينا.
         </p>
       </>
     ),
   },
   {
     id: 'faq-card-6',
-    question: 'إذا واجهت مشكلة، من المسؤول؟ وكيف أوصل له؟',
-    category: 'support',
+    question: 'كيف أستفيد من ميزة "الكاش باك" (Cash Back) عند الاشتراك؟',
+    category: 'value',
     answer: (
       <>
         <p>
-          عندك 3 قنوات مباشرة، ومتوسط الرد <strong className="text-slate-900 font-bold">15 دقيقة</strong>:
-        </p>
-        <ul className="list-none space-y-2 ps-0">
-          <li>
-            <strong className="text-slate-900 font-bold">واتساب:</strong> 0544608220 (الأسرع — متاح 24/7).
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">الاتصال الموحّد:</strong> 920018041.
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">البريد الإلكتروني:</strong> info@amanever.com.
-          </li>
-        </ul>
-        <p>
-          <strong className="text-slate-900 font-bold">وعد الخدمة:</strong>
-        </p>
-        <ul className="list-none space-y-2 ps-0">
-          <li>رد على واتساب خلال 15 دقيقة في أوقات الذروة.</li>
-          <li>حل المشكلات البسيطة خلال ساعة.</li>
-          <li>تصعيد للمشكلات المعقدة خلال 24 ساعة.</li>
-        </ul>
-        <p>
-          مكتبنا في <strong className="text-slate-900 font-bold">جدة — البغدادية الشرقية</strong>، ومتاح للزيارة بموعد مسبق.
+          عند تفعيل عضويتك، تحصل على رصيد مالي ترحيبي في محفظتك الإلكترونية. يمكنك استخدام هذا الرصيد كخصم مالي عند قيامك بأول عملية شرائية لخدماتنا، مما يعني <strong className="text-slate-900 font-bold">توفيراً فورياً من اللحظة الأولى</strong>.
         </p>
       </>
     ),
   },
   {
     id: 'faq-card-7',
-    question: 'تمام، كيف أبدأ؟',
-    category: 'action',
+    question: 'ما هو نظام "نقاط أمان" وكيف يتم استبداله؟',
+    category: 'value',
     answer: (
       <>
         <p>
-          3 خطوات، <strong className="text-slate-900 font-bold">5 دقائق</strong>:
+          هو نظام مكافآت يمنحك نقاطاً مقابل كل عملية شرائية تقوم بها. هذه النقاط تُجمع في محفظتك داخل التطبيق، ويمكنك تحويلها إلى رصيد خدمات مالي لاستخدامه في الحصول على خدمات طبية أو صحية لدى نفس المنشأة.
         </p>
-        <ol className="list-decimal list-inside space-y-2 ps-0">
-          <li>
-            <strong className="text-slate-900 font-bold">حمّل تطبيق أمان إيفر</strong> من{' '}
-            <a href="#" className="text-emerald-600 underline underline-offset-4 hover:text-emerald-700">
-              App Store
-            </a>{' '}
-            أو{' '}
-            <a href="#" className="text-emerald-600 underline underline-offset-4 hover:text-emerald-700">
-              Google Play
-            </a>
-            .
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">اختار باقتك</strong> (Premier 199 ريال / VIP 499 ريال).
-          </li>
-          <li>
-            <strong className="text-slate-900 font-bold">ابدأ استخدام الخصومات</strong> فوراً — ما في فترة انتظار.
-          </li>
-        </ol>
-        <p className="mt-4">
-          <a href="#download" className="text-emerald-600 underline underline-offset-4 hover:text-emerald-700 font-bold">
-            حمّل التطبيق وابدأ الحين ←
-          </a>
+      </>
+    ),
+  },
+  {
+    id: 'faq-card-8',
+    question: 'ما هي الخدمات التي يوفرها تطبيق "أمان إيفر" لحاملي البطاقات؟',
+    category: 'value',
+    answer: (
+      <>
+        <p>
+          يوفر التطبيق تجربة رعاية ذكية تشمل:
+        </p>
+        <ul className="list-none space-y-2 ps-0">
+          <li>• حجز موعد مع طبيب</li>
+          <li>• استشارة طبية "فيديو" عن بُعد</li>
+          <li>• طلب خدمات الرعاية المنزلية</li>
+          <li>• التسوق من المتجر الإلكتروني الطبي المتكامل</li>
+        </ul>
+        <p className="mt-2">
+          <strong className="text-slate-900 font-bold">وكل هذا بأسعار مخفضة لحاملي بطاقات أمان إيفر</strong>
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 'faq-card-9',
+    question: 'هل يمكنني شراء منتجات طبية عبر التطبيق بالبطاقة؟',
+    category: 'value',
+    answer: (
+      <>
+        <p>
+          <strong className="text-slate-900 font-bold">نعم</strong>، يضم التطبيق متجراً إلكترونياً يحتوي على منتجات طبية، صحية، وتجميلية متنوعة، ويحصل حاملو البطاقات (خاصة VIP) على أسعار حصرية ومخفضة عند الطلب من خلاله.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 'faq-card-10',
+    question: 'كيف أحصل على الموافقة عند التوجه للمستشفى أو المركز الطبي؟',
+    category: 'support',
+    answer: (
+      <>
+        <p>
+          مع أمان إيفر، <strong className="text-slate-900 font-bold">لا داعي للانتظار!</strong> بطاقتك تحمل موافقة مسبقة وفورية، بمجرد إبراز البطاقة أو الهوية في المنشأة الصحية المشتركة، يتم تفعيل الخصم الخاص بك مباشرة دون أي تعقيدات إدارية.
+        </p>
+        <p className="mt-3">
+          <strong className="text-slate-900 font-bold">للتواصل:</strong> واتساب 920018041
         </p>
       </>
     ),
@@ -452,7 +366,7 @@ export function FAQSection() {
             <div className="text-sm text-slate-500 mt-4 flex items-center justify-center gap-4 flex-wrap">
               <span className="flex items-center gap-1">
                 <MessageCircle className="w-4 h-4" />
-                <span>متوسط وقت الرد: 15 دقيقة</span>
+                <span>متوسط وقت الرد: ثوانٍ</span>
               </span>
               <span className="hidden sm:inline">·</span>
               <span className="flex items-center gap-1">
@@ -483,7 +397,7 @@ export function FAQSection() {
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                أسئلة حاملي البطاقات
+                الأسئلة المتكررة لحاملي بطاقات أمان إيفر
               </button>
             </div>
           </div>
@@ -503,10 +417,10 @@ export function FAQSection() {
           {/* Bottom CTA */}
           <div className="bg-emerald-50 rounded-2xl p-8 text-center mt-12">
             <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-3">
-              لسه عندك أسئلة؟
+              هل لديك المزيد من الأسئلة؟
             </h3>
             <p className="text-base text-slate-600 mb-6">
-              تواصل معنا مباشرة، وراح نرد عليك خلال 15 دقيقة.
+              تواصل معنا مباشرة، وسنرد عليك خلال ثوانٍ.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
@@ -516,13 +430,13 @@ export function FAQSection() {
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition-colors"
               >
                 <MessageCircle className="w-5 h-5" />
-                <span>تواصل على واتساب</span>
+                <span>تواصل عبر واتساب</span>
               </a>
               <a
                 href="tel:920018041"
                 className="text-emerald-600 font-semibold hover:text-emerald-700 transition-colors"
               >
-                اتصل بنا 920018041
+                اتصل بنا على 920018041
               </a>
             </div>
           </div>

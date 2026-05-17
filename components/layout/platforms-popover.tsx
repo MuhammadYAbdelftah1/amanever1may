@@ -94,10 +94,22 @@ export function PlatformsPopover({ locale, isMobile = false, type }: PlatformsPo
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (mode === 'register' && formData.password !== formData.confirmPassword) {
-      alert('كلمة المرور غير متطابقة');
+    
+    console.log('Form submitted! Mode:', mode, 'Type:', type);
+    
+    // Show notification for registration
+    if (mode === 'register') {
+      console.log('Register mode detected!');
+      if (formData.password !== formData.confirmPassword) {
+        alert('كلمة المرور غير متطابقة');
+        return;
+      }
+      console.log('Showing alert...');
+      alert('جاري الاتصال بصفحة تسجيل التجار قريباً يا دكتور أبو تالين حاضر لا تقلق :)');
       return;
     }
+    
+    // Handle login (original behavior)
     console.log(`${mode} for ${type}:`, formData);
     // TODO: Handle actual submission
   };
@@ -245,188 +257,69 @@ export function PlatformsPopover({ locale, isMobile = false, type }: PlatformsPo
                 </button>
               </div>
 
-              {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {mode === 'login' ? (
-                  <>
-                    {/* Login: Identifier */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        {config.identifierLabel}
-                      </label>
+              {/* Form or Message */}
+              {mode === 'login' ? (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Login: Identifier */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      {config.identifierLabel}
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.identifier}
+                      onChange={(e) => setFormData({ ...formData, identifier: e.target.value })}
+                      placeholder={config.identifierPlaceholder}
+                      className="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:border-[#4A8B8E] focus:outline-none text-sm"
+                      required
+                      dir="ltr"
+                    />
+                  </div>
+
+                  {/* Login: Password */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      كلمة المرور
+                    </label>
+                    <div className="relative">
                       <input
-                        type="text"
-                        value={formData.identifier}
-                        onChange={(e) => setFormData({ ...formData, identifier: e.target.value })}
-                        placeholder={config.identifierPlaceholder}
-                        className="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:border-[#4A8B8E] focus:outline-none text-sm"
+                        type={showPassword ? 'text' : 'password'}
+                        value={formData.password}
+                        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                        placeholder="أدخل كلمة المرور"
+                        className="w-full px-4 py-2.5 pr-12 border-2 border-gray-200 rounded-xl focus:border-[#4A8B8E] focus:outline-none text-sm"
                         required
                         dir="ltr"
                       />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                      >
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
                     </div>
+                  </div>
 
-                    {/* Login: Password */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        كلمة المرور
-                      </label>
-                      <div className="relative">
-                        <input
-                          type={showPassword ? 'text' : 'password'}
-                          value={formData.password}
-                          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                          placeholder="أدخل كلمة المرور"
-                          className="w-full px-4 py-2.5 pr-12 border-2 border-gray-200 rounded-xl focus:border-[#4A8B8E] focus:outline-none text-sm"
-                          required
-                          dir="ltr"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-                        >
-                          {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        </button>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    {/* Register: Mobile */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        رقم الجوال
-                      </label>
-                      <input
-                        type="tel"
-                        value={formData.mobile}
-                        onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                        placeholder="05xxxxxxxx"
-                        className="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:border-[#4A8B8E] focus:outline-none text-sm"
-                        required
-                        dir="ltr"
-                      />
-                    </div>
-
-                    {/* Register: Email */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        البريد الإلكتروني
-                      </label>
-                      <input
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="example@email.com"
-                        className="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:border-[#4A8B8E] focus:outline-none text-sm"
-                        required
-                        dir="ltr"
-                      />
-                    </div>
-
-                    {/* Register: Platform-specific fields */}
-                    {config.registerFields.map((field: any) => (
-                      <div key={field.id}>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">
-                          {field.label}
-                        </label>
-                        {field.type === 'select' ? (
-                          <select
-                            value={(formData as any)[field.id]}
-                            onChange={(e) => setFormData({ ...formData, [field.id]: e.target.value })}
-                            className="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:border-[#4A8B8E] focus:outline-none text-sm"
-                            required={field.required}
-                          >
-                            <option value="">اختر...</option>
-                            {field.options?.map((opt: string) => (
-                              <option key={opt} value={opt}>{opt}</option>
-                            ))}
-                          </select>
-                        ) : (
-                          <input
-                            type={field.type}
-                            value={(formData as any)[field.id]}
-                            onChange={(e) => setFormData({ ...formData, [field.id]: e.target.value })}
-                            placeholder={`أدخل ${field.label}`}
-                            className="w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:border-[#4A8B8E] focus:outline-none text-sm"
-                            required={field.required}
-                            dir="ltr"
-                          />
-                        )}
-                      </div>
-                    ))}
-
-                    {/* Register: Password */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        كلمة المرور
-                      </label>
-                      <div className="relative">
-                        <input
-                          type={showPassword ? 'text' : 'password'}
-                          value={formData.password}
-                          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                          placeholder="8 أحرف على الأقل"
-                          className="w-full px-4 py-2.5 pr-12 border-2 border-gray-200 rounded-xl focus:border-[#4A8B8E] focus:outline-none text-sm"
-                          required
-                          minLength={8}
-                          dir="ltr"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-                        >
-                          {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Register: Confirm Password */}
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        تأكيد كلمة المرور
-                      </label>
-                      <div className="relative">
-                        <input
-                          type={showConfirmPassword ? 'text' : 'password'}
-                          value={formData.confirmPassword}
-                          onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                          placeholder="أعد إدخال كلمة المرور"
-                          className="w-full px-4 py-2.5 pr-12 border-2 border-gray-200 rounded-xl focus:border-[#4A8B8E] focus:outline-none text-sm"
-                          required
-                          dir="ltr"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-                        >
-                          {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        </button>
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className={`w-full py-3 px-4 bg-gradient-to-r ${config.gradient} text-white font-bold rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-6`}
-                >
-                  {mode === 'login' ? (
-                    <>
-                      <LogIn className="w-5 h-5" />
-                      <span>دخول</span>
-                    </>
-                  ) : (
-                    <>
-                      <UserPlus className="w-5 h-5" />
-                      <span>إنشاء الحساب</span>
-                    </>
-                  )}
-                </button>
-              </form>
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className={`w-full py-3 px-4 bg-gradient-to-r ${config.gradient} text-white font-bold rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-6`}
+                  >
+                    <LogIn className="w-5 h-5" />
+                    <span>دخول</span>
+                  </button>
+                </form>
+              ) : (
+                /* Registration Message */
+                <div className="py-12 px-4 text-center">
+                  <div className="mb-6 text-6xl">😊</div>
+                  <p className="text-xl font-bold text-gray-800 leading-relaxed">
+                    جاري الاتصال بصفحة تسجيل التجار قريباً<br />
+                    يا دكتور أبو تالين حاضر لا تقلق :)
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -507,153 +400,61 @@ export function PlatformsPopover({ locale, isMobile = false, type }: PlatformsPo
               </button>
             </div>
 
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-3">
-              {mode === 'login' ? (
-                <>
-                  {/* Login: Identifier */}
-                  <div>
-                    <input
-                      type="text"
-                      value={formData.identifier}
-                      onChange={(e) => setFormData({ ...formData, identifier: e.target.value })}
-                      placeholder={config.identifierPlaceholder}
-                      className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-[#4A8B8E] focus:outline-none text-sm"
-                      required
-                      dir="ltr"
-                    />
-                  </div>
-
-                  {/* Login: Password */}
-                  <div className="relative">
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      value={formData.password}
-                      onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                      placeholder="كلمة المرور"
-                      className="w-full px-3 py-2 pr-10 border-2 border-gray-200 rounded-lg focus:border-[#4A8B8E] focus:outline-none text-sm"
-                      required
-                      dir="ltr"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-                    >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  {/* Register: Mobile & Email */}
+            {/* Form or Message */}
+            {mode === 'login' ? (
+              <form onSubmit={handleSubmit} className="space-y-3">
+                {/* Login: Identifier */}
+                <div>
                   <input
-                    type="tel"
-                    value={formData.mobile}
-                    onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                    placeholder="رقم الجوال"
+                    type="text"
+                    value={formData.identifier}
+                    onChange={(e) => setFormData({ ...formData, identifier: e.target.value })}
+                    placeholder={config.identifierPlaceholder}
                     className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-[#4A8B8E] focus:outline-none text-sm"
                     required
                     dir="ltr"
                   />
+                </div>
+
+                {/* Login: Password */}
+                <div className="relative">
                   <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="البريد الإلكتروني"
-                    className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-[#4A8B8E] focus:outline-none text-sm"
+                    type={showPassword ? 'text' : 'password'}
+                    value={formData.password}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    placeholder="كلمة المرور"
+                    className="w-full px-3 py-2 pr-10 border-2 border-gray-200 rounded-lg focus:border-[#4A8B8E] focus:outline-none text-sm"
                     required
                     dir="ltr"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
 
-                  {/* Platform-specific fields */}
-                  {config.registerFields.map((field: any) => (
-                    <div key={field.id}>
-                      {field.type === 'select' ? (
-                        <select
-                          value={(formData as any)[field.id]}
-                          onChange={(e) => setFormData({ ...formData, [field.id]: e.target.value })}
-                          className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-[#4A8B8E] focus:outline-none text-sm"
-                          required={field.required}
-                        >
-                          <option value="">{field.label}</option>
-                          {field.options?.map((opt: string) => (
-                            <option key={opt} value={opt}>{opt}</option>
-                          ))}
-                        </select>
-                      ) : (
-                        <input
-                          type={field.type}
-                          value={(formData as any)[field.id]}
-                          onChange={(e) => setFormData({ ...formData, [field.id]: e.target.value })}
-                          placeholder={field.label}
-                          className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-[#4A8B8E] focus:outline-none text-sm"
-                          required={field.required}
-                          dir="ltr"
-                        />
-                      )}
-                    </div>
-                  ))}
-
-                  {/* Passwords */}
-                  <div className="relative">
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      value={formData.password}
-                      onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                      placeholder="كلمة المرور"
-                      className="w-full px-3 py-2 pr-10 border-2 border-gray-200 rounded-lg focus:border-[#4A8B8E] focus:outline-none text-sm"
-                      required
-                      minLength={8}
-                      dir="ltr"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-                    >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                  </div>
-                  <div className="relative">
-                    <input
-                      type={showConfirmPassword ? 'text' : 'password'}
-                      value={formData.confirmPassword}
-                      onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                      placeholder="تأكيد كلمة المرور"
-                      className="w-full px-3 py-2 pr-10 border-2 border-gray-200 rounded-lg focus:border-[#4A8B8E] focus:outline-none text-sm"
-                      required
-                      dir="ltr"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-                    >
-                      {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                  </div>
-                </>
-              )}
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className={`w-full py-2.5 px-4 bg-gradient-to-r ${config.gradient} text-white font-bold rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2 text-sm mt-4`}
-              >
-                {mode === 'login' ? (
-                  <>
-                    <LogIn className="w-4 h-4" />
-                    <span>دخول</span>
-                  </>
-                ) : (
-                  <>
-                    <UserPlus className="w-4 h-4" />
-                    <span>إنشاء</span>
-                  </>
-                )}
-              </button>
-            </form>
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  className={`w-full py-2.5 px-4 bg-gradient-to-r ${config.gradient} text-white font-bold rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2 text-sm mt-4`}
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span>دخول</span>
+                </button>
+              </form>
+            ) : (
+              /* Registration Message */
+              <div className="py-8 px-4 text-center">
+                <div className="mb-4 text-5xl">😊</div>
+                <p className="text-lg font-bold text-gray-800 leading-relaxed">
+                  جاري الاتصال بصفحة تسجيل التجار قريباً<br />
+                  يا دكتور أبو تالين حاضر لا تقلق :)
+                </p>
+              </div>
+            )}
           </div>
         </div>
       )}

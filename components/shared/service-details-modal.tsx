@@ -107,7 +107,7 @@ const serviceDetails: Record<string, {
   },
   'medical-network': {
     title: 'استكشف الشبكة الطبية الآن',
-    subtitle: 'أكثر من 2000 مركز طبي في خدمتك',
+    subtitle: 'أكثر من 4000 مركز طبي في خدمتك',
     description: 'شبكة طبية واسعة تضم أفضل المستشفيات والعيادات والمراكز الطبية المعتمدة في جميع مدن المملكة. نوفر لك وصولاً مباشراً لخدمات طبية متميزة بأسعار مخفضة.',
     image: '/images/medical-network.webp',
     features: [
