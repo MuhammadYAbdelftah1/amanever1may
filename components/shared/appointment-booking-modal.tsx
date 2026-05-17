@@ -443,7 +443,6 @@ export function AppointmentBookingModal({ isOpen, onClose, provider }: Appointme
               {/* Specialties List */}
               <div className="space-y-2 max-h-[400px] overflow-y-auto">
                 {filteredSpecialties.map((specialty) => {
-                  const IconComponent = specialty.icon;
                   return (
                     <button
                       key={specialty.id}
@@ -453,12 +452,15 @@ export function AppointmentBookingModal({ isOpen, onClose, provider }: Appointme
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3 text-right">
                           <div 
-                            className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                            className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 overflow-hidden"
                             style={{ backgroundColor: `${specialty.color}15` }}
                           >
-                            <IconComponent 
-                              className="w-6 h-6" 
-                              style={{ color: specialty.color }}
+                            <Image
+                              src="/images/specialty-icon.webp"
+                              alt={specialty.name}
+                              width={48}
+                              height={48}
+                              className="object-cover"
                             />
                           </div>
                           <div>
@@ -495,19 +497,19 @@ export function AppointmentBookingModal({ isOpen, onClose, provider }: Appointme
                 <div className="flex items-center gap-3">
                   {(() => {
                     const specialty = medicalSpecialties.find(s => s.id === selectedSpecialty);
-                    const IconComponent = specialty?.icon;
                     return (
                       <>
                         <div 
-                          className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+                          className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden"
                           style={{ backgroundColor: `${specialty?.color}15` }}
                         >
-                          {IconComponent && (
-                            <IconComponent 
-                              className="w-5 h-5" 
-                              style={{ color: specialty?.color }}
-                            />
-                          )}
+                          <Image
+                            src="/images/specialty-icon.webp"
+                            alt={selectedSpecialtyName || ''}
+                            width={40}
+                            height={40}
+                            className="object-cover"
+                          />
                         </div>
                         <div>
                           <p className="font-bold text-gray-900 text-sm">{selectedSpecialtyName}</p>
@@ -790,13 +792,20 @@ export function AppointmentBookingModal({ isOpen, onClose, provider }: Appointme
                   <div className="flex items-start gap-2">
                     {(() => {
                       const specialty = medicalSpecialties.find(s => s.id === selectedSpecialty);
-                      const IconComponent = specialty?.icon;
-                      return IconComponent ? (
-                        <IconComponent 
-                          className="w-4 h-4 mt-0.5 shrink-0" 
-                          style={{ color: specialty?.color }}
-                        />
-                      ) : null;
+                      return (
+                        <div 
+                          className="w-6 h-6 rounded flex items-center justify-center shrink-0 overflow-hidden"
+                          style={{ backgroundColor: `${specialty?.color}15` }}
+                        >
+                          <Image
+                            src="/images/specialty-icon.webp"
+                            alt={selectedSpecialtyName || ''}
+                            width={24}
+                            height={24}
+                            className="object-cover"
+                          />
+                        </div>
+                      );
                     })()}
                     <div className="flex-1">
                       <p className="text-gray-500 text-xs">التخصص</p>
