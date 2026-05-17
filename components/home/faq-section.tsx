@@ -43,7 +43,7 @@ const generalFAQItems: FAQItemData[] = [
           <strong className="text-slate-900 font-bold">نعم</strong>، المتجر متاح لجميع مستخدمي التطبيق لتسوق أرقى المنتجات الطبية والتجميلية.
         </p>
         <p>
-          ولكن، يحصل حاملوا بطاقات أمان إيفر على <strong className="text-slate-900 font-bold">"أسعار خاصة وحصرية"</strong> وعروض كاش باك لا تظهر للمستخدم العادي، مما يجعل تجربة التسوق مع البطاقة أكثر ذكاءً وتوفيراً.
+          ولكن، يحصل حاملوا بطاقات أمان إيفر على <strong className="text-slate-900 font-bold">أسعار خاصة وحصرية</strong> وعروض كاش باك لا تظهر للمستخدم العادي، مما يجعل تجربة التسوق مع البطاقة أكثر ذكاءً وتوفيراً.
         </p>
       </>
     ),
@@ -70,7 +70,7 @@ const generalFAQItems: FAQItemData[] = [
     answer: (
       <>
         <p>
-          لأن البطاقة تحول <strong className="text-slate-900 font-bold">"مصاريفك الصحية" إلى "استثمار"</strong>.
+          لأن البطاقة تحول <strong className="text-slate-900 font-bold">مصاريفك الصحية إلى استثمار</strong>.
         </p>
         <p>
           فبينما يستمتع الجميع بسهولة الاستخدام عبر التطبيق، ينفرد حاملو البطاقات باسترداد مالي (Cash Back) ونقاط ولاء تتحول لخدمات مجانية، فضلاً عن الخصومات المباشرة التي تجعل تكلفة الرعاية الصحية والتجميلية في متناول اليد دائماً.
@@ -130,12 +130,12 @@ const generalFAQItems: FAQItemData[] = [
     answer: (
       <>
         <p>
-          تفعيل بطاقة "أمان إيفر" عملية بسيطة وتتم خلال دقائق:
+          تفعيل بطاقة أمان إيفر عملية بسيطة وتتم خلال دقائق:
         </p>
         <ol className="list-decimal list-inside space-y-2 ps-0">
           <li><strong className="text-slate-900 font-bold">تحميل التطبيق:</strong> قم بتحميل تطبيق أمان إيفر من متجر التطبيقات (iOS أو Android).</li>
           <li><strong className="text-slate-900 font-bold">تسجيل الدخول:</strong> استخدم رقم الجوال الذي استخدمته عند الشراء.</li>
-          <li><strong className="text-slate-900 font-bold">تفعيل العضوية:</strong> ستجد بطاقتك الرقمية بانتظارك في ملفك الشخصي، ومن هنا يمكنك البدء بحجز المواعيد واستخدام رصيد "الكاش باك" الترحيبي فوراً.</li>
+          <li><strong className="text-slate-900 font-bold">تفعيل العضوية:</strong> ستجد بطاقتك الرقمية بانتظارك في ملفك الشخصي، ومن هنا يمكنك البدء بحجز المواعيد واستخدام رصيد الكاش باك الترحيبي فوراً.</li>
         </ol>
       </>
     ),
@@ -150,7 +150,7 @@ const generalFAQItems: FAQItemData[] = [
           <strong className="text-slate-900 font-bold">خصوصيتك هي أولويتنا القصوى.</strong>
         </p>
         <p>
-          تطبيق "أمان إيفر" يستخدم أعلى معايير التشفير والأمان لضمان سرية بياناتك الطبية، ولا يمكن لأي جهة الاطلاع على استشاراتك أو تاريخك المرضي إلا الأطباء المختصين الذين تختار التواصل معهم.
+          تطبيق أمان إيفر يستخدم أعلى معايير التشفير والأمان لضمان سرية بياناتك الطبية، ولا يمكن لأي جهة الاطلاع على استشاراتك أو تاريخك المرضي إلا الأطباء المختصين الذين تختار التواصل معهم.
         </p>
       </>
     ),
@@ -185,7 +185,7 @@ const cardholderFAQItems: FAQItemData[] = [
   },
   {
     id: 'faq-card-3',
-    question: 'ما هو الفرق الجوهري بين بطاقة "بريمير" وبطاقة "VIP"؟',
+    question: 'ما هو الفرق الجوهري بين بطاقة بريمير وبطاقة VIP؟',
     category: 'comparison',
     answer: (
       <>
@@ -197,7 +197,7 @@ const cardholderFAQItems: FAQItemData[] = [
             <strong className="text-slate-900 font-bold">• بطاقة بريمير:</strong> تمنحك خصومات تصل من 20% إلى 50%
           </li>
           <li>
-            <strong className="text-slate-900 font-bold">• بطاقة VIP:</strong> تمنحك خصومات هائلة تصل من 30% إلى 80%، بالإضافة إلى خدمات مجانية تشمل 5 حجوزات طبية و5 استشارات "اسأل طبيب" مجانية تماماً في تطبيقنا الرقمي.
+            <strong className="text-slate-900 font-bold">• بطاقة VIP:</strong> تمنحك خصومات هائلة تصل من 30% إلى 80%، بالإضافة إلى خدمات مجانية تشمل 5 حجوزات طبية و5 استشارات اسأل طبيب مجانية تماماً في تطبيقنا الرقمي.
           </li>
         </ul>
       </>
@@ -229,7 +229,7 @@ const cardholderFAQItems: FAQItemData[] = [
   },
   {
     id: 'faq-card-6',
-    question: 'كيف أستفيد من ميزة "الكاش باك" (Cash Back) عند الاشتراك؟',
+    question: 'كيف أستفيد من ميزة الكاش باك (Cash Back) عند الاشتراك؟',
     category: 'value',
     answer: (
       <>
@@ -241,7 +241,7 @@ const cardholderFAQItems: FAQItemData[] = [
   },
   {
     id: 'faq-card-7',
-    question: 'ما هو نظام "نقاط أمان" وكيف يتم استبداله؟',
+    question: 'ما هو نظام نقاط أمان وكيف يتم استبداله؟',
     category: 'value',
     answer: (
       <>
@@ -253,7 +253,7 @@ const cardholderFAQItems: FAQItemData[] = [
   },
   {
     id: 'faq-card-8',
-    question: 'ما هي الخدمات التي يوفرها تطبيق "أمان إيفر" لحاملي البطاقات؟',
+    question: 'ما هي الخدمات التي يوفرها تطبيق أمان إيفر لحاملي البطاقات؟',
     category: 'value',
     answer: (
       <>
@@ -262,7 +262,7 @@ const cardholderFAQItems: FAQItemData[] = [
         </p>
         <ul className="list-none space-y-2 ps-0">
           <li>• حجز موعد مع طبيب</li>
-          <li>• استشارة طبية "فيديو" عن بُعد</li>
+          <li>• استشارة طبية فيديو عن بُعد</li>
           <li>• طلب خدمات الرعاية المنزلية</li>
           <li>• التسوق من المتجر الإلكتروني الطبي المتكامل</li>
         </ul>
